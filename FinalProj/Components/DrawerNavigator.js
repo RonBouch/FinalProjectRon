@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Dimensions } from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer'; 
+import ContentComponent from './ContentComponent';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login'
@@ -18,8 +19,10 @@ const DNav = createDrawerNavigator({
 }, 
 {
      initialRouteName: 'Home',
-    drawerWidth:300,
-    drawerPosition:'left',
+     contentComponent:ContentComponent,
+    drawerWidth:Dimensions.get('window').width,
+    drawerPosition:'right',
+    drawerBackgroundColor:'transparent'
     }
 );
 
