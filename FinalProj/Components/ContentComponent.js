@@ -19,7 +19,7 @@ export default class ContentComponent extends Component{
                             </View>
                             </TouchableHighlight>
 
-                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('S2')}>
+                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('Contribution')}>
                             <View style={styles.row}>
                             <Icon  iconStyle={{ marginEnd: "10%" }} name="thumbs-up" type="font-awesome"  color="gray" size={28} />                    
                             <Text style={styles.text}>Contacts</Text>
@@ -41,10 +41,10 @@ export default class ContentComponent extends Component{
                             </TouchableHighlight>
 
                             <View style={styles.line}></View>
-                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('Register')}>
+                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('S3')}>
                             <View style={styles.row}>
                             <Icon  iconStyle={{ marginEnd: "10%" }} name="share" type="font-awesome"  color="gray" size={28} />                    
-                            <Text style={styles.text}>הרשמה</Text>
+                            <Text style={styles.text}>S3</Text>
                             </View>
                             </TouchableHighlight>
                             <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('Register')}>

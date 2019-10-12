@@ -1,19 +1,43 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  //Drawer Nav
-  
+  //contribution screen
+  view:{
+    flex:1,
+    // justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:'white',
+
+  },
   //Basic Design
 
   backgroundImage: {
     flex: 1,
     resizeMode: "cover"
   },
+  touchableHighlight:{
+    width:50,
+    height:50,
+    // backgroundColor:'red',
+    borderRadius:50,
+    alignItems:'center',
+    justifyContent:'center',
+    position:'absolute',
+    left:10,
+    top:20,
+  },
+  open:{
+    color:'white',
+    fontSize:16,
+    fontWeight:'bold',
+  },
   logo: {
     alignItems: "center",
-    marginTop: "15%",
-    width: "90%",
-    height: "30%"
+    // marginTop: "15%",
+    height:'25%',
+    backgroundColor:'blue'
+    
+
   },
   container: {
     flex: 1,
@@ -27,6 +51,7 @@ export default StyleSheet.create({
   main: {
     backgroundColor: "rgba(255,255,255,.7)",
     alignItems: "center",
+    // flex:1,
     width: "100%",
     height: "100%"
   },

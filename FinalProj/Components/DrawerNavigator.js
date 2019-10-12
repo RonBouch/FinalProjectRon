@@ -7,18 +7,20 @@ import ContentComponent from './ContentComponent';
 import Home from '../screens/Home';
 import Login from '../screens/Login'
 import Register from '../screens/Register'
-import S2 from '../screens/S2'
- 
+import Contribution from '../screens/Contribution'
+ import S3 from '../screens/S3.js'
+
 const DNav = createDrawerNavigator({
+    Contribution: {screen: Contribution},
+    S3:{screen:S3},
+
     Home: {screen: Home},  
   Login: {screen: Login},
   Register:{screen:Register},
-  
-  S2: {screen: S2},
 
 }, 
 {
-     initialRouteName: 'Home',
+     initialRouteName: 'Contribution',
      contentComponent:ContentComponent,
     drawerWidth:Dimensions.get('window').width,
     drawerPosition:'right',
