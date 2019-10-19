@@ -7,7 +7,26 @@ export default StyleSheet.create({
     // justifyContent:'center',
     alignItems:'center',
     backgroundColor:'white',
+    padding:'2%'
 
+  },
+  line:{
+    width:'90%',
+    alignSelf:'center',
+    height:1,
+    backgroundColor:'gray',
+    margin:15,
+},
+  searchButton: {
+    backgroundColor: "rgba(0,0,255,.7)",
+    flexDirection: "row",
+    height: 35,
+    width: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "white",
+    borderWidth: 2,
+    marginTop:10 
   },
   //Basic Design
 
@@ -261,7 +280,7 @@ export default StyleSheet.create({
     height: "100%"
   },
   cardInfo: {
-    height: "40%",
+    height: 100,
     width: "100%",
     marginBottom: 10,
     borderWidth: 1,

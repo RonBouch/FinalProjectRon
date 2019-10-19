@@ -3,19 +3,24 @@ import { View,TouchableHighlight,Image,ImageBackground,TouchableOpacity,Text} fr
 import { Dropdown } from "react-native-material-dropdown";
 
 import styles from "../Components/StyleSheet";
-// import { Icon } from "react-native-elements";
+import { Icon as Icona } from "react-native-elements";
 import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
 import Icon from 'react-native-vector-icons/Ionicons';  
 import S3 from './S3';
 import Publish from '../screens/Publish'
+import { CheckBox } from "react-native-elements";
 
 class Contribution extends Component {
     constructor(props) {
         super(props);
         this.state={
             type:"",
+            region:"",  
+          checkedB: false,
+
         }
+
     }
     
     static navigationOptions={
@@ -26,8 +31,16 @@ class Contribution extends Component {
           type: e
         });
       };
+      Region = e => {
+        this.setState({
+          region: e
+        });
+      };
     render() {
         let Type = [
+            {
+                value: "הכל"
+              },
             {
               value: "מוצרי חשמל"
             },
@@ -50,6 +63,26 @@ class Contribution extends Component {
               value: "שונות"
             }
           ];
+        let Region = [
+            {
+                value: "הכל"
+              },
+            {
+              value: "צפון"
+            },
+            {
+              value: "שפלה"
+            },
+            {
+              value: "שרון"
+            },
+            {
+              value: "מרכז"
+            },
+            {
+              value: "דרום"
+            },
+          ];
         return (
       
             <ImageBackground source={require('../assets/bg2.jpg')} style={styles.backgroundImage}>
@@ -66,21 +99,124 @@ class Contribution extends Component {
             </View>
        
          <View style={styles.view}>
-         <View style={{marginTop:10}}>
+         <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
+                 <CheckBox 
+                        title="מודעות לפי תאריך"
+                        iconRight
+                        checked={true}
+                        // containerStyle={{width:200,height:50}}
+                        />
+                   <CheckBox 
+                        title="רק עם תמונה"
+                        iconRight
+                        // containerStyle={{width:200,height:50}}
+                        />
+                       
          <Dropdown
                       label="קטגוריה"
                       itemColor="black"
                       dropdownMargins={{ min: 0, max: 1 }}
                       dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: 200, padding: 5 }}
+                      containerStyle={{ width: 180, padding: 5,marginTop:10 }}
                       data={Type}
-                      onChangeText={this.type}
+                      onChangeText={this.Type}
                     />
+                    <Dropdown
+                      label="איזור"
+                      itemColor="black"
+                      dropdownMargins={{ min: 0, max: 1 }}
+                      dropdownOffset={{ top: 0, left: 0 }}
+                      containerStyle={{ width: 100, padding: 5 ,marginTop:10 }}
+                      data={Region}
+                      onChangeText={this.Region}
+                    />
+                    
+                    <TouchableOpacity
+                    //   onPress={this.handleSubmit}
+                      style={styles.searchButton}
+                    >
+                      <Text style={{ color: "white" }}>חפש {"  "}</Text>
+                      <Icona
+                        name="search"
+                        type="font-awesome"
+                        color="white"
+                        size={18}
+                      />
+                    </TouchableOpacity>
          </View>
+         <View style={styles.line}></View>
 
-         <Text style={styles.text}>This IS S2 Screen </Text>
+         <View
+            style={{
+              width: "100%",
+              height: 100,
+              marginBottom: "2%",
+              backgroundColor: "rgba(255,255,255,.4)"
+            }}
+            // key={index}
+          >
+            <ImageBackground
+              source={require("../assets/logo3.jpg")}
+              style={styles.card}
+            >
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View style={{ width: "75%", padding: "3%" }}>
+                  
+                  
+                  <View
+                    style={{
+                      width: "100%",
+                      marginTop: "5%",
+                      flexDirection: "row-reverse",
+                      justifyContent: "space-between"
+                    }}
+                  >
+                    <TouchableOpacity
+                    //   onPress={() => this._pressCall(place.Phone)}
+                      success
+                      type="outline"
+                      style={styles.phoneCard}
+                    >
+                      <Text style={styles.textCard}>התקשר</Text>
+                      <Icon name="md-call" color="green" size={24} />
+                    </TouchableOpacity>
 
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        flex: 3,
+                        color: "red",
+                        fontWeight: "bold",
+                        marginRight: 5
+                      }}
+                    >
+                     איש קשר:רון
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={{ width: "25%" }}>
+                  <Image
+                    source={require('../assets/g3.jpg')}
+                    style={{ width: "100%", height: "100%",padding:10 }}
+                  />
+                </View>
+              </View>
+              <View>
+                <Text
+                  style={styles.textCard}
+                //   onPress={() => {
+                //     this.infoWindow(place, index);
+                //   }}
+                >
+                  עוד..
+                </Text>
+              </View>
+            </ImageBackground>
+          </View>
+      
        
+
          </View>
          
          </ImageBackground>
@@ -170,7 +306,7 @@ class HomeScreen extends React.Component {
         },  
     },  
     {  
-      initialRouteName: "Contribution",  
+      initialRouteName: "S3",  
       activeColor: '#f0edf6',  
       inactiveColor: '#226557',  
       barStyle: { backgroundColor: '#3BAD87' },  
