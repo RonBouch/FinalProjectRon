@@ -12,7 +12,7 @@ namespace BALproj
 {
     public static class BALServices
     {
-        public static string Login(string email, string password)
+        public static String Login(string email, string password)
         {
          
             User u = DBServices.Login(email, password);
