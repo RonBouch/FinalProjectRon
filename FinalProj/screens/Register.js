@@ -150,7 +150,7 @@ export default class Register extends React.Component {
       };
       console.log(data);
       fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebServise.asmx/Register",
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Register",
         {
           method: "post",
           headers: new Headers({
@@ -177,7 +177,7 @@ export default class Register extends React.Component {
               console.log("ID" + id);
               id = u.ID;
 
-              this.props.navigation.navigate("HomePage");
+              this.props.navigation.navigate("Home");
             }
             console.log(result.d);
             console.log(result);

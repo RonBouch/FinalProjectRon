@@ -113,7 +113,7 @@ export default class Login extends React.Component {
       };
       console.log(data);
       fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11//WebServise.asmx/Login",
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Login",
         {
           method: "post",
           headers: new Headers({
@@ -138,7 +138,7 @@ export default class Login extends React.Component {
               });
               return;
             } else {
-              this.btnSendPushFromClient();
+              // this.btnSendPushFromClient();
               global.id = u.ID;
               global.firstName = u.FirstName;
               global.lastName = u.LastName;
@@ -146,7 +146,7 @@ export default class Login extends React.Component {
               global.password = u.Password;
               global.birthday = u.Birthday;
               global.gender = u.Gender;
-              this.props.navigation.navigate("HomePage");
+              this.props.navigation.navigate("S1");
             }
             console.log(result.d);
             console.log(result);

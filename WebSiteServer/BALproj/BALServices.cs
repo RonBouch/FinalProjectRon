@@ -12,7 +12,7 @@ namespace BALproj
 {
     public static class BALServices
     {
-        public static String Login(string email, string password)
+        public static string Login(string email, string password)
         {
          
             User u = DBServices.Login(email, password);
@@ -27,7 +27,38 @@ namespace BALproj
 
             return new JavaScriptSerializer().Serialize(u);
         }
+
+        public static string Register(string firstName, string lastName, string email, string password, string gender, string birthday)
+        {
+            User u = DBServices.Register(firstName, lastName, email, password, gender, birthday);
+            if (u != null)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return new JavaScriptSerializer().Serialize(u);
+        }
+
+        public static string RegisterWithGoogle(string firstName, string lastName, string email, string password)
+        {
+            User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password);
+            if (u != null)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return new JavaScriptSerializer().Serialize(u);
+        }
+
     }
 
-    
+
 }

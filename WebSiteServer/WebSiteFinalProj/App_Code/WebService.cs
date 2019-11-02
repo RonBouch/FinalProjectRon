@@ -21,14 +21,23 @@ public class WebService : System.Web.Services.WebService
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
     }
-    [WebMethod]
-    public string HelloWorld()
-    {
-        return "Hello World";
-    }
+    
     [WebMethod]
     public string Login(string email, string password)
     {
         return BALServices.Login(email, password);
+    }
+
+    [WebMethod]
+    public string Register(string firstName, string lastName, string email, string password, string gender, string birthday)
+    {
+        return BALServices.Register(firstName, lastName, email, password, gender, birthday);
+    }
+
+
+    [WebMethod]
+    public string RegisterWithGoogle(string firstName, string lastName, string email, string password)
+    {
+        return BALServices.RegisterWithGoogle(firstName, lastName, email, password);
     }
 }
