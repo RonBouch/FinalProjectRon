@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import RadioForm from "react-native-simple-radio-button";
 import styles from "../Components/StyleSheet";
 import { Location, Permissions, ImagePicker } from "expo";
-// import CheckBox from 'react-native-check-box'
 import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import shortid from "shortid";
+import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
+ import cities from '../city_list'
 import {
   StyleSheet,
   Text,
@@ -19,7 +18,8 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
@@ -42,7 +42,7 @@ const DissmisKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-export default class Publish extends React.Component {
+ class Publish extends React.Component {
   constructor(props) {
     super(props);
     this.rentOrSell = "";
@@ -241,36 +241,19 @@ export default class Publish extends React.Component {
     this.setState({ screenHeight: contentHeight });
   };
 
+
+  handleSelectItem(item, index) {
+    const {onDropdownClose} = this.props;
+    onDropdownClose();
+    console.log(item,);
+  }
+
+
   render() {
-    let houseRooms = [
-      {
-        value: "1"
-      },
-      {
-        value: "1.5"
-      },
-      {
-        value: "2"
-      },
-      {
-        value: "2.5"
-      },
-      {
-        value: "3"
-      },
-      {
-        value: "3.5"
-      },
-      {
-        value: "4"
-      },
-      {
-        value: "4.5"
-      },
-      {
-        value: "5"
-      }
-    ];
+     const autocompletes = [...Array(1).keys()];
+    const data = cities; 
+    const {scrollToInput, onDropdownClose, onDropdownShow} = this.props;
+ 
     let houseType = [
       {
         value: "דירה"
@@ -299,7 +282,9 @@ export default class Publish extends React.Component {
         style={styles.backgroundImage}
       >
         <View style={styles.container}>
+       
           <View style={styles.main}>
+          
             <View style={styles.logo}>
               <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                 <Icon
@@ -316,6 +301,33 @@ export default class Publish extends React.Component {
                 resizeMode="contain"
               />
             </View>
+            {/* <View style={styles.autocompletesContainer}>
+        <SafeAreaView>
+          {autocompletes.map(() => (
+            <Autocomplete
+              key={shortid.generate()}
+              data={data}
+              style={styles.input}
+              scrollToInput={ev => scrollToInput(ev)}
+              handleSelectItem={(item, id) => this.handleSelectItem(item, id)}
+              onDropdownClose={() => onDropdownClose()}
+              onDropdownShow={() => onDropdownShow()}
+              placeholder="חפש"
+              renderIcon={() => (
+                <Ionicons name="md-search" size={20} color="#c7c6c1" style={styles.plus} />
+              )}
+              // fetchDataUrl={apiUrl}
+              
+              minimumCharactersCount={0}
+              highlightText
+              valueExtractor={item => item.name}
+              rightContent
+              rightTextExtractor={item => item.id}
+            />
+          ))}
+        </SafeAreaView>
+        <Text>hi</Text>
+      </View> */}
             <KeyboardAvoidingView style={styles.container} behavior="padding">
               <ScrollView
                 contentContainerStyle={styles.scrollview}
@@ -323,18 +335,19 @@ export default class Publish extends React.Component {
                 onContentSizeChange={this.onContentSizeChange}
               >
                 <View style={{ alignItems: "center",marginTop:10 }}>
+                <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
                   <View
                     style={{
                       flexDirection: "row",
                       borderBottomWidth: 0.2,
                       borderBottomColor: "rgb(150,150,150)",
                       width: 200,
-                      marginBottom: 15
+                      margin: 15
                     }}
                   >
                     <Text style={{ color: "red" }}> *</Text>
                     <TextInput
-                      placeholder="כתובת הנכס"
+                      placeholder="עיר/יישוב"
                       placeholderTextColor="rgb(150,150,150)"
                       style={{
                         width: "80%",
@@ -350,6 +363,9 @@ export default class Publish extends React.Component {
                       size={24}
                     />
                   </View>
+
+         
+                
                   <View
                     style={{
                       flexDirection: "row",
@@ -403,45 +419,24 @@ export default class Publish extends React.Component {
                       size={24}
                     />
                   </View>
-                  <View
-                    style={{
-                      flexDirection: "row"
-                    }}
-                  >
-                    <Text style={{ color: "red" }}>*</Text>
-                    <RadioForm
-                      radio_props={radio_props}
-                      initial={null}
-                      style={styles.radioPublish}
-                      onPress={this.postType}
-                    />
-                  </View>
+                  
 
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ color: "red" }}>*</Text>
 
                     <Dropdown
-                      label="סוג הנכס"
+                      label="קטגוריית הפריט"
                       itemColor="black"
                       dropdownMargins={{ min: 0, max: 1 }}
                       dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: 110, padding: 5 }}
+                      containerStyle={{width:'80%', padding: 5 }}
                       data={houseType}
                       onChangeText={this.HouseType}
                     />
-                    <Text style={{ color: "red" }}>*</Text>
-
-                    <Dropdown
-                      label="מס' חדרים"
-                      itemColor="black"
-                      dropdownMargins={{ min: 0, max: 1 }}
-                      dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: 110, padding: 5 }}
-                      data={houseRooms}
-                      onChangeText={this.HouseRooms}
-                    />
+               
                   </View>
                   <View style={{ flexDirection: "row" }}>
+                    
                     <View
                       style={{
                         borderBottomWidth: 0.2,
@@ -452,36 +447,12 @@ export default class Publish extends React.Component {
                     >
                       <TextInput
                         placeholderTextColor="rgb(150,150,150)"
-                        keyboardType="number-pad"
                         style={{
                           width: "100%",
                           textAlign: "center",
                           fontSize: 16
                         }}
-                        onChangeText={e => {
-                          this.setState({ floor: e });
-                        }}
-                        placeholder="קומה"
-                      />
-                    </View>
-                    <View style={{ width: 10 }} />
-                    <View
-                      style={{
-                        borderBottomWidth: 0.2,
-                        borderBottomColor: "rgb(150,150,150)",
-                        width: 105,
-                        padding: 5
-                      }}
-                    >
-                      <TextInput
-                        placeholderTextColor="rgb(150,150,150)"
-                        keyboardType="number-pad"
-                        style={{
-                          width: "100%",
-                          textAlign: "center",
-                          fontSize: 16
-                        }}
-                        placeholder="גודל במ'ר"
+                        placeholder="שם הפריט"
                         onChangeText={e => {
                           this.setState({ squareMeter: e });
                         }}
@@ -513,35 +484,7 @@ export default class Publish extends React.Component {
                       }}
                     />
                   </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 1,
-                      borderBottomColor: "rgb(100,100,100)",
-                      width: 150,
-                      padding: 5,
-                      marginTop: 15,
-                      marginBottom: 10
-                    }}
-                  >
-                    <Text style={{ color: "red" }}> *</Text>
-
-                    <TextInput
-                      placeholderTextColor="rgb(100,100,100)"
-                      keyboardType="number-pad"
-                      placeholder="מחיר"
-                      style={{ width: "70%", marginRight: "10%", fontSize: 16 }}
-                      onChangeText={e => {
-                        this.setState({ price: e });
-                      }}
-                    />
-                    <Icon
-                      name="shekel"
-                      type="font-awesome"
-                      color="rgb(100,100,100)"
-                      size={24}
-                    />
-                  </View>
+                  
 
                   <View style={styles.addImage}>
                     <TouchableOpacity
@@ -570,7 +513,7 @@ export default class Publish extends React.Component {
                       onPress={this.handleSubmit}
                       style={styles.publishButton}
                     >
-                      <Text style={{ color: "white" }}>פרסם נכס {"  "}</Text>
+                      <Text style={{ color: "white" }}>פרסם פריט {"  "}</Text>
                       <Icon
                         name="upload"
                         type="font-awesome"
@@ -592,3 +535,4 @@ export default class Publish extends React.Component {
     );
   }
 }
+export default withKeyboardAwareScrollView(Publish)

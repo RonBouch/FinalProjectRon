@@ -1,6 +1,38 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+//Publish Screen
+autocompletesContainer: {
+  paddingTop: 30,
+  zIndex: 1,
+  width: "100%",
+  paddingHorizontal: 8,
+},
+inputA: {maxHeight: 40},
+inputContainer: {
+  display: "flex",
+  flexShrink: 0,
+  flexGrow: 0,
+  flexDirection: "row",
+  flexWrap: "wrap",
+  alignItems: "center",
+  borderBottomWidth: 1,
+  borderColor: "#c7c6c1",
+  paddingVertical: 13,
+  paddingLeft: 12,
+  paddingRight: "5%",
+  width: "100%",
+  justifyContent: "flex-start",
+},
+container: {
+  flex: 1,
+  backgroundColor: "#ffffff",
+},
+plus: {
+  position: "absolute",
+  left: 15,
+  top: 10,
+},
   //contribution screen
   view:{
     flex:1,

@@ -52,7 +52,7 @@
 //   }
 // });
 import React, {Component} from "react";
-import {StyleSheet, View, SafeAreaView} from "react-native";
+import {StyleSheet, View, SafeAreaView,Text} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import shortid from "shortid";
 import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
@@ -100,6 +100,7 @@ class S3 extends Component {
             />
           ))}
         </SafeAreaView>
+        <Text>hi</Text>
       </View>
     );
   }

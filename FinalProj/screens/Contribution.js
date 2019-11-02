@@ -306,7 +306,7 @@ class HomeScreen extends React.Component {
         },  
     },  
     {  
-      initialRouteName: "S3",  
+      initialRouteName: "Publish",  
       activeColor: '#f0edf6',  
       inactiveColor: '#226557',  
       barStyle: { backgroundColor: '#3BAD87' },  
