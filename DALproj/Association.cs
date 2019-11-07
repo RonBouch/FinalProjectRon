@@ -1,5 +1,4 @@
-﻿
-namespace DALproj
+﻿namespace DALproj
 {
     public class Association
     {

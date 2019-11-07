@@ -18,10 +18,51 @@ class Contribution extends Component {
             type:"",
             region:"",  
           checkedB: false,
-
+          items:null,
         }
 
     }
+    componentDidMount() {
+      this.GetPlaces();
+    }
+  
+    GetPlaces = () => {
+     
+      fetch(
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
+        {
+          method: "post",
+          headers: new Headers({
+            "Content-Type": "application/Json;"
+          }),
+         
+        }
+      )
+        .then(res => {
+          console.log("res=", res);
+          return res.json();
+        })
+        .then(
+          result => {
+            console.log("fetch POST= ", result);
+            let items = JSON.parse(result.d);
+            if (items == null) {
+              this.setState({
+                message: "הרשמה נכשלה"
+              });
+              return;
+            } else {
+              console.log("U = " + items);
+              this.setState({
+                items: items
+              });
+            }
+          },
+          error => {
+            console.log("err post=", error);
+          }
+        );
+    };
     
     static navigationOptions={
         drawerLabel:'Contribution',
@@ -232,33 +273,7 @@ class HomeScreen extends React.Component {
       );  
     }  
   }  
-  class ProfileScreen extends React.Component {  
-    render() {  
-      return (  
-          <View style={styles.container}>  
-            <Text>Profile Screen</Text>  
-          </View>  
-      );  
-    }  
-  }  
-  class ImageScreen extends React.Component {  
-      render() {  
-          return (  
-              <View style={styles.container}>  
-                  <Text>Image Screen</Text>  
-              </View>  
-          );  
-      }  
-  }  
-  class CartScreen extends React.Component {  
-      render() {  
-          return (  
-              <View style={styles.container}>  
-                  <Text>Cart Screen</Text>  
-              </View>  
-          );  
-      }  
-  }  
+
   const TabNavigator = createMaterialBottomTabNavigator(  
     {  
       HomeScreen: { screen: HomeScreen,  
