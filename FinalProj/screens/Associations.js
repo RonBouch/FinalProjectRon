@@ -24,7 +24,7 @@ class Associations extends Component {
     this.AssociationAdress = "";
     this.AssociationDetails = "";
     this.state={
-        associatons:null,
+        associations:null,
     }
   }
  componentDidMount(){
@@ -47,16 +47,16 @@ class Associations extends Component {
       .then(
         result => {
           console.log("fetch POST= ", result);
-          let associatons = JSON.parse(result.d);
-          if (associatons == null) {
+          let associations = JSON.parse(result.d);
+          if (associations == null) {
             this.setState({
               message: "לא קיימים עמותות"
             });
             return;
           } else {
-            console.log("associatons = " + associatons);
+            console.log("associations = " + associations);
             this.setState({
-              associatons: associatons
+              associations: associations
             });
           }
         },
@@ -68,9 +68,9 @@ class Associations extends Component {
 
   render() {
       let Associations=[];
-      if(this.state.associatons!=null){
-        Associations=this.state.associatons.map((association,index)=>{
-            //   console.log("asass",associaton)
+      if(this.state.associations!=null){
+        Associations=this.state.associations.map((association,index)=>{
+            //   console.log("asass",association)
               return(
                   <View key={index}
                   >
