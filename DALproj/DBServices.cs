@@ -218,7 +218,7 @@ namespace DALproj
             {
 
 
-                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{userId}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
+                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{int.Parse(userId)}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
@@ -263,50 +263,63 @@ namespace DALproj
 
         }
 
-        public static Association ShowAssociation(string name, string email, string Phone, string additionalPhone, string fax, string adress
-            , string website)
+
+        public static List<Item> GetItems()
         {
-
-            User u = null;
-            try
+            List<Item> items = new List<Item>();
+            comm.CommandText = $"SELECT * from Items";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
             {
-                comm.CommandText = $"SELECT * " + " " +
-                              "FROM UserTB " + "" +
-                              $"WHERE Email='{email}' AND Password='{password}' ";
-                comm.Connection.Open();
-                SqlDataReader reader = comm.ExecuteReader();
-                if (reader.Read())
+                Item p = new Item()
                 {
-                    u = new User()
-                    {
-                        ID = int.Parse(reader["ID"].ToString()),
-                        FirstName = reader["FirstName"].ToString(),
-                        LastName = reader["LastName"].ToString(),
-                        Email = reader["Email"].ToString(),
-                        Password = reader["Password"].ToString(),
-                        Gender = reader["Gender"].ToString(),
-                        Birthday = reader["Birthday"].ToString()
+                    ItemID = int.Parse(reader["ItemID"].ToString()),
+                    UserID = reader["UserID"].ToString(),
+                    UserName = reader["UserName"].ToString(),
+                    UserPhone = reader["UserPhone"].ToString(),
+                    ItemType = reader["ItemType"].ToString(),
+                    City = reader["City"].ToString(),
+                    ItemAbout = reader["ItemAbout"].ToString(),
+                    ItemImg = reader["ItemImg"].ToString(),
+                    ItemDate = reader["ItemDate"].ToString(),
 
-                    };
-                }
-
-                comm.Connection.Close();
-
-                return u;
+                };
+                items.Add(p);
             }
-            catch (Exception e)
+
+            comm.Connection.Close();
+
+            return items;
+        }
+
+
+        public static List<Association> GetAssociations()
+        {
+            List<Association> associations = new List<Association>();
+            comm.CommandText = $"SELECT * from Associations";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
             {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                if (comm.Connection.State != ConnectionState.Closed)
+                Association a = new Association()
                 {
-                    comm.Connection.Close();
-                }
-            }
-            return u;
+                    AssociationName = reader["AssociationName"].ToString(),
+                    AssociationEmail = reader["AssociationEmail"].ToString(),
+                    AssociationPhone = reader["AssociationPhone"].ToString(),
+                    AssociationAdditionalPhone = reader["AssociationAdditionalPhone"].ToString(),
+                    AssociationDetails = reader["AssociationDetails"].ToString(),
+                    AssociationFax = reader["AssociationFax"].ToString(),
+                    AssociationWebsite = reader["AssociationWebsite"].ToString(),
+                    AssociationAdress = reader["AssociationAdress"].ToString(),
 
+                };
+                associations.Add(a);
+            }
+
+            comm.Connection.Close();
+
+            return associations;
         }
     }
 }
