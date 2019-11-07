@@ -218,7 +218,7 @@ namespace DALproj
             {
 
 
-                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{userId}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
+                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{int.Parse(userId)}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
@@ -262,6 +262,36 @@ namespace DALproj
 
 
         }
-   
+
+
+        public static List<Item> GetItems()
+        {
+            List<Item> items = new List<Item>();
+            comm.CommandText = $"SELECT * from Items";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                Item p = new Item()
+                {
+                    ItemID = int.Parse(reader["ItemID"].ToString()),
+                    UserID = reader["UserID"].ToString(),
+                    UserName = reader["UserName"].ToString(),
+                    UserPhone = reader["UserPhone"].ToString(),
+                    ItemType = reader["ItemType"].ToString(),
+                    City = reader["City"].ToString(),
+                    ItemAbout = reader["ItemAbout"].ToString(),
+                    ItemImg = reader["ItemImg"].ToString(),
+                    ItemDate = reader["ItemDate"].ToString(),
+
+                };
+                items.Add(p);
+            }
+
+            comm.Connection.Close();
+
+            return items;
+        }
+
     }
 }

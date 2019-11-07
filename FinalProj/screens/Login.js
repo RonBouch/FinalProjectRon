@@ -92,7 +92,7 @@ export default class Login extends React.Component {
   };
 
   validation = () => {
-    this.props.navigation.navigate("HomeScreen");
+    // this.props.navigation.navigate("HomeScreen");
 
     if (this.email == "") {
       this.setState({ message: "* אנא הכנס כתובת אימייל" });
@@ -146,7 +146,7 @@ export default class Login extends React.Component {
               global.password = u.Password;
               global.birthday = u.Birthday;
               global.gender = u.Gender;
-              this.props.navigation.navigate("S1");
+              this.props.navigation.navigate("Home");
             }
             console.log(result.d);
             console.log(result);

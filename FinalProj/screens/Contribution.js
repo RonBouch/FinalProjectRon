@@ -261,7 +261,7 @@ class HomeScreen extends React.Component {
   }  
   const TabNavigator = createMaterialBottomTabNavigator(  
     {  
-        Home: { screen: HomeScreen,  
+      HomeScreen: { screen: HomeScreen,  
             navigationOptions:{  
                 tabBarLabel:'תן יד',  
                 tabBarIcon: ({ tintColor }) => (  

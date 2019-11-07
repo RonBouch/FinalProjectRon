@@ -71,6 +71,22 @@ namespace BALproj
             }
             return new JavaScriptSerializer().Serialize(p);
         }
+
+        public static string GetItems()
+        {
+            List<Item> p = DBServices.GetItems();
+
+            if (p != null)
+            {
+                return new JavaScriptSerializer().Serialize(p);
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize("No Items");
+            }
+
+
+        }
     }
 
 

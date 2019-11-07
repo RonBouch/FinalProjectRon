@@ -43,7 +43,7 @@ const DissmisKeyboard = ({ children }) => (
       itemName:"",
       city: "",
       itemAbout:"",
-      itemImg: "",
+      itemImg: "sdvw",
     };
   }
 
@@ -158,8 +158,8 @@ ItemName=e=>{
    
       const data = {
         userId: 1,
-        userName: this.state.name,
-        userPhone: this.state.userP,
+        userName: this.state.userName,
+        userPhone: this.state.userPhone,
         itemType:this.state.itemType,
         itemName:this.state.itemName,
         city: this.state.city,
@@ -169,7 +169,7 @@ ItemName=e=>{
       console.log(JSON.stringify(data));
 
       fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebServise.asmx/InsertHouse",
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
         {
           method: "post",
           headers: new Headers({
@@ -206,18 +206,19 @@ ItemName=e=>{
   };
 
   isValid() {
-    let valid = false;
-    const { address } = this.state;
-    if (address.length !== 0) {
-      valid = true;
-    }
-    if(this.name==""||this.room==""||this.address==""||this.phone==""||this.price==""||this.type==""||this.rentOrSell==""){
-      valid=false;
-      this.setState({
-        resLabel:"אנא מלא שדות חובה!"
-      })
-    }
-    return valid;
+    // let valid = false;
+    // const { address } = this.state;
+    // if (address.length !== 0) {
+    //   valid = true;
+    // }
+    // if(this.name==""||this.room==""||this.address==""||this.phone==""||this.price==""||this.type==""||this.rentOrSell==""){
+    //   valid=false;
+    //   this.setState({
+    //     resLabel:"אנא מלא שדות חובה!"
+    //   })
+    // }
+    // return valid;
+    return true;
   }
 
   onContentSizeChange = (contentWidth, contentHeight) => {
@@ -371,7 +372,7 @@ ItemName=e=>{
                       placeholderTextColor="rgb(150,150,150)"
                       placeholder={"מס' טלפון"}
                       onChangeText={e => {
-                        this.setState({ phone: e });
+                        this.setState({ userPhone: e });
                       }}
                       style={{ width: "80%", marginRight: "8%", fontSize: 16 }}
                     />
@@ -397,7 +398,7 @@ ItemName=e=>{
                       placeholder="איש קשר"
                       placeholderTextColor="rgb(150,150,150)"
                       onChangeText={e => {
-                        this.setState({ name: e });
+                        this.setState({ userName: e });
                       }}
                       style={{ width: "80%", marginRight: "8%", fontSize: 16 }}
                     />
@@ -443,7 +444,7 @@ ItemName=e=>{
                         }}
                         placeholder="שם הפריט"
                         onChangeText={e => {
-                          this.setState({ squareMeter: e });
+                          this.setState({ itemName: e });
                         }}
                       />
                     </View>
@@ -463,7 +464,8 @@ ItemName=e=>{
                       multiline={true}
                       maxLength={60}
                       onChangeText={e => {
-                        this.setState({ about: e });
+                        this.setState({ itemAbout: e });
+                        console.log(this.state.itemAbout)
                       }}
                       placeholder="ספר בקצרה על הנכס עד 60 תווים..."
                       style={{
@@ -499,7 +501,7 @@ ItemName=e=>{
 
                   <View>
                     <TouchableOpacity
-                      onPress={this.handleSubmit}
+                      onPress={()=>this.handleSubmit()}
                       style={styles.publishButton}
                     >
                       <Text style={{ color: "white" }}>פרסם פריט {"  "}</Text>

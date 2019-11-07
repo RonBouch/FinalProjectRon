@@ -46,4 +46,10 @@ public class WebService : System.Web.Services.WebService
     {
         return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, itemAbout, itemImg);
     }
+    [WebMethod]
+    public string GetItems()
+    {
+        return BALServices.GetItems();
+
+    }
 }
