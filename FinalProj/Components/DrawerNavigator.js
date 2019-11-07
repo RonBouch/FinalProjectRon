@@ -1,36 +1,38 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View,Dimensions } from 'react-native';
-import {createAppContainer} from 'react-navigation';
-import { createDrawerNavigator } from 'react-navigation-drawer'; 
-import ContentComponent from './ContentComponent';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import ContentComponent from "./ContentComponent";
+import Associations from "../screens/Associations";
+import Home from "../screens/Home";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
+import Contribution from "../screens/Contribution";
+import S3 from "../screens/S3.js";
 
-import Home from '../screens/Home';
-import Login from '../screens/Login'
-import Register from '../screens/Register'
-import Contribution from '../screens/Contribution'
- import S3 from '../screens/S3.js'
+const DNav = createDrawerNavigator(
+  {
+    Associations: { screen: Associations },
 
-const DNav = createDrawerNavigator({
-    Contribution: {screen: Contribution},
-    S3:{screen:S3},
+    Contribution: { screen: Contribution },
+    S3: { screen: S3 },
 
-    Home: {screen: Home},  
-  Login: {screen: Login},
-  Register:{screen:Register},
-
-}, 
-{
-     initialRouteName: 'Contribution',
-     contentComponent:ContentComponent,
-    drawerWidth:Dimensions.get('window').width,
-    drawerPosition:'right',
-    drawerBackgroundColor:'transparent'
-    }
+    Home: { screen: Home },
+    Login: { screen: Login },
+    Register: { screen: Register }
+  },
+  {
+    initialRouteName: "Associations",
+    contentComponent: ContentComponent,
+    drawerWidth: Dimensions.get("window").width,
+    drawerPosition: "right",
+    drawerBackgroundColor: "transparent"
+  }
 );
 
 const AppContainer = createAppContainer(DNav);
-export default class DrawerNavigator extends Component{
-  render(){
-      return <AppContainer/>
+export default class DrawerNavigator extends Component {
+  render() {
+    return <AppContainer />;
   }
 }
