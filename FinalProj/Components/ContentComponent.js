@@ -33,10 +33,10 @@ export default class ContentComponent extends Component{
                             </View>
                             </TouchableHighlight>
                             
-                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('Register')}>
+                            <TouchableHighlight underlayColor={'rgba(0,0,0,0.2)'} onPress={()=>this.props.navigation.navigate('Associations')}>
                             <View style={styles.row}>
                             <Icon  iconStyle={{ marginEnd: "10%" }} name="envelope" type="font-awesome"  color="gray" size={28} />                    
-                            <Text style={styles.text}>הרשמה</Text>
+                            <Text style={styles.text}>עמותות</Text>
                             </View>
                             </TouchableHighlight>
 

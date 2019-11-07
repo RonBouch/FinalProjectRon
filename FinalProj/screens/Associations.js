@@ -67,14 +67,14 @@ class Associations extends Component {
   };
 
   render() {
-      let Associatons=[];
+      let Associations=[];
       if(this.state.associatons!=null){
-          Associations=this.state.associatons.map((associaton,index)=>{
+        Associations=this.state.associatons.map((association,index)=>{
             //   console.log("asass",associaton)
               return(
                   <View key={index}
-                  style={{height:'100%',width:'100%'}}>
-                      <Text>jhhy</Text>
+                  >
+                      <Text>{association.AssociationName}</Text>
                   </View>
               )
           })
@@ -90,8 +90,9 @@ class Associations extends Component {
               resizeMode="contain"
             /> */}
           </View>
-          <Text>dsad</Text>
-            {Associatons}
+         <View>
+           {Associations}
+         </View>
         </View>
       </View>
     );
