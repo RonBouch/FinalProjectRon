@@ -36,7 +36,7 @@ class Associations extends Component {
             /> */}
           </View>
           <View>
-            <Text>fdhd</Text>
+            <Text>kjkbk</Text>
           </View>
         </View>
       </View>
