@@ -87,6 +87,24 @@ namespace BALproj
 
 
         }
+
+
+
+        public static string GetAssociations()
+        {
+            List<Association> associations = DBServices.GetAssociations();
+
+            if (associations != null)
+            {
+                return new JavaScriptSerializer().Serialize(associations);
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize("No Associations");
+            }
+
+
+        }
     }
 
 

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DALproj
 {
-    class Association
+    public class Association
     {
         public int AssociationID { get; set; }
         public string AssociationName { get; set; }

@@ -52,4 +52,10 @@ public class WebService : System.Web.Services.WebService
         return BALServices.GetItems();
 
     }
+    [WebMethod]
+    public string GetAssociations()
+    {
+        return BALServices.GetAssociations();
+
+    }
 }
