@@ -124,70 +124,17 @@ class Contribution extends Component {
               value: "דרום"
             },
           ];
-        return (
-      
-            <ImageBackground source={require('../assets/bg2.jpg')} style={styles.backgroundImage}>
-              <View style={styles.logo}>
-              <TouchableHighlight onPress={()=>this.props.navigation.goBack()}
-            style={styles.touchableHighlight} underlayColor={'rgba(0,0,0,0.8)'}>
-            <Icon  iconStyle={{ marginEnd: "10%" }} name="md-arrow-round-forward" type="font-awesome"  color="black" size={28} />             
-            </TouchableHighlight>
-              <Image
-                source={require("../assets/logo3.jpg")}
-                style={{ width: "80%", height: 100 ,borderRadius:50,marginTop:'15%'}}
-                resizeMode="contain"
-              />
-            </View>
-       
-         <View style={styles.view}>
-         <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
-                 <CheckBox 
-                        title="מודעות לפי תאריך"
-                        iconRight
-                        checked={true}
-                        // containerStyle={{width:200,height:50}}
-                        />
-                   <CheckBox 
-                        title="רק עם תמונה"
-                        iconRight
-                        // containerStyle={{width:200,height:50}}
-                        />
-                       
-         <Dropdown
-                      label="קטגוריה"
-                      itemColor="black"
-                      dropdownMargins={{ min: 0, max: 1 }}
-                      dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: 180, padding: 5,marginTop:10 }}
-                      data={Type}
-                      onChangeText={this.Type}
-                    />
-                    <Dropdown
-                      label="איזור"
-                      itemColor="black"
-                      dropdownMargins={{ min: 0, max: 1 }}
-                      dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: 100, padding: 5 ,marginTop:10 }}
-                      data={Region}
-                      onChangeText={this.Region}
-                    />
-                    
-                    <TouchableOpacity
-                    //   onPress={this.handleSubmit}
-                      style={styles.searchButton}
-                    >
-                      <Text style={{ color: "white" }}>חפש {"  "}</Text>
-                      <Icona
-                        name="search"
-                        type="font-awesome"
-                        color="white"
-                        size={18}
-                      />
-                    </TouchableOpacity>
-         </View>
-         <View style={styles.line}></View>
+          let Items = [];
 
-         <View
+          if (this.state.items != null) {
+            debugger;
+            Items = this.state.items.map((items, index) => {
+              // if (index == this.state.pageToShow) {
+              //   this.viewPage = place.Address;
+              // }
+      
+              return (
+                        <View key={index}
             style={{
               width: "100%",
               height: 100,
@@ -255,6 +202,73 @@ class Contribution extends Component {
               </View>
             </ImageBackground>
           </View>
+              )
+            })}
+          return (
+      
+            <ImageBackground source={require('../assets/bg2.jpg')} style={styles.backgroundImage}>
+              <View style={styles.logo}>
+              <TouchableHighlight onPress={()=>this.props.navigation.goBack()}
+            style={styles.touchableHighlight} underlayColor={'rgba(0,0,0,0.8)'}>
+            <Icon  iconStyle={{ marginEnd: "10%" }} name="md-arrow-round-forward" type="font-awesome"  color="black" size={28} />             
+            </TouchableHighlight>
+              <Image
+                source={require("../assets/logo3.jpg")}
+                style={{ width: "80%", height: 100 ,borderRadius:50,marginTop:'15%'}}
+                resizeMode="contain"
+              />
+            </View>
+       
+         <View style={styles.view}>
+         <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
+                 <CheckBox 
+                        title="מודעות לפי תאריך"
+                        iconRight
+                        checked={true}
+                        // containerStyle={{width:200,height:50}}
+                        />
+                   <CheckBox 
+                        title="רק עם תמונה"
+                        iconRight
+                        // containerStyle={{width:200,height:50}}
+                        />
+                       
+         <Dropdown
+                      label="קטגוריה"
+                      itemColor="black"
+                      dropdownMargins={{ min: 0, max: 1 }}
+                      dropdownOffset={{ top: 0, left: 0 }}
+                      containerStyle={{ width: 180, padding: 5,marginTop:10 }}
+                      data={Type}
+                      onChangeText={this.Type}
+                    />
+                    <Dropdown
+                      label="איזור"
+                      itemColor="black"
+                      dropdownMargins={{ min: 0, max: 1 }}
+                      dropdownOffset={{ top: 0, left: 0 }}
+                      containerStyle={{ width: 100, padding: 5 ,marginTop:10 }}
+                      data={Region}
+                      onChangeText={this.Region}
+                    />
+                    
+                    <TouchableOpacity
+                    //   onPress={this.handleSubmit}
+                      style={styles.searchButton}
+                    >
+                      <Text style={{ color: "white" }}>חפש {"  "}</Text>
+                      <Icona
+                        name="search"
+                        type="font-awesome"
+                        color="white"
+                        size={18}
+                      />
+                    </TouchableOpacity>
+         </View>
+         <View style={styles.line}></View>
+
+          {Items}
+         
       
        
 
@@ -321,7 +335,7 @@ class HomeScreen extends React.Component {
         },  
     },  
     {  
-      initialRouteName: "Publish",  
+      initialRouteName: "Contribution",  
       activeColor: '#f0edf6',  
       inactiveColor: '#226557',  
       barStyle: { backgroundColor: '#3BAD87' },  
