@@ -6,33 +6,11 @@ import { Ionicons } from "@expo/vector-icons";
 import shortid from "shortid";
 import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
  import cities from '../city_list'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  ImageBackground,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  ScrollView,
-  SafeAreaView
+import {StyleSheet,Text,View,Dimensions,ImageBackground,TextInput,Image,TouchableOpacity,Keyboard,TouchableWithoutFeedback, KeyboardAvoidingView,
+    ScrollView,SafeAreaView
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
-const radio_props = [
-  {
-    label: "  השכרה  ",
-    value: "R"
-  },
-  {
-    label: "  מכירה  ",
-    value: "B"
-  }
-];
 
 const { height, width } = Dimensions.get("window");
 
@@ -51,44 +29,90 @@ const DissmisKeyboard = ({ children }) => (
       errors: {},
       resLabel: "",
       Show: false,
+
+
       location: null,
       data: "",
       delta: 0.1,
       latitude: 37.78825,
       longitude: -122.4324,
 
-      address: "",
-      phone: "",
-      name: "",
-      type: "",
-      room: "",
-      floor: "",
-      squareMeter: "",
-      about: "",
-      price: "",
-      img: "H5.jpg"
+      userName:"",
+      userPhone:"",
+      itemType:"",
+      itemName:"",
+      city: "",
+      itemAbout:"",
+      itemImg: "",
     };
   }
-  HouseType = e => {
-    this.setState({
-      type: e
-    });
-  };
-  HouseRooms = e => {
-    this.setState({
-      room: e
-    });
-  };
-  postType = e => {
-    this.rentOrSell = e;
-  };
 
-  handleAddress = e => {
+  ItemType = e => {
     this.setState({
-      address: e
+      itemType: e
     });
   };
 
+  City=e=>{
+    this.setState({
+      city: e
+    });
+  }
+ UserPhone=e=>{
+  this.setState({
+    userPhone: e
+  });
+ }
+ UserName=e=>{
+  this.setState({
+    userName: e
+  });
+ }
+ItemName=e=>{
+  this.setState({
+    itemName: e
+  });
+}
+ ItemAbout=e=>{
+    this.setState({
+      itemAbout: e
+    });
+  }
+
+  CheckCity= async()=>{
+    const { city } = this.state;
+    var detials = city.split(",", 2);
+    console.log("detials = " + detials);
+    if (detials[1] !== "") {
+      this.setState({
+        delta: 0.01
+      });
+    } else {
+      this.setState({
+        delta: 0.2
+      });
+    }
+    if (
+      (await Location.geocodeAsync(city)) == "" ||
+      (await Location.geocodeAsync(city)) == null
+    ) {
+      this.setState({
+        resLabel: "*עיר או רחוב לא תקינים, נסה שוב!"
+      });
+      return;
+    }
+
+    
+    // let geocode = await Location.geocodeAsync(address);
+    // console.log("geocode  = " + geocode[0].latitude);
+
+    // this.setState({
+    //   latitude: geocode[0].latitude,
+    //   longitude: geocode[0].longitude
+    // });
+    // console.log("latitdue  = " + this.state.latitude);
+
+}
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
@@ -131,57 +155,16 @@ const DissmisKeyboard = ({ children }) => (
 
   handleSubmit = async () => {
     if (this.isValid()) {
-      const { address } = this.state;
-      var detials = address.split(",", 2);
-      console.log("detials = " + detials);
-      if (detials[1] !== "") {
-        this.setState({
-          delta: 0.01
-        });
-      } else {
-        this.setState({
-          delta: 0.2
-        });
-      }
-      if (
-        (await Location.geocodeAsync(address)) == "" ||
-        (await Location.geocodeAsync(address)) == null
-      ) {
-        this.setState({
-          resLabel: "*עיר או רחוב לא תקינים, נסה שוב!"
-        });
-        return;
-      }
-      if (this.state.about == "" || this.state.name == "") {
-        this.setState({
-          resLabel: "*אנא מלא את כל השדות!."
-        });
-        return;
-      }
-      let geocode = await Location.geocodeAsync(address);
-      console.log("geocode  = " + geocode[0].latitude);
-
-      this.setState({
-        latitude: geocode[0].latitude,
-        longitude: geocode[0].longitude
-      });
-      console.log("latitdue  = " + this.state.latitude);
-
+   
       const data = {
-        userid: id,
-        address: this.state.address,
-        lati: this.state.latitude,
-        longi: this.state.longitude,
-        name: this.state.name,
-        about: this.state.about,
-        phone: this.state.phone,
-        img: this.state.img,
-        price: this.state.price,
-        room: this.state.room,
-        floor: this.state.floor,
-        type: this.state.type,
-        squareMeter: this.state.squareMeter,
-        rb: this.rentOrSell
+        userId: 1,
+        userName: this.state.name,
+        userPhone: this.state.userP,
+        itemType:this.state.itemType,
+        itemName:this.state.itemName,
+        city: this.state.city,
+        itemAbout: this.state.itemAbout,
+        itemImg: this.state.itemImg,
       };
       console.log(JSON.stringify(data));
 
@@ -206,13 +189,13 @@ const DissmisKeyboard = ({ children }) => (
             console.log("u = " + u);
             if (u == null) {
               this.setState({
-                message: "הרשמה נכשלה"
+                message: "לא ניתן לעלות חפץ זה ."
               });
               return;
             }
              else
               {
-              this.props.navigation.navigate("HomePage");
+              this.props.navigation.navigate("Home");
             }
           },
           error => {
@@ -254,24 +237,30 @@ const DissmisKeyboard = ({ children }) => (
     const data = cities; 
     const {scrollToInput, onDropdownClose, onDropdownShow} = this.props;
  
-    let houseType = [
+    let itemType = [
       {
-        value: "דירה"
+        value: "הכל"
       },
       {
-        value: "דירת גן"
+        value: "מוצרי חשמל"
       },
       {
-        value: "פרטי"
+        value: "בגדים"
       },
       {
-        value: "פנטהאוז"
+        value: "ריהוט וכלי בית"
       },
       {
-        value: "יחידת דיור"
+        value: "ספרים ומדיה דיגיטלית"
       },
       {
-        value: "מגרש"
+        value: "לתינוק ולילד"
+      },
+      {
+        value: "סיוע חברתי וסביבתי"
+      },
+      {
+        value: "שונות"
       }
     ];
 
@@ -354,7 +343,7 @@ const DissmisKeyboard = ({ children }) => (
                         marginRight: "8%",
                         fontSize: 16
                       }}
-                      onChangeText={this.handleAddress}
+                      onChangeText={this.City}
                     />
                     <Icon
                       name="map-marker"
@@ -430,8 +419,8 @@ const DissmisKeyboard = ({ children }) => (
                       dropdownMargins={{ min: 0, max: 1 }}
                       dropdownOffset={{ top: 0, left: 0 }}
                       containerStyle={{width:'80%', padding: 5 }}
-                      data={houseType}
-                      onChangeText={this.HouseType}
+                      data={itemType}
+                      onChangeText={this.ItemType}
                     />
                
                   </View>

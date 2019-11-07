@@ -58,6 +58,19 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
+        public static string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
+        {
+            Item p = DBServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, itemAbout, itemImg);
+            if (p != null)
+            {
+
+            }
+            else
+            {
+
+            }
+            return new JavaScriptSerializer().Serialize(p);
+        }
     }
 
 

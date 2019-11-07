@@ -14,10 +14,8 @@ class App extends React.Component{
 }
 
 const MainNavigator = createStackNavigator({
-  Login: {screen: Login},
-
   S1: {screen: S1},
-
+  Login: {screen: Login},
   Register:{screen:Register},
   Home: {screen: Home},
 },

@@ -206,5 +206,62 @@ namespace DALproj
             return u;
         }
 
+
+        public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
+        {
+            string itemDate = string.Format("{0:HH:mm:ss tt}", DateTime.Now);
+            Item p = null;
+            SqlDataReader reader = null;
+            SqlDataReader reader2 = null;
+
+            try
+            {
+
+
+                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{userId}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
+                    comm.Connection.Open();
+                    int res = comm.ExecuteNonQuery();
+                    if (res == 1)
+                    {
+                        comm.CommandText = "SELECT max(ItemID) as maxID FROM Items";
+                        reader2 = comm.ExecuteReader();
+                        if (reader2.Read())
+                        {
+                        p = new Item()
+                        {
+                            ItemID = (int)reader2["maxID"],
+                            UserID = userId,
+                            UserName=userName,
+                            UserPhone=userPhone,
+                            ItemType=itemType,
+                            City=city,
+                            ItemAbout=itemAbout,
+                            ItemImg=itemImg,
+                            ItemDate=itemDate,
+                        };
+                        }
+                        return p;
+                    }
+
+            }
+            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+
+            return p;
+
+
+        }
+   
     }
 }

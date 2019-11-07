@@ -40,4 +40,10 @@ public class WebService : System.Web.Services.WebService
     {
         return BALServices.RegisterWithGoogle(firstName, lastName, email, password);
     }
+
+    [WebMethod]
+    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
+    {
+        return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, itemAbout, itemImg);
+    }
 }
