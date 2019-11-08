@@ -4,6 +4,7 @@ import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import ContentComponent from "./ContentComponent";
 import AssociationsList from "../screens/AssociationsList";
+import AssociationPage from "../screens/AssociationPage";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
@@ -13,6 +14,8 @@ import S3 from "../screens/S3.js";
 const DNav = createDrawerNavigator(
   {
     AssociationsList: { screen: AssociationsList },
+
+    AssociationPage: { screen: AssociationPage },
 
     Contribution: { screen: Contribution },
 
