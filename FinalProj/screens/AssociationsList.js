@@ -60,7 +60,7 @@ class AssociationsList extends Component {
   };
 
   render() {
-    const navigate = this.props.navigation;
+    const { navigate } = this.props.navigation;
     let Associations = [];
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
