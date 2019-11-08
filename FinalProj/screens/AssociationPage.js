@@ -1,11 +1,11 @@
-import React, { Component,Text } from "react";
+import React, { Component, Text } from "react";
 
 class AssociationPage extends Component {
   render() {
     return (
-      <div>
+      <View>
         <Text>dsgbs</Text>
-      </div>
+      </View>
     );
   }
 }
