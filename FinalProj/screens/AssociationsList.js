@@ -11,6 +11,7 @@ import {
   Image,
   Dimensions
 } from "react-native";
+import { Left } from "native-base";
 
 class AssociationsList extends Component {
   constructor(props) {
@@ -84,9 +85,9 @@ class AssociationsList extends Component {
             }}
           >
             <Image
-              style={{ width: 50, height: 50 }}
+              style={{ width: 50, height: 50, justifyContent: "Left" }}
               source={{
-                uri: "http://www.taramta.co.il/Upload/sunriseisrael.jpg"
+                uri: association.AssociationImage
               }}
             ></Image>
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>

@@ -306,6 +306,7 @@ namespace DALproj
                 {
                     AssociationID = int.Parse(reader["AssociationID"].ToString()),
                     AssociationName = reader["AssociationName"].ToString(),
+                    AssociationType = reader["AssociationType"].ToString(),
                     AssociationEmail = reader["AssociationEmail"].ToString(),
                     AssociationPhone = reader["AssociationPhone"].ToString(),
                     AssociationAdditionalPhone = reader["AssociationAdditionalPhone"].ToString(),
@@ -314,8 +315,6 @@ namespace DALproj
                     AssociationWebsite = reader["AssociationWebsite"].ToString(),
                     AssociationAdress = reader["AssociationAdress"].ToString(),
                     AssociationImage = reader["AssociationImage"].ToString(),
-
-
                 };
                 associations.Add(a);
             }
