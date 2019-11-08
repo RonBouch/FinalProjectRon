@@ -13,6 +13,5 @@
         public string AssociationWebsite { get; set; }
         public string AssociationAdress { get; set; }
         public string AssociationImage { get; set; }
-
     }
 }

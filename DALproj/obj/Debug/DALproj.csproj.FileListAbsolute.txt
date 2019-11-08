@@ -12,3 +12,10 @@ C:\Users\ronb1\Desktop\React-Native\FinalProjectRon\DALproj\obj\Debug\DALproj.cs
 C:\Users\ronb1\Desktop\React-Native\FinalProjectRon\DALproj\obj\Debug\DALproj.csproj.CoreCompileInputs.cache
 C:\Users\ronb1\Desktop\React-Native\FinalProjectRon\DALproj\obj\Debug\DALproj.dll
 C:\Users\ronb1\Desktop\React-Native\FinalProjectRon\DALproj\obj\Debug\DALproj.pdb
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\bin\Debug\DALproj.dll.config
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\bin\Debug\DALproj.dll
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\bin\Debug\DALproj.pdb
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.csprojAssemblyReference.cache
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.csproj.CoreCompileInputs.cache
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.dll
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.pdb

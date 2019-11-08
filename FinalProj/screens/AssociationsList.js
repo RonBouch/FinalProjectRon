@@ -11,6 +11,7 @@ import {
   Image,
   Dimensions
 } from "react-native";
+import { Left } from "native-base";
 
 class AssociationsList extends Component {
   constructor(props) {
@@ -75,25 +76,34 @@ class AssociationsList extends Component {
           <TouchableOpacity
             key={index}
             style={{
+              alignItems: "flex-start",
+              flexDirection: "row",
               padding: "3%",
               height: 100,
-              width: 300,
+              width: "90%",
               borderWidth: 1,
               borderColor: "black",
               marginBottom: "3%"
             }}
+            onPress={() => this.props.navigation.navigate("AssociationsPage")}
           >
             <Image
-              style={{ width: 50, height: 50 }}
+              style={{ width: 50, height: 50, alignItems: "flex-start" }}
               source={{
-                uri: "http://www.taramta.co.il/Upload/sunriseisrael.jpg"
+                uri: association.AssociationImage
               }}
             ></Image>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-              עמותת {association.AssociationName}
-            </Text>
-            <Text>כתובת : {association.AssociationAdress}</Text>
-            <Text>טלפון : {association.AssociationPhone}</Text>
+            <View
+              style={{
+                marginLeft: "5%"
+              }}
+            >
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                עמותת {association.AssociationName}
+              </Text>
+              <Text>כתובת : {association.AssociationAdress}</Text>
+              <Text>טלפון : {association.AssociationPhone}</Text>
+            </View>
           </TouchableOpacity>
         );
       });
