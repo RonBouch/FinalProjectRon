@@ -16,14 +16,6 @@ import { Left } from "native-base";
 class AssociationsList extends Component {
   constructor(props) {
     super(props);
-    this.AssociationsName = "";
-    this.AssociationsEmail = "";
-    this.AssociationsPhone = "";
-    this.AssociationAdditionalPhone = "";
-    this.AssociationFax = "";
-    this.AssociationWebsite = "";
-    this.AssociationAdress = "";
-    this.AssociationDetails = "";
     this.state = {
       associations: null
     };
