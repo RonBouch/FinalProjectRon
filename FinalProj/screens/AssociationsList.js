@@ -85,7 +85,7 @@ class AssociationsList extends Component {
               borderColor: "black",
               marginBottom: "3%"
             }}
-            onPress={() => this.props.navigation.navigate("AssociationsPage")}
+            onPress={() => this.props.navigation.navigate("AssociationPage")}
           >
             <Image
               style={{ width: 50, height: 50, alignItems: "flex-start" }}
