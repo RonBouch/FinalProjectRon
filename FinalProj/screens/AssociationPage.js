@@ -13,60 +13,22 @@ class AssociationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      associations: null
+      association: this.props.navigation.state.parmas.association
     };
   }
 
-  componentDidMount() {
-    this.GetAssociations();
-  }
-
-  GetAssociations = async () => {
-    fetch(
-      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetAssociations",
-      {
-        method: "post",
-        headers: new Headers({
-          "Content-Type": "application/Json;"
-        })
-      }
-    )
-      .then(res => {
-        console.log("res=", res);
-        return res.json();
-      })
-      .then(
-        result => {
-          console.log("fetch POST= ", result);
-          let associations = JSON.parse(result.d);
-          if (associations == null) {
-            this.setState({
-              message: "לא קיימים עמותות"
-            });
-            return;
-          } else {
-            console.log("associations = " + associations);
-            this.setState({
-              associations: associations
-            });
-          }
-        },
-        error => {
-          console.log("err post=", error);
-        }
-      );
-  };
-
   render() {
-    let Associations = [];
-    if (this.state.associations != null) {
-      Associations = this.state.associations.map((association, index) => {
-        //   console.log("asass",association)
-        return (
-          <View
-            key={index}
-            style={{}}
-          >
+    return (
+      <View style={styles.container}>
+        <View style={styles.main}>
+          <View style={styles.logo}>
+            {/* <Image
+              source={require("../assets/houseLogo.png")}
+              style={{ width: "100%", height: "100%", marginTop: "15%" }}
+              resizeMode="contain"
+            /> */}
+          </View>
+          <View key={index} style={{}}>
             <Image
               style={{ width: 50, height: 50, alignItems: "flex-start" }}
               source={{
@@ -85,20 +47,6 @@ class AssociationPage extends Component {
               <Text>טלפון : {association.AssociationPhone}</Text>
             </View>
           </View>
-        );
-      });
-    }
-    return (
-      <View style={styles.container}>
-        <View style={styles.main}>
-          <View style={styles.logo}>
-            {/* <Image
-              source={require("../assets/houseLogo.png")}
-              style={{ width: "100%", height: "100%", marginTop: "15%" }}
-              resizeMode="contain"
-            /> */}
-          </View>
-          <View>{Associations}</View>
         </View>
       </View>
     );

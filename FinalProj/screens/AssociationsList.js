@@ -60,6 +60,7 @@ class AssociationsList extends Component {
   };
 
   render() {
+    const navigate = this.props.navigation;
     let Associations = [];
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
@@ -77,7 +78,11 @@ class AssociationsList extends Component {
               borderColor: "black",
               marginBottom: "3%"
             }}
-            onPress={() => this.props.navigation.navigate("AssociationPage")}
+            onPress={() =>
+              navigate("AssociationPage", { assocation: association })
+            }
+
+            // onPress={() => this.props.navigation.navigate("AssociationPage")}
           >
             <Image
               style={{ width: 50, height: 50, alignItems: "flex-start" }}
