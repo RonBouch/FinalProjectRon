@@ -12,7 +12,7 @@ import {
   Dimensions
 } from "react-native";
 
-class Associations extends Component {
+class AssociationsList extends Component {
   constructor(props) {
     super(props);
     this.AssociationsName = "";
@@ -23,13 +23,13 @@ class Associations extends Component {
     this.AssociationWebsite = "";
     this.AssociationAdress = "";
     this.AssociationDetails = "";
-    this.state={
-        associations:null,
-    }
+    this.state = {
+      associations: null
+    };
   }
- componentDidMount(){
+  componentDidMount() {
     this.GetAssociations();
- }
+  }
   GetAssociations = async () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetAssociations",
@@ -67,19 +67,38 @@ class Associations extends Component {
   };
 
   render() {
-      let Associations=[];
-      if(this.state.associations!=null){
-        Associations=this.state.associations.map((association,index)=>{
-            //   console.log("asass",association)
-              return(
-                  <View key={index}
-                  >
-                      <Text>{association.AssociationName}</Text>
-                  </View>
-              )
-          })
-      }
-      console.log("asd",Associations)
+    let Associations = [];
+    if (this.state.associations != null) {
+      Associations = this.state.associations.map((association, index) => {
+        //   console.log("asass",association)
+        return (
+          <TouchableOpacity
+            key={index}
+            style={{
+              padding: "3%",
+              height: 100,
+              width: 300,
+              borderWidth: 1,
+              borderColor: "black",
+              marginBottom: "3%"
+            }}
+          >
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={{
+                uri: "http://www.taramta.co.il/Upload/sunriseisrael.jpg"
+              }}
+            ></Image>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+              עמותת {association.AssociationName}
+            </Text>
+            <Text>כתובת : {association.AssociationAdress}</Text>
+            <Text>טלפון : {association.AssociationPhone}</Text>
+          </TouchableOpacity>
+        );
+      });
+    }
+    console.log("asd", Associations);
     return (
       <View style={styles.container}>
         <View style={styles.main}>
@@ -90,13 +109,11 @@ class Associations extends Component {
               resizeMode="contain"
             /> */}
           </View>
-         <View>
-           {Associations}
-         </View>
+          <View>{Associations}</View>
         </View>
       </View>
     );
   }
 }
 
-export default Associations;
+export default AssociationsList;

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import ContentComponent from "./ContentComponent";
-import Associations from "../screens/Associations";
+import AssociationsList from "../screens/AssociationsList";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
@@ -12,9 +12,9 @@ import S3 from "../screens/S3.js";
 
 const DNav = createDrawerNavigator(
   {
-    Contribution: { screen: Contribution },
+    AssociationsList: { screen: AssociationsList },
 
-    Associations: { screen: Associations },
+    Contribution: { screen: Contribution },
 
     S3: { screen: S3 },
 
@@ -23,7 +23,7 @@ const DNav = createDrawerNavigator(
     Register: { screen: Register }
   },
   {
-    initialRouteName: "Contribution",
+    initialRouteName: "AssociationsList",
     contentComponent: ContentComponent,
     drawerWidth: Dimensions.get("window").width,
     drawerPosition: "right",
