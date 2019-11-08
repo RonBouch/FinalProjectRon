@@ -127,80 +127,21 @@ class Contribution extends Component {
           let Items = [];
 
           if (this.state.items != null) {
-            debugger;
-            Items = this.state.items.map((items, index) => {
-              // if (index == this.state.pageToShow) {
-              //   this.viewPage = place.Address;
-              // }
-      
+            Items = this.state.items.map((items, index) => {      
               return (
-                        <View key={index}
+            
+            <View key={index}
             style={{
-              width: "100%",
-              height: 100,
-              marginBottom: "2%",
-              backgroundColor: "rgba(255,255,255,.4)"
+              height: 50,
+              // marginBottom: "2%",
+              // backgroundColor: 'gray',
+              marginTop:2,
+              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
             }}
-            // key={index}
           >
-            <ImageBackground
-              source={require("../assets/logo3.jpg")}
-              style={styles.card}
-            >
-              <View style={{ flexDirection: "row", flex: 1 }}>
-                <View style={{ width: "75%", padding: "3%" }}>
-                  
-                  
-                  <View
-                    style={{
-                      width: "100%",
-                      marginTop: "5%",
-                      flexDirection: "row-reverse",
-                      justifyContent: "space-between"
-                    }}
-                  >
-                    <TouchableOpacity
-                    //   onPress={() => this._pressCall(place.Phone)}
-                      success
-                      type="outline"
-                      style={styles.phoneCard}
-                    >
-                      <Text style={styles.textCard}>התקשר</Text>
-                      <Icon name="md-call" color="green" size={24} />
-                    </TouchableOpacity>
-
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        flex: 3,
-                        color: "red",
-                        fontWeight: "bold",
-                        marginRight: 5
-                      }}
-                    >
-                     איש קשר:רון
-                    </Text>
-                  </View>
-                </View>
-
-                <View style={{ width: "25%" }}>
-                  <Image
-                    source={require('../assets/g3.jpg')}
-                    style={{ width: "100%", height: "100%",padding:10 }}
-                  />
-                </View>
-              </View>
-              <View>
-                <Text
-                  style={styles.textCard}
-                //   onPress={() => {
-                //     this.infoWindow(place, index);
-                //   }}
-                >
-                  עוד..
-                </Text>
-              </View>
-            </ImageBackground>
+         <Text>{items.ItemDate}</Text>
+         <Text>{items.City}</Text>
+         <Text>{items.ItemName}</Text>
           </View>
               )
             })}
@@ -266,6 +207,12 @@ class Contribution extends Component {
                     </TouchableOpacity>
          </View>
          <View style={styles.line}></View>
+   
+         <View  style={{justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: 'gray'}} >
+         <Text style={{fontWeight: "bold",fontSize:14}}>תאריך פרסום</Text>
+         <Text style={{fontWeight: "bold",fontSize:14}}> עיר/יישוב </Text>
+        <Text style={{fontWeight: "bold",fontSize:14}}>חפצים למסירה</Text>
+         </View>
 
           {Items}
          

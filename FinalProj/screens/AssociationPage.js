@@ -18,7 +18,7 @@ class AssociationPage extends Component {
   }
 
   render() {
-    console.log("a",this.state.a)
+    console.log("a",this.state.association)
     return (
       <View style={styles.container}>
         <View style={styles.main}>
