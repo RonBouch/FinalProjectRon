@@ -13,11 +13,12 @@ class AssociationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      association: this.props.navigation.state.parmas.association
+      association: this.props.navigation.state.params.association
     };
   }
 
   render() {
+    console.log("a",this.state.a)
     return (
       <View style={styles.container}>
         <View style={styles.main}>
@@ -28,7 +29,7 @@ class AssociationPage extends Component {
               resizeMode="contain"
             /> */}
           </View>
-          <View key={index} style={{}}>
+          {/* <View>
             <Image
               style={{ width: 50, height: 50, alignItems: "flex-start" }}
               source={{
@@ -46,7 +47,7 @@ class AssociationPage extends Component {
               <Text>כתובת : {association.AssociationAdress}</Text>
               <Text>טלפון : {association.AssociationPhone}</Text>
             </View>
-          </View>
+          </View> */}
         </View>
       </View>
     );

@@ -79,7 +79,7 @@ class AssociationsList extends Component {
               marginBottom: "3%"
             }}
             onPress={() =>
-              navigate("AssociationPage", { assocation: association })
+              navigate("AssociationPage", { association: association })
             }
 
             // onPress={() => this.props.navigation.navigate("AssociationPage")}
