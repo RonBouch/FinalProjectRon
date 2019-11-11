@@ -79,14 +79,13 @@ class AssociationsList extends Component {
             <TouchableOpacity
               style={{
                 alignItems: "center",
-                padding: "8%",
+                justifyContent: "center",
                 height: 140,
                 width: 140,
                 borderWidth: 1,
                 borderColor: "black",
                 borderRadius: 50,
-                marginBottom: "3%",
-                elevation: 15,
+                elevation: 10,
                 backgroundColor: "#fff",
                 shadowColor: "rgba(0,0,0, .4)",
                 shadowOffset: { height: 1, width: 1 },
@@ -109,7 +108,13 @@ class AssociationsList extends Component {
                   marginLeft: "5%"
                 }}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 12 }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    fontSize: 12
+                  }}
+                >
                   עמותת {association.AssociationName}
                 </Text>
               </View>
@@ -141,7 +146,7 @@ class AssociationsList extends Component {
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Image
-                source={require("../assets/imageedit_3_3371400810.png")}
+                source={require("../assets/TenYadLogo.png")}
                 style={{ width: 60, height: 60 }}
               />
             </TouchableHighlight>
