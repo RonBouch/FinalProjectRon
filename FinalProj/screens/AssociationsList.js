@@ -60,52 +60,54 @@ class AssociationsList extends Component {
   };
 
   render() {
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     let Associations = [];
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
         //   console.log("asass",association)
         return (
-          <TouchableOpacity
+          <View
             key={index}
             style={{
-              alignItems: "flex-start",
-              flexDirection: "row",
-              padding: "3%",
-              height: 100,
-              width: "90%",
-              borderWidth: 1,
-              borderColor: "black",
-              marginBottom: "3%"
+              margin: 10
             }}
-            onPress={() =>
-              navigate("AssociationPage", { association: association })
-            }
-
-            // onPress={() => this.props.navigation.navigate("AssociationPage")}
           >
-            <Image
-              style={{ width: 50, height: 50, alignItems: "flex-start" }}
-              source={{
-                uri: association.AssociationImage
-              }}
-            ></Image>
-            <View
+            <TouchableOpacity
               style={{
-                marginLeft: "5%"
+                alignItems: "center",
+                padding: "8%",
+                height: 140,
+                width: 140,
+                borderWidth: 1,
+                borderColor: "black",
+                borderRadius: 50,
+                marginBottom: "3%"
               }}
+              onPress={() =>
+                navigate("AssociationPage", { association: association })
+              }
+              // onPress={() => this.props.navigation.navigate("AssociationPage")}
             >
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                עמותת {association.AssociationName}
-              </Text>
-              <Text>כתובת : {association.AssociationAdress}</Text>
-              <Text>טלפון : {association.AssociationPhone}</Text>
-            </View>
-          </TouchableOpacity>
+              <Image
+                style={{ width: 80, height: 80, alignItems: "flex-start" }}
+                source={{
+                  uri: association.AssociationImage
+                }}
+              ></Image>
+              <View
+                style={{
+                  marginLeft: "5%"
+                }}
+              >
+                <Text style={{ fontWeight: "bold", fontSize: 12 }}>
+                  עמותת {association.AssociationName}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         );
       });
     }
-    console.log("asd", Associations);
     return (
       <View style={styles.container}>
         <View style={styles.main}>
@@ -116,7 +118,18 @@ class AssociationsList extends Component {
               resizeMode="contain"
             /> */}
           </View>
-          <View>{Associations}</View>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+
+              flexDirection: "row",
+              flexWrap: "wrap",
+              width: "100%"
+            }}
+          >
+            {Associations}
+          </View>
         </View>
       </View>
     );

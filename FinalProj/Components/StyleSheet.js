@@ -1,54 +1,53 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-//Publish Screen
-autocompletesContainer: {
-  paddingTop: 30,
-  zIndex: 1,
-  width: "100%",
-  paddingHorizontal: 8,
-},
-inputA: {maxHeight: 40},
-inputContainer: {
-  display: "flex",
-  flexShrink: 0,
-  flexGrow: 0,
-  flexDirection: "row",
-  flexWrap: "wrap",
-  alignItems: "center",
-  borderBottomWidth: 1,
-  borderColor: "#c7c6c1",
-  paddingVertical: 13,
-  paddingLeft: 12,
-  paddingRight: "5%",
-  width: "100%",
-  justifyContent: "flex-start",
-},
-container: {
-  flex: 1,
-  backgroundColor: "#ffffff",
-},
-plus: {
-  position: "absolute",
-  left: 15,
-  top: 10,
-},
-  //contribution screen
-  view:{
-    flex:1,
-    // justifyContent:'center',
-    alignItems:'center',
-    backgroundColor:'white',
-    padding:'2%'
-
+  //Publish Screen
+  autocompletesContainer: {
+    paddingTop: 30,
+    zIndex: 1,
+    width: "100%",
+    paddingHorizontal: 8
   },
-  line:{
-    width:'90%',
-    alignSelf:'center',
-    height:1,
-    backgroundColor:'gray',
-    margin:15,
-},
+  inputA: { maxHeight: 40 },
+  inputContainer: {
+    display: "flex",
+    flexShrink: 0,
+    flexGrow: 0,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderColor: "#c7c6c1",
+    paddingVertical: 13,
+    paddingLeft: 12,
+    paddingRight: "5%",
+    width: "100%",
+    justifyContent: "flex-start"
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#ffffff"
+  },
+  plus: {
+    position: "absolute",
+    left: 15,
+    top: 10
+  },
+  //contribution screen
+  view: {
+    flex: 1,
+    // justifyContent:'center',
+    alignItems: "center",
+    backgroundColor: "white",
+    padding: "2%"
+  },
+  line: {
+    width: "90%",
+    alignSelf: "center",
+    height: 1,
+    backgroundColor: "gray",
+    margin: 15
+  },
   searchButton: {
     backgroundColor: "rgba(0,0,255,.7)",
     flexDirection: "row",
@@ -58,7 +57,7 @@ plus: {
     justifyContent: "center",
     borderColor: "white",
     borderWidth: 2,
-    marginTop:10 
+    marginTop: 10
   },
   //Basic Design
 
@@ -66,36 +65,34 @@ plus: {
     flex: 1,
     resizeMode: "cover"
   },
-  touchableHighlight:{
-    width:50,
-    height:50,
+  touchableHighlight: {
+    width: 50,
+    height: 50,
     // backgroundColor:'red',
-    borderRadius:50,
-    alignItems:'center',
-    justifyContent:'center',
-    position:'absolute',
-    left:10,
-    top:20,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    left: 10,
+    top: 20
   },
-  open:{
-    color:'white',
-    fontSize:16,
-    fontWeight:'bold',
+  open: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold"
   },
   logo: {
     alignItems: "center",
     // marginTop: "15%",
-    height:'25%',
-    backgroundColor:'blue'
-    
-
+    height: "25%",
+    backgroundColor: "blue"
   },
   container: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    paddingLeft: "10%",
-    paddingRight: "10%",
+    paddingLeft: "5%",
+    paddingRight: "5%",
     width: "100%",
     height: "100%"
   },

@@ -4,7 +4,7 @@
     {
         public int AssociationID { get; set; }
         public string AssociationName { get; set; }
-        public string AssociationType { get; set; }
+        public int AssociationTypeID { get; set; }
         public string AssociationEmail { get; set; }
         public string AssociationPhone { get; set; }
         public string AssociationAdditionalPhone { get; set; }

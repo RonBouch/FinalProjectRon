@@ -306,7 +306,7 @@ namespace DALproj
                 {
                     AssociationID = int.Parse(reader["AssociationID"].ToString()),
                     AssociationName = reader["AssociationName"].ToString(),
-                    AssociationType = reader["AssociationType"].ToString(),
+                    AssociationTypeID = int.Parse(reader["AssociationTypeID"].ToString()),
                     AssociationEmail = reader["AssociationEmail"].ToString(),
                     AssociationPhone = reader["AssociationPhone"].ToString(),
                     AssociationAdditionalPhone = reader["AssociationAdditionalPhone"].ToString(),
