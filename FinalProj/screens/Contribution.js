@@ -19,6 +19,7 @@ class Contribution extends Component {
             region:"",  
           checkedB: false,
           items:null,
+          extraDetails:-1,
         }
 
     }
@@ -54,7 +55,9 @@ class Contribution extends Component {
             } else {
               console.log("U = " + items);
               this.setState({
-                items: items
+                items: items,
+                
+
               });
             }
           },
@@ -76,6 +79,18 @@ class Contribution extends Component {
         this.setState({
           region: e
         });
+      };
+      infoWindow = (p, i) => {
+        
+        if (this.state.extraDetails == -1 ) {
+          this.setState({
+            extraDetails: i,
+          });
+        } else {
+          this.setState({
+            extraDetails: -1,
+          });
+        }
       };
     render() {
         let Type = [
@@ -127,10 +142,19 @@ class Contribution extends Component {
           let Items = [];
 
           if (this.state.items != null) {
-            Items = this.state.items.map((items, index) => {      
+            console.log("ASDADSSADADS")
+            Items = this.state.items.map((item, index) => { 
+              console.log("Extr ",this.state.extraDetails+ " Index",index) 
               return (
-            
-            <View key={index}
+                ((index!=this.state.extraDetails))?
+
+           
+            <TouchableOpacity key={index}
+
+            onPress={() => {
+              this.infoWindow(item, index);
+            }}
+
             style={{
               height: 50,
               // marginBottom: "2%",
@@ -139,11 +163,35 @@ class Contribution extends Component {
               justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
             }}
           >
-         <Text>{items.ItemDate}</Text>
-         <Text>{items.City}</Text>
-         <Text>{items.ItemName}</Text>
-          </View>
-              )
+         <Text>{item.ItemDate}</Text>
+         <Text>{item.City}</Text>
+         <Text>{item.ItemName}</Text>
+          </TouchableOpacity>
+              
+          
+              
+              :             
+
+           
+                  <TouchableOpacity key={index}
+      
+                  onPress={() => {
+                    this.infoWindow(item, index);
+                  }}
+      
+                  style={{
+                    height: 100,
+                    // marginBottom: "2%",
+                    // backgroundColor: 'gray',
+                    marginTop:2,
+                    justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
+                  }}
+                >
+               <Text>{item.ItemDate}</Text>
+               <Text>{item.City}</Text>
+               <Text>{item.ItemName}</Text>
+                </TouchableOpacity>)
+              
             })}
           return (
       
