@@ -66,15 +66,11 @@ export default StyleSheet.create({
     resizeMode: "cover"
   },
   touchableHighlight: {
-    width: 50,
-    height: 50,
-    // backgroundColor:'red',
-    borderRadius: 50,
-    alignItems: "center",
+    width: 60,
+    height: 60,
     justifyContent: "center",
     position: "absolute",
-    left: 10,
-    top: 20
+    left: 10
   },
   open: {
     color: "white",
@@ -82,24 +78,20 @@ export default StyleSheet.create({
     fontWeight: "bold"
   },
   logo: {
-    alignItems: "center",
-    // marginTop: "15%",
-    height: "25%",
-    backgroundColor: "blue"
+    marginTop: "10%",
+    backgroundColor: "#6495ed",
+    width: "100%",
+    alignItems: "flex-end"
   },
   container: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center",
-    paddingLeft: "5%",
-    paddingRight: "5%",
     width: "100%",
     height: "100%"
   },
   main: {
     backgroundColor: "rgba(255,255,255,.7)",
     alignItems: "center",
-    // flex:1,
     width: "100%",
     height: "100%"
   },

@@ -26,7 +26,7 @@ export default class ContentComponent extends Component {
           <ScrollView>
             <View style={styles.header}>
               <Image
-                source={require("../assets/logo3.jpg")}
+                source={require("../assets/imageedit_3_3371400810.png")}
                 style={[styles.headerImage, { width: 150, height: 150 }]}
               />
               <Text style={[styles.text, { color: "white" }]}>תן יד</Text>

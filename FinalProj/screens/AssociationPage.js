@@ -45,8 +45,50 @@ class AssociationPage extends Component {
               <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                 עמותת {this.state.association.AssociationName}
               </Text>
-              <Text>כתובת : {this.state.association.AssociationAdress}</Text>
-              <Text>טלפון : {this.state.association.AssociationPhone}</Text>
+              {this.state.association.AssociationAdress != "" ? (
+                <Text>כתובת : {this.state.association.AssociationAdress}</Text>
+              ) : (
+                console.log("No Adress")
+              )}
+              {this.state.association.AssociationPhone != "" ? (
+                <Text>טלפון : {this.state.association.AssociationPhone}</Text>
+              ) : (
+                console.log("No Phone")
+              )}
+              {this.state.association.AssociationAdditionalPhone != "" ? (
+                <Text>
+                  טלפון נוסף :
+                  {this.state.association.AssociationAdditionalPhone}
+                </Text>
+              ) : (
+                console.log("No Additional Phone")
+              )}
+              {this.state.association.AssociationFax != "" ? (
+                <Text>פקס :{this.state.association.AssociationFax}</Text>
+              ) : (
+                console.log("No Fax")
+              )}
+              {this.state.association.AssociationEmail != "" ? (
+                <Text>
+                  דואר אלקטרוני :{this.state.association.AssociationEmail}
+                </Text>
+              ) : (
+                console.log("No Email")
+              )}
+              {this.state.association.AssociationWebsite != "" ? (
+                <Text>
+                  אתר אינטרנט :{this.state.association.AssociationWebsite}
+                </Text>
+              ) : (
+                console.log("No Website")
+              )}
+              {this.state.association.AssociationDetails != "" ? (
+                <Text>
+                  אודותינו :{this.state.association.AssociationDetails}
+                </Text>
+              ) : (
+                console.log("No Details")
+              )}
             </View>
           </View>
         </View>

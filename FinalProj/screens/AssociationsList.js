@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { Icon } from "react-native-elements";
+import { DrawerActions } from "react-navigation-drawer";
 import {
   Text,
   View,
@@ -9,7 +10,10 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  Dimensions
+  Dimensions,
+  ScrollView,
+  StatusBar,
+  TouchableHighlight
 } from "react-native";
 import { Left } from "native-base";
 
@@ -81,7 +85,13 @@ class AssociationsList extends Component {
                 borderWidth: 1,
                 borderColor: "black",
                 borderRadius: 50,
-                marginBottom: "3%"
+                marginBottom: "3%",
+                elevation: 15,
+                backgroundColor: "#fff",
+                shadowColor: "rgba(0,0,0, .4)",
+                shadowOffset: { height: 1, width: 1 },
+                shadowOpacity: 1,
+                shadowRadius: 1
               }}
               onPress={() =>
                 navigate("AssociationPage", { association: association })
@@ -112,24 +122,40 @@ class AssociationsList extends Component {
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.logo}>
-            {/* <Image
-              source={require("../assets/houseLogo.png")}
-              style={{ width: "100%", height: "100%", marginTop: "15%" }}
-              resizeMode="contain"
-            /> */}
+            <TouchableHighlight
+              onPress={() =>
+                this.props.navigation.dispatch(DrawerActions.openDrawer())
+              }
+              style={styles.touchableHighlight}
+              underlayColor={"rgba(0,0,0,0.8)"}
+            >
+              <Icon
+                iconStyle={{ marginEnd: "10%" }}
+                name="bars"
+                type="font-awesome"
+                color="white"
+                size={28}
+              />
+            </TouchableHighlight>
+            <Image
+              source={require("../assets/imageedit_3_3371400810.png")}
+              style={{ width: 60, height: 60 }}
+            />
           </View>
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
+          <ScrollView style={{ marginHorizontal: 20, width: "100%" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
 
-              flexDirection: "row",
-              flexWrap: "wrap",
-              width: "100%"
-            }}
-          >
-            {Associations}
-          </View>
+                flexDirection: "row",
+                flexWrap: "wrap",
+                width: "100%"
+              }}
+            >
+              {Associations}
+            </View>
+          </ScrollView>
         </View>
       </View>
     );
