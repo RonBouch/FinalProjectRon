@@ -279,6 +279,7 @@ namespace DALproj
                     UserName = reader["UserName"].ToString(),
                     UserPhone = reader["UserPhone"].ToString(),
                     ItemType = reader["ItemType"].ToString(),
+                    ItemName=reader["ItemName"].ToString(),
                     City = reader["City"].ToString(),
                     ItemAbout = reader["ItemAbout"].ToString(),
                     ItemImg = reader["ItemImg"].ToString(),

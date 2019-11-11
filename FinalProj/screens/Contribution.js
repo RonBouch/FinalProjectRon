@@ -19,6 +19,7 @@ class Contribution extends Component {
             region:"",  
           checkedB: false,
           items:null,
+          extraDetails:-1,
         }
 
     }
@@ -54,7 +55,9 @@ class Contribution extends Component {
             } else {
               console.log("U = " + items);
               this.setState({
-                items: items
+                items: items,
+                
+
               });
             }
           },
@@ -76,6 +79,18 @@ class Contribution extends Component {
         this.setState({
           region: e
         });
+      };
+      infoWindow = (p, i) => {
+        
+        if (this.state.extraDetails == -1 ) {
+          this.setState({
+            extraDetails: i,
+          });
+        } else {
+          this.setState({
+            extraDetails: -1,
+          });
+        }
       };
     render() {
         let Type = [
@@ -127,82 +142,56 @@ class Contribution extends Component {
           let Items = [];
 
           if (this.state.items != null) {
-            debugger;
-            Items = this.state.items.map((items, index) => {
-              // if (index == this.state.pageToShow) {
-              //   this.viewPage = place.Address;
-              // }
-      
+            console.log("ASDADSSADADS")
+            Items = this.state.items.map((item, index) => { 
+              console.log("Extr ",this.state.extraDetails+ " Index",index) 
               return (
-                        <View key={index}
-            style={{
-              width: "100%",
-              height: 100,
-              marginBottom: "2%",
-              backgroundColor: "rgba(255,255,255,.4)"
+                ((index!=this.state.extraDetails))?
+
+           
+            <TouchableOpacity key={index}
+
+            onPress={() => {
+              this.infoWindow(item, index);
             }}
-            // key={index}
+
+            style={{
+              height: 50,
+              // marginBottom: "2%",
+              // backgroundColor: 'gray',
+              marginTop:2,
+              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
+            }}
           >
-            <ImageBackground
-              source={require("../assets/logo3.jpg")}
-              style={styles.card}
-            >
-              <View style={{ flexDirection: "row", flex: 1 }}>
-                <View style={{ width: "75%", padding: "3%" }}>
-                  
-                  
-                  <View
-                    style={{
-                      width: "100%",
-                      marginTop: "5%",
-                      flexDirection: "row-reverse",
-                      justifyContent: "space-between"
-                    }}
-                  >
-                    <TouchableOpacity
-                    //   onPress={() => this._pressCall(place.Phone)}
-                      success
-                      type="outline"
-                      style={styles.phoneCard}
-                    >
-                      <Text style={styles.textCard}>התקשר</Text>
-                      <Icon name="md-call" color="green" size={24} />
-                    </TouchableOpacity>
+         <Text>{item.ItemDate}</Text>
+         <Text>{item.City}</Text>
+         <Text>{item.ItemName}</Text>
+          </TouchableOpacity>
+              
+          
+              
+              :             
 
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        flex: 3,
-                        color: "red",
-                        fontWeight: "bold",
-                        marginRight: 5
-                      }}
-                    >
-                     איש קשר:רון
-                    </Text>
-                  </View>
-                </View>
-
-                <View style={{ width: "25%" }}>
-                  <Image
-                    source={require('../assets/g3.jpg')}
-                    style={{ width: "100%", height: "100%",padding:10 }}
-                  />
-                </View>
-              </View>
-              <View>
-                <Text
-                  style={styles.textCard}
-                //   onPress={() => {
-                //     this.infoWindow(place, index);
-                //   }}
+           
+                  <TouchableOpacity key={index}
+      
+                  onPress={() => {
+                    this.infoWindow(item, index);
+                  }}
+      
+                  style={{
+                    height: 100,
+                    // marginBottom: "2%",
+                    // backgroundColor: 'gray',
+                    marginTop:2,
+                    justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
+                  }}
                 >
-                  עוד..
-                </Text>
-              </View>
-            </ImageBackground>
-          </View>
-              )
+               <Text>{item.ItemDate}</Text>
+               <Text>{item.City}</Text>
+               <Text>{item.ItemName}</Text>
+                </TouchableOpacity>)
+              
             })}
           return (
       
@@ -266,6 +255,12 @@ class Contribution extends Component {
                     </TouchableOpacity>
          </View>
          <View style={styles.line}></View>
+   
+         <View  style={{justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: 'gray'}} >
+         <Text style={{fontWeight: "bold",fontSize:14}}>תאריך פרסום</Text>
+         <Text style={{fontWeight: "bold",fontSize:14}}> עיר/יישוב </Text>
+        <Text style={{fontWeight: "bold",fontSize:14}}>חפצים למסירה</Text>
+         </View>
 
           {Items}
          
