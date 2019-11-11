@@ -139,13 +139,13 @@ const styles = StyleSheet.create({
   },
   drawer: {
     flex: 1,
-    width: 350,
+    width: "80%",
     backgroundColor: "white"
   },
   header: {
     width: "100%",
     height: 200,
-    backgroundColor: "#6195ff",
+    backgroundColor: "#6495ed",
     alignItems: "center",
     justifyContent: "center"
   },
