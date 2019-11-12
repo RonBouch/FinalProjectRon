@@ -46,7 +46,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     height: 1,
     backgroundColor: "gray",
-    margin: 15
+    // margin: 10
   },
   searchButton: {
     backgroundColor: "rgba(0,0,255,.7)",

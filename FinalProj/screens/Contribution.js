@@ -172,18 +172,26 @@ class Contribution extends Component {
               
           
               
-              :             
+              :         
+              
+              
+
+
+
+              
 <View   key={index}
-style={{backgroundColor: '#e6e6fa',width:'100%', justifyContent: 'space-between'}}>
+style={{backgroundColor: '#e6e6fa',width:'100%', justifyContent: 'space-between'}}
+>
+
      <TouchableOpacity
 style={{
   marginTop:2,
   justifyContent: 'space-between',flexDirection:'row-reverse', alignItems: "center",
 
 }}
-onPress={() => {
-  this.infoWindow(index);
-}}
+// onPress={() => {
+//   this.infoWindow(index);
+// }}
 >
 <Text>{item.ItemDate}</Text>
 <Text>{item.City}</Text>
@@ -191,16 +199,32 @@ onPress={() => {
 </TouchableOpacity>
                 <View style={styles.line}></View>
 
+
                  <View  
-                 onResponderGrant={() => {
-                  this.infoWindow(index);
-                }}
+                //  onTouchStart={()=>this.infoWindow(index)}
                 style={{
-                flexDirection:'row',width:'100%',
+                  width:'100%',padding:5,alignItems:'center',height:100
               }}>
-                <Image source={require("../assets/bg2.jpg")}
-                    style={{ width: 70, height: 70,   marginLeft:3 }}
+            <View style={{
+                flexDirection:'row',width:'80%',justifyContent:'space-between',alignItems:'center',color:'gray' ,height:'70%'
+
+              }}>
+            <Image source={require("../assets/bg2.jpg")}
+                    style={{ width: 70, height: 70}}
                   />
+              <TouchableOpacity>
+                <Icon name="md-star" size={40} color="#ffe500"/>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Icon name="ios-chatbubbles" size={40} color='blue'/>
+              </TouchableOpacity>
+
+                    <TouchableOpacity>
+              <Icon name="md-call" size={40} color="green"/>
+
+              </TouchableOpacity>
+            </View>
+           
                 </View>
 </View>
             
@@ -245,7 +269,7 @@ onPress={() => {
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Image
-                source={require("../assets/imageedit_3_3371400810.png")}
+                source={require("../assets/TenYadLogo.png")}
                 style={{ width: 60, height: 60 }}
               />
             </TouchableHighlight>
@@ -317,34 +341,16 @@ onPress={() => {
         )
     }
 }
-// class HomeScreen extends React.Component {  
-//     render() {  
-//       return (  
-//           <View style={styles.container}>  
-//             <Text>Home Screen</Text>  
-//           </View>  
-//       );  
-//     }  
-//   }  
 
   const TabNavigator = createMaterialBottomTabNavigator(  
     {  
-      // HomeScreen: { screen: HomeScreen,  
-      //       navigationOptions:{  
-      //           tabBarLabel:'תן יד',  
-      //           tabBarIcon: ({ tintColor }) => (  
-      //               <View>  
-      //                   <Icon style={[{color: tintColor}]} size={25} name={'ios-home'}/>  
-      //               </View>),  
-      //       }  
-      //   },  
       Contribution: {  
         screen: Contribution,  
         navigationOptions:{  
             tabBarLabel:'תרומות',  
             tabBarIcon: ({ tintColor }) => (  
                 <View>  
-                    <Icona      type="font-awesome" style={[{color: tintColor}]} size={25} name="handshake-o"/>  
+                    <Icona     color={tintColor} type="font-awesome" style={[{color: tintColor}]} size={25} name="handshake-o"/>  
                 </View>),  
                  activeColor: 'white',  
                  inactiveColor: '#46f6d7',  
@@ -358,7 +364,7 @@ onPress={() => {
               <View>  
                   <Icon style={[{color: tintColor}]} size={25} name={'ios-add-circle-outline'}/>  
               </View>),  
-          activeColor: '#615af6',  
+          activeColor: 'white',  
           inactiveColor: '#46f6d7',  
           barStyle: { backgroundColor: '#67baf6' },  
       }  
