@@ -25,7 +25,7 @@ export default StyleSheet.create({
     justifyContent: "flex-start"
   },
   container: {
-    flex: 1,
+    flex: 1
     // backgroundColor: "#ffffff"
   },
   plus: {
@@ -66,6 +66,7 @@ export default StyleSheet.create({
     resizeMode: "cover"
   },
   touchableHighlight: {
+    marginTop: 35,
     width: 60,
     height: 60,
     justifyContent: "center",
@@ -77,11 +78,15 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold"
   },
-  logo: {
-    marginTop: "5%",
+  topBar: {
     backgroundColor: "#6495ed",
     width: "100%",
     alignItems: "flex-end"
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    marginTop: 35
   },
   container: {
     flex: 1,
@@ -90,9 +95,6 @@ export default StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "#6495ed",
-
-    // backgroundColor: "rgba(255,255,255,.7)",
     alignItems: "center",
     width: "100%",
     height: "100%"

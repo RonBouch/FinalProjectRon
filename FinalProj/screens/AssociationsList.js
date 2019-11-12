@@ -126,7 +126,7 @@ class AssociationsList extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.main}>
-          <View style={styles.logo}>
+          <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -147,11 +147,17 @@ class AssociationsList extends Component {
             >
               <Image
                 source={require("../assets/TenYadLogo.png")}
-                style={{ width: 60, height: 60 }}
+                style={styles.logo}
               />
             </TouchableHighlight>
           </View>
-          <ScrollView style={{ marginHorizontal: 20, width: "100%",backgroundColor:'white' }}>
+          <ScrollView
+            style={{
+              marginHorizontal: 20,
+              width: "100%",
+              backgroundColor: "white"
+            }}
+          >
             <View
               style={{
                 alignItems: "center",

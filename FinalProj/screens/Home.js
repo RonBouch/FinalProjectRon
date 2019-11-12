@@ -21,7 +21,7 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.main}>
-          <View style={styles.logo}>
+          <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -42,7 +42,7 @@ export default class Home extends Component {
             >
               <Image
                 source={require("../assets/TenYadLogo.png")}
-                style={{ width: 60, height: 60 }}
+                style={styles.logo}
               />
             </TouchableHighlight>
           </View>
