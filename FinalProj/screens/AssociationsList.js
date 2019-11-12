@@ -151,7 +151,7 @@ class AssociationsList extends Component {
               />
             </TouchableHighlight>
           </View>
-          <ScrollView style={{ marginHorizontal: 20, width: "100%" }}>
+          <ScrollView style={{ marginHorizontal: 20, width: "100%",backgroundColor:'white' }}>
             <View
               style={{
                 alignItems: "center",

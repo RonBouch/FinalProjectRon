@@ -80,9 +80,9 @@ class Contribution extends Component {
           region: e
         });
       };
-      infoWindow = (p, i) => {
+      infoWindow = (i) => {
         
-        if (this.state.extraDetails == -1 ) {
+        if (this.state.extraDetails == -1 ||this.state.extraDetails!=i) {
           this.setState({
             extraDetails: i,
           });
@@ -152,7 +152,7 @@ class Contribution extends Component {
             <TouchableOpacity key={index}
 
             onPress={() => {
-              this.infoWindow(item, index);
+              this.infoWindow(index);
             }}
 
             style={{
@@ -171,26 +171,38 @@ class Contribution extends Component {
           
               
               :             
+<View   key={index}
+style={{backgroundColor: '#deb887',width:'100%', justifyContent: 'space-between'}}>
+     <TouchableOpacity
+style={{
+  marginTop:2,
+  justifyContent: 'space-between',flexDirection:'row-reverse', alignItems: "center",
 
-           
-                  <TouchableOpacity key={index}
-      
-                  onPress={() => {
-                    this.infoWindow(item, index);
-                  }}
-      
-                  style={{
-                    height: 100,
-                    // marginBottom: "2%",
-                    // backgroundColor: 'gray',
-                    marginTop:2,
-                    justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
-                  }}
-                >
-               <Text>{item.ItemDate}</Text>
-               <Text>{item.City}</Text>
-               <Text>{item.ItemName}</Text>
-                </TouchableOpacity>)
+}}
+onPress={() => {
+  this.infoWindow(index);
+}}
+>
+<Text>{item.ItemDate}</Text>
+<Text>{item.City}</Text>
+<Text>{item.ItemName}</Text>
+</TouchableOpacity>
+                <View style={styles.line}></View>
+
+                 <View  
+                 onResponderGrant={() => {
+                  this.infoWindow(index);
+                }}
+                style={{
+                flexDirection:'row',width:'100%',
+              }}>
+                <Image source={require("../assets/bg2.jpg")}
+                    style={{ width: 70, height: 70,   marginLeft:3 }}
+                  />
+                </View>
+</View>
+            
+                )
               
             })}
           return (
