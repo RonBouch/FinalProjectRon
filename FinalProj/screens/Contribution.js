@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View,TouchableHighlight,Image,ImageBackground,TouchableOpacity,Text} from 'react-native';
+import { View,TouchableHighlight,Image,ImageBackground,TouchableOpacity,Text,ScrollView} from 'react-native';
 import { Dropdown } from "react-native-material-dropdown";
+import { DrawerActions } from "react-navigation-drawer";
 
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
+
 import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
 import Icon from 'react-native-vector-icons/Ionicons';  
@@ -160,7 +162,7 @@ class Contribution extends Component {
               // marginBottom: "2%",
               // backgroundColor: 'gray',
               marginTop:2,
-              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f5f5dc'
+              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f0f8ff'
             }}
           >
          <Text>{item.ItemDate}</Text>
@@ -172,7 +174,7 @@ class Contribution extends Component {
               
               :             
 <View   key={index}
-style={{backgroundColor: '#deb887',width:'100%', justifyContent: 'space-between'}}>
+style={{backgroundColor: '#e6e6fa',width:'100%', justifyContent: 'space-between'}}>
      <TouchableOpacity
 style={{
   marginTop:2,
@@ -205,23 +207,52 @@ onPress={() => {
                 )
               
             })}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           return (
-      
-            <ImageBackground source={require('../assets/bg2.jpg')} style={styles.backgroundImage}>
-              <View style={styles.logo}>
-              <TouchableHighlight onPress={()=>this.props.navigation.goBack()}
-            style={styles.touchableHighlight} underlayColor={'rgba(0,0,0,0.8)'}>
-            <Icon  iconStyle={{ marginEnd: "10%" }} name="md-arrow-round-forward" type="font-awesome"  color="black" size={28} />             
-            </TouchableHighlight>
-              <Image
-                source={require("../assets/logo3.jpg")}
-                style={{ width: "80%", height: 100 ,borderRadius:50,marginTop:'15%'}}
-                resizeMode="contain"
+            <View style={styles.container}>
+        <View style={styles.main}>
+          <View style={styles.logo}>
+            <TouchableHighlight
+              onPress={() =>
+                this.props.navigation.dispatch(DrawerActions.openDrawer())
+              }
+              style={styles.touchableHighlight}
+              underlayColor={"rgba(0,0,0,0.8)"}
+            >
+              <Icona
+                iconStyle={{ marginEnd: "10%" }}
+                name="bars"
+                type="font-awesome"
+                color="white"
+                size={28}
               />
-            </View>
-       
-         <View style={styles.view}>
-         <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
+            </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() => this.props.navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/imageedit_3_3371400810.png")}
+                style={{ width: 60, height: 60 }}
+              />
+            </TouchableHighlight>
+          </View>
+          <ScrollView style={{ marginHorizontal: 20, width: "100%",backgroundColor:'white' }}>
+          <View style={styles.view}>
+          <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
                  <CheckBox 
                         title="מודעות לפי תאריך"
                         iconRight
@@ -268,10 +299,10 @@ onPress={() => {
          </View>
          <View style={styles.line}></View>
    
-         <View  style={{justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: 'gray'}} >
-         <Text style={{fontWeight: "bold",fontSize:14}}>תאריך פרסום</Text>
-         <Text style={{fontWeight: "bold",fontSize:14}}> עיר/יישוב </Text>
-        <Text style={{fontWeight: "bold",fontSize:14}}>חפצים למסירה</Text>
+         <View  style={{justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#6495ed',marginBottom:10}} >
+         <Text style={{fontWeight: "bold",fontSize:16}}>תאריך פרסום</Text>
+         <Text style={{fontWeight: "bold",fontSize:16}}> עיר/יישוב </Text>
+        <Text style={{fontWeight: "bold",fontSize:16}}>חפצים למסירה</Text>
          </View>
 
           {Items}
@@ -280,66 +311,72 @@ onPress={() => {
        
 
          </View>
-         
-         </ImageBackground>
+          </ScrollView>
+        </View>
+      </View>
         )
     }
 }
-class HomeScreen extends React.Component {  
-    render() {  
-      return (  
-          <View style={styles.container}>  
-            <Text>Home Screen</Text>  
-          </View>  
-      );  
-    }  
-  }  
+// class HomeScreen extends React.Component {  
+//     render() {  
+//       return (  
+//           <View style={styles.container}>  
+//             <Text>Home Screen</Text>  
+//           </View>  
+//       );  
+//     }  
+//   }  
 
   const TabNavigator = createMaterialBottomTabNavigator(  
     {  
-      HomeScreen: { screen: HomeScreen,  
-            navigationOptions:{  
-                tabBarLabel:'תן יד',  
-                tabBarIcon: ({ tintColor }) => (  
-                    <View>  
-                        <Icon style={[{color: tintColor}]} size={25} name={'ios-home'}/>  
-                    </View>),  
-            }  
-        },  
+      // HomeScreen: { screen: HomeScreen,  
+      //       navigationOptions:{  
+      //           tabBarLabel:'תן יד',  
+      //           tabBarIcon: ({ tintColor }) => (  
+      //               <View>  
+      //                   <Icon style={[{color: tintColor}]} size={25} name={'ios-home'}/>  
+      //               </View>),  
+      //       }  
+      //   },  
+      Contribution: {  
+        screen: Contribution,  
+        navigationOptions:{  
+            tabBarLabel:'תרומות',  
+            tabBarIcon: ({ tintColor }) => (  
+                <View>  
+                    <Icona      type="font-awesome" style={[{color: tintColor}]} size={25} name="handshake-o"/>  
+                </View>),  
+                 activeColor: 'white',  
+                 inactiveColor: '#46f6d7',  
+                 barStyle: { backgroundColor: '#6495ed' },   
+        }  
+    },  
+    Publish: { screen: Publish,  
+      navigationOptions:{  
+          tabBarLabel:'תן חפץ',  
+          tabBarIcon: ({ tintColor }) => (  
+              <View>  
+                  <Icon style={[{color: tintColor}]} size={25} name={'ios-add-circle-outline'}/>  
+              </View>),  
+          activeColor: '#615af6',  
+          inactiveColor: '#46f6d7',  
+          barStyle: { backgroundColor: '#67baf6' },  
+      }  
+  },  
         S3: { screen: S3,  
             navigationOptions:{  
-                tabBarLabel:'חפש חפץ',  
+                tabBarLabel:'הודעות',  
                 tabBarIcon: ({ tintColor }) => (  
                     <View>  
-                        <Icon style={[{color: tintColor}]} size={25} name={'md-search'}/>  
+                        <Icon style={[{color: tintColor}]} size={25} name={'ios-chatbubbles'}/>  
                     </View>),  
-                activeColor: '#f60c0d',  
-                inactiveColor: '#f65a22',  
-                barStyle: { backgroundColor: '#f69b31' },  
+               activeColor: 'white',  
+               inactiveColor: '#46f6d7',  
+               barStyle: { backgroundColor: '#6495ed' },  
             }  
         },  
-        Publish: { screen: Publish,  
-            navigationOptions:{  
-                tabBarLabel:'תן חפץ',  
-                tabBarIcon: ({ tintColor }) => (  
-                    <View>  
-                        <Icon style={[{color: tintColor}]} size={25} name={'ios-add-circle-outline'}/>  
-                    </View>),  
-                activeColor: '#615af6',  
-                inactiveColor: '#46f6d7',  
-                barStyle: { backgroundColor: '#67baf6' },  
-            }  
-        },  
-        Contribution: {  
-            screen: Contribution,  
-            navigationOptions:{  
-                tabBarLabel:'Cart',  
-                tabBarIcon: ({ tintColor }) => (  
-                    <View>  
-                        <Icon style={[{color: tintColor}]} size={25} name={'md-hand'}/>  
-                    </View>),  
-            }  
-        },  
+     
+       
     },  
     {  
       initialRouteName: "Contribution",  
