@@ -24,10 +24,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start"
   },
-  container: {
-    flex: 1
-    // backgroundColor: "#ffffff"
-  },
+ 
   plus: {
     position: "absolute",
     left: 15,

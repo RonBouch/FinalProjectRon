@@ -61,6 +61,15 @@ class AssociationPage extends Component {
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
+
+
+
+
+
+
+
+
+
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -85,8 +94,19 @@ class AssociationPage extends Component {
                 style={styles.logo}
               />
             </TouchableHighlight>
+
+
+
+
+
+
+
           </View>
           <ScrollView style={{ width: "100%", height: "100%" }}>
+
+
+
+
             <View
               style={{
                 width: "100%",
@@ -99,6 +119,14 @@ class AssociationPage extends Component {
                   width: "60%"
                 }}
               >
+
+
+
+
+
+
+
+
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                   עמותת {this.state.association.AssociationName}
                 </Text>
@@ -165,6 +193,10 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Website")
             )}
+
+
+
+            
             <View style={{ padding: "2%", height: "100%", width: "100%" }}>
               {this.state.association.AssociationDetails != "" ? (
                 <Text>
