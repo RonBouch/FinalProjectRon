@@ -26,7 +26,7 @@ export default class ContentComponent extends Component {
           <ScrollView>
             <View style={styles.header}>
               <Image
-                source={require("../assets/logo3.jpg")}
+                source={require("../assets/imageedit_3_3371400810.png")}
                 style={[styles.headerImage, { width: 150, height: 150 }]}
               />
               <Text style={[styles.text, { color: "white" }]}>תן יד</Text>
@@ -139,13 +139,13 @@ const styles = StyleSheet.create({
   },
   drawer: {
     flex: 1,
-    width: 350,
+    width: "80%",
     backgroundColor: "white"
   },
   header: {
     width: "100%",
     height: 200,
-    backgroundColor: "#6195ff",
+    backgroundColor: "#6495ed",
     alignItems: "center",
     justifyContent: "center"
   },
