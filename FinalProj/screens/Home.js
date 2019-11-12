@@ -41,7 +41,7 @@ export default class Home extends Component {
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Image
-                source={require("../assets/imageedit_3_3371400810.png")}
+                source={require("../assets/TenYadLogo.png")}
                 style={{ width: 60, height: 60 }}
               />
             </TouchableHighlight>

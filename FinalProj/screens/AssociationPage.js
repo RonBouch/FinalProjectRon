@@ -42,10 +42,15 @@ class AssociationPage extends Component {
                 size={28}
               />
             </TouchableHighlight>
-            <Image
-              source={require("../assets/imageedit_3_3371400810.png")}
-              style={{ width: 60, height: 60 }}
-            />
+
+            <TouchableHighlight
+              onPress={() => this.props.navigation.navigate("Home")}
+            >
+              <Image
+                source={require("../assets/TenYadLogo.png")}
+                style={{ width: 60, height: 60 }}
+              />
+            </TouchableHighlight>
           </View>
           <ScrollView style={{ marginHorizontal: 20, width: "100%" }}>
             <View

@@ -70,7 +70,7 @@ export default StyleSheet.create({
     height: 60,
     justifyContent: "center",
     position: "absolute",
-    left: 10
+    left: 5
   },
   open: {
     color: "white",
