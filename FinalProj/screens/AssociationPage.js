@@ -94,15 +94,11 @@ class AssociationPage extends Component {
                 style={styles.logo}
               />
             </TouchableHighlight>
-
-
-
-
-
-
-
           </View>
-          <ScrollView style={{ width: "100%", height: "100%" }}>
+
+
+
+          <ScrollView style={styles.scrollview}>
 
 
 
@@ -110,6 +106,7 @@ class AssociationPage extends Component {
             <View
               style={{
                 width: "100%",
+                
                 flexDirection: "row",
                 padding: "5%"
               }}
@@ -163,6 +160,9 @@ class AssociationPage extends Component {
                 }}
               ></Image>
             </View>
+
+
+            
             {this.state.association.AssociationAdress != "" ? (
               <Button
                 onPress={this.openAdress}
@@ -173,6 +173,8 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Adress")
             )}
+
+            
             {this.state.association.AssociationEmail != "" ? (
               <Button
                 onPress={this.sendMail}
@@ -183,6 +185,9 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Email")
             )}
+
+
+
             {this.state.association.AssociationWebsite != "" ? (
               <Button
                 onPress={this.openWebSite}
@@ -197,7 +202,6 @@ class AssociationPage extends Component {
 
 
             
-            <View style={{ padding: "2%", height: "100%", width: "100%" }}>
               {this.state.association.AssociationDetails != "" ? (
                 <Text>
                   אודותינו :{this.state.association.AssociationDetails}
@@ -205,7 +209,6 @@ class AssociationPage extends Component {
               ) : (
                 console.log("No Details")
               )}
-            </View>
           </ScrollView>
         </View>
       </View>
