@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#ffffff"
+    // backgroundColor: "#ffffff"
   },
   plus: {
     position: "absolute",
@@ -78,7 +78,7 @@ export default StyleSheet.create({
     fontWeight: "bold"
   },
   logo: {
-    marginTop: "10%",
+    marginTop: "5%",
     backgroundColor: "#6495ed",
     width: "100%",
     alignItems: "flex-end"
@@ -90,7 +90,9 @@ export default StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "rgba(255,255,255,.7)",
+    backgroundColor: "#6495ed",
+
+    // backgroundColor: "rgba(255,255,255,.7)",
     alignItems: "center",
     width: "100%",
     height: "100%"
