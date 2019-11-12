@@ -11,22 +11,56 @@ import {
   Text,
   ScrollView
 } from "react-native";
+import { Linking } from "expo";
+import { Button } from "react-native-paper";
 
 class AssociationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      association: null
+      association: null,
+      url: null,
+      email: null,
+      adress: null,
+      phone: null,
+      additionalPhone: null
     };
   }
 
+  openWebSite = () => {
+    Linking.openURL(this.state.url);
+  };
+
+  sendMail = () => {
+    Linking.openURL("mailto:" + this.state.email);
+  };
+
+  openAdress = () => {
+    Linking.openURL(
+      "https://www.google.com/maps/search/?api=1&query=" + this.state.adress
+    );
+  };
+
+  callPhone = () => {
+    Linking.openURL("tel:" + this.state.phone);
+  };
+
+  callAdditionalPhone = () => {
+    Linking.openURL("tel:" + this.state.additionalPhone);
+  };
+
   render() {
     this.state.association = this.props.navigation.state.params.association;
-    console.log("a", this.state.association);
+    this.state.url = this.state.association.AssociationWebsite;
+    this.state.email = this.state.association.AssociationEmail;
+    this.state.adress = this.state.association.AssociationAdress;
+    this.state.phone = this.state.association.AssociationPhone;
+    this.state.additionalPhone = this.state.association.AssociationAdditionalPhone;
+
     return (
       <View style={styles.container}>
         <View style={styles.main}>
-          <View style={styles.logo}>
+          <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -48,49 +82,36 @@ class AssociationPage extends Component {
             >
               <Image
                 source={require("../assets/TenYadLogo.png")}
-                style={{ width: 60, height: 60 }}
+                style={styles.logo}
               />
             </TouchableHighlight>
           </View>
-          <ScrollView style={{ marginHorizontal: 20, width: "100%" }}>
+          <ScrollView style={{ width: "100%", height: "100%" }}>
             <View
               style={{
-                alignItems: "center",
-                justifyContent: "center",
-
+                width: "100%",
                 flexDirection: "row",
-                flexWrap: "wrap",
-                width: "100%"
+                padding: "5%"
               }}
             >
-              <Image
-                style={{ width: 50, height: 50, alignItems: "flex-start" }}
-                source={{
-                  uri: this.state.association.AssociationImage
-                }}
-              ></Image>
               <View
                 style={{
-                  marginLeft: "5%"
+                  width: "60%"
                 }}
               >
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                   עמותת {this.state.association.AssociationName}
                 </Text>
-                {this.state.association.AssociationAdress != "" ? (
-                  <Text>
-                    כתובת : {this.state.association.AssociationAdress}
-                  </Text>
-                ) : (
-                  console.log("No Adress")
-                )}
+                <Text></Text>
                 {this.state.association.AssociationPhone != "" ? (
-                  <Text>טלפון : {this.state.association.AssociationPhone}</Text>
+                  <Text onPress={this.callPhone}>
+                    טלפון : {this.state.association.AssociationPhone}
+                  </Text>
                 ) : (
                   console.log("No Phone")
                 )}
                 {this.state.association.AssociationAdditionalPhone != "" ? (
-                  <Text>
+                  <Text onPress={this.callAdditionalPhone}>
                     טלפון נוסף :
                     {this.state.association.AssociationAdditionalPhone}
                   </Text>
@@ -102,28 +123,56 @@ class AssociationPage extends Component {
                 ) : (
                   console.log("No Fax")
                 )}
-                {this.state.association.AssociationEmail != "" ? (
-                  <Text>
-                    דואר אלקטרוני :{this.state.association.AssociationEmail}
-                  </Text>
-                ) : (
-                  console.log("No Email")
-                )}
-                {this.state.association.AssociationWebsite != "" ? (
-                  <Text>
-                    אתר אינטרנט :{this.state.association.AssociationWebsite}
-                  </Text>
-                ) : (
-                  console.log("No Website")
-                )}
-                {this.state.association.AssociationDetails != "" ? (
-                  <Text>
-                    אודותינו :{this.state.association.AssociationDetails}
-                  </Text>
-                ) : (
-                  console.log("No Details")
-                )}
               </View>
+              <Image
+                style={{
+                  width: 100,
+                  height: 100,
+                  width: "40%"
+                }}
+                source={{
+                  uri: this.state.association.AssociationImage
+                }}
+              ></Image>
+            </View>
+            {this.state.association.AssociationAdress != "" ? (
+              <Button
+                onPress={this.openAdress}
+                style={{ color: "blue", fontWeight: "bold" }}
+              >
+                ניווט
+              </Button>
+            ) : (
+              console.log("No Adress")
+            )}
+            {this.state.association.AssociationEmail != "" ? (
+              <Button
+                onPress={this.sendMail}
+                style={{ color: "blue", fontWeight: "bold" }}
+              >
+                פנייה באמצעות מייל
+              </Button>
+            ) : (
+              console.log("No Email")
+            )}
+            {this.state.association.AssociationWebsite != "" ? (
+              <Button
+                onPress={this.openWebSite}
+                style={{ color: "blue", fontWeight: "bold" }}
+              >
+                לאתר האינטרנט
+              </Button>
+            ) : (
+              console.log("No Website")
+            )}
+            <View style={{ padding: "2%", height: "100%", width: "100%" }}>
+              {this.state.association.AssociationDetails != "" ? (
+                <Text>
+                  אודותינו :{this.state.association.AssociationDetails}
+                </Text>
+              ) : (
+                console.log("No Details")
+              )}
             </View>
           </ScrollView>
         </View>
