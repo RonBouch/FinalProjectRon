@@ -61,15 +61,6 @@ class AssociationPage extends Component {
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
-
-
-
-
-
-
-
-
-
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -96,17 +87,11 @@ class AssociationPage extends Component {
             </TouchableHighlight>
           </View>
 
-
-
           <ScrollView style={styles.scrollview}>
-
-
-
-
             <View
               style={{
                 width: "100%",
-                
+
                 flexDirection: "row",
                 padding: "5%"
               }}
@@ -116,21 +101,16 @@ class AssociationPage extends Component {
                   width: "60%"
                 }}
               >
-
-
-
-
-
-
-
-
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                   עמותת {this.state.association.AssociationName}
                 </Text>
                 <Text></Text>
                 {this.state.association.AssociationPhone != "" ? (
                   <Text onPress={this.callPhone}>
-                    טלפון : {this.state.association.AssociationPhone}
+                    טלפון :{" "}
+                    <Text style={{ color: "green" }}>
+                      {this.state.association.AssociationPhone}
+                    </Text>
                   </Text>
                 ) : (
                   console.log("No Phone")
@@ -138,7 +118,9 @@ class AssociationPage extends Component {
                 {this.state.association.AssociationAdditionalPhone != "" ? (
                   <Text onPress={this.callAdditionalPhone}>
                     טלפון נוסף :
-                    {this.state.association.AssociationAdditionalPhone}
+                    <Text style={{ color: "green" }}>
+                      {this.state.association.AssociationAdditionalPhone}
+                    </Text>
                   </Text>
                 ) : (
                   console.log("No Additional Phone")
@@ -161,8 +143,6 @@ class AssociationPage extends Component {
               ></Image>
             </View>
 
-
-            
             {this.state.association.AssociationAdress != "" ? (
               <Button
                 onPress={this.openAdress}
@@ -174,7 +154,6 @@ class AssociationPage extends Component {
               console.log("No Adress")
             )}
 
-            
             {this.state.association.AssociationEmail != "" ? (
               <Button
                 onPress={this.sendMail}
@@ -185,8 +164,6 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Email")
             )}
-
-
 
             {this.state.association.AssociationWebsite != "" ? (
               <Button
@@ -199,16 +176,17 @@ class AssociationPage extends Component {
               console.log("No Website")
             )}
 
-
-
-            
-              {this.state.association.AssociationDetails != "" ? (
-                <Text>
-                  אודותינו :{this.state.association.AssociationDetails}
-                </Text>
-              ) : (
-                console.log("No Details")
-              )}
+            {this.state.association.AssociationDetails != "" ? (
+              <Text style={{ fontSize: 12 }}>
+                {this.state.association.AssociationDetails}
+                {"\n"}
+                {"\n"}
+                {"\n"}
+                {"\n"}
+              </Text>
+            ) : (
+              console.log("No Details")
+            )}
           </ScrollView>
         </View>
       </View>
