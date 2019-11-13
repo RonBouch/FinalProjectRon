@@ -4,13 +4,27 @@ import { Location, Permissions, ImagePicker } from "expo";
 import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import shortid from "shortid";
-import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
- import cities from '../city_list'
-import {StyleSheet,Text,View,Dimensions,ImageBackground,TextInput,Image,TouchableOpacity,Keyboard,TouchableWithoutFeedback, KeyboardAvoidingView,
-    ScrollView,SafeAreaView
+import {
+  Autocomplete,
+  withKeyboardAwareScrollView
+} from "react-native-dropdown-autocomplete";
+import cities from "../city_list";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  ImageBackground,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Keyboard,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  ScrollView,
+  SafeAreaView
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
-
 
 const { height, width } = Dimensions.get("window");
 
@@ -20,7 +34,7 @@ const DissmisKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
- class Publish extends React.Component {
+class Publish extends React.Component {
   constructor(props) {
     super(props);
     this.rentOrSell = "";
@@ -30,20 +44,19 @@ const DissmisKeyboard = ({ children }) => (
       resLabel: "",
       Show: false,
 
-
       location: null,
       data: "",
       delta: 0.1,
       latitude: 37.78825,
       longitude: -122.4324,
 
-      userName:"",
-      userPhone:"",
-      itemType:"",
-      itemName:"",
+      userName: "",
+      userPhone: "",
+      itemType: "",
+      itemName: "",
       city: "",
-      itemAbout:"",
-      itemImg: "sdvw",
+      itemAbout: "",
+      itemImg: "sdvw"
     };
   }
 
@@ -53,33 +66,33 @@ const DissmisKeyboard = ({ children }) => (
     });
   };
 
-  City=e=>{
+  City = e => {
     this.setState({
       city: e
     });
-  }
- UserPhone=e=>{
-  this.setState({
-    userPhone: e
-  });
- }
- UserName=e=>{
-  this.setState({
-    userName: e
-  });
- }
-ItemName=e=>{
-  this.setState({
-    itemName: e
-  });
-}
- ItemAbout=e=>{
+  };
+  UserPhone = e => {
+    this.setState({
+      userPhone: e
+    });
+  };
+  UserName = e => {
+    this.setState({
+      userName: e
+    });
+  };
+  ItemName = e => {
+    this.setState({
+      itemName: e
+    });
+  };
+  ItemAbout = e => {
     this.setState({
       itemAbout: e
     });
-  }
+  };
 
-  CheckCity= async()=>{
+  CheckCity = async () => {
     const { city } = this.state;
     var detials = city.split(",", 2);
     console.log("detials = " + detials);
@@ -102,7 +115,6 @@ ItemName=e=>{
       return;
     }
 
-    
     // let geocode = await Location.geocodeAsync(address);
     // console.log("geocode  = " + geocode[0].latitude);
 
@@ -111,8 +123,7 @@ ItemName=e=>{
     //   longitude: geocode[0].longitude
     // });
     // console.log("latitdue  = " + this.state.latitude);
-
-}
+  };
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
@@ -155,16 +166,15 @@ ItemName=e=>{
 
   handleSubmit = async () => {
     if (this.isValid()) {
-   
       const data = {
         userId: 1,
         userName: this.state.userName,
         userPhone: this.state.userPhone,
-        itemType:this.state.itemType,
-        itemName:this.state.itemName,
+        itemType: this.state.itemType,
+        itemName: this.state.itemName,
         city: this.state.city,
         itemAbout: this.state.itemAbout,
-        itemImg: this.state.itemImg,
+        itemImg: this.state.itemImg
       };
       console.log(JSON.stringify(data));
 
@@ -192,9 +202,7 @@ ItemName=e=>{
                 message: "לא ניתן לעלות חפץ זה ."
               });
               return;
-            }
-             else
-              {
+            } else {
               this.props.navigation.navigate("Home");
             }
           },
@@ -225,19 +233,17 @@ ItemName=e=>{
     this.setState({ screenHeight: contentHeight });
   };
 
-
   handleSelectItem(item, index) {
-    const {onDropdownClose} = this.props;
+    const { onDropdownClose } = this.props;
     onDropdownClose();
-    console.log(item,);
+    console.log(item);
   }
 
-
   render() {
-     const autocompletes = [...Array(1).keys()];
-    const data = cities; 
-    const {scrollToInput, onDropdownClose, onDropdownShow} = this.props;
- 
+    const autocompletes = [...Array(1).keys()];
+    const data = cities;
+    const { scrollToInput, onDropdownClose, onDropdownShow } = this.props;
+
     let itemType = [
       {
         value: "הכל"
@@ -272,9 +278,7 @@ ItemName=e=>{
         style={styles.backgroundImage}
       >
         <View style={styles.container}>
-       
           <View style={styles.main}>
-          
             <View style={styles.logo}>
               <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                 <Icon
@@ -324,8 +328,8 @@ ItemName=e=>{
                 scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
               >
-                <View style={{ alignItems: "center",marginTop:10 }}>
-                <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
+                <View style={{ alignItems: "center", marginTop: 10 }}>
+                  <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
                   <View
                     style={{
                       flexDirection: "row",
@@ -354,8 +358,6 @@ ItemName=e=>{
                     />
                   </View>
 
-         
-                
                   <View
                     style={{
                       flexDirection: "row",
@@ -409,7 +411,6 @@ ItemName=e=>{
                       size={24}
                     />
                   </View>
-                  
 
                   <View style={{ flexDirection: "row" }}>
                     <Text style={{ color: "red" }}>*</Text>
@@ -419,14 +420,12 @@ ItemName=e=>{
                       itemColor="black"
                       dropdownMargins={{ min: 0, max: 1 }}
                       dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{width:'80%', padding: 5 }}
+                      containerStyle={{ width: "80%", padding: 5 }}
                       data={itemType}
                       onChangeText={this.ItemType}
                     />
-               
                   </View>
                   <View style={{ flexDirection: "row" }}>
-                    
                     <View
                       style={{
                         borderBottomWidth: 0.2,
@@ -465,7 +464,7 @@ ItemName=e=>{
                       maxLength={60}
                       onChangeText={e => {
                         this.setState({ itemAbout: e });
-                        console.log(this.state.itemAbout)
+                        console.log(this.state.itemAbout);
                       }}
                       placeholder="ספר בקצרה על הנכס עד 60 תווים..."
                       style={{
@@ -475,7 +474,6 @@ ItemName=e=>{
                       }}
                     />
                   </View>
-                  
 
                   <View style={styles.addImage}>
                     <TouchableOpacity
@@ -501,7 +499,7 @@ ItemName=e=>{
 
                   <View>
                     <TouchableOpacity
-                      onPress={()=>this.handleSubmit()}
+                      onPress={() => this.handleSubmit()}
                       style={styles.publishButton}
                     >
                       <Text style={{ color: "white" }}>פרסם פריט {"  "}</Text>
@@ -526,4 +524,4 @@ ItemName=e=>{
     );
   }
 }
-export default withKeyboardAwareScrollView(Publish)
+export default withKeyboardAwareScrollView(Publish);

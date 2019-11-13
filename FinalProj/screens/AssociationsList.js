@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { Icon } from "react-native-elements";
+import { Dropdown } from "react-native-material-dropdown";
+
 import { DrawerActions } from "react-navigation-drawer";
 import {
   Text,
@@ -21,11 +23,13 @@ class AssociationsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      associations: null
+      associations: null,
+      associationTypes: null
     };
   }
   componentDidMount() {
     this.GetAssociations();
+    this.GetAssociationsType();
   }
   GetAssociations = async () => {
     fetch(
@@ -38,12 +42,10 @@ class AssociationsList extends Component {
       }
     )
       .then(res => {
-        console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-          console.log("fetch POST= ", result);
           let associations = JSON.parse(result.d);
           if (associations == null) {
             this.setState({
@@ -51,9 +53,41 @@ class AssociationsList extends Component {
             });
             return;
           } else {
-            console.log("associations = " + associations);
             this.setState({
               associations: associations
+            });
+          }
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
+  GetAssociationsType = async () => {
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetAssociationTypes",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        })
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          let associationTypes = JSON.parse(result.d);
+          if (associationTypes == null) {
+            this.setState({
+              message: "לא קיימים סוגי עמותות"
+            });
+            return;
+          } else {
+            this.setState({
+              associationTypes: associationTypes
             });
           }
         },
@@ -66,9 +100,15 @@ class AssociationsList extends Component {
   render() {
     const { navigate } = this.props.navigation;
     let Associations = [];
+    let AssociationTypes = [];
+
+    if (this.state.associationTypes != null) {
+      this.state.associationTypes.map(associationTypes => {
+        AssociationTypes.push({ value: associationTypes.AssociationTypeName });
+      });
+    }
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
-        //   console.log("asass",association)
         return (
           <View
             key={index}
@@ -95,7 +135,6 @@ class AssociationsList extends Component {
               onPress={() =>
                 navigate("AssociationPage", { association: association })
               }
-              // onPress={() => this.props.navigation.navigate("AssociationPage")}
             >
               <Image
                 style={{ width: 80, height: 80, alignItems: "flex-start" }}
@@ -168,6 +207,33 @@ class AssociationsList extends Component {
                 width: "100%"
               }}
             >
+              <TextInput
+                placeholder="חיפוש"
+                placeholderTextColor="rgb(150,150,150)"
+                style={{
+                  borderBottomWidth: 0.2,
+                  borderBottomColor: "rgb(150,150,150)",
+                  width: "40%",
+                  marginLeft: "5%",
+                  fontSize: 16
+                }}
+                // onChangeText={this.City}
+              />
+              <Dropdown
+                label="סוג עמותה"
+                itemColor="black"
+                dropdownMargins={{ min: 0, max: 10 }}
+                dropdownOffset={{ top: 0, left: 0 }}
+                containerStyle={{
+                  width: "40%",
+                  padding: 5,
+                  marginTop: 10,
+                  marginLeft: "5%"
+                }}
+                data={AssociationTypes}
+                // onChangeText={this.Type}
+              />
+
               {Associations}
             </View>
           </ScrollView>
