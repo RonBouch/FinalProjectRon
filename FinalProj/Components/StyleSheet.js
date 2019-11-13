@@ -24,10 +24,7 @@ export default StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start"
   },
-  container: {
-    flex: 1
-    // backgroundColor: "#ffffff"
-  },
+ 
   plus: {
     position: "absolute",
     left: 15,
@@ -243,7 +240,10 @@ export default StyleSheet.create({
   //Favorite Page Style
 
   scrollview: {
-    flexGrow: 1
+    flex:1,
+    flexGrow: 1,
+    height:'100%',
+    width:'100%'
   },
   card: {
     backgroundColor: "rgba(255,255,255,.4)",

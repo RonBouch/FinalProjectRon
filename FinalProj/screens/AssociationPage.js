@@ -61,6 +61,15 @@ class AssociationPage extends Component {
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
+
+
+
+
+
+
+
+
+
             <TouchableHighlight
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
@@ -86,10 +95,18 @@ class AssociationPage extends Component {
               />
             </TouchableHighlight>
           </View>
-          <ScrollView style={{ width: "100%", height: "100%" }}>
+
+
+
+          <ScrollView style={styles.scrollview}>
+
+
+
+
             <View
               style={{
                 width: "100%",
+                
                 flexDirection: "row",
                 padding: "5%"
               }}
@@ -99,6 +116,14 @@ class AssociationPage extends Component {
                   width: "60%"
                 }}
               >
+
+
+
+
+
+
+
+
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                   עמותת {this.state.association.AssociationName}
                 </Text>
@@ -140,6 +165,9 @@ class AssociationPage extends Component {
                 }}
               ></Image>
             </View>
+
+
+            
             {this.state.association.AssociationAdress != "" ? (
               <Button
                 onPress={this.openAdress}
@@ -150,6 +178,8 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Adress")
             )}
+
+            
             {this.state.association.AssociationEmail != "" ? (
               <Button
                 onPress={this.sendMail}
@@ -160,6 +190,9 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Email")
             )}
+
+
+
             {this.state.association.AssociationWebsite != "" ? (
               <Button
                 onPress={this.openWebSite}
@@ -188,7 +221,6 @@ class AssociationPage extends Component {
               ) : (
                 console.log("No Details")
               )}
-            </View>
           </ScrollView>
         </View>
       </View>
