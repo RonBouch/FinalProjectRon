@@ -130,10 +130,7 @@ class AssociationPage extends Component {
                 <Text></Text>
                 {this.state.association.AssociationPhone != "" ? (
                   <Text onPress={this.callPhone}>
-                    טלפון :{" "}
-                    <Text style={{ color: "green" }}>
-                      {this.state.association.AssociationPhone}
-                    </Text>
+                    טלפון : {this.state.association.AssociationPhone}
                   </Text>
                 ) : (
                   console.log("No Phone")
@@ -141,9 +138,7 @@ class AssociationPage extends Component {
                 {this.state.association.AssociationAdditionalPhone != "" ? (
                   <Text onPress={this.callAdditionalPhone}>
                     טלפון נוסף :
-                    <Text style={{ color: "green" }}>
-                      {this.state.association.AssociationAdditionalPhone}
-                    </Text>
+                    {this.state.association.AssociationAdditionalPhone}
                   </Text>
                 ) : (
                   console.log("No Additional Phone")
@@ -203,20 +198,13 @@ class AssociationPage extends Component {
             ) : (
               console.log("No Website")
             )}
-            <View
-              style={{
-                flex: 1,
-                padding: "2%",
-                marginBottom: 50
-              }}
-            >
+
+
+
+            
               {this.state.association.AssociationDetails != "" ? (
-                <Text style={{ fontSize: 12 }}>
-                  {this.state.association.AssociationDetails}
-                  {"\n"}
-                  {"\n"}
-                  {"\n"}
-                  {"\n"}
+                <Text>
+                  אודותינו :{this.state.association.AssociationDetails}
                 </Text>
               ) : (
                 console.log("No Details")
