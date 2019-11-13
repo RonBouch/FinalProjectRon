@@ -27,7 +27,7 @@ class AssociationsList extends Component {
       associationTypes: null
     };
   }
-  componentDidMount() {
+  componentDidMount=async=()=> {
     this.GetAssociations();
     this.GetAssociationsType();
   }
