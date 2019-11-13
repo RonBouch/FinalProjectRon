@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View,TouchableHighlight,Image,ImageBackground,TouchableOpacity,Text,ScrollView} from 'react-native';
+import { View,TouchableHighlight,Image,ImageBackground,TouchableOpacity,Text,ScrollView,Linking} from 'react-native';
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
 
@@ -28,7 +28,11 @@ class Contribution extends Component {
     componentDidMount() {
       this.GetPlaces();
     }
-  
+    _pressCall = (phone) => {
+      const url = "tel:" + phone;
+      console.log("url  asasds",url)
+      Linking.openURL(url);
+    };
     GetPlaces = () => {
      
       fetch(
@@ -162,12 +166,17 @@ class Contribution extends Component {
               // marginBottom: "2%",
               // backgroundColor: 'gray',
               marginTop:2,
-              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f0f8ff'
+              justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f0f8ff',alignItems:'center'
             }}
           >
+
          <Text>{item.ItemDate}</Text>
          <Text>{item.City}</Text>
-         <Text>{item.ItemName}</Text>
+         <View style={{flexDirection:'row-reverse'}}>
+          <Text>{item.ItemName}</Text>
+          <Icon style={{margin:2}} name="ios-checkbox-outline" size={20} color="blue"/>
+          
+          </View>         
           </TouchableOpacity>
               
           
@@ -189,45 +198,65 @@ style={{
   justifyContent: 'space-between',flexDirection:'row-reverse', alignItems: "center",
 
 }}
-// onPress={() => {
-//   this.infoWindow(index);
-// }}
+onPress={() => {
+  this.infoWindow(index);
+}}
 >
 <Text>{item.ItemDate}</Text>
 <Text>{item.City}</Text>
-<Text>{item.ItemName}</Text>
-</TouchableOpacity>
+<View style={{flexDirection:'row-reverse'}}>
+          <Text>{item.ItemName}</Text>
+          <Icon style={{margin:2}} name="ios-checkbox-outline" size={20} color="blue"/>
+          
+          </View>         
+          </TouchableOpacity>
+              
                 <View style={styles.line}></View>
 
 
                  <View  
-                //  onTouchStart={()=>this.infoWindow(index)}
                 style={{
-                  width:'100%',padding:5,alignItems:'center',height:100
+                  width:'100%',padding:5
               }}>
-            <View style={{
-                flexDirection:'row',width:'90%',justifyContent:'space-between',alignItems:'center',padding:10 ,height:'95%', borderRadius: 200,     backgroundColor: "rgba(255,255,255,.5)",
-
-
-
-              }}>
-            <Image source={require("../assets/bg2.jpg")}
-                    style={{ width: 70, height: 70, borderRadius: 100}}
+<View style={{width:'90%',flexDirection:'row'}}>
+              <Image source={require("../assets/bg2.jpg")}
+                    style={{ width: 100, height: 100, borderWidth: 4,borderColor:"black",margin:4}}
                   />
-              <TouchableOpacity>
-                <Icon name="md-star" size={40} color="#ffe500"/>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Icon name="ios-chatbubbles" size={40} color='blue'/>
-              </TouchableOpacity>
+            <View style={{flexDirection:"column",justifyContent:'space-around'}}>
+            
+                <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout} dasdkad asdksadkdsa adsasdjasdn</Text>
+                <View style={{width:'40%',justifyContent:"space-around",flexDirection:'row',padding:10 , borderRadius: 50,    backgroundColor: "rgba(255,255,255,.5)"}}>
+        
+        <TouchableOpacity>
+          <Icon name="md-heart" size={40} color="red"/>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon name="ios-chatbubbles" size={40} color='blue'/>
+        </TouchableOpacity>
 
-                    <TouchableOpacity>
-              <Icon name="md-call" size={40} color="green"/>
+              <TouchableOpacity>
+        <Icon name="md-call" size={40} color="green" onPress={()=>this._pressCall(item.UserPhone)}/>
 
-              </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
+
+              </View>
+
+
+
+            
+    
+
             </View>
+
+             
+
+
+
+          
            
                 </View>
+          
 </View>
             
                 )
