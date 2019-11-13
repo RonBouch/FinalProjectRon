@@ -58,4 +58,10 @@ public class WebService : System.Web.Services.WebService
         return BALServices.GetAssociations();
 
     }
+    [WebMethod]
+    public string GetAssociationTypes()
+    {
+        return BALServices.GetAssociationTypes();
+
+    }
 }

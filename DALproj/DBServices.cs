@@ -324,5 +324,27 @@ namespace DALproj
 
             return associations;
         }
+
+        public static List<AssociationType> GetAssociationTypes()
+        {
+            List<AssociationType> associationTypes = new List<AssociationType>();
+            comm.CommandText = $"SELECT * from AssociationType";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                AssociationType at = new AssociationType()
+                {
+                    AssociationTypeID = int.Parse(reader["AssociationTypeID"].ToString()),
+                    AssociationTypeName = reader["AssociationTypeName"].ToString(),
+      
+                };
+                associationTypes.Add(at);
+            }
+
+            comm.Connection.Close();
+
+            return associationTypes;
+        }
     }
 }

@@ -177,7 +177,7 @@ class AssociationPage extends Component {
             )}
 
             {this.state.association.AssociationDetails != "" ? (
-              <Text style={{ fontSize: 12 }}>
+              <Text style={{ fontSize: 14, padding: 10 }}>
                 {this.state.association.AssociationDetails}
                 {"\n"}
                 {"\n"}
