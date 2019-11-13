@@ -2,7 +2,7 @@
 {
     public class AssociationType
     {
-        public int AssociationTypeID { get; set; }
+        public string AssociationTypeID { get; set; }
         public string AssociationTypeName { get; set; }
 
     }

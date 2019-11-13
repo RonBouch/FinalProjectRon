@@ -335,7 +335,7 @@ namespace DALproj
             {
                 AssociationType at = new AssociationType()
                 {
-                    AssociationTypeID = int.Parse(reader["AssociationTypeID"].ToString()),
+                    AssociationTypeID = reader["AssociationTypeID"].ToString(),
                     AssociationTypeName = reader["AssociationTypeName"].ToString(),
       
                 };

@@ -49,7 +49,7 @@ class AssociationsList extends Component {
           let associations = JSON.parse(result.d);
           if (associations == null) {
             this.setState({
-              message: "לא קיימים עמותות"
+              message: "לא קיימים סוגי עמותות"
             });
             return;
           } else {
