@@ -206,11 +206,13 @@ style={{
                   width:'100%',padding:5,alignItems:'center',height:100
               }}>
             <View style={{
-                flexDirection:'row',width:'80%',justifyContent:'space-between',alignItems:'center',color:'gray' ,height:'70%'
+                flexDirection:'row',width:'90%',justifyContent:'space-between',alignItems:'center',padding:10 ,height:'95%', borderRadius: 200,     backgroundColor: "rgba(255,255,255,.5)",
+
+
 
               }}>
             <Image source={require("../assets/bg2.jpg")}
-                    style={{ width: 70, height: 70}}
+                    style={{ width: 70, height: 70, borderRadius: 100}}
                   />
               <TouchableOpacity>
                 <Icon name="md-star" size={40} color="#ffe500"/>
