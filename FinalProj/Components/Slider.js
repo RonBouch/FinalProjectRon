@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {View,Text,Image,Dimensions} from 'react-native'
 import Swiper from 'react-native-swiper'
 
-const {width}=Dimensions.get('window')
+const {width,height}=Dimensions.get('window')
 const Slider =props => (
     <View style={styles.container}>
         <Image style={styles.image} source={props.uri}/>
@@ -14,8 +14,9 @@ const styles={
         justifyContent:'center',
     },
     image:{
-        flex:1,
+        // flex:1,
         width
+        
     }
 }
 export default class extends Component{
@@ -32,11 +33,13 @@ export default class extends Component{
     }
 render(){
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,borderWidth:5,borderColor:'#000080'}}>
             <Swiper
 
  autoplay
-height={240}  >
+height={400}
+width={width}
+  >
                {this.state.imagesSlider.map((item,i)=>
                <Slider
                uri={item}
