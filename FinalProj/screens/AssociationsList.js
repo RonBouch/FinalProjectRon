@@ -27,12 +27,12 @@ class AssociationsList extends Component {
       associationTypes: null
     };
   }
-  componentDidMount=async=()=> {
-    this.GetAssociations();
+  componentDidMount ()  {
     this.GetAssociationsType();
+    this.GetAssociations();
   }
   GetAssociations = async () => {
-    fetch(
+    await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetAssociations",
       {
         method: "post",
@@ -74,12 +74,12 @@ class AssociationsList extends Component {
         })
       }
     )
-      .then(res => {
-        return res.json();
+     .then ( res => {
+        return  res.json();
       })
       .then(
         result => {
-          let associationTypes = JSON.parse(result.d);
+          let associationTypes =   JSON.parse(result.d);
           if (associationTypes == null) {
             this.setState({
               message: "לא קיימים סוגי עמותות"
@@ -98,6 +98,7 @@ class AssociationsList extends Component {
   };
 
   render() {
+
     const { navigate } = this.props.navigation;
     let Associations = [];
     let AssociationTypes = [];
@@ -107,6 +108,8 @@ class AssociationsList extends Component {
         AssociationTypes.push({ value: associationTypes.AssociationTypeName });
       });
     }
+
+
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
         return (

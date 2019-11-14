@@ -57,7 +57,7 @@ import {Ionicons} from "@expo/vector-icons";
 import shortid from "shortid";
 import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
  import cities from '../city_list'
-
+import Slider from '../Components/Slider'
 class S3 extends Component {
   handleSelectItem(item, index) {
     const {onDropdownClose} = this.props;
@@ -101,6 +101,9 @@ class S3 extends Component {
           ))}
         </SafeAreaView>
         <Text>hi</Text>
+        <View style={{flex:1}}>
+            <Slider/>
+          </View>
       </View>
     );
   }

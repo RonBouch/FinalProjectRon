@@ -12,6 +12,7 @@ import { DrawerActions } from "react-navigation-drawer";
 // import StyleSheet from "../Components/StyleSheet";
 import { Icon } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Slider from "../Components/Slider";
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -20,7 +21,6 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.main}>
           <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
@@ -46,7 +46,11 @@ export default class Home extends Component {
               />
             </TouchableHighlight>
           </View>
-          <View>
+        <View style={{flex:1}}>
+        <View style={{flex:1}}>
+            <Slider/>
+          </View>
+        <View style={{flex:3}}>
             <TouchableOpacity
               style={{
                 marginTop: 80,
@@ -75,7 +79,6 @@ export default class Home extends Component {
                 רשימת העמותות
               </Text>
             </TouchableOpacity>
-
             <TouchableOpacity
               style={{
                 marginTop: 80,
@@ -105,8 +108,13 @@ export default class Home extends Component {
               </Text>
             </TouchableOpacity>
           </View>
+
+
         </View>
-      </View>
+          
+         
+        </View>
+        
     );
   }
 }

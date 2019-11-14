@@ -89,9 +89,11 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     width: "100%",
-    height: "100%"
+    height: "100%",
+    alignItems:'center'
   },
   main: {
+    // flex:1,
     alignItems: "center",
     width: "100%",
     height: "100%"
