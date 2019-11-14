@@ -47,7 +47,7 @@ export default class Home extends Component {
             </TouchableHighlight>
           </View>
         <View style={{flex:1}}>
-        <View style={{flex:1,alignContent:'center',alignItems:'center'}}>
+        <View style={{flex:1}}>
             <Slider/>
           </View>
         <View style={{flex:3}}>

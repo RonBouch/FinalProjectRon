@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {View,Text,Image,Dimensions} from 'react-native'
 import Swiper from 'react-native-swiper'
 
-const {width,height}=Dimensions.get('window')
+const {width}=Dimensions.get('window')
 const Slider =props => (
     <View style={styles.container}>
         <Image style={styles.image} source={props.uri}/>
@@ -14,7 +14,7 @@ const styles={
         justifyContent:'center',
     },
     image:{
-        // flex:1,
+        flex:1,
         width
         
     }
@@ -37,8 +37,7 @@ render(){
             <Swiper
 
  autoplay
-height={400}
-width={width}
+height={240}
   >
                {this.state.imagesSlider.map((item,i)=>
                <Slider
