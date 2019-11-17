@@ -35,7 +35,7 @@ render(){
     return(
         <View style={{flex:1,borderWidth:5,borderColor:'#000080'}}>
             <Swiper
-
+ onResponderRelease={2}
  autoplay
 height={240}
   >
