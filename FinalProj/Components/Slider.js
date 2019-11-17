@@ -10,12 +10,14 @@ const Slider =props => (
 )
 const styles={
     container:{
-        flex:1,
-        justifyContent:'center',
+        width:width,
+        height:240
     },
     image:{
         flex:1,
-        width
+        width:null,
+        height:null,
+        resizeMode:'cover'
         
     }
 }
@@ -25,17 +27,17 @@ export default class extends Component{
         this.state={
             imagesSlider:[
                 require('../assets/bg.jpg'),
-                require('../assets/bg2.jpg'),
-                require('../assets/g3.jpg'),
+                // require('../assets/bg2.jpg'),
+                // require('../assets/g3.jpg'),
                 
             ]
         }
     }
 render(){
     return(
-        <View style={{flex:1,borderWidth:5,borderColor:'#000080'}}>
+        <View style={{flex:1,borderWidth:5,borderColor:'#000080'
+    }}>
             <Swiper
- onResponderRelease={2}
  autoplay
 height={240}
   >

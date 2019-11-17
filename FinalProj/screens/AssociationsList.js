@@ -20,6 +20,10 @@ import {
 import { Left } from "native-base";
 
 class AssociationsList extends Component {
+  loadPage(){
+    this.GetAssociations();
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,8 +32,13 @@ class AssociationsList extends Component {
     };
   }
   componentDidMount ()  {
-    this.GetAssociationsType();
-    this.GetAssociations();
+    try{
+      this.loadPage();
+    }catch(e){
+     console.log("Errr Fetch ",e);
+    }
+    // this.GetAssociationsType();
+    // this.GetAssociations();
   }
   GetAssociations = async () => {
     await fetch(
@@ -62,6 +71,7 @@ class AssociationsList extends Component {
           console.log("err post=", error);
         }
       );
+      this.GetAssociationsType();
   };
 
   GetAssociationsType = async () => {

@@ -47,8 +47,8 @@ export default class Home extends Component {
             </TouchableHighlight>
           </View>
         <View style={{flex:1}}>
-        <View style={{flex:1}}>
-            <Slider/>
+        <View style={{flex:1,flexDirection:'row'}}>
+            <Slider />
           </View>
         <View style={{flex:3}}>
             <TouchableOpacity

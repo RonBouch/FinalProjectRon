@@ -22,6 +22,7 @@ class Contribution extends Component {
           checkedB: false,
           items:null,
           extraDetails:-1,
+          showImg:false,
         }
 
     }
@@ -152,7 +153,8 @@ class Contribution extends Component {
             Items = this.state.items.map((item, index) => { 
               console.log("Extr ",this.state.extraDetails+ " Index",index) 
               return (
-                ((index!=this.state.extraDetails))?
+
+                ((index!=this.state.extraDetails&& !this.state.showImg))?
 
            
             <TouchableOpacity key={index}
@@ -219,12 +221,16 @@ onPress={() => {
                   width:'100%',padding:5
               }}>
 <View style={{width:'90%',flexDirection:'row'}}>
-              <Image source={require("../assets/bg2.jpg")}
+              <Image source={{
+                      uri:
+                        "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                        item.ItemImg
+                    }}
                     style={{ width: 100, height: 100, borderWidth: 4,borderColor:"black",margin:4}}
                   />
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
             
-                <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout} dasdkad asdksadkdsa adsasdjasdn</Text>
+                <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout}</Text>
                 <View style={{width:'40%',justifyContent:"space-around",flexDirection:'row',padding:10 , borderRadius: 50,    backgroundColor: "rgba(255,255,255,.5)"}}>
         
         <TouchableOpacity>
@@ -273,7 +279,7 @@ onPress={() => {
 
 
 
-
+console.log('sadsadasds',this.state.showImg)
 
 
 
@@ -309,9 +315,10 @@ onPress={() => {
           <View style={styles.view}>
           <View style={{marginTop:10,flexDirection: "row",flexWrap:'wrap'}}>
                  <CheckBox 
-                        title="מודעות לפי תאריך"
+                        title="הצג תמונה לכולם"
                         iconRight
-                        checked={true}
+                        checked={this.state.showImg}
+                        onPress={()=>this.setState({showImg:!this.state.showImg})}
                         // containerStyle={{width:200,height:50}}
                         />
                    <CheckBox 
