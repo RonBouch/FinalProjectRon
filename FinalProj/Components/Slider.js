@@ -10,14 +10,17 @@ const Slider =props => (
 )
 const styles={
     container:{
-        width:width,
-        height:240
+        borderWidth:3,
+        borderColor:'black',
+        margin:10,
     },
     image:{
-        flex:1,
-        width:null,
-        height:null,
-        resizeMode:'cover'
+        // flex:1,
+        // alignContent:'center',
+        // marginLeft:30,
+        width:'100%',
+        height:'100%',
+        // resizeMode:'cover'
         
     }
 }
@@ -26,25 +29,35 @@ export default class extends Component{
         super(props);
         this.state={
             imagesSlider:[
-                require('../assets/bg.jpg'),
-                // require('../assets/bg2.jpg'),
-                // require('../assets/g3.jpg'),
+                require('../assets/mekarer.jpg'),
+                require('../assets/shoes.jpg'),
+                require('../assets/aron.jpg'),
+                require('../assets/shulhan.jpg'),
+
                 
-            ]
+            ],
+            show:false,
         }
     }
 render(){
     return(
-        <View style={{flex:1,borderWidth:5,borderColor:'#000080'
+        <View style={{width:150,height:150
     }}>
             <Swiper
+            style={{alignItems:'center'}}
+            showsButtons	
+            buttonWrapperStyle={{flexDirection:'row-reverse'}}
  autoplay
 height={240}
   >
                {this.state.imagesSlider.map((item,i)=>
+                 
                <Slider
                uri={item}
                key={i}/>
+
+
+
                )}
             </Swiper>
         </View>

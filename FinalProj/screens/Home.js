@@ -5,7 +5,7 @@ import {
   View,
   TouchableHighlight,
   Image,
-  ImageBackground
+  ImageBackground,Dimensions
 } from "react-native";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
@@ -13,6 +13,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import { Icon } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Slider from "../Components/Slider";
+const {width}=Dimensions.get('window')
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -46,11 +47,16 @@ export default class Home extends Component {
               />
             </TouchableHighlight>
           </View>
-        <View style={{flex:1}}>
-        <View style={{flex:1,flexDirection:'row'}}>
+        <View style={{flex:1,}}>
+        <View>
+            <Text style={{fontSize:18,fontWeight:'bold'
+}}>הכי חדש!</Text>
+            <View style={{borderWidth:5,borderColor:'#000080',marginTop:10,alignItems:'center',width:width,justifyContent:'center'}} >
             <Slider />
+
+            </View>
           </View>
-        <View style={{flex:3}}>
+        <View style={{flex:3,alignItems:'center'}}>
             <TouchableOpacity
               style={{
                 marginTop: 80,

@@ -191,7 +191,8 @@ class Contribution extends Component {
 
               
 <View   key={index}
-style={{backgroundColor: '#e6e6fa',width:'100%', justifyContent: 'space-between'}}
+style={{backgroundColor: '#e6e6fa',width:'100%', justifyContent: 'space-between',marginTop:2,
+}}
 >
 
      <TouchableOpacity
