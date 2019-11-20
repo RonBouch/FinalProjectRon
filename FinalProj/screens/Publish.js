@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
-import { Location, Permissions, ImagePicker } from "expo";
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import shortid from "shortid";
+import { DrawerActions } from "react-navigation-drawer";
+
 import {
   Autocomplete,
   withKeyboardAwareScrollView
@@ -13,6 +17,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
   Dimensions,
   ImageBackground,
   TextInput,
@@ -56,7 +61,10 @@ class Publish extends React.Component {
       itemName: "",
       city: "",
       itemAbout: "",
-      itemImg: "sdvw"
+      itemImg: "sdvw",
+
+      imageName:"",
+      imageBade64:""
     };
   }
 
@@ -127,7 +135,9 @@ class Publish extends React.Component {
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
-      aspect: [4, 3]
+      aspect: [4, 3],
+      base64:true,
+      quality:0.1
     });
 
     if (result.cancelled) {
@@ -136,26 +146,38 @@ class Publish extends React.Component {
 
     let localUri = result.uri;
     let filename = localUri.split("/").pop();
+    let imageBase64 = result.base64;
 
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
 
-    let formData = new FormData();
-    formData.append("photo", { uri: localUri, name: filename, type });
+    const formData = { base64:imageBase64, imageName: "imgRon1.jpg" };
     console.log("formdata = ", formData);
-    return await fetch("http://ruppinmobile.tempdomain.co.il/site11/image", {
-      method: "POST",
-      body: formData,
-      header: {
-        "content-type": "multipart/form-data"
+    await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
+    {
+      method: "post",
+          headers: new Headers({
+            "Content-Type": "application/Json;"
+          }),
+          body: JSON.stringify(formData)
+    }).then ( res => {
+      return res.json();
+    })
+    .then(
+      result => {
+        console.log("result = ",result);
+      },
+      error => {
+        console.log("err post=", error);
       }
-    });
+    );
   };
 
   openGallery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [4, 3]
+      aspect: [4, 3],
+      quality:0.1
     });
     if (!result.cancelled) {
       console.log("result ", result);
@@ -273,28 +295,37 @@ class Publish extends React.Component {
 
     const scrollEnabled = this.state.screenHeight > height - 300;
     return (
-      <ImageBackground
-        source={require("../assets/bg.jpg")}
-        style={styles.backgroundImage}
-      >
-        <View style={styles.container}>
-          <View style={styles.main}>
-            <View style={styles.logo}>
-              <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                <Icon
-                  name="arrow-circle-left"
-                  type="font-awesome"
-                  iconStyle={{ marginLeft: "85%" }}
-                  color="black"
-                  size={34}
-                />
-              </TouchableOpacity>
-              <Image
-                source={require("../assets/logo2.jpg")}
-                style={{ width: 150, height: 150 }}
-                resizeMode="contain"
-              />
-            </View>
+  
+      <View style={styles.container}>
+      <View style={styles.main}>
+        <View style={styles.topBar}>
+          <TouchableHighlight
+            onPress={() =>
+              this.props.navigation.dispatch(DrawerActions.openDrawer())
+            }
+            style={styles.touchableHighlight}
+            underlayColor={"rgba(0,0,0,0.8)"}
+          >
+            <Icon
+              iconStyle={{ marginEnd: "10%" }}
+              name="bars"
+              type="font-awesome"
+              color="white"
+              size={28}
+            />
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={() => this.props.navigation.navigate("Home")}
+          >
+            <Image
+              source={require("../assets/TenYadLogo.png")}
+              style={styles.logo}
+            />
+          </TouchableHighlight>
+        </View>
+
+          
             {/* <View style={styles.autocompletesContainer}>
         <SafeAreaView>
           {autocompletes.map(() => (
@@ -520,7 +551,6 @@ class Publish extends React.Component {
             </KeyboardAvoidingView>
           </View>
         </View>
-      </ImageBackground>
     );
   }
 }

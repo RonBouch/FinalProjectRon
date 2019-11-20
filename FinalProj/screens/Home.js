@@ -51,7 +51,7 @@ export default class Home extends Component {
         <View>
             <Text style={{fontSize:18,fontWeight:'bold'
 }}>הכי חדש!</Text>
-            <View style={{borderWidth:5,borderColor:'#000080',marginTop:10,alignItems:'center',width:width,justifyContent:'center'}} >
+            <View style={{borderWidth:5,borderColor:'#000080',marginTop:10,alignItems:'center',width:width,justifyContent:'center',backgroundColor:'#b0c4de'}} >
             <Slider />
 
             </View>

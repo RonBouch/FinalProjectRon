@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Web.Script.Serialization;
 using BALproj;
 
 /// <summary>
@@ -63,5 +65,39 @@ public class WebService : System.Web.Services.WebService
     {
         return BALServices.GetAssociationTypes();
 
+    }
+
+    [WebMethod]
+    public string UploadImage(string base64, string imageName) {
+
+        return new JavaScriptSerializer().Serialize(SaveImage(base64, imageName));
+    }
+
+    public bool SaveImage(string base64, string imageName)
+    {
+        try
+        {
+            string path = HttpContext.Current.Server.MapPath("~/ImageStorage"); //Path
+
+            //Check if directory exist
+            if (!System.IO.Directory.Exists(path))
+            {
+                System.IO.Directory.CreateDirectory(path); //Create directory if it doesn't exist
+            }
+
+            //set the image path
+            string imgPath = Path.Combine(path, imageName);
+
+            byte[] imageBytes = Convert.FromBase64String(base64.Replace(' ', '+'));
+
+            File.WriteAllBytes(imgPath, imageBytes);
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+        
     }
 }

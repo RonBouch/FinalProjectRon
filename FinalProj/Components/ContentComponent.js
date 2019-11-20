@@ -59,13 +59,13 @@ export default class ContentComponent extends Component {
                   color="gray"
                   size={28}
                 />
-                <Text style={styles.text}>Contacts</Text>
+                <Text style={styles.text}>תרומות</Text>
               </View>
             </TouchableHighlight>
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Login")}
+              onPress={() => this.props.navigation.navigate("Publish")}
             >
               <View style={styles.row}>
                 <Icon
@@ -75,7 +75,7 @@ export default class ContentComponent extends Component {
                   color="gray"
                   size={28}
                 />
-                <Text style={styles.text}>התחברות</Text>
+                <Text style={styles.text}>מועדפים</Text>
               </View>
             </TouchableHighlight>
 
@@ -108,7 +108,7 @@ export default class ContentComponent extends Component {
                   color="gray"
                   size={28}
                 />
-                <Text style={styles.text}>S3</Text>
+                <Text style={styles.text}>About</Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
@@ -123,7 +123,7 @@ export default class ContentComponent extends Component {
                   color="gray"
                   size={28}
                 />
-                <Text style={styles.text}>הרשמה</Text>
+                <Text style={styles.text}>התנתק</Text>
               </View>
             </TouchableHighlight>
           </ScrollView>

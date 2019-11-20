@@ -346,5 +346,6 @@ namespace DALproj
 
             return associationTypes;
         }
+
     }
 }

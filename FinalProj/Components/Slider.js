@@ -13,6 +13,7 @@ const styles={
         borderWidth:3,
         borderColor:'black',
         margin:10,
+        borderRadius: 40
     },
     image:{
         // flex:1,
@@ -20,6 +21,8 @@ const styles={
         // marginLeft:30,
         width:'100%',
         height:'100%',
+        borderRadius: 40,
+
         // resizeMode:'cover'
         
     }

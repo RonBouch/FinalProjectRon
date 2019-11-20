@@ -7,6 +7,8 @@ import AssociationsList from "../screens/AssociationsList";
 import AssociationPage from "../screens/AssociationPage";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
+import Publish from "../screens/Publish";
+
 import Register from "../screens/Register";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
@@ -14,6 +16,8 @@ import S3 from "../screens/S3.js";
 const DNav = createDrawerNavigator(
   {
     Home: { screen: Home },
+
+    Publish:{screen:Publish},
 
     AssociationsList: { screen: AssociationsList },
 
