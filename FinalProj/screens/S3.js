@@ -1,61 +1,13 @@
-// import React, { Component } from 'react';
-// import { Image,View,Text,TextInput,TouchableOpacity,StyleSheet} from 'react-native';
-// import Autocomplete from 'react-native-autocomplete-input'
-// import cities from '../city_list'
-// export default class S3 extends Component {
-//   constructor(props) {
-//     super(props);
-//   this.state={
-//     searchText:"",
 
-//   }
-//   }
-//   componentDidMount(){
-    
-
-//   }
-//   render() {
-//     const { data } =cities;
-//     console.log(this.state.searchText)
-//     // console.log(cities)
-//     return (
-//       <View style={{height:50,marginTop:50}}>
-//       <View style={styles.autocompleteContainer}>
-//         <Autocomplete
-//          data={data}
-//          defaultValue=""
-//          onChangeText={text => this.setState({ searchText: text })}
-//          renderItem={({ item, i }) =>     console.log(item)
-//          (
-           
-//            <TouchableOpacity onPress={() => this.setState({ searchText: item })} >
-//              <Text>{item}</Text>
-//            </TouchableOpacity>
-//          )}/>
-//       </View>
-//       <View>
-//         <Text>Some content</Text>
-//       </View>
-//     </View>
-//     );
-//   }
-// }
-// const styles = StyleSheet.create({
-//   autocompleteContainer: {
-//     marginTop:100,
-//     flex: 1,
-//     left: 0,
-//     position: 'absolute',
-//     right: 0,
-//     top: 0,
-//     zIndex: 1
-//   }
-// });
 import React, {Component} from "react";
 import {StyleSheet, View, SafeAreaView,Text,TextInput} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import shortid from "shortid";
 import {Autocomplete, withKeyboardAwareScrollView} from "react-native-dropdown-autocomplete";
+
+
+
+
  import cities from '../city_list'
 import Slider from '../Components/Slider'
 class S3 extends Component {

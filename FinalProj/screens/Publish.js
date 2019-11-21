@@ -5,21 +5,19 @@ import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
-import shortid from "shortid";
 import { DrawerActions } from "react-navigation-drawer";
-
+import shortid from "shortid";
 import {
   Autocomplete,
   withKeyboardAwareScrollView
 } from "react-native-dropdown-autocomplete";
 import cities from "../city_list";
+
 import {
-  StyleSheet,
   Text,
   View,
   TouchableHighlight,
   Dimensions,
-  ImageBackground,
   TextInput,
   Image,
   TouchableOpacity,
@@ -293,11 +291,12 @@ class Publish extends React.Component {
       }
     ];
 
-    const scrollEnabled = this.state.screenHeight > height - 300;
+    const scrollEnabled = this.state.screenHeight > height;
     return (
   
       <View style={styles.container}>
       <View style={styles.main}>
+   
         <View style={styles.topBar}>
           <TouchableHighlight
             onPress={() =>
@@ -325,14 +324,15 @@ class Publish extends React.Component {
           </TouchableHighlight>
         </View>
 
-          
-            {/* <View style={styles.autocompletesContainer}>
+        <View          
+           scrollEnabled={scrollEnabled}
+    style={styles.autocompletesContainer}>
         <SafeAreaView>
           {autocompletes.map(() => (
             <Autocomplete
               key={shortid.generate()}
               data={data}
-              style={styles.input}
+              style={styles.inputA}
               scrollToInput={ev => scrollToInput(ev)}
               handleSelectItem={(item, id) => this.handleSelectItem(item, id)}
               onDropdownClose={() => onDropdownClose()}
@@ -343,7 +343,7 @@ class Publish extends React.Component {
               )}
               // fetchDataUrl={apiUrl}
               
-              minimumCharactersCount={0}
+              minimumCharactersCount={1}
               highlightText
               valueExtractor={item => item.name}
               rightContent
@@ -351,16 +351,22 @@ class Publish extends React.Component {
             />
           ))}
         </SafeAreaView>
-        <Text>hi</Text>
-      </View> */}
-            <KeyboardAvoidingView style={styles.container} behavior="padding">
-              <ScrollView
+      </View>
+  
+
+
+        <View>
+        <ScrollView
                 contentContainerStyle={styles.scrollview}
                 scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
               >
                 <View style={{ alignItems: "center", marginTop: 10 }}>
                   <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
+
+
+ 
+
                   <View
                     style={{
                       flexDirection: "row",
@@ -548,7 +554,13 @@ class Publish extends React.Component {
                   )}
                 </View>
               </ScrollView>
-            </KeyboardAvoidingView>
+        </View>
+  
+            {/* <KeyboardAvoidingView style={styles.container} behavior="padding">
+            
+            </KeyboardAvoidingView> */}
+
+           
           </View>
         </View>
     );

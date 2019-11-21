@@ -23,7 +23,7 @@ const styles={
         height:'100%',
         borderRadius: 40,
 
-        // resizeMode:'cover'
+        resizeMode:'cover'
         
     }
 }
@@ -44,7 +44,8 @@ export default class extends Component{
     }
 render(){
     return(
-        <View style={{width:150,height:150
+        <View style={{width:'50%',height:150, 
+
     }}>
             <Swiper
             style={{alignItems:'center'}}

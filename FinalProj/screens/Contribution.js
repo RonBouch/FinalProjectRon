@@ -5,12 +5,14 @@ import { DrawerActions } from "react-navigation-drawer";
 
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
+import Icon from 'react-native-vector-icons/Ionicons';  
 
 import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
-import Icon from 'react-native-vector-icons/Ionicons';  
 import S3 from './S3';
 import Publish from '../screens/Publish'
+import Favorite from '../screens/Favorite'
+
 import { CheckBox } from "react-native-elements";
 
 class Contribution extends Component {
@@ -19,10 +21,12 @@ class Contribution extends Component {
         this.state={
             type:"",
             region:"",  
-          checkedB: false,
+          // checkedB: false,
+          item:null,
           items:null,
           extraDetails:-1,
           showImg:false,
+          checkedFavorite:false,
         }
 
     }
@@ -31,7 +35,7 @@ class Contribution extends Component {
     }
     _pressCall = (phone) => {
       const url = "tel:" + phone;
-      console.log("url  asasds",url)
+      // console.log("url  asasds",url)
       Linking.openURL(url);
     };
     GetPlaces = () => {
@@ -47,12 +51,12 @@ class Contribution extends Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
+          // console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
-            console.log("fetch POST= ", result);
+            // console.log("fetch POST= ", result);
             let items = JSON.parse(result.d);
             if (items == null) {
               this.setState({
@@ -60,7 +64,7 @@ class Contribution extends Component {
               });
               return;
             } else {
-              console.log("U = " + items);
+              // console.log("U = " + items);
               this.setState({
                 items: items,
                 
@@ -87,16 +91,81 @@ class Contribution extends Component {
           region: e
         });
       };
-      infoWindow = (i) => {
+      infoWindow = (index,item) => {
         
-        if (this.state.extraDetails == -1 ||this.state.extraDetails!=i) {
+        if (this.state.extraDetails == -1 ||this.state.extraDetails!=index) {
           this.setState({
-            extraDetails: i,
+            extraDetails: index,
+            item:item,
+            checkedFavorite:false
           });
         } else {
           this.setState({
             extraDetails: -1,
+            item:item,
           });
+        }
+      };
+
+
+    async  FavoriteChack(item) {
+      console.log("ITEMID ",item.ItemID)
+       await this.setState({
+          checkedFavorite: !this.state.checkedFavorite,
+          item:item
+        });
+        this.Favorite();
+      }
+      Favorite = () => {
+        console.log("state item ",this.state.item.ItemID + " " + this.state.checkedFavorite)
+
+        if (this.state.checkedFavorite||this.state.showImg) {
+          console.log(
+            "Item id = " + this.state.item.ItemID 
+          );
+    
+          const data = {
+            userid: 1,
+            itemid: this.state.item.ItemID
+          };
+          fetch(
+            "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
+            {
+              method: "post",
+              headers: new Headers({
+                "Content-Type": "application/Json;"
+              }),
+              body: JSON.stringify(data)
+            }
+          )
+            .then(res => {
+              console.log("res=", res);
+              return res.json();
+            })
+            .then(
+              result => {
+                console.log("fetch POST= ", result);
+                let favorite = JSON.parse(result.d);
+                if (favorite == -1) {
+                  this.setState({
+                    checkedFavorite: true
+                  });
+    
+                  console.log("Allready Exist this favorite");
+                  return;
+
+                } else {
+                  this.setState({
+                    checkedFavorite: true
+                  });
+                }
+                console.log(result.d);
+                console.log(result);
+              },
+              error => {
+                console.log("err post=", error);
+              }
+            );
         }
       };
     render() {
@@ -149,9 +218,8 @@ class Contribution extends Component {
           let Items = [];
 
           if (this.state.items != null) {
-            console.log("ASDADSSADADS")
             Items = this.state.items.map((item, index) => { 
-              console.log("Extr ",this.state.extraDetails+ " Index",index) 
+              // console.log("Extr ",this.state.extraDetails+ " Index",index) 
               return (
 
                 ((index!=this.state.extraDetails&& !this.state.showImg))?
@@ -160,7 +228,7 @@ class Contribution extends Component {
             <TouchableOpacity key={index}
 
             onPress={() => {
-              this.infoWindow(index);
+              this.infoWindow(index,item);
             }}
 
             style={{
@@ -221,7 +289,7 @@ onPress={() => {
                 style={{
                   width:'100%',padding:5
               }}>
-<View style={{width:'90%',flexDirection:'row'}}>
+<View style={{flexDirection:'row'}}>
               <Image source={{
                       uri:
                         "http://ruppinmobile.tempdomain.co.il/site11/image/" +
@@ -232,11 +300,16 @@ onPress={() => {
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
             
                 <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout}</Text>
-                <View style={{width:'40%',justifyContent:"space-around",flexDirection:'row',padding:10 , borderRadius: 50,    backgroundColor: "rgba(255,255,255,.5)"}}>
+
+
+                <View style={{width:250,flexDirection:'row',padding:5,justifyContent:'space-around',borderWidth:1,    backgroundColor: "rgba(255,255,255,.5)",marginRight:200}}>
         
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
           <Icon name="md-heart" size={40} color="red"/>
         </TouchableOpacity>
+
+
+
         <TouchableOpacity>
           <Icon name="ios-chatbubbles" size={40} color='blue'/>
         </TouchableOpacity>
@@ -246,41 +319,12 @@ onPress={() => {
 
         </TouchableOpacity>
       </View>
-
-              </View>
-
-
-
-            
-    
-
-            </View>
-
+             </View>
+             </View>
+             </View>  
+             </View> 
              
-
-
-
-          
-           
-                </View>
-          
-</View>
-            
-                )
-              
-            })}
-
-
-
-
-
-
-
-
-
-
-
-console.log('sadsadasds',this.state.showImg)
+             )})}
 
 
 
@@ -408,13 +452,17 @@ console.log('sadsadasds',this.state.showImg)
           barStyle: { backgroundColor: '#67baf6' },  
       }  
   },  
-        S3: { screen: S3,  
+        Favorite: { screen: Favorite,  
             navigationOptions:{  
-                tabBarLabel:'הודעות',  
+                tabBarLabel:'מועדפים',  
                 tabBarIcon: ({ tintColor }) => (  
                     <View>  
-                        <Icon style={[{color: tintColor}]} size={25} name={'ios-chatbubbles'}/>  
-                    </View>),  
+                        <Icon style={[{color: tintColor}]} size={25} name={'ios-star-half'}/>  
+                    </View>
+                    // <TouchableOpacity>
+                    //   <Image style={{width:30,height:30}} source={require("../assets/Favorite1.png")}/>
+                    // </TouchableOpacity>
+                    ),  
                activeColor: 'white',  
                inactiveColor: '#46f6d7',  
                barStyle: { backgroundColor: '#6495ed' },  
@@ -424,7 +472,7 @@ console.log('sadsadasds',this.state.showImg)
        
     },  
     {  
-      initialRouteName: "Contribution",  
+      initialRouteName: "Favorite",  
       activeColor: '#f0edf6',  
       inactiveColor: '#226557',  
       barStyle: { backgroundColor: '#3BAD87' },  

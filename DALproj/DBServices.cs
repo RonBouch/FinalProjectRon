@@ -347,5 +347,139 @@ namespace DALproj
             return associationTypes;
         }
 
+
+        public static int InsertFavorite(int userid, int itemid)
+        {
+            int check = 1;
+            SqlDataReader reader = null;
+            try
+            {
+                comm.CommandText = $"SELECT * FROM Favorite WHERE UserID={userid} and ItemID={itemid}";
+                comm.Connection.Open();
+                reader = comm.ExecuteReader();
+                if (reader.Read())
+                {
+                    check = -1;
+                    return check;
+                }
+                else
+                {
+                    comm.Connection.Close();
+                }
+                comm.CommandText = $"INSERT INTO Favorite(UserID,ItemID) VALUES({userid}, {itemid})";
+                comm.Connection.Open();
+
+                int res = comm.ExecuteNonQuery();
+                if (res == 1)
+                {
+                    check = 1;
+
+                    return check;
+
+                }
+                else
+                {
+                    check = 0;
+                    return check;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+            return check;
+        }
+
+        public static List<Item> GetItemsFromFavorite(int userid)
+        {
+            List<Item> items= null;
+            try
+            {
+
+
+                items = new List<Item>();
+                comm.CommandText = $"SELECT * from Favorite Where UserID={userid}";
+                comm.Connection.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                List<Favorite> f = new List<Favorite>();
+                while (reader.Read())
+                {
+                    Favorite ff = new Favorite()
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        UserID = int.Parse(reader["UserID"].ToString()),
+                        ItemID = int.Parse(reader["ItemID"].ToString()),
+                    };
+                    f.Add(ff);
+                }
+                if (!reader.IsClosed)
+                    reader.Close();
+
+                foreach (Favorite fav in f)
+                {
+
+                    comm.CommandText = $"SELECT * from Items Where ItemID={fav.ItemID}";
+
+                    SqlDataReader reader2 = comm.ExecuteReader();
+
+                    if (reader2.Read())
+                    {
+                       
+                       
+                        Item i = new Item()
+                        {
+                            ItemID = int.Parse(reader2["ItemID"].ToString()),
+                            UserID = reader2["UserID"].ToString(),
+                            UserName = reader2["UserName"].ToString(),
+                            UserPhone = reader2["UserPhone"].ToString(),
+                            ItemType = reader2["ItemType"].ToString(),
+                            ItemName = reader2["ItemName"].ToString(),
+                            City = reader2["City"].ToString(),
+                            ItemAbout = reader2["ItemAbout"].ToString(),
+                            ItemImg = reader2["ItemImg"].ToString(),
+                            ItemDate = reader2["ItemDate"].ToString(),
+                        };
+
+                        items.Add(i);
+
+                    }
+                    if (!reader2.IsClosed)
+                    {
+                        reader2.Close();
+                    }
+
+
+                }
+                comm.Connection.Close();
+
+                return items;
+            }
+            catch (Exception m)
+            {
+                Console.WriteLine(m.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+
+                }
+
+
+            }
+            return items;
+        }
+
     }
 }

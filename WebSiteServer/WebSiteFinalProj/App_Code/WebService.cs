@@ -68,6 +68,16 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public int InsertFavorite(int userid, int itemid)
+    {
+        return BALServices.InsertFavorite(userid, itemid);
+    }
+    [WebMethod]
+    public string GetItemsFromFavorite(int userid)
+    {
+        return BALServices.GetItemsFromFavorite(userid);
+    }
+    [WebMethod]
     public string UploadImage(string base64, string imageName) {
 
         return new JavaScriptSerializer().Serialize(SaveImage(base64, imageName));

@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   //Publish Screen
   autocompletesContainer: {
-    paddingTop: 30,
+    // paddingTop: 30,
     zIndex: 1,
     width: "100%",
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
   },
-  inputA: { maxHeight: 40 },
+  inputAuto: {maxHeight: 40},
   inputContainer: {
     display: "flex",
     flexShrink: 0,
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     paddingLeft: 12,
     paddingRight: "5%",
     width: "100%",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
  
   plus: {
