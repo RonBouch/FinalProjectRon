@@ -211,7 +211,6 @@ namespace DALproj
         {
             string itemDate = string.Format("{0:HH:mm:ss tt}", DateTime.Now);
             Item p = null;
-            SqlDataReader reader = null;
             SqlDataReader reader2 = null;
 
             try
@@ -359,6 +358,11 @@ namespace DALproj
                 reader = comm.ExecuteReader();
                 if (reader.Read())
                 {
+                    comm.Connection.Close();
+                    comm.CommandText = $"DELETE  FROM Favorite WHERE UserID={userid} and ItemID={itemid}";
+                    comm.Connection.Open();
+                    int delete = comm.ExecuteNonQuery();
+              
                     check = -1;
                     return check;
                 }

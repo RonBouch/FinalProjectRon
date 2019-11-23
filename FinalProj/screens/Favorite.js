@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  ImageBackground,
   TouchableHighlight,
   Linking,
   ScrollView
@@ -14,11 +13,13 @@ import {
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';  
+import { DrawerActions } from "react-navigation-drawer";
+import {NavigationEvents} from 'react-navigation';
 
 import RadioForm from "react-native-simple-radio-button";
-
 const { height } = Dimensions.get("window");
 export default class Favorite extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,19 +28,36 @@ export default class Favorite extends React.Component {
     //   checkedB: true,
       screenHeight: 0,
       userPhone: "",
-      pageToShow: null
+      pageToShow: null,
+      reloadPage:false,
     };
   }
-  componentDidMount() {
-    this.GetItems();
-  }
 
-  GetItems = () => {
-    // console.log("iddddd"+id);
+  // define a separate function to get triggered on focus
+onFocusFunction = () => {
+
+  console.log("Call fetch Get Items .");
+  this.GetItemsFromFavorite();
+  // do some stuff on every screen focus
+}
+
+// add a focus listener onDidMount
+async componentDidMount () {
+  this.focusListener = this.props.navigation.addListener('didFocus', () => {
+    this.onFocusFunction()
+  })
+}
+
+// and don't forget to remove the listener
+componentWillUnmount () {
+  this.focusListener.remove()
+}
+
+   GetItemsFromFavorite =async () => {
     const data = {
       userid: 1
     };
-    fetch(
+    await fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
         {
         method: "post",
@@ -50,12 +68,10 @@ export default class Favorite extends React.Component {
       }
     )
       .then(res => {
-        console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-        //   console.log("fetch POST= ", result);
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
@@ -63,13 +79,11 @@ export default class Favorite extends React.Component {
             });
             return;
           } else {
-            // console.log("U = " + items);
             this.setState({
-              items: items
+              items: items,
             });
           }
-          console.log(result.d);
-        //   console.log(result);
+   
         },
         error => {
           console.log("err post=", error);
@@ -88,8 +102,6 @@ export default class Favorite extends React.Component {
     Linking.openURL(url);
   };
   infoWindow = (item, i) => {
-    // console.log('page to show  -- -- - = = == '+ p.City+i)
-    // console.log("imgggg = " + p.Img);
 
     if (this.state.pageToShow == null || this.state.pageToShow != i) {
       this.setState({
@@ -103,21 +115,85 @@ export default class Favorite extends React.Component {
       });
     }
   };
+
+  async  FavoriteChack(item) {
+     await this.setState({
+        item:item
+      });
+      this.Favorite();
+    }
+    Favorite = () => {
+      console.log("state item ",this.state.item.ItemID)
+
+      if (this.state.item.ItemID!=null) {
+       
+        const data = {
+          userid: 1,
+          itemid: this.state.item.ItemID
+        };
+        fetch(
+          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
+          {
+            method: "post",
+            headers: new Headers({
+              "Content-Type": "application/Json;"
+            }),
+            body: JSON.stringify(data)
+          }
+        )
+          .then(res => {
+            console.log("res=", res);
+            return res.json();
+          })
+          .then(
+            result => {
+              // console.log("fetch POST= ", result);
+
+              
+              let favorite = JSON.parse(result.d);
+              this.GetItemsFromFavorite();
+              console.log("YESYESTWS")
+              if (favorite == -1) {
+                
+  
+                console.log("Allready Exist this favorite");
+                return;
+
+              } else {
+            
+              }
+              console.log(result.d);
+              console.log(result);
+            },
+            error => {
+              console.log("err post=", error);
+            }
+          );
+      }
+    };
+ 
+   async ReloadPage(){
+ 
+    this.setState({reloadPage:!this.state.reloadPage})
+      // this.GetItemsFromFavorite();
+
+    }
   render() {
-    const scrollEnabled = this.state.screenHeight > height - 1000;
+    //Doing alerts whern i come back to Favorite screen .!
+{/* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */}
+
+      
+    // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
 
     if (this.state.items != null) {
-      debugger;
       Items = this.state.items.map((item, index) => {
-        // if (index == this.state.pageToShow) {
-        //   this.viewPage = item.Address;
-        // }
+
 
         return (
             <View   key={index}
-            style={{backgroundColor: '#e6e6fa',margin:15, justifyContent: 'space-between',borderWidth:1,
+            style={{backgroundColor: '#e6e6fa',margin:10, justifyContent: 'space-between',borderWidth:1,
             }}
             >
             
@@ -180,7 +256,7 @@ export default class Favorite extends React.Component {
                          </View>
                          </View>
                          </View>  
-                         <TouchableOpacity style={{backgroundColor:'#8fbc8f',height:30,alignItems:'center'}}>
+                         <TouchableOpacity onPress={()=>this.FavoriteChack(item)} style={{backgroundColor:'#8fbc8f',height:30,alignItems:'center'}}>
                          <Text style={{fontSize:16,color:'white',fontWeight:'bold'}}>מחק פריט
                              </Text>
                              </TouchableOpacity>
@@ -223,8 +299,8 @@ export default class Favorite extends React.Component {
 
           <ScrollView style={styles.scrollview}>
             
-            
             <View style={{flex:1}}>
+
              {Items}
             </View>
 

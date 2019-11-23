@@ -31,14 +31,14 @@ class Contribution extends Component {
 
     }
     componentDidMount() {
-      this.GetPlaces();
+      this.GetItems();
     }
     _pressCall = (phone) => {
       const url = "tel:" + phone;
       // console.log("url  asasds",url)
       Linking.openURL(url);
     };
-    GetPlaces = () => {
+    GetItems =   () => {
      
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
@@ -472,7 +472,7 @@ onPress={() => {
        
     },  
     {  
-      initialRouteName: "Favorite",  
+      initialRouteName: "Contribution",  
       activeColor: '#f0edf6',  
       inactiveColor: '#226557',  
       barStyle: { backgroundColor: '#3BAD87' },  
