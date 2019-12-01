@@ -23,7 +23,9 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount(){
-      this.setState({img:global.image})
+      this.setState({img:global.image},function(){
+          console.log("img state",this.state.img)
+      })
   }
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
@@ -66,7 +68,7 @@ export default class Profile extends React.Component {
     );
   };
   openGallery = async () => {
-      this.setState({img:""})
+    //   this.setState({img:""})
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3], 
@@ -83,7 +85,6 @@ export default class Profile extends React.Component {
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
    
-    this.setState({ img:global.id +global.firstName+".jpg" });
     console.log("Imgg name ", this.state.img)
     global.image= global.id +global.firstName+".jpg";
     const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
@@ -100,6 +101,8 @@ export default class Profile extends React.Component {
     })
     .then(
       result => {
+        this.setState({ img:global.id +global.firstName+".jpg" });
+
         console.log("result = ",result);
       },
       error => {
@@ -108,6 +111,7 @@ export default class Profile extends React.Component {
     );
   };
   render() {
+      console.log("IMG  ", global.image)
     return (
         <View style={styles.container}>
           <View style={styles.main}>
@@ -154,7 +158,7 @@ export default class Profile extends React.Component {
                 }}
                 onPress={this.openGallery}
               >
-                {+global.image != "" ? (
+                {this.state.img != "" ? (
                   <Image
                   style={{
                     height: 150,
@@ -163,7 +167,7 @@ export default class Profile extends React.Component {
                   }}
                   source={{
                     uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img
+                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img +'?time'+new Date()
                   }}
                 />
                 ) : (

@@ -29,6 +29,8 @@ onFocusFunction = () => {
 
 // add a focus listener onDidMount
 async componentDidMount () {
+  this.setState({img:global.image})
+
   this.focusListener = this.props.navigation.addListener('didFocus', () => {
     this.onFocusFunction()
   })
@@ -41,7 +43,7 @@ componentWillUnmount () {
 
   
   render() {
-    console.log("IMg name ", global.image )
+    console.log("IMg name ", this.state.img )
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -64,9 +66,10 @@ componentWillUnmount () {
                     }}
                     source={{
                       uri:
-                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img
+                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img+'?time'+new Date()
                     }}
-                  />:<Image
+                  />:
+                  <Image
                 source={require("../assets/TenYadLogo.png")}
                 style={[styles.headerImage, { width: 150, height: 150 }]}
               />}
