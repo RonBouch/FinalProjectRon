@@ -11,6 +11,35 @@ import {
 import { Icon } from "react-native-elements";
 
 export default class ContentComponent extends Component {
+  constructor(props) {
+    super(props);
+      this.state={
+        img:"",
+
+      }
+
+  }
+  // define a separate function to get triggered on focus
+onFocusFunction = () => {
+
+  console.log("Change Picture .");
+  this.setState({img:global.image})
+  // do some stuff on every screen focus
+}
+
+// add a focus listener onDidMount
+async componentDidMount () {
+  this.focusListener = this.props.navigation.addListener('didFocus', () => {
+    this.onFocusFunction()
+  })
+}
+
+// and don't forget to remove the listener
+componentWillUnmount () {
+  this.focusListener.remove()
+}
+
+  
   render() {
     console.log("IMg name ", global.image )
     return (
@@ -26,7 +55,7 @@ export default class ContentComponent extends Component {
         >
           <ScrollView>
             <View style={styles.header}>
-            {global.image!=""? 
+            {this.state.img!=""? 
             <Image
                     style={{
                       height: 150,
@@ -35,7 +64,7 @@ export default class ContentComponent extends Component {
                     }}
                     source={{
                       uri:
-                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+global.image
+                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img
                     }}
                   />:<Image
                 source={require("../assets/TenYadLogo.png")}
