@@ -139,14 +139,16 @@ export default class Login extends React.Component {
               return;
             } else {
               // this.btnSendPushFromClient();
-              global.id = u.ID;
+              global.id = u.UserID;
               global.firstName = u.FirstName;
               global.lastName = u.LastName;
               global.email = u.Email;
               global.password = u.Password;
               global.birthday = u.Birthday;
               global.gender = u.Gender;
-              this.props.navigation.navigate("Home");
+              global.image = u.Image;
+
+              this.props.navigation.navigate("DrawerNavigator");
             }
             console.log(result.d);
             console.log(result);

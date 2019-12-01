@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
+// import Constants from 'expo-constants';
+// import * as Permissions from 'expo-permissions';
 import { Icon } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions } from "react-navigation-drawer";

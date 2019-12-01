@@ -77,6 +77,20 @@ public class WebService : System.Web.Services.WebService
     {
         return BALServices.GetItemsFromFavorite(userid);
     }
+
+    [WebMethod]
+    public string GetItemsByID(int userid)
+    {
+        return BALServices.GetItemsByID(userid);
+
+    }
+    [WebMethod]
+    public int DeleteItem(int userid, int itemid)
+    {
+        return BALServices.DeleteItem(userid, itemid);
+    }
+
+
     [WebMethod]
     public string UploadImage(string base64, string imageName) {
 

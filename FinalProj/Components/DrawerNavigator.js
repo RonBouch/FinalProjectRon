@@ -8,6 +8,9 @@ import AssociationPage from "../screens/AssociationPage";
 import Home from "../screens/Home";
 import Login from "../screens/Login";
 import Publish from "../screens/Publish";
+import Profile from "../screens/Profile";
+import EditPage from "../screens/EditPage";
+import ProfilePost from "../screens/ProfilePost";
 
 import Register from "../screens/Register";
 import Contribution from "../screens/Contribution";
@@ -15,12 +18,16 @@ import S3 from "../screens/S3.js";
 
 const DNav = createDrawerNavigator(
   {
+    Home: { screen: Home },
+
+    Profile:{screen:Profile},
+   ProfilePost:{screen:ProfilePost},
+    EditPage:{screen:EditPage},
     Contribution: { screen: Contribution },
 
     Publish:{screen:Publish},
 
 
-    Home: { screen: Home },
 
 
     AssociationsList: { screen: AssociationsList },
@@ -40,7 +47,7 @@ const DNav = createDrawerNavigator(
     Register: { screen: Register }
   },
   {
-    initialRouteName: "Contribution",
+    initialRouteName: "Home",
     contentComponent: ContentComponent,
     drawerWidth: Dimensions.get("window").width,
     drawerPosition: "right",

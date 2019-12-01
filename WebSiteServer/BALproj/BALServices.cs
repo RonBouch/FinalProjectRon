@@ -148,6 +148,42 @@ namespace BALproj
 
 
         }
+
+
+        public static string GetItemsByID(int userid)
+        {
+            List<Item> p = DBServices.GetItemsByID(userid);
+
+            if (p != null)
+            {
+                return new JavaScriptSerializer().Serialize(p);
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize("No Items");
+            }
+
+
+        }
+
+
+        public static int DeleteItem(int userid, int itemid)
+        {
+            int check = DBServices.DeleteItem(userid, itemid);
+            if (check == 0)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return check;
+        }
+
+
+
     }
 
 

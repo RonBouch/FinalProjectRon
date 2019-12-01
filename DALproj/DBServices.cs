@@ -30,7 +30,7 @@ namespace DALproj
             try
             {
                 comm.CommandText = $"SELECT * " + " " +
-                              "FROM UserTB " + "" +
+                              "FROM Users " + "" +
                               $"WHERE Email='{email}' AND Password='{password}' ";
                 comm.Connection.Open();
                 SqlDataReader reader = comm.ExecuteReader();
@@ -38,14 +38,16 @@ namespace DALproj
                 {
                     u = new User()
                     {
-                        ID = int.Parse(reader["ID"].ToString()),
+                        UserID = int.Parse(reader["UserID"].ToString()),
+                        isAdmin = bool.Parse(reader["isAdmin"].ToString()),
                         FirstName = reader["FirstName"].ToString(),
                         LastName = reader["LastName"].ToString(),
+                        City = reader["City"].ToString(),
+                        Gender = reader["Gender"].ToString(),
                         Email = reader["Email"].ToString(),
                         Password = reader["Password"].ToString(),
-                        Gender = reader["Gender"].ToString(),
-                        Birthday = reader["Birthday"].ToString()
-
+                        Birthday = reader["Birthday"].ToString(),
+                        Image=reader["Image"].ToString()
                     };
                 }
 
@@ -90,13 +92,14 @@ namespace DALproj
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
                     {
-                        comm.CommandText = "SELECT max(ID) as maxID FROM UserTB";
+                        comm.CommandText = "SELECT max(UserID) as maxID FROM UserTB";
                         reader2 = comm.ExecuteReader();
                         if (reader2.Read())
                         {
                             u = new User()
                             {
-                                ID = (int)reader2["maxID"],
+                                UserID = (int)reader2["maxUserID"],
+                                isAdmin = false,
                                 FirstName = firstName,
                                 LastName = lastName,
                                 Email = email,
@@ -144,7 +147,7 @@ namespace DALproj
 
                     u = new User()
                     {
-                        ID = (int)reader["ID"],
+                        UserID = (int)reader["UserID"],
                         FirstName = firstName,
                         LastName = lastName,
                         Email = email,
@@ -176,7 +179,7 @@ namespace DALproj
                         {
                             u = new User()
                             {
-                                ID = (int)reader2["maxID"],
+                                UserID = (int)reader2["maxUserID"],
                                 FirstName = firstName,
                                 LastName = lastName,
                                 Email = email,
@@ -209,7 +212,7 @@ namespace DALproj
 
         public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
         {
-            string itemDate = string.Format("{0:HH:mm:ss tt}", DateTime.Now);
+            string itemDate = string.Format("{0:HH:mm}", DateTime.Now);
             Item p = null;
             SqlDataReader reader2 = null;
 
@@ -484,6 +487,79 @@ namespace DALproj
             }
             return items;
         }
+
+        public static List<Item> GetItemsByID(int userid)
+        {
+            List<Item> items = new List<Item>();
+            comm.CommandText = $"SELECT * from Items WHERE UserID={userid}";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                Item p = new Item()
+                {
+                    ItemID = int.Parse(reader["ItemID"].ToString()),
+                    UserID = reader["UserID"].ToString(),
+                    UserName = reader["UserName"].ToString(),
+                    UserPhone = reader["UserPhone"].ToString(),
+                    ItemType = reader["ItemType"].ToString(),
+                    ItemName = reader["ItemName"].ToString(),
+                    City = reader["City"].ToString(),
+                    ItemAbout = reader["ItemAbout"].ToString(),
+                    ItemImg = reader["ItemImg"].ToString(),
+                    ItemDate = reader["ItemDate"].ToString(),
+
+                };
+                items.Add(p);
+            }
+
+            comm.Connection.Close();
+
+            return items;
+        }
+
+
+        public static int DeleteItem(int userid, int itemid)
+        {
+            int check = 1;
+            SqlDataReader reader = null;
+            try
+            {
+                comm.CommandText = $"SELECT * FROM Items WHERE UserID={userid} and ItemID={itemid}";
+                comm.Connection.Open();
+                reader = comm.ExecuteReader();
+                if (reader.Read())
+                {
+                    comm.Connection.Close();
+                    comm.CommandText = $"DELETE  FROM Items WHERE UserID={userid} and ItemID={itemid}";
+                    comm.Connection.Open();
+                    int delete = comm.ExecuteNonQuery();
+
+                    check = -1;
+                    return check;
+                }
+                else
+                {
+                    return 0;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+            return check;
+        }
+
 
     }
 }

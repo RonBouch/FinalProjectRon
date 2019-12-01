@@ -12,6 +12,7 @@ import { Icon } from "react-native-elements";
 
 export default class ContentComponent extends Component {
   render() {
+    console.log("IMg name ", global.image )
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -25,10 +26,22 @@ export default class ContentComponent extends Component {
         >
           <ScrollView>
             <View style={styles.header}>
-              <Image
+            {global.image!=""? 
+            <Image
+                    style={{
+                      height: 150,
+                      width: 150,
+                      borderRadius: 100
+                    }}
+                    source={{
+                      uri:
+                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+global.image
+                    }}
+                  />:<Image
                 source={require("../assets/TenYadLogo.png")}
                 style={[styles.headerImage, { width: 150, height: 150 }]}
-              />
+              />}
+              
               <Text style={[styles.text, { color: "white" }]}>תן יד</Text>
             </View>
             <TouchableHighlight
@@ -92,6 +105,22 @@ export default class ContentComponent extends Component {
                   size={28}
                 />
                 <Text style={styles.text}>עמותות</Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              underlayColor={"rgba(0,0,0,0.2)"}
+              onPress={() => this.props.navigation.navigate("Profile")}
+            >
+              <View style={styles.row}>
+                <Icon
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="envelope"
+                  type="font-awesome"
+                  color="gray"
+                  size={28}
+                />
+                <Text style={styles.text}>פרופיל</Text>
               </View>
             </TouchableHighlight>
 
