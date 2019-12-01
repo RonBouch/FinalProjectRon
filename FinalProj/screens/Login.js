@@ -147,7 +147,7 @@ export default class Login extends React.Component {
               global.birthday = u.Birthday;
               global.gender = u.Gender;
               global.image = u.Image;
-
+               
               this.props.navigation.navigate("DrawerNavigator");
             }
             console.log(result.d);
