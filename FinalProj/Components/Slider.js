@@ -48,7 +48,7 @@ export default class extends Component {
   }
   makeImageArray =async(items)=>{
     for (let index = 1; index <= 5; index++) {
-        this.setState(prevState => ({
+      await this.setState(prevState => ({
           imagesSlider: [
             items[items.length - index].ItemImg,
             ...prevState.imagesSlider

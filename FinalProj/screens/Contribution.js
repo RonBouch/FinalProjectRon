@@ -289,6 +289,8 @@ onPress={() => {
                 style={{
                   width:'100%',padding:5
               }}>
+
+
 <View style={{flexDirection:'row'}}>
               <Image source={{
                       uri:
@@ -299,10 +301,10 @@ onPress={() => {
                   />
             <View style={{flexDirection:"column",justifyContent:'space-around'}}>
             
-                <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout}</Text>
+                <Text style={{marginRight:200}}>על הפריט : {item.ItemAbout}</Text>
 
 
-                <View style={{width:250,flexDirection:'row',padding:5,justifyContent:'space-around',borderWidth:1,    backgroundColor: "rgba(255,255,255,.5)",marginRight:200}}>
+                <View style={{width:250,flexDirection:'row',padding:5,justifyContent:'space-around',borderWidth:1, marginTop:10,   backgroundColor: "rgba(255,255,255,.5)",marginRight:200}}>
         
         <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
           <Icon name="md-heart" size={40} color="red"/>
