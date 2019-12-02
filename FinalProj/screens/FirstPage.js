@@ -185,7 +185,7 @@ export default class FirstPage extends React.Component {
   render() {
     return (
       <ImageBackground
-        source={require("../assets/background2.jpg")}
+        source={require("../assets/background.jpg")}
         style={styles.imageBackground}
       >
         <View style={styles.firstPageContainer}>
@@ -206,7 +206,7 @@ export default class FirstPage extends React.Component {
                           fontWeight: "bold",
                           fontSize: 25,
                           fontFamily: "serif",
-                          textShadowColor: "black",
+                          textShadowColor: "gray",
                           textShadowOffset: { width: 1, height: 4 },
                           textShadowRadius: 5
                         }
@@ -226,7 +226,7 @@ export default class FirstPage extends React.Component {
                           fontWeight: "bold",
                           fontSize: 25,
                           fontFamily: "serif",
-                          textShadowColor: "black",
+                          textShadowColor: "gray",
                           textShadowOffset: { width: 1, height: 4 },
                           textShadowRadius: 5
                         }

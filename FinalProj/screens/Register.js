@@ -270,6 +270,11 @@ export default class Register extends React.Component {
         <RadioForm
           radio_props={radio_props}
           initial={null}
+          selectedButtonColor={"black"}
+          selectedLabelColor={"white"}
+          buttonColor={"white"}
+          labelColor={"white"}
+          animation={true}
           style={styles.radioGender}
           onPress={this.changeGender}
         />

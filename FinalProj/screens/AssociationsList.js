@@ -20,7 +20,7 @@ import {
 import { Left } from "native-base";
 
 class AssociationsList extends Component {
-  loadPage(){
+  loadPage() {
     this.GetAssociations();
   }
 
@@ -31,11 +31,11 @@ class AssociationsList extends Component {
       associationTypes: null
     };
   }
-  componentDidMount ()  {
-    try{
+  componentDidMount() {
+    try {
       this.loadPage();
-    }catch(e){
-     console.log("Errr Fetch ",e);
+    } catch (e) {
+      console.log("Errr Fetch ", e);
     }
     // this.GetAssociationsType();
     // this.GetAssociations();
@@ -71,7 +71,7 @@ class AssociationsList extends Component {
           console.log("err post=", error);
         }
       );
-      this.GetAssociationsType();
+    this.GetAssociationsType();
   };
 
   GetAssociationsType = async () => {
@@ -84,12 +84,12 @@ class AssociationsList extends Component {
         })
       }
     )
-     .then ( res => {
-        return  res.json();
+      .then(res => {
+        return res.json();
       })
       .then(
         result => {
-          let associationTypes =   JSON.parse(result.d);
+          let associationTypes = JSON.parse(result.d);
           if (associationTypes == null) {
             this.setState({
               message: "לא קיימים סוגי עמותות"
@@ -108,7 +108,6 @@ class AssociationsList extends Component {
   };
 
   render() {
-
     const { navigate } = this.props.navigation;
     let Associations = [];
     let AssociationTypes = [];
@@ -118,7 +117,6 @@ class AssociationsList extends Component {
         AssociationTypes.push({ value: associationTypes.AssociationTypeName });
       });
     }
-
 
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
@@ -176,82 +174,82 @@ class AssociationsList extends Component {
       });
     }
     return (
-      <View style={styles.container}>
-        <View style={styles.main}>
-          <View style={styles.topBar}>
-            <TouchableHighlight
-              onPress={() =>
-                this.props.navigation.dispatch(DrawerActions.openDrawer())
-              }
-              style={styles.touchableHighlight}
-              underlayColor={"rgba(0,0,0,0.8)"}
-            >
-              <Icon
-                iconStyle={{ marginEnd: "10%" }}
-                name="bars"
-                type="font-awesome"
-                color="white"
-                size={28}
-              />
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => this.props.navigation.navigate("Home")}
-            >
-              <Image
-                source={require("../assets/TenYadLogo.png")}
-                style={styles.logo}
-              />
-            </TouchableHighlight>
-          </View>
-          <ScrollView
-            style={{
-              marginHorizontal: 20,
-              width: "100%",
-              backgroundColor: "white"
-            }}
-          >
-            <View
+        <View style={styles.container}>
+          <View style={styles.main}>
+            <View style={styles.topBar}>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
+                style={styles.touchableHighlight}
+                underlayColor={"rgba(0,0,0,0.8)"}
+              >
+                <Icon
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="bars"
+                  type="font-awesome"
+                  color="white"
+                  size={28}
+                />
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => this.props.navigation.navigate("Home")}
+              >
+                <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={styles.logo}
+                />
+              </TouchableHighlight>
+            </View>
+            <ScrollView
               style={{
-                alignItems: "center",
-                justifyContent: "center",
-
-                flexDirection: "row",
-                flexWrap: "wrap",
-                width: "100%"
+                marginHorizontal: 20,
+                width: "100%",
+                backgroundColor: "white"
               }}
             >
-              <TextInput
-                placeholder="חיפוש"
-                placeholderTextColor="rgb(150,150,150)"
+              <View
                 style={{
-                  borderBottomWidth: 0.2,
-                  borderBottomColor: "rgb(150,150,150)",
-                  width: "40%",
-                  marginLeft: "5%",
-                  fontSize: 16
-                }}
-                // onChangeText={this.City}
-              />
-              <Dropdown
-                label="סוג עמותה"
-                itemColor="black"
-                dropdownMargins={{ min: 0, max: 10 }}
-                dropdownOffset={{ top: 0, left: 0 }}
-                containerStyle={{
-                  width: "40%",
-                  padding: 5,
-                  marginTop: 10,
-                  marginLeft: "5%"
-                }}
-                data={AssociationTypes}
-                // onChangeText={this.Type}
-              />
+                  alignItems: "center",
+                  justifyContent: "center",
 
-              {Associations}
-            </View>
-          </ScrollView>
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  width: "100%"
+                }}
+              >
+                <TextInput
+                  placeholder="חיפוש"
+                  placeholderTextColor="rgb(150,150,150)"
+                  style={{
+                    borderBottomWidth: 0.2,
+                    borderBottomColor: "rgb(150,150,150)",
+                    width: "40%",
+                    marginLeft: "5%",
+                    fontSize: 16
+                  }}
+                  // onChangeText={this.City}
+                />
+                <Dropdown
+                  label="סוג עמותה"
+                  itemColor="black"
+                  dropdownMargins={{ min: 0, max: 10 }}
+                  dropdownOffset={{ top: 0, left: 0 }}
+                  containerStyle={{
+                    width: "40%",
+                    padding: 5,
+                    marginTop: 10,
+                    marginLeft: "5%"
+                  }}
+                  data={AssociationTypes}
+                  // onChangeText={this.Type}
+                />
+
+                {Associations}
+              </View>
+            </ScrollView>
+          </View>
         </View>
-      </View>
     );
   }
 }

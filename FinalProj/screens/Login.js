@@ -239,12 +239,6 @@ class Login extends React.Component {
             // onPress={() => this.props.navigation.navigate("GooglePage")}
             style={{ margin: 20 }}
           >
-            {/* <Icon
-              name="logo-googleplus"
-              type="ionicon"
-              color="white"
-              size={40}
-            /> */}
             <Image
               source={require("../assets/googleIcon.png")}
               style={{ height: 55, width: 55, marginTop: 8 }}
@@ -252,12 +246,6 @@ class Login extends React.Component {
           </TouchableOpacity>
 
           <TouchableOpacity onPress={this.FaceBookBtn} style={{ margin: 20 }}>
-            {/* <Icon
-              name="facebook-square"
-              type="font-awesome"
-              color="white"
-              size={40}
-            /> */}
             <Image
               source={require("../assets/facebookIcon2.png")}
               style={{ height: 70, width: 70 }}

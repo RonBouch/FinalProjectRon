@@ -17,9 +17,10 @@ class App extends React.Component {
 
 const MainNavigator = createStackNavigator(
   {
+    FirstPage: { screen: FirstPage },
+
     DrawerNavigator: { screen: DrawerNavigator },
 
-    FirstPage: { screen: FirstPage },
     Login: { screen: Login },
     S1: { screen: S1 },
     Register: { screen: Register },
@@ -29,7 +30,7 @@ const MainNavigator = createStackNavigator(
     headerMode: "none",
     defaultNavigationOptions: { headerVisable: false }
   },
-  { initialRouteName: "DrawerNavigator" }
+  { initialRouteName: "FirstPage" }
 );
 
 export default createAppContainer(MainNavigator);

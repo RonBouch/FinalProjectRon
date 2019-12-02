@@ -110,16 +110,15 @@ export default StyleSheet.create({
 
   linebottom: {
     margin: 20,
-    color: "rgba(255,255,255,.9)",
+    color: "red",
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 26,
     fontFamily: "serif",
-    textShadowColor: "#E91E63",
-    textShadowOffset: { width: 1, height: 4 },
-    textShadowRadius: 5
+    textShadowColor: "rgb(0, 0, 0)",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 1
   },
   form: {
-    backgroundColor: "rgba(255, 255, 255,.5)",
     alignItems: "center",
     textAlign: "center",
     width: "90%",
@@ -142,15 +141,15 @@ export default StyleSheet.create({
   loginButton: {
     flexDirection: "row",
     elevation: 10,
-    backgroundColor: "rgba(201, 76, 48,.9)",
+    backgroundColor: "rgba(67, 204, 29,.9)",
     borderRadius: 20,
-    height: 50,
-    width: 180,
+    height: 35,
+    width: 150,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: "white",
     borderWidth: 1,
-    marginTop: 20
+    marginTop: 50
   },
   textMessage: {
     margin: 10,
@@ -186,21 +185,21 @@ export default StyleSheet.create({
   //Register Page Style
   radioGender: {
     flexDirection: "row",
-    margin: 5,
+    margin: 10,
     justifyContent: "center"
   },
   registerButton: {
     flexDirection: "row",
     elevation: 10,
-    backgroundColor: "rgba(201, 76, 48,.9)",
+    backgroundColor: "rgba(208, 222, 9,.9)",
     borderRadius: 20,
-    height: 50,
-    width: 180,
+    height: 35,
+    width: 150,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: "white",
     borderWidth: 1,
-    marginTop: 5
+    marginTop: 10
   },
 
   //Home Page Style
