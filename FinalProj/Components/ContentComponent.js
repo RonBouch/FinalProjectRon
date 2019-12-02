@@ -24,12 +24,14 @@ export default class ContentComponent extends Component {
     // do some stuff on every screen focus
   };
 
-  // add a focus listener onDidMount
-  async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.onFocusFunction();
-    });
-  }
+// add a focus listener onDidMount
+async componentDidMount () {
+  this.setState({img:global.image})
+
+  this.focusListener = this.props.navigation.addListener('didFocus', () => {
+    this.onFocusFunction()
+  })
+}
 
   // and don't forget to remove the listener
   componentWillUnmount() {
@@ -37,7 +39,7 @@ export default class ContentComponent extends Component {
   }
 
   render() {
-    console.log("IMg name ", global.image);
+    console.log("IMg name ", this.state.img )
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -51,26 +53,23 @@ export default class ContentComponent extends Component {
         >
           <ScrollView>
             <View style={styles.header}>
-              {this.state.img != "" ? (
-                <Image
-                  style={{
-                    height: 150,
-                    width: 150,
-                    borderRadius: 100
-                  }}
-                  source={{
-                    uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
-                      this.state.img
-                  }}
-                />
-              ) : (
-                <Image
-                  source={require("../assets/TenYadLogo.png")}
-                  style={[styles.headerImage, { width: 150, height: 150 }]}
-                />
-              )}
-
+            {this.state.img!=""? 
+            <Image
+                    style={{
+                      height: 150,
+                      width: 150,
+                      borderRadius: 100
+                    }}
+                    source={{
+                      uri:
+                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img+'?time'+new Date()
+                    }}
+                  />:
+                  <Image
+                source={require("../assets/TenYadLogo.png")}
+                style={[styles.headerImage, { width: 150, height: 150 }]}
+              />}
+              
               <Text style={[styles.text, { color: "white" }]}>תן יד</Text>
             </View>
             <TouchableHighlight
