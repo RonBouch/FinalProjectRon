@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "../Components/StyleSheet";
 import { Ionicons } from "@expo/vector-icons";
+import Login from "./Login";
+import Register from "./Register";
 import {
   Text,
   View,
@@ -19,7 +21,7 @@ import { Icon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthSession } from "expo";
-export default class Login extends React.Component {
+export default class FirstPage extends React.Component {
   constructor(props) {
     super(props);
     this.password = "";
@@ -182,84 +184,47 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <View style={{ alignItems: "center" }}>
-        <View style={styles.input}>
-          <Icon
-            iconStyle={{ marginEnd: "10%" }}
-            name="envelope"
-            type="font-awesome"
-            color="black"
-            size={28}
+      <View style={styles.container}>
+        <View style={styles.form}>
+          <Image
+            source={require("../assets/TenYadLogo.png")}
+            style={{ height: 120, width: 120 }}
           />
-          <TextInput
-            keyboardType="email-address"
-            placeholder="אימייל"
-            placeholderTextColor="rgba(0,0,0,.4)"
-            onChangeText={this.changeEmail}
-            style={{ width: 150 }}
-          />
-        </View>
-
-        <View style={styles.input}>
-          <Icon
-            iconStyle={{ marginEnd: "10%" }}
-            name="lock"
-            type="font-awesome"
-            color="black"
-            size={35}
-          />
-          <TextInput
-            secureTextEntry={true}
-            placeholder="סיסמא"
-            placeholderTextColor="rgba(0,0,0,.4)"
-            onChangeText={this.changePass}
-            style={{ width: 150 }}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.loginButton} onPress={this.validation}>
-          <Text style={{ fontWeight: "bold", color: "white", fontSize: 18 }}>
-            התחבר{"  "}
-          </Text>
-          <Icon name="login" type="antdesign" color="white" size={20} />
-        </TouchableOpacity>
-
-        <Text style={styles.textMessage}>{this.state.message}</Text>
-
-        <View>
-          <Text style={{ color: "white" }}>
-            {"_________   "}או התחבר באמצעות{"    _________"}
-          </Text>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity
-            // onPress={() => this.props.navigation.navigate("GooglePage")}
-            style={{ margin: 20 }}
-          >
-            {/* <Icon
-              name="logo-googleplus"
-              type="ionicon"
-              color="white"
-              size={40}
-            /> */}
-            <Image
-              source={require("../assets/googleIcon.png")}
-              style={{ height: 55, width: 55, marginTop: 8 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.FaceBookBtn} style={{ margin: 20 }}>
-            {/* <Icon
-              name="facebook-square"
-              type="font-awesome"
-              color="white"
-              size={40}
-            /> */}
-            <Image
-              source={require("../assets/facebookIcon2.png")}
-              style={{ height: 70, width: 70 }}
-            />
-          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              style={
+                this.state.LoginRegister ? styles.linebottom : { margin: 20 }
+              }
+              onPress={this.changeToLogin}
+            >
+              <Text
+                style={{
+                  color: "rgba(255,255,255,.9)",
+                  fontWeight: "bold",
+                  fontSize: 25
+                }}
+              >
+                התחברות
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={
+                !this.state.LoginRegister ? styles.linebottom : { margin: 20 }
+              }
+              onPress={this.changeToRegister}
+            >
+              <Text
+                style={{
+                  color: "rgba(255,255,255,.9)",
+                  fontWeight: "bold",
+                  fontSize: 25
+                }}
+              >
+                הרשמה
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {this.state.LoginRegister ? <Login /> : <Register />}
         </View>
       </View>
     );

@@ -191,134 +191,99 @@ export default class Register extends React.Component {
 
   render() {
     return (
-    //   <ImageBackground
-    //     source={require("../assets/background2.jpg")}
-    //     style={styles.backgroundImage}
-    //   >
-        <View style={styles.container}>
-          <View style={styles.main}>
-            <KeyboardAvoidingView style={styles.container} behavior="padding">
-              <View style={styles.logo}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <Icon
-                    name="arrow-circle-left"
-                    type="font-awesome"
-                    iconStyle={{ marginLeft: "85%" }}
-                    color="black"
-                    size={34}
-                  />
-                </TouchableOpacity>
-                {/* <Image
-                  source={require("../assets/houseLogo.png")}
-                  style={{ width: "100%", height: "100%" }}
-                  resizeMode="contain"
-                /> */}
-              </View>
-              <TextInput
-                style={styles.input}
-                placeholder="שם פרטי"
-                onChangeText={this.changeFirstName}
-              />
+      <KeyboardAvoidingView style={{ alignItems: "center" }} behavior="padding">
+        <TextInput
+          style={styles.input}
+          placeholder="שם פרטי"
+          onChangeText={this.changeFirstName}
+        />
 
-              <TextInput
-                style={styles.input}
-                placeholder="שם משפחה"
-                onChangeText={this.changeLastName}
-              />
+        <TextInput
+          style={styles.input}
+          placeholder="שם משפחה"
+          onChangeText={this.changeLastName}
+        />
 
-              <TextInput
-                style={styles.input}
-                keyboardType="email-address"
-                placeholder="אמייל"
-                onChangeText={this.changeEmail}
-              />
+        <TextInput
+          style={styles.input}
+          keyboardType="email-address"
+          placeholder="אמייל"
+          onChangeText={this.changeEmail}
+        />
 
-              <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                placeholder="סיסמא"
-                onChangeText={this.changePassword}
-              />
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
+          placeholder="סיסמא"
+          onChangeText={this.changePassword}
+        />
 
-              <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                placeholder="אימות סיסמא"
-                onChangeText={this.changeVerifyPassword}
-              />
-              <DatePicker
-                style={{
-                  width: 200,
-                  margin: 5,
-                  backgroundColor: "rgba(255,255,255,.5)"
-                }}
-                date={this.state.date}
-                mode="date"
-                placeholder="יום הולדת"
-                format="DD-MM-YYYY"
-                minDate={
-                  new Date().getDate() +
-                  "-" +
-                  (new Date().getMonth() + 1) +
-                  "-" +
-                  (new Date().getFullYear() - 120)
-                }
-                maxDate={new Date()}
-                customStyles={{
-                  dateIcon: {
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36
-                  }
-                  // ... You can check the source to find the other keys.
-                }}
-                onDateChange={date => {
-                  this.setState({ date: date });
-                }}
-              />
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
+          placeholder="אימות סיסמא"
+          onChangeText={this.changeVerifyPassword}
+        />
+        <DatePicker
+          style={{
+            width: 200,
+            margin: 5,
+            backgroundColor: "rgba(255,255,255,.5)"
+          }}
+          date={this.state.date}
+          mode="date"
+          placeholder="יום הולדת"
+          format="DD-MM-YYYY"
+          minDate={
+            new Date().getDate() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            (new Date().getFullYear() - 120)
+          }
+          maxDate={new Date()}
+          customStyles={{
+            dateIcon: {
+              position: "absolute",
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          onDateChange={date => {
+            this.setState({ date: date });
+          }}
+        />
 
-              <RadioForm
-                radio_props={radio_props}
-                initial={null}
-                style={styles.radioGender}
-                onPress={this.changeGender}
-              />
+        <RadioForm
+          radio_props={radio_props}
+          initial={null}
+          style={styles.radioGender}
+          onPress={this.changeGender}
+        />
 
-              <TouchableOpacity
-                style={styles.registerButton2}
-                onPress={this.register}
-              >
-                <Text>
-                  הרשמה
-                  {"  "}
-                </Text>
-                <Icon
-                  name="user-plus"
-                  type="font-awesome"
-                  color="black"
-                  size={18}
-                />
-              </TouchableOpacity>
+        <TouchableOpacity style={styles.registerButton} onPress={this.register}>
+          <Text style={{ fontWeight: "bold" }}>
+            הרשמה
+            {"  "}
+          </Text>
+          <Icon name="user-plus" type="font-awesome" color="black" size={18} />
+        </TouchableOpacity>
 
-              <Text style={styles.textMessage}>
-                {this.state.errors.firstName ||
-                  this.state.errors.lastName ||
-                  this.state.errors.email ||
-                  this.state.errors.password ||
-                  this.state.errors.verifyPassword ||
-                  this.state.errors.birthday ||
-                  this.state.errors.gender}
-              </Text>
-            </KeyboardAvoidingView>
-          </View>
-        </View>
-    //   </ImageBackground>
+        <Text style={styles.textMessage}>
+          {this.state.errors.firstName ||
+            this.state.errors.lastName ||
+            this.state.errors.email ||
+            this.state.errors.password ||
+            this.state.errors.verifyPassword ||
+            this.state.errors.birthday ||
+            this.state.errors.gender}
+        </Text>
+      </KeyboardAvoidingView>
     );
   }
 }

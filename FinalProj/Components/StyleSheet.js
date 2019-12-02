@@ -6,9 +6,9 @@ export default StyleSheet.create({
     // paddingTop: 30,
     zIndex: 1,
     width: "100%",
-    paddingHorizontal: 8,
+    paddingHorizontal: 8
   },
-  inputAuto: {maxHeight: 40},
+  inputAuto: { maxHeight: 40 },
   inputContainer: {
     display: "flex",
     flexShrink: 0,
@@ -22,9 +22,9 @@ export default StyleSheet.create({
     paddingLeft: 12,
     paddingRight: "5%",
     width: "100%",
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
   },
- 
+
   plus: {
     position: "absolute",
     left: 15,
@@ -42,7 +42,7 @@ export default StyleSheet.create({
     width: "90%",
     alignSelf: "center",
     height: 1,
-    backgroundColor: "gray",
+    backgroundColor: "gray"
     // margin: 10
   },
   searchButton: {
@@ -90,7 +90,8 @@ export default StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: "100%",
-    alignItems:'center'
+    alignItems: "center",
+    backgroundColor: "#6495ed"
   },
   main: {
     // flex:1,
@@ -101,47 +102,44 @@ export default StyleSheet.create({
 
   //Login Page Style
 
-  loginForm: {
+  linebottom: {
+    margin: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: "white"
+  },
+  form: {
+    backgroundColor: "rgba(255, 255, 255,.5)",
     alignItems: "center",
-    width: "100%"
+    textAlign: "center",
+    width: "90%",
+    height: "85%",
+    margin: 75
   },
   input: {
     flexDirection: "row",
-    backgroundColor: "rgba(255,255,255,.5)",
-    borderRadius: 50,
+    backgroundColor: "rgba(255, 255, 255,.9)",
     width: 250,
     height: 40,
     textAlign: "center",
-    borderColor: "gray",
+    borderColor: "black",
     borderWidth: 2,
-    margin: 5
+    marginTop: 5
   },
   loginButton: {
-    backgroundColor: "rgba(100,100,100,.5)",
-    borderRadius: 200,
-    height: 30,
-    width: 80,
+    flexDirection: "row",
+    backgroundColor: "rgba(201, 76, 48,.9)",
+    borderRadius: 20,
+    height: 50,
+    width: 180,
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "gray",
+    borderColor: "black",
     borderWidth: 2,
-    marginRight: "55%",
-    marginTop: 5
+    marginTop: 20
   },
   textMessage: {
     margin: 10,
     color: "red"
-  },
-  registerButton: {
-    backgroundColor: "rgba(255,255,0,.9)",
-    flexDirection: "row",
-    height: 45,
-    width: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-    borderColor: "white",
-    borderWidth: 2
   },
 
   faceBookButton: {
@@ -173,18 +171,20 @@ export default StyleSheet.create({
   //Register Page Style
   radioGender: {
     flexDirection: "row",
-    margin: 10,
+    margin: 5,
     justifyContent: "center"
   },
-  registerButton2: {
+  registerButton: {
     backgroundColor: "rgba(255,255,0,.9)",
     flexDirection: "row",
-    height: 45,
-    width: 200,
-    marginTop: 10,
+    borderRadius: 200,
+
+    height: 50,
+    width: 180,
+    textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "white",
+    borderColor: "black",
     borderWidth: 2
   },
 
@@ -242,10 +242,10 @@ export default StyleSheet.create({
   //Favorite Page Style
 
   scrollview: {
-    flex:1,
+    flex: 1,
     flexGrow: 1,
-    height:'100%',
-    width:'100%'
+    height: "100%",
+    width: "100%"
   },
   card: {
     backgroundColor: "rgba(255,255,255,.4)",

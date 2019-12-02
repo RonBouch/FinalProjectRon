@@ -11,7 +11,6 @@ import Publish from "../screens/Publish";
 import Profile from "../screens/Profile";
 import EditPage from "../screens/EditPage";
 import ProfilePost from "../screens/ProfilePost";
-
 import Register from "../screens/Register";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
@@ -20,23 +19,17 @@ const DNav = createDrawerNavigator(
   {
     Home: { screen: Home },
 
-    Profile:{screen:Profile},
-   ProfilePost:{screen:ProfilePost},
-    EditPage:{screen:EditPage},
+    Profile: { screen: Profile },
+
+    ProfilePost: { screen: ProfilePost },
+
+    EditPage: { screen: EditPage },
+
     Contribution: { screen: Contribution },
 
-    Publish:{screen:Publish},
-
-
-
+    Publish: { screen: Publish },
 
     AssociationsList: { screen: AssociationsList },
-
-
-
-
-
- 
 
     Login: { screen: Login },
 
