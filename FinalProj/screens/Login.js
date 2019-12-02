@@ -13,14 +13,14 @@ import {
 } from "react-native";
 // import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync.js";
 import { Notifications, Permissions } from "expo";
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthSession } from "expo";
- class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.password = "";
@@ -156,7 +156,7 @@ import { AuthSession } from "expo";
               global.birthday = u.Birthday;
               global.gender = u.Gender;
               global.image = u.Image;
-               
+
               this.props.navigation.navigate("DrawerNavigator");
             }
             console.log(result.d);
@@ -186,16 +186,18 @@ import { AuthSession } from "expo";
       <View style={{ alignItems: "center" }}>
         <View style={styles.input}>
           <Icon
-            iconStyle={{ marginEnd: "10%" }}
+            iconStyle={{
+              marginEnd: "10%"
+            }}
             name="envelope"
             type="font-awesome"
-            color="black"
-            size={28}
+            color="white"
+            size={18}
           />
           <TextInput
             keyboardType="email-address"
             placeholder="אימייל"
-            placeholderTextColor="rgba(0,0,0,.4)"
+            placeholderTextColor="rgba(255,255,255,.7)"
             onChangeText={this.changeEmail}
             style={{ width: 150 }}
           />
@@ -206,13 +208,13 @@ import { AuthSession } from "expo";
             iconStyle={{ marginEnd: "10%" }}
             name="lock"
             type="font-awesome"
-            color="black"
-            size={35}
+            color="white"
+            size={22}
           />
           <TextInput
             secureTextEntry={true}
             placeholder="סיסמא"
-            placeholderTextColor="rgba(0,0,0,.4)"
+            placeholderTextColor="rgba(255,255,255,.7)"
             onChangeText={this.changePass}
             style={{ width: 150 }}
           />
@@ -227,7 +229,7 @@ import { AuthSession } from "expo";
 
         <Text style={styles.textMessage}>{this.state.message}</Text>
 
-        <View>
+        <View style={{ marginTop: 20 }}>
           <Text style={{ color: "white" }}>
             {"_________   "}או התחבר באמצעות{"    _________"}
           </Text>

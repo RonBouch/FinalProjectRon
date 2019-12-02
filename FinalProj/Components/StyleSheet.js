@@ -111,8 +111,13 @@ export default StyleSheet.create({
 
   linebottom: {
     margin: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: "white"
+    color: "rgba(255,255,255,.9)",
+    fontWeight: "bold",
+    fontSize: 25,
+    fontFamily: "serif",
+    textShadowColor: "#E91E63",
+    textShadowOffset: { width: 1, height: 4 },
+    textShadowRadius: 5
   },
   form: {
     backgroundColor: "rgba(255, 255, 255,.5)",
@@ -124,16 +129,16 @@ export default StyleSheet.create({
   },
   input: {
     flexDirection: "row",
-    backgroundColor: "rgba(255, 255, 255,.9)",
-    width: 250,
+    width: 200,
     height: 40,
-    textAlign: "center",
-    borderColor: "black",
-    borderWidth: 2,
+    alignItems: "center",
+    borderColor: "white",
+    borderBottomWidth: 1,
     marginTop: 5
   },
   loginButton: {
     flexDirection: "row",
+    elevation: 10,
     backgroundColor: "rgba(201, 76, 48,.9)",
     borderRadius: 20,
     height: 50,
@@ -141,7 +146,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
-    borderWidth: 2,
+    borderWidth: 1,
     marginTop: 20
   },
   textMessage: {
@@ -183,6 +188,7 @@ export default StyleSheet.create({
   },
   registerButton: {
     flexDirection: "row",
+    elevation: 10,
     backgroundColor: "rgba(201, 76, 48,.9)",
     borderRadius: 20,
     height: 50,
@@ -190,7 +196,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
-    borderWidth: 2,
+    borderWidth: 1,
     marginTop: 5
   },
 

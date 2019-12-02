@@ -191,34 +191,42 @@ export default class FirstPage extends React.Component {
             style={{ height: 120, width: 120 }}
           />
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              style={
-                this.state.LoginRegister ? styles.linebottom : { margin: 20 }
-              }
-              onPress={this.changeToLogin}
-            >
+            <TouchableOpacity onPress={this.changeToLogin}>
               <Text
-                style={{
-                  color: "rgba(255,255,255,.9)",
-                  fontWeight: "bold",
-                  fontSize: 25
-                }}
+                style={
+                  this.state.LoginRegister
+                    ? styles.linebottom
+                    : {
+                        margin: 20,
+                        color: "rgba(255,255,255,.9)",
+                        fontWeight: "bold",
+                        fontSize: 25,
+                        fontFamily: "serif",
+                        textShadowColor: "black",
+                        textShadowOffset: { width: 1, height: 4 },
+                        textShadowRadius: 5
+                      }
+                }
               >
                 התחברות
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={
-                !this.state.LoginRegister ? styles.linebottom : { margin: 20 }
-              }
-              onPress={this.changeToRegister}
-            >
+            <TouchableOpacity onPress={this.changeToRegister}>
               <Text
-                style={{
-                  color: "rgba(255,255,255,.9)",
-                  fontWeight: "bold",
-                  fontSize: 25
-                }}
+                style={
+                  !this.state.LoginRegister
+                    ? styles.linebottom
+                    : {
+                        margin: 20,
+                        color: "rgba(255,255,255,.9)",
+                        fontWeight: "bold",
+                        fontSize: 25,
+                        fontFamily: "serif",
+                        textShadowColor: "black",
+                        textShadowOffset: { width: 1, height: 4 },
+                        textShadowRadius: 5
+                      }
+                }
               >
                 הרשמה
               </Text>
