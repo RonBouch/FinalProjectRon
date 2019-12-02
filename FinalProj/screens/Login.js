@@ -13,13 +13,14 @@ import {
 } from "react-native";
 // import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync.js";
 import { Notifications, Permissions } from "expo";
+import { withNavigation } from 'react-navigation';
 
 import { Icon } from "react-native-elements";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthSession } from "expo";
-export default class Login extends React.Component {
+ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.password = "";
@@ -265,3 +266,4 @@ export default class Login extends React.Component {
     );
   }
 }
+export default withNavigation(Login);
