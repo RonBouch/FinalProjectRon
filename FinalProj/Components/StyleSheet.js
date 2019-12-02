@@ -85,13 +85,20 @@ export default StyleSheet.create({
     height: 60,
     marginTop: 35
   },
-  container: {
+  firstPageContainer: {
     flex: 1,
     flexDirection: "column",
     width: "100%",
     height: "100%",
     alignItems: "center",
     backgroundColor: "#6495ed"
+  },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    alignItems: "center"
   },
   main: {
     // flex:1,
@@ -175,17 +182,16 @@ export default StyleSheet.create({
     justifyContent: "center"
   },
   registerButton: {
-    backgroundColor: "rgba(255,255,0,.9)",
     flexDirection: "row",
-    borderRadius: 200,
-
+    backgroundColor: "rgba(201, 76, 48,.9)",
+    borderRadius: 20,
     height: 50,
     width: 180,
-    textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
+    marginTop: 5
   },
 
   //Home Page Style
