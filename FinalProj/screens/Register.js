@@ -195,12 +195,14 @@ export default class Register extends React.Component {
         <TextInput
           style={styles.input}
           placeholder="שם פרטי"
+          placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeFirstName}
         />
 
         <TextInput
           style={styles.input}
           placeholder="שם משפחה"
+          placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeLastName}
         />
 
@@ -208,6 +210,7 @@ export default class Register extends React.Component {
           style={styles.input}
           keyboardType="email-address"
           placeholder="אמייל"
+          placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeEmail}
         />
 
@@ -215,6 +218,7 @@ export default class Register extends React.Component {
           style={styles.input}
           secureTextEntry={true}
           placeholder="סיסמא"
+          placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changePassword}
         />
 
@@ -222,11 +226,12 @@ export default class Register extends React.Component {
           style={styles.input}
           secureTextEntry={true}
           placeholder="אימות סיסמא"
+          placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeVerifyPassword}
         />
         <DatePicker
           style={{
-            width: 200,
+            width: 150,
             margin: 5
           }}
           date={this.state.date}
@@ -242,6 +247,7 @@ export default class Register extends React.Component {
           }
           maxDate={new Date()}
           customStyles={{
+            placeholderText: { color: "rgba(255,255,255,.7)" },
             dateIcon: {
               position: "absolute",
               left: 0,
@@ -250,9 +256,9 @@ export default class Register extends React.Component {
             },
             dateInput: {
               marginLeft: 36,
-              backgroundColor: "rgba(255,255,255,.9)",
-              borderColor: "black",
-              borderWidth: 2
+              borderColor: "white",
+              borderWidth: 0,
+              borderBottomWidth: 1
             }
             // ... You can check the source to find the other keys.
           }}
