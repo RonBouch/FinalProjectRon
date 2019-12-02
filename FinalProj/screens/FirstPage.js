@@ -184,7 +184,7 @@ export default class FirstPage extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.firstPageContainer}>
         <View style={styles.form}>
           <Image
             source={require("../assets/TenYadLogo.png")}

@@ -227,8 +227,7 @@ export default class Register extends React.Component {
         <DatePicker
           style={{
             width: 200,
-            margin: 5,
-            backgroundColor: "rgba(255,255,255,.5)"
+            margin: 5
           }}
           date={this.state.date}
           mode="date"
@@ -250,7 +249,10 @@ export default class Register extends React.Component {
               marginLeft: 0
             },
             dateInput: {
-              marginLeft: 36
+              marginLeft: 36,
+              backgroundColor: "rgba(255,255,255,.9)",
+              borderColor: "black",
+              borderWidth: 2
             }
             // ... You can check the source to find the other keys.
           }}
@@ -267,11 +269,11 @@ export default class Register extends React.Component {
         />
 
         <TouchableOpacity style={styles.registerButton} onPress={this.register}>
-          <Text style={{ fontWeight: "bold" }}>
+          <Text style={{ fontWeight: "bold", color: "white", fontSize: 18 }}>
             הרשמה
             {"  "}
           </Text>
-          <Icon name="user-plus" type="font-awesome" color="black" size={18} />
+          <Icon name="user-plus" type="font-awesome" color="white" size={18} />
         </TouchableOpacity>
 
         <Text style={styles.textMessage}>
