@@ -21,10 +21,11 @@ const MainNavigator = createStackNavigator(
 
     DrawerNavigator: { screen: DrawerNavigator },
 
+    Home: { screen: Home },
+
     Login: { screen: Login },
     S1: { screen: S1 },
-    Register: { screen: Register },
-    Home: { screen: Home }
+    Register: { screen: Register }
   },
   {
     headerMode: "none",

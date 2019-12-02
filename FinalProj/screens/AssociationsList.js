@@ -174,6 +174,10 @@ class AssociationsList extends Component {
       });
     }
     return (
+      <ImageBackground
+        source={require("../assets/background.jpg")}
+        style={styles.imageBackground}
+      >
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
@@ -204,8 +208,7 @@ class AssociationsList extends Component {
             <ScrollView
               style={{
                 marginHorizontal: 20,
-                width: "100%",
-                backgroundColor: "white"
+                width: "100%"
               }}
             >
               <View
@@ -250,6 +253,7 @@ class AssociationsList extends Component {
             </ScrollView>
           </View>
         </View>
+      </ImageBackground>
     );
   }
 }

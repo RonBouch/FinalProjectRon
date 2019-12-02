@@ -5,7 +5,8 @@ import {
   View,
   TouchableHighlight,
   Image,
-  ImageBackground,Dimensions
+  ImageBackground,
+  Dimensions
 } from "react-native";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
@@ -13,7 +14,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import { Icon } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Slider from "../Components/Slider";
-const {width}=Dimensions.get('window')
+const { width } = Dimensions.get("window");
 
 export default class Home extends Component {
   static navigationOptions = {
@@ -21,7 +22,11 @@ export default class Home extends Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground
+        source={require("../assets/background.jpg")}
+        style={styles.imageBackground}
+      >
+        <View style={styles.container}>
           <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
@@ -47,80 +52,84 @@ export default class Home extends Component {
               />
             </TouchableHighlight>
           </View>
-        <View style={{flex:1,}}>
-        <View>
-            <Text style={{fontSize:18,fontWeight:'bold'
-}}>הכי חדש!</Text>
-            <View style={{borderWidth:5,borderColor:'#000080',marginTop:10,alignItems:'center',width:width,justifyContent:'center',backgroundColor:'#b0c4de'}} >
-            <Slider />
-
+          <View style={{ flex: 1 }}>
+            <View>
+              <View
+                style={{
+                  marginTop: 20,
+                  alignItems: "center",
+                  width: width,
+                  justifyContent: "center",
+                }}
+              >
+                <Slider />
+              </View>
+            </View>
+            <View style={{ flex: 3, alignItems: "center" }}>
+              <TouchableOpacity
+                style={{
+                  marginTop: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 100,
+                  width: 200,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  borderRadius: 30,
+                  elevation: 15,
+                  backgroundColor: "#fff",
+                  shadowColor: "rgba(0,0,0, .4)",
+                  shadowOffset: { height: 1, width: 1 },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  backgroundColor: "#dc143c"
+                }}
+                onPress={() =>
+                  this.props.navigation.navigate("AssociationsList")
+                }
+              >
+                <Text
+                  style={{
+                    fontSize: 25,
+                    color: "white"
+                  }}
+                >
+                  עמותות
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  marginTop: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 100,
+                  width: 200,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  borderRadius: 30,
+                  elevation: 15,
+                  backgroundColor: "#fff",
+                  shadowColor: "rgba(0,0,0, .4)",
+                  shadowOffset: { height: 1, width: 1 },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  backgroundColor: "rgb(67, 204, 29)"
+                }}
+                onPress={() => this.props.navigation.navigate("Contribution")}
+              >
+                <Text
+                  style={{
+                    fontSize: 25,
+                    color: "white"
+                  }}
+                >
+                  פורום תרומות
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
-        <View style={{flex:3,alignItems:'center'}}>
-            <TouchableOpacity
-              style={{
-                marginTop: 80,
-                justifyContent: "center",
-                alignItems: "center",
-                height: 140,
-                width: 280,
-                borderWidth: 1,
-                borderColor: "black",
-                borderRadius: 50,
-                elevation: 15,
-                backgroundColor: "#fff",
-                shadowColor: "rgba(0,0,0, .4)",
-                shadowOffset: { height: 1, width: 1 },
-                shadowOpacity: 1,
-                shadowRadius: 1,
-                backgroundColor: "#dc143c"
-              }}
-              onPress={() => this.props.navigation.navigate("AssociationsList")}
-            >
-              <Text
-                style={{
-                  fontSize: 25
-                }}
-              >
-                רשימת העמותות
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                marginTop: 80,
-                justifyContent: "center",
-                alignItems: "center",
-                height: 140,
-                width: 280,
-                borderWidth: 1,
-                borderColor: "black",
-                borderRadius: 50,
-                elevation: 15,
-                backgroundColor: "#fff",
-                shadowColor: "rgba(0,0,0, .4)",
-                shadowOffset: { height: 1, width: 1 },
-                shadowOpacity: 1,
-                shadowRadius: 1,
-                backgroundColor: "#7fff00"
-              }}
-              onPress={() => this.props.navigation.navigate("Contribution")}
-            >
-              <Text
-                style={{
-                  fontSize: 25
-                }}
-              >
-                פורום תרומות
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-
         </View>
-          
-         
-        </View>
-        
+      </ImageBackground>
     );
   }
 }
