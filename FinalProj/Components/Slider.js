@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, AppState } from "react-native";
 import Swiper from "react-native-swiper";
 import { array } from "prop-types";
 
@@ -21,6 +21,7 @@ const Slider = props => (
 );
 const styles = {
   container: {
+      padding:8,
   },
   image: {
     // flex:1,
@@ -44,6 +45,16 @@ export default class extends Component {
   }
   async componentDidMount() {
     this.GetItems();
+  }
+  makeImageArray =async(items)=>{
+    for (let index = 1; index <= 5; index++) {
+        this.setState(prevState => ({
+          imagesSlider: [
+            items[items.length - index].ItemImg,
+            ...prevState.imagesSlider
+          ]
+        }));
+      }
   }
   GetItems = async () => {
     console.log("Get Items");
@@ -71,14 +82,7 @@ export default class extends Component {
             });
             return;
           } else {
-            for (let index = 1; index <= 5; index++) {
-              this.setState(prevState => ({
-                imagesSlider: [
-                  items[items.length - index].ItemImg,
-                  ...prevState.imagesSlider
-                ]
-              }));
-            }
+              this.makeImageArray(items)
           }
         },
         error => {

@@ -62,10 +62,41 @@ export default class Home extends Component {
                   justifyContent: "center",
                 }}
               >
+              
+              <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/>
                 <Slider />
               </View>
             </View>
             <View style={{ flex: 3, alignItems: "center" }}>
+            <TouchableOpacity
+                style={{
+                  marginTop: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: 100,
+                  width: 200,
+                  borderWidth: 1,
+                  borderColor: "white",
+                  borderRadius: 30,
+                  elevation: 15,
+                  backgroundColor: "#fff",
+                  shadowColor: "rgba(0,0,0, .4)",
+                  shadowOffset: { height: 1, width: 1 },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  backgroundColor: "rgb(67, 204, 29)"
+                }}
+                onPress={() => this.props.navigation.navigate("Contribution")}
+              >
+                <Text
+                  style={{
+                    fontSize: 25,
+                    color: "white"
+                  }}
+                >
+                  פורום תרומות
+                </Text>
+              </TouchableOpacity>
               <TouchableOpacity
                 style={{
                   marginTop: 40,
@@ -97,35 +128,7 @@ export default class Home extends Component {
                   עמותות
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  marginTop: 40,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 100,
-                  width: 200,
-                  borderWidth: 1,
-                  borderColor: "white",
-                  borderRadius: 30,
-                  elevation: 15,
-                  backgroundColor: "#fff",
-                  shadowColor: "rgba(0,0,0, .4)",
-                  shadowOffset: { height: 1, width: 1 },
-                  shadowOpacity: 1,
-                  shadowRadius: 1,
-                  backgroundColor: "rgb(67, 204, 29)"
-                }}
-                onPress={() => this.props.navigation.navigate("Contribution")}
-              >
-                <Text
-                  style={{
-                    fontSize: 25,
-                    color: "white"
-                  }}
-                >
-                  פורום תרומות
-                </Text>
-              </TouchableOpacity>
+          
             </View>
           </View>
         </View>
