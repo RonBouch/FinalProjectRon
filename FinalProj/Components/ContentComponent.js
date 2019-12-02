@@ -24,14 +24,14 @@ export default class ContentComponent extends Component {
     // do some stuff on every screen focus
   };
 
-// add a focus listener onDidMount
-async componentDidMount () {
-  this.setState({img:global.image})
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.setState({ img: global.image });
 
-  this.focusListener = this.props.navigation.addListener('didFocus', () => {
-    this.onFocusFunction()
-  })
-}
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
 
   // and don't forget to remove the listener
   componentWillUnmount() {
@@ -39,7 +39,7 @@ async componentDidMount () {
   }
 
   render() {
-    console.log("IMg name ", this.state.img )
+    console.log("IMg name ", this.state.img);
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -53,23 +53,28 @@ async componentDidMount () {
         >
           <ScrollView>
             <View style={styles.header}>
-            {this.state.img!=""? 
-            <Image
-                    style={{
-                      height: 150,
-                      width: 150,
-                      borderRadius: 100
-                    }}
-                    source={{
-                      uri:
-                        "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img+'?time'+new Date()
-                    }}
-                  />:
-                  <Image
-                source={require("../assets/TenYadLogo.png")}
-                style={[styles.headerImage, { width: 150, height: 150 }]}
-              />}
-              
+              {this.state.img != "" ? (
+                <Image
+                  style={{
+                    height: 150,
+                    width: 150,
+                    borderRadius: 100
+                  }}
+                  source={{
+                    uri:
+                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
+                      this.state.img +
+                      "?time" +
+                      new Date()
+                  }}
+                />
+              ) : (
+                <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={[styles.headerImage, { width: 150, height: 150 }]}
+                />
+              )}
+
               <Text style={[styles.text, { color: "white" }]}>תן יד</Text>
             </View>
             <TouchableHighlight
@@ -170,7 +175,7 @@ async componentDidMount () {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Register")}
+              onPress={() => this.props.navigation.navigate("Home")}
             >
               <View style={styles.row}>
                 <Icon

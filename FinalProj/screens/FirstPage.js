@@ -184,57 +184,62 @@ export default class FirstPage extends React.Component {
 
   render() {
     return (
-      <View style={styles.firstPageContainer}>
-        <View style={styles.form}>
-          <Image
-            source={require("../assets/TenYadLogo.png")}
-            style={{ height: 120, width: 120 }}
-          />
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={this.changeToLogin}>
-              <Text
-                style={
-                  this.state.LoginRegister
-                    ? styles.linebottom
-                    : {
-                        margin: 20,
-                        color: "rgba(255,255,255,.9)",
-                        fontWeight: "bold",
-                        fontSize: 25,
-                        fontFamily: "serif",
-                        textShadowColor: "black",
-                        textShadowOffset: { width: 1, height: 4 },
-                        textShadowRadius: 5
-                      }
-                }
-              >
-                התחברות
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.changeToRegister}>
-              <Text
-                style={
-                  !this.state.LoginRegister
-                    ? styles.linebottom
-                    : {
-                        margin: 20,
-                        color: "rgba(255,255,255,.9)",
-                        fontWeight: "bold",
-                        fontSize: 25,
-                        fontFamily: "serif",
-                        textShadowColor: "black",
-                        textShadowOffset: { width: 1, height: 4 },
-                        textShadowRadius: 5
-                      }
-                }
-              >
-                הרשמה
-              </Text>
-            </TouchableOpacity>
+      <ImageBackground
+        source={require("../assets/background2.jpg")}
+        style={styles.imageBackground}
+      >
+        <View style={styles.firstPageContainer}>
+          <View style={styles.form}>
+            <Image
+              source={require("../assets/TenYadLogo.png")}
+              style={{ height: 120, width: 120 }}
+            />
+            <View style={{ flexDirection: "row" }}>
+              <TouchableOpacity onPress={this.changeToLogin}>
+                <Text
+                  style={
+                    this.state.LoginRegister
+                      ? styles.linebottom
+                      : {
+                          margin: 20,
+                          color: "rgba(255,255,255,.9)",
+                          fontWeight: "bold",
+                          fontSize: 25,
+                          fontFamily: "serif",
+                          textShadowColor: "black",
+                          textShadowOffset: { width: 1, height: 4 },
+                          textShadowRadius: 5
+                        }
+                  }
+                >
+                  התחברות
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.changeToRegister}>
+                <Text
+                  style={
+                    !this.state.LoginRegister
+                      ? styles.linebottom
+                      : {
+                          margin: 20,
+                          color: "rgba(255,255,255,.9)",
+                          fontWeight: "bold",
+                          fontSize: 25,
+                          fontFamily: "serif",
+                          textShadowColor: "black",
+                          textShadowOffset: { width: 1, height: 4 },
+                          textShadowRadius: 5
+                        }
+                  }
+                >
+                  הרשמה
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {this.state.LoginRegister ? <Login /> : <Register />}
           </View>
-          {this.state.LoginRegister ? <Login /> : <Register />}
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }

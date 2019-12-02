@@ -90,8 +90,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: "100%",
-    alignItems: "center",
-    backgroundColor: "#6495ed"
+    alignItems: "center"
   },
   container: {
     flex: 1,
@@ -126,6 +125,10 @@ export default StyleSheet.create({
     width: "90%",
     height: "85%",
     margin: 75
+  },
+  imageBackground: {
+    width: "100%",
+    height: "100%"
   },
   input: {
     flexDirection: "row",
