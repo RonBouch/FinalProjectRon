@@ -8,58 +8,57 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   Linking,
+  ImageBackground,
   ScrollView
 } from "react-native";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
-import Icon from 'react-native-vector-icons/Ionicons';  
+import Icon from "react-native-vector-icons/Ionicons";
 import { DrawerActions } from "react-navigation-drawer";
-import {NavigationEvents} from 'react-navigation';
+import { NavigationEvents } from "react-navigation";
 
 import RadioForm from "react-native-simple-radio-button";
 const { height } = Dimensions.get("window");
 export default class Favorite extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       items: null,
       item: null,
-    //   checkedB: true,
+      //   checkedB: true,
       screenHeight: 0,
       userPhone: "",
       pageToShow: null,
-      reloadPage:false,
+      reloadPage: false
     };
   }
 
   // define a separate function to get triggered on focus
-onFocusFunction = () => {
+  onFocusFunction = () => {
+    console.log("Call fetch Get Items .");
+    this.GetItemsFromFavorite();
+    // do some stuff on every screen focus
+  };
 
-  console.log("Call fetch Get Items .");
-  this.GetItemsFromFavorite();
-  // do some stuff on every screen focus
-}
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
 
-// add a focus listener onDidMount
-async componentDidMount () {
-  this.focusListener = this.props.navigation.addListener('didFocus', () => {
-    this.onFocusFunction()
-  })
-}
+  // and don't forget to remove the listener
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
 
-// and don't forget to remove the listener
-componentWillUnmount () {
-  this.focusListener.remove()
-}
-
-   GetItemsFromFavorite =async () => {
+  GetItemsFromFavorite = async () => {
     const data = {
       userid: 1
     };
     await fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
-        {
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
+      {
         method: "post",
         headers: new Headers({
           "Content-Type": "application/Json;"
@@ -75,15 +74,14 @@ componentWillUnmount () {
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
-            //   message: "הרשמה נכשלה"
+              //   message: "הרשמה נכשלה"
             });
             return;
           } else {
             this.setState({
-              items: items,
+              items: items
             });
           }
-   
         },
         error => {
           console.log("err post=", error);
@@ -94,7 +92,7 @@ componentWillUnmount () {
   onContentSizeChange = (contentWidth, contentHeight) => {
     this.setState({ screenHeight: contentHeight });
   };
-  _pressCall = (p) => {
+  _pressCall = p => {
     this.setState({
       userPhone: p
     });
@@ -102,7 +100,6 @@ componentWillUnmount () {
     Linking.openURL(url);
   };
   infoWindow = (item, i) => {
-
     if (this.state.pageToShow == null || this.state.pageToShow != i) {
       this.setState({
         pageToShow: i,
@@ -116,198 +113,237 @@ componentWillUnmount () {
     }
   };
 
-  async  FavoriteChack(item) {
-     await this.setState({
-        item:item
-      });
-      this.Favorite();
-    }
-    Favorite = () => {
-      console.log("state item ",this.state.item.ItemID)
+  async FavoriteChack(item) {
+    await this.setState({
+      item: item
+    });
+    this.Favorite();
+  }
+  Favorite = () => {
+    console.log("state item ", this.state.item.ItemID);
 
-      if (this.state.item.ItemID!=null) {
-       
-        const data = {
-          userid: 1,
-          itemid: this.state.item.ItemID
-        };
-        fetch(
-          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
-          {
-            method: "post",
-            headers: new Headers({
-              "Content-Type": "application/Json;"
-            }),
-            body: JSON.stringify(data)
-          }
-        )
-          .then(res => {
-            console.log("res=", res);
-            return res.json();
-          })
-          .then(
-            result => {
-              // console.log("fetch POST= ", result);
+    if (this.state.item.ItemID != null) {
+      const data = {
+        userid: 1,
+        itemid: this.state.item.ItemID
+      };
+      fetch(
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
+        {
+          method: "post",
+          headers: new Headers({
+            "Content-Type": "application/Json;"
+          }),
+          body: JSON.stringify(data)
+        }
+      )
+        .then(res => {
+          console.log("res=", res);
+          return res.json();
+        })
+        .then(
+          result => {
+            // console.log("fetch POST= ", result);
 
-              
-              let favorite = JSON.parse(result.d);
-              this.GetItemsFromFavorite();
-              console.log("YESYESTWS")
-              if (favorite == -1) {
-                
-  
-                console.log("Allready Exist this favorite");
-                return;
-
-              } else {
-            
-              }
-              console.log(result.d);
-              console.log(result);
-            },
-            error => {
-              console.log("err post=", error);
+            let favorite = JSON.parse(result.d);
+            this.GetItemsFromFavorite();
+            console.log("YESYESTWS");
+            if (favorite == -1) {
+              console.log("Allready Exist this favorite");
+              return;
+            } else {
             }
-          );
-      }
-    };
- 
-   async ReloadPage(){
- 
-    this.setState({reloadPage:!this.state.reloadPage})
-      // this.GetItemsFromFavorite();
-
+            console.log(result.d);
+            console.log(result);
+          },
+          error => {
+            console.log("err post=", error);
+          }
+        );
     }
+  };
+
+  async ReloadPage() {
+    this.setState({ reloadPage: !this.state.reloadPage });
+    // this.GetItemsFromFavorite();
+  }
   render() {
     //Doing alerts whern i come back to Favorite screen .!
-{/* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */}
+    {
+      /* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */
+    }
 
-      
     // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
-
-
         return (
-            <View   key={index}
-            style={{backgroundColor: '#e6e6fa',margin:10, justifyContent: 'space-between',borderWidth:1,
-            }}
-            >
-            
-                 <TouchableOpacity
+          <View
+            key={index}
             style={{
-              marginTop:2,
-              justifyContent: 'space-between',flexDirection:'row-reverse', alignItems: "center",
-            
+              backgroundColor: "white",
+              width: "95%",
+              height: 300,
+              margin: 10,
+              borderWidth: 1,
+              borderColor: "#e6e6fa",
+              elevation: 10
             }}
-            onPress={() => {
-              this.infoWindow(index);
-            }}
+          >
+            {/* <View style={styles.line}></View> */}
+            <View
+              style={{
+                position: "absolute",
+                zIndex: 1,
+                margin: 5,
+                left: 2
+              }}
             >
-            <Text>{item.ItemDate}</Text>
-            <Text>{item.City}</Text>
-            <View style={{flexDirection:'row-reverse'}}>
-                      <Text>{item.ItemName}</Text>
-                      <Icon style={{margin:2}} name="ios-checkbox-outline" size={20} color="blue"/>
-                      
-                      </View>         
-                      </TouchableOpacity>
-                          
-                            <View style={styles.line}></View>
-            
-            
-                             <View  
-                            style={{
-                              width:'100%',padding:5
-                          }}>
-            <View style={{flexDirection:'row'}}>
-                          <Image source={{
-                                  uri:
-                                    "http://ruppinmobile.tempdomain.co.il/site11/image/" +
-                                    item.ItemImg
-                                }}
-                                style={{ width: 100, height: 100, borderWidth: 4,borderColor:"black",margin:4}}
-                              />
-                        <View style={{flexDirection:"column",justifyContent:'space-around'}}>
-                        
-                            <Text style={{marginRight:20}}>על הפריט : {item.ItemAbout}</Text>
-            
-            
-                            <View style={{width:250,flexDirection:'row',padding:5,justifyContent:'space-around',borderWidth:1,    backgroundColor: "rgba(255,255,255,.5)",marginRight:200}}>
-                    
-                    <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
-                      <Icon name="md-heart" size={40} color="red"/>
-                    </TouchableOpacity>
-            
-            
-            
-                    <TouchableOpacity>
-                      <Icon name="ios-chatbubbles" size={40} color='blue'/>
-                    </TouchableOpacity>
-            
-                          <TouchableOpacity>
-                    <Icon name="md-call" size={40} color="green" onPress={()=>this._pressCall(item.UserPhone)}/>
-            
-                    </TouchableOpacity>
-                  </View>
-                         </View>
-                         </View>
-                         </View>  
-                         <TouchableOpacity onPress={()=>this.FavoriteChack(item)} style={{backgroundColor:'#8fbc8f',height:30,alignItems:'center'}}>
-                         <Text style={{fontSize:16,color:'white',fontWeight:'bold'}}>מחק פריט
-                             </Text>
-                             </TouchableOpacity>
-                         </View> 
-                         
+              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+                <Icon name="md-heart" size={35} color="red" />
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Icon
+                  name="md-call"
+                  size={35}
+                  color="green"
+                  onPress={() => this._pressCall(item.UserPhone)}
+                />
+              </TouchableOpacity>
+            </View>
+            <Image
+              source={{
+                uri:
+                  "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                  item.ItemImg
+              }}
+              style={{
+                width: "100%",
+                height: "60%"
+              }}
+            />
+            <View
+              style={{
+                justifyContent: "space-around",
+                flexDirection: "row-reverse",
+                alignItems: "center"
+              }}
+              onPress={() => {
+                this.infoWindow(index);
+              }}
+            >
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: 22,
+                  fontFamily: "serif",
+                  textShadowColor: "gray",
+                  textShadowOffset: { width: 1, height: 2 },
+                  textShadowRadius: 5
+                }}
+              >
+                {item.ItemDate}
+              </Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: 22,
+                  fontFamily: "serif",
+                  textShadowColor: "gray",
+                  textShadowOffset: { width: 1, height: 2 },
+                  textShadowRadius: 5
+                }}
+              >
+                {item.City}
+              </Text>
+              <View style={{ flexDirection: "row-reverse" }}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    fontSize: 22,
+                    fontFamily: "serif",
+                    textShadowColor: "gray",
+                    textShadowOffset: { width: 1, height: 2 },
+                    textShadowRadius: 5
+                  }}
+                >
+                  {item.ItemName}
+                </Text>
+              </View>
+            </View>
+            <View style={{ margin: 10 }}>
+              <Text>{item.ItemAbout}</Text>
+            </View>
+          </View>
         );
       });
     }
 
     return (
-    
+      <ImageBackground
+        source={require("../assets/background2.jpg")}
+        style={styles.imageBackground}
+      >
         <View style={styles.container}>
-        <View style={styles.main}>
-          <View style={styles.topBar}>
-            <TouchableHighlight
-              onPress={() =>
-                this.props.navigation.dispatch(DrawerActions.openDrawer())
-              }
-              style={styles.touchableHighlight}
-              underlayColor={"rgba(0,0,0,0.8)"}
-            >
-              <Icona
-                iconStyle={{ marginEnd: "10%" }}
-                name="bars"
-                type="font-awesome"
-                color="white"
-                size={28}
-              />
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={() => this.props.navigation.navigate("Home")}
-            >
-              <Image
-                source={require("../assets/TenYadLogo.png")}
-                style={styles.logo}
-              />
-            </TouchableHighlight>
-          </View>
-
-          <ScrollView style={styles.scrollview}>
-            
-            <View style={{flex:1}}>
-
-             {Items}
+          <View style={styles.main}>
+            <View style={styles.topBar}>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
+                style={styles.touchableHighlight}
+                underlayColor={"rgba(0,0,0,0.8)"}
+              >
+                <Icona
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="bars"
+                  type="font-awesome"
+                  color="white"
+                  size={28}
+                />
+              </TouchableHighlight>
+              <View
+                style={{
+                  marginTop: 35,
+                  justifyContent: "center"
+                }}
+              >
+                <Text
+                  style={{
+                    color: "rgba(255,255,255,.9)",
+                    fontWeight: "bold",
+                    fontSize: 25,
+                    fontFamily: "serif",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: 1, height: 4 },
+                    textShadowRadius: 5
+                  }}
+                >
+                  מועדפים
+                </Text>
+              </View>
+              <TouchableHighlight
+                onPress={() => this.props.navigation.navigate("Home")}
+              >
+                <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={styles.logo}
+                />
+              </TouchableHighlight>
             </View>
 
-
+            <ScrollView style={styles.scrollview}>
+              <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
             </ScrollView>
           </View>
         </View>
+      </ImageBackground>
     );
   }
 }
