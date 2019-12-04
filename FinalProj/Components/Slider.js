@@ -7,7 +7,8 @@ import { withNavigation } from "react-navigation";
 const { width } = Dimensions.get("window");
 const Slider = props => (
   <View  style={styles.container}  >
-  
+  <Image style={{width:70,height:70,position:'absolute',left:5,zIndex:1}} source={require('../assets/new1.gif')}/>
+
   <Image
       style={styles.image}
       source={{

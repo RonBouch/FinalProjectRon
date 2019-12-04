@@ -541,7 +541,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Favorite",
+    initialRouteName: "Contribution",
     activeColor: "#f0edf6",
     inactiveColor: "#226557",
     barStyle: { backgroundColor: "#3BAD87" }
