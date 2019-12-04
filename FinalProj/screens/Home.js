@@ -78,12 +78,11 @@ export default class Home extends Component {
                   borderColor: "white",
                   borderRadius: 30,
                   elevation: 15,
-                  backgroundColor: "#fff",
                   shadowColor: "rgba(0,0,0, .4)",
                   shadowOffset: { height: 1, width: 1 },
                   shadowOpacity: 1,
                   shadowRadius: 1,
-                  backgroundColor: "rgb(67, 204, 29)"
+                  backgroundColor: "rgba(67, 204, 29,.9)"
                 }}
                 onPress={() => this.props.navigation.navigate("Contribution")}
               >

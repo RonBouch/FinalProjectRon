@@ -185,7 +185,7 @@ export default class Favorite extends React.Component {
             style={{
               backgroundColor: "white",
               width: "95%",
-              height: 300,
+              height: 260,
               margin: 10,
               borderWidth: 1,
               borderColor: "#e6e6fa",
@@ -200,20 +200,7 @@ export default class Favorite extends React.Component {
                 margin: 5,
                 left: 2
               }}
-            >
-              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
-                <Icon name="md-heart" size={35} color="red" />
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Icon
-                  name="md-call"
-                  size={35}
-                  color="green"
-                  onPress={() => this._pressCall(item.UserPhone)}
-                />
-              </TouchableOpacity>
-            </View>
+            ></View>
             <Image
               source={{
                 uri:
@@ -222,14 +209,15 @@ export default class Favorite extends React.Component {
               }}
               style={{
                 width: "100%",
-                height: "60%"
+                height: "50%"
               }}
             />
             <View
               style={{
                 justifyContent: "space-around",
                 flexDirection: "row-reverse",
-                alignItems: "center"
+                alignItems: "center",
+                height: "10%"
               }}
               onPress={() => {
                 this.infoWindow(index);
@@ -239,11 +227,8 @@ export default class Favorite extends React.Component {
                 style={{
                   color: "black",
                   fontWeight: "bold",
-                  fontSize: 22,
-                  fontFamily: "serif",
-                  textShadowColor: "gray",
-                  textShadowOffset: { width: 1, height: 2 },
-                  textShadowRadius: 5
+                  fontSize: 18,
+                  fontFamily: "serif"
                 }}
               >
                 {item.ItemDate}
@@ -252,33 +237,45 @@ export default class Favorite extends React.Component {
                 style={{
                   color: "black",
                   fontWeight: "bold",
-                  fontSize: 22,
                   fontFamily: "serif",
-                  textShadowColor: "gray",
-                  textShadowOffset: { width: 1, height: 2 },
-                  textShadowRadius: 5
+                  fontSize: 18
                 }}
               >
                 {item.City}
               </Text>
-              <View style={{ flexDirection: "row-reverse" }}>
-                <Text
-                  style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontSize: 22,
-                    fontFamily: "serif",
-                    textShadowColor: "gray",
-                    textShadowOffset: { width: 1, height: 2 },
-                    textShadowRadius: 5
-                  }}
-                >
-                  {item.ItemName}
-                </Text>
-              </View>
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  fontFamily: "serif"
+                }}
+              >
+                {item.ItemName}
+              </Text>
             </View>
-            <View style={{ margin: 10 }}>
+            <View style={{ margin: 10, height: "20%" }}>
               <Text>{item.ItemAbout}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                height: "10%"
+              }}
+            >
+              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+                <Icon name="md-heart" size={30} color="red" />
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <Icon
+                  name="md-call"
+                  size={30}
+                  color="green"
+                  onPress={() => this._pressCall(item.UserPhone)}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         );
