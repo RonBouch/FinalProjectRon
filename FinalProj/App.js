@@ -24,6 +24,8 @@ const MainNavigator = createStackNavigator(
 
 
 
+
+
     Home: { screen: Home },
 
     Login: { screen: Login },
@@ -34,7 +36,7 @@ const MainNavigator = createStackNavigator(
     headerMode: "none",
     defaultNavigationOptions: { headerVisable: false }
   },
-  { initialRouteName: "DrawerNavigator" }
+  { initialRouteName: "FirstPage" }
 );
 
 export default createAppContainer(MainNavigator);

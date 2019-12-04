@@ -25,8 +25,8 @@ class Contribution extends Component {
           item:null,
           items:null,
           extraDetails:-1,
-          showImg:false,
-          checkedFavorite:false,
+          showImages:false,
+          checkItemChange:false,
         }
 
     }
@@ -97,7 +97,7 @@ class Contribution extends Component {
           this.setState({
             extraDetails: index,
             item:item,
-            checkedFavorite:false
+            checkItemChange:false
           });
         } else {
           this.setState({
@@ -111,23 +111,23 @@ class Contribution extends Component {
     async  FavoriteChack(item) {
       console.log("ITEMID ",item.ItemID)
        await this.setState({
-          checkedFavorite: !this.state.checkedFavorite,
+          checkItemChange: !this.state.checkItemChange,
           item:item
         });
         this.Favorite();
       }
-      Favorite = () => {
-        console.log("state item ",this.state.item.ItemID + " " + this.state.checkedFavorite)
 
-        if (this.state.checkedFavorite||this.state.showImg) {
-          console.log(
-            "Item id = " + this.state.item.ItemID 
-          );
-    
+      //הכנסת פריט למועדפים מתוך הפורום תרומות 
+      Favorite = () => {
+      //בדיקה עם פריט התצוגה ישתנה או שכל הפריטים בתצוגה פתוחים ומראים תמונה לכולם
+        if (this.state.checkItemChange||this.state.showImages) {
+          // בניית משתנה דאטה והכנסת ערכים לשליחה לדטה בייס
           const data = {
+            //המשתנה החדש מקבל את מספר זהות המשתמש ואת מספר זהות הפריט
             userid: 1,
             itemid: this.state.item.ItemID
           };
+          //נותן כתובת לשרת
           fetch(
             "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
             {
@@ -142,21 +142,21 @@ class Contribution extends Component {
               console.log("res=", res);
               return res.json();
             })
+            //JSONקבלת תשובה מהשרת והפיכת התשובה ל 
             .then(
               result => {
-                console.log("fetch POST= ", result);
                 let favorite = JSON.parse(result.d);
+                //כאשר השרת מחזיר תשובה שהיא שווה ל -1 זה אומר שפריט זה כבר קיים במועדפים
                 if (favorite == -1) {
                   this.setState({
-                    checkedFavorite: true
+                    checkItemChange: true
                   });
-    
                   console.log("Allready Exist this favorite");
                   return;
 
                 } else {
                   this.setState({
-                    checkedFavorite: true
+                    checkItemChange: true
                   });
                 }
                 console.log(result.d);
@@ -219,22 +219,15 @@ class Contribution extends Component {
 
           if (this.state.items != null) {
             Items = this.state.items.map((item, index) => { 
-              // console.log("Extr ",this.state.extraDetails+ " Index",index) 
               return (
-
-                ((index!=this.state.extraDetails&& !this.state.showImg))?
-
-           
+                ((index!=this.state.extraDetails&& !this.state.showImages))?
             <TouchableOpacity key={index}
-
             onPress={() => {
               this.infoWindow(index,item);
             }}
 
             style={{
               height: 50,
-              // marginBottom: "2%",
-              // backgroundColor: 'gray',
               marginTop:2,
               justifyContent: 'space-between',flexDirection:'row-reverse',width:'100%',backgroundColor: '#f0f8ff',alignItems:'center'
             }}
@@ -254,7 +247,6 @@ class Contribution extends Component {
               :         
               
               
-
 
 
               
@@ -364,14 +356,12 @@ onPress={() => {
                  <CheckBox 
                         title="הצג תמונה לכולם"
                         iconRight
-                        checked={this.state.showImg}
-                        onPress={()=>this.setState({showImg:!this.state.showImg})}
-                        // containerStyle={{width:200,height:50}}
+                        checked={this.state.showImages}
+                        onPress={()=>this.setState({showImages:!this.state.showImages})}
                         />
                    <CheckBox 
                         title="רק עם תמונה"
                         iconRight
-                        // containerStyle={{width:200,height:50}}
                         />
                        
          <Dropdown
