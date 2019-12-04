@@ -69,46 +69,54 @@ export default class Profile extends React.Component {
   };
   openGallery = async () => {
     //   this.setState({img:""})
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3], 
-      base64:true,
-      quality:0.1
-    });
-    if (!result.cancelled) {
-      console.log("result ", result);
-     
-    }let localUri = result.uri;
-    let filename = localUri.split("/").pop();
-    let imageBase64 = result.base64;
-
-    let match = /\.(\w+)$/.exec(filename);
-    let type = match ? `image/${match[1]}` : `image`;
-   
-    console.log("Imgg name ", this.state.img)
-    global.image= global.id +global.firstName+".jpg";
-    const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
-    // console.log("formdata = ", formData);
-    await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
-    {
-      method: "post",
-          headers: new Headers({
-            "Content-Type": "application/Json;"
-          }),
-          body: JSON.stringify(formData)
-    }).then ( res => {
-      return res.json();
-    })
-    .then(
-      result => {
-        this.setState({ img:global.id +global.firstName+".jpg" });
-
-        console.log("result = ",result);
-      },
-      error => {
-        console.log("err post=", error);
+    if( await ImagePicker!=null){
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3], 
+        base64:true,
+        quality:0.1
+      });
+      if (result.cancelled) {
+        console.log("result ", result);
+       
       }
-    );
+      else{
+        let localUri = result.uri;
+      let filename = localUri.split("/").pop();
+      let imageBase64 = result.base64;
+  
+      let match = /\.(\w+)$/.exec(filename);
+      let type = match ? `image/${match[1]}` : `image`;
+     
+      console.log("Imgg name ", this.state.img)
+      global.image= global.id +global.firstName+".jpg";
+      const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
+      // console.log("formdata = ", formData);
+      await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
+      {
+        method: "post",
+            headers: new Headers({
+              "Content-Type": "application/Json;"
+            }),
+            body: JSON.stringify(formData)
+      }).then ( res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({ img:global.id +global.firstName+".jpg" });
+  
+          console.log("result = ",result);
+        },
+        error => {
+          console.log("err post=", error);
+        }
+        );
+    }
+  }
+   
+   
+
   };
   render() {
       console.log("IMG  ", global.image)

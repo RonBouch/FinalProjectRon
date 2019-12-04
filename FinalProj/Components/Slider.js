@@ -1,22 +1,20 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions, AppState } from "react-native";
+import { View, Text, Image, Dimensions, AppState, TouchableOpacity } from "react-native";
 import Swiper from "react-native-swiper";
 import { array } from "prop-types";
+import { withNavigation } from "react-navigation";
 
 const { width } = Dimensions.get("window");
 const Slider = props => (
-  <View
-    style={styles.container}
-    onTouchEndCapture={() => {
-      alert("hi");
-    }}
-  >
-    <Image
+  <View  style={styles.container}  >
+  
+  <Image
       style={styles.image}
       source={{
         uri: "http://ruppinmobile.tempdomain.co.il/site11/image/" + props.uri
       }}
     />
+    
   </View>
 );
 const styles = {
@@ -92,9 +90,10 @@ export default class extends Component {
   };
 
   render() {
-    console.log("  image slider", this.state.imagesSlider);
+      console.log("Props  ",this.props.props.navigation)
     return (
-      <View style={{ width: "70%", height: 160 }}>
+      <View style={{ width: "70%", height: 160 }}
+      >
         <Swiper
           style={{ alignItems: "center" }}
           showsButtons
@@ -105,7 +104,11 @@ export default class extends Component {
           height={240}
         >
           {this.state.imagesSlider.map((item, i) => (
-            <Slider uri={item} key={i} />
+              <TouchableOpacity key={i} onPress={()=>this.props.props.navigation.navigate('Contribution')}>
+
+            <Slider uri={item} key={i}   />
+  </TouchableOpacity>
+
           ))}
         </Swiper>
       </View>

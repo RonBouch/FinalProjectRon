@@ -64,7 +64,7 @@ export default class Home extends Component {
               >
               
               <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/>
-                <Slider />
+                <Slider props={this.props} />
               </View>
             </View>
             <View style={{ flex: 3, alignItems: "center" }}>
