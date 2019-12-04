@@ -196,6 +196,26 @@ class AssociationsList extends Component {
                   size={28}
                 />
               </TouchableHighlight>
+              <View
+                style={{
+                  marginTop: 35,
+                  justifyContent: "center"
+                }}
+              >
+                <Text
+                  style={{
+                    color: "rgba(255,255,255,.9)",
+                    fontWeight: "bold",
+                    fontSize: 25,
+                    fontFamily: "serif",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: 1, height: 4 },
+                    textShadowRadius: 5
+                  }}
+                >
+                  עמותות
+                </Text>
+              </View>
               <TouchableHighlight
                 onPress={() => this.props.navigation.navigate("Home")}
               >
