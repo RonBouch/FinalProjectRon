@@ -23,7 +23,7 @@ export default class Home extends Component {
   render() {
     return (
       <ImageBackground
-        source={require("../assets/background.jpg")}
+        source={require("../assets/background2.jpg")}
         style={styles.imageBackground}
       >
         <View style={styles.container}>
@@ -59,16 +59,18 @@ export default class Home extends Component {
                   marginTop: 20,
                   alignItems: "center",
                   width: width,
-                  justifyContent: "center",
+                  justifyContent: "center"
                 }}
               >
-              
-              <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/>
+                <Image
+                  style={{ width: 100, height: 70 }}
+                  source={require("../assets/new1.gif")}
+                />
                 <Slider props={this.props} />
               </View>
             </View>
             <View style={{ flex: 3, alignItems: "center" }}>
-            <TouchableOpacity
+              <TouchableOpacity
                 style={{
                   marginTop: 40,
                   justifyContent: "center",
@@ -128,7 +130,6 @@ export default class Home extends Component {
                   עמותות
                 </Text>
               </TouchableOpacity>
-          
             </View>
           </View>
         </View>

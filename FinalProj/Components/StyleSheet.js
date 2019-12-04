@@ -110,7 +110,7 @@ export default StyleSheet.create({
 
   linebottom: {
     margin: 20,
-    color: "red",
+    color: "rgb(196, 58, 37)",
     fontWeight: "bold",
     fontSize: 26,
     fontFamily: "serif",

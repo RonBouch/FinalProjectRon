@@ -175,7 +175,7 @@ class AssociationsList extends Component {
     }
     return (
       <ImageBackground
-        source={require("../assets/background.jpg")}
+        source={require("../assets/background2.jpg")}
         style={styles.imageBackground}
       >
         <View style={styles.container}>
