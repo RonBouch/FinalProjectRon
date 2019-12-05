@@ -200,7 +200,25 @@ export default class Favorite extends React.Component {
                 margin: 5,
                 left: 2
               }}
-            ></View>
+            >
+              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+                <Icona
+                  name="heart"
+                  type="font-awesome"
+                  size={14}
+                  color="red"
+                  raised
+                />
+              </TouchableOpacity>
+              {/* <TouchableOpacity>
+                <Icon
+                  name="md-call"
+                  size={30}
+                  color="green"
+                  onPress={() => this._pressCall(item.UserPhone)}
+                />
+              </TouchableOpacity> */}
+            </View>
             <Image
               source={{
                 uri:
@@ -209,7 +227,7 @@ export default class Favorite extends React.Component {
               }}
               style={{
                 width: "100%",
-                height: "50%"
+                height: "60%"
               }}
             />
             <View
@@ -263,20 +281,7 @@ export default class Favorite extends React.Component {
                 justifyContent: "space-around",
                 height: "10%"
               }}
-            >
-              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
-                <Icon name="md-heart" size={30} color="red" />
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <Icon
-                  name="md-call"
-                  size={30}
-                  color="green"
-                  onPress={() => this._pressCall(item.UserPhone)}
-                />
-              </TouchableOpacity>
-            </View>
+            ></View>
           </View>
         );
       });

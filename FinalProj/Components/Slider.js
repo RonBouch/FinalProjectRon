@@ -126,6 +126,7 @@ export default class extends Component {
             >
               <Slider uri={item} key={i} />
             </TouchableOpacity>
+            
           ))}
         </Swiper>
       </View>

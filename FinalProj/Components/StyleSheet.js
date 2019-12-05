@@ -32,9 +32,7 @@ export default StyleSheet.create({
   //contribution screen
   view: {
     flex: 1,
-    // justifyContent:'center',
     alignItems: "center",
-    backgroundColor: "white",
     padding: "2%"
   },
   line: {
