@@ -29,13 +29,13 @@ import {
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
-const { height, width } = Dimensions.get("window");
+// const { height, width } = Dimensions.get("window");
 
-const DissmisKeyboard = ({ children }) => (
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    {children}
-  </TouchableWithoutFeedback>
-);
+// const DissmisKeyboard = ({ children }) => (
+//   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+//     {children}
+//   </TouchableWithoutFeedback>
+// );
 
 class Publish extends React.Component {
   constructor(props) {
@@ -249,9 +249,9 @@ class Publish extends React.Component {
     return true;
   }
 
-  onContentSizeChange = (contentWidth, contentHeight) => {
-    this.setState({ screenHeight: contentHeight });
-  };
+  // onContentSizeChange = (contentWidth, contentHeight) => {
+  //   this.setState({ screenHeight: contentHeight });
+  // };
 
   handleSelectItem(item, index) {
     const { onDropdownClose } = this.props;
@@ -291,10 +291,12 @@ class Publish extends React.Component {
       }
     ];
 
-    const scrollEnabled = this.state.screenHeight > height;
+    // const scrollEnabled = this.state.screenHeight > height;
     return (
   
-      <View style={styles.container}>
+
+      
+    
       <View style={styles.main}>
    
         <View style={styles.topBar}>
@@ -323,31 +325,30 @@ class Publish extends React.Component {
             />
           </TouchableHighlight>
         </View>
+        <View style={styles.container}>
 
-        <View          
-           scrollEnabled={scrollEnabled}
-    style={styles.autocompletesContainer}>
+
+
+        <View style={styles.autocompletesContainer}>
         <SafeAreaView>
           {autocompletes.map(() => (
             <Autocomplete
               key={shortid.generate()}
-              data={data}
-              style={styles.inputA}
+              style={styles.input}
               scrollToInput={ev => scrollToInput(ev)}
               handleSelectItem={(item, id) => this.handleSelectItem(item, id)}
               onDropdownClose={() => onDropdownClose()}
               onDropdownShow={() => onDropdownShow()}
-              placeholder="חפש"
               renderIcon={() => (
-                <Ionicons name="md-search" size={20} color="#c7c6c1" style={styles.plus} />
+                <Ionicons name="ios-add-circle-outline" size={20} color="#c7c6c1" style={styles.plus} />
               )}
+              data={data}
               // fetchDataUrl={apiUrl}
-              
-              minimumCharactersCount={1}
+              minimumCharactersCount={2}
               highlightText
               valueExtractor={item => item.name}
               rightContent
-              rightTextExtractor={item => item.id}
+              rightTextExtractor={item => item.properties}
             />
           ))}
         </SafeAreaView>
@@ -355,10 +356,10 @@ class Publish extends React.Component {
   
 
 
-        <View>
+        <View style={{ alignItems: "center", marginTop: 10 }}> 
         <ScrollView
                 contentContainerStyle={styles.scrollview}
-                scrollEnabled={scrollEnabled}
+                // scrollEnabled={scrollEnabled}
                 onContentSizeChange={this.onContentSizeChange}
               >
                 <View style={{ alignItems: "center", marginTop: 10 }}>

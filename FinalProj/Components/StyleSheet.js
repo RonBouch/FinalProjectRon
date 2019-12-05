@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   //Publish Screen
   autocompletesContainer: {
-    // paddingTop: 30,
+    paddingTop: 0,
     zIndex: 1,
     width: "100%",
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
   },
-  inputAuto: { maxHeight: 40 },
+  input: {maxHeight: 40},
   inputContainer: {
     display: "flex",
     flexShrink: 0,
@@ -22,9 +22,8 @@ export default StyleSheet.create({
     paddingLeft: 12,
     paddingRight: "5%",
     width: "100%",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
-
   plus: {
     position: "absolute",
     left: 15,
@@ -100,7 +99,7 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   main: {
-    // flex:1,
+    flex:1,
     alignItems: "center",
     width: "100%",
     height: "100%"

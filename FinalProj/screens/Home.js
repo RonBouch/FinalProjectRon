@@ -62,12 +62,8 @@ export default class Home extends Component {
                   justifyContent: "center"
                 }}
               >
-<<<<<<< HEAD
               
               {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
-=======
-                {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
->>>>>>> be0b2bb27a3f93585c0c8c843fc4fa0900bf695f
                 <Slider props={this.props} />
               </View>
             </View>

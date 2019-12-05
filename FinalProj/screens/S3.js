@@ -28,7 +28,6 @@ class S3 extends Component {
  
     return (
       <View style={styles.autocompletesContainer}>
-        <SafeAreaView>
           {autocompletes.map(() => (
             <Autocomplete
               key={shortid.generate()}
@@ -51,10 +50,11 @@ class S3 extends Component {
               rightTextExtractor={item => item.id}
             />
           ))}
-        </SafeAreaView>
         <Text>hi</Text>
         <View style={{flex:1}}>
             <Slider/>
+            <Slider/>
+
           </View>
       </View>
     );

@@ -106,7 +106,6 @@ export default class extends Component {
   };
 
   render() {
-    console.log("Props  ", this.props.props.navigation);
     return (
       <View style={{ width: "100%", height: 200 }}>
         <Swiper
