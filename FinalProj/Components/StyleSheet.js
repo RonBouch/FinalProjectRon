@@ -8,7 +8,7 @@ export default StyleSheet.create({
     width: "100%",
     paddingHorizontal: 8,
   },
-  input: {maxHeight: 40},
+  inputa: {maxHeight: 40},
   inputContainer: {
     display: "flex",
     flexShrink: 0,

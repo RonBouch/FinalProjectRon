@@ -23,6 +23,7 @@ import Publish from "../screens/Publish";
 import Favorite from "../screens/Favorite";
 
 import { CheckBox } from "react-native-elements";
+import { array } from "prop-types";
 
 class Contribution extends Component {
   constructor(props) {
@@ -35,17 +36,76 @@ class Contribution extends Component {
       items: null,
       extraDetails: -1,
       showImg: false,
-      checkedFavorite: false
+      checkedFavorite: false,
+      itemsFromFavorite:null,
     };
   }
-  componentDidMount() {
-    this.GetItems();
-  }
+
+    // define a separate function to get triggered on focus
+    onFocusFunction = () => {
+      console.log("Change Picture .");
+      this.GetItems();
+      // do some stuff on every screen focus
+    };
+  
+    // add a focus listener onDidMount
+    async componentDidMount() {
+  
+      this.focusListener = this.props.navigation.addListener("didFocus", () => {
+        this.onFocusFunction();
+      });
+    }
+  
+    // and don't forget to remove the listener
+    componentWillUnmount() {
+      this.focusListener.remove();
+    }
+  
+
   _pressCall = phone => {
     const url = "tel:" + phone;
     // console.log("url  asasds",url)
     Linking.openURL(url);
   };
+
+  GetItemsFromFavorite = async () => {
+    const data = {
+      userid: 1
+    };
+    await fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        }),
+        body: JSON.stringify(data)
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          let itemsFromFavorite = JSON.parse(result.d);
+          if (itemsFromFavorite == null) {
+            this.setState({
+              //   message: "הרשמה נכשלה"
+            });
+            return;
+          } else {
+            this.setState({
+              itemsFromFavorite: itemsFromFavorite
+            });
+            // console.log("Item Favorite", itemsFromFavorite)
+          }
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
   GetItems = () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
@@ -74,6 +134,7 @@ class Contribution extends Component {
             this.setState({
               items: items
             });
+            this.GetItemsFromFavorite();
           }
         },
         error => {
@@ -124,8 +185,8 @@ class Contribution extends Component {
       this.state.item.ItemID + " " + this.state.checkedFavorite
     );
 
-    if (this.state.checkedFavorite || this.state.showImg) {
-      console.log("Item id = " + this.state.item.ItemID);
+    // if (this.state.checkedFavorite || this.state.showImg) {
+    //   console.log("Item id = " + this.state.item.ItemID);
 
       const data = {
         userid: 1,
@@ -168,7 +229,7 @@ class Contribution extends Component {
             console.log("err post=", error);
           }
         );
-    }
+    
   };
   render() {
     let Type = [
@@ -219,8 +280,12 @@ class Contribution extends Component {
     ];
     let Items = [];
 
-    if (this.state.items != null) {
+    if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
+      
       Items = this.state.items.map((item, index) => {
+        // console.log("ITem ID =====",this.state.itemsFromFavorite.length)
+        console.log( item.ItemID+" "+this.state.itemsFromFavorite.filter(data => (data.ItemID == item.ItemID)))
+        // console.log("Include ", item.ItemID +" " +this.state.itemsFromFavorite.includes(item.ItemID)     )
         return (
           <View
             key={index}
@@ -244,7 +309,7 @@ class Contribution extends Component {
               }}
             >
               <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
-                {this.state.checkedFavorite ? (
+                {this.state.itemsFromFavorite.filter(data => (data.ItemID == item.ItemID))!=""? (
                   <Icona
                     name="heart"
                     type="font-awesome"
@@ -338,6 +403,10 @@ class Contribution extends Component {
         );
       });
     }
+
+
+
+
 
     return (
       <ImageBackground
