@@ -171,26 +171,13 @@ class Contribution extends Component {
     }
   };
 
-  async FavoriteChack(item) {
-    console.log("ITEMID ", item.ItemID);
-    await this.setState({
-      checkedFavorite: !this.state.checkedFavorite,
-      item: item
-    });
-    this.Favorite();
-  }
-  Favorite = () => {
-    console.log(
-      "state item ",
-      this.state.item.ItemID + " " + this.state.checkedFavorite
-    );
+  Favorite = (item) => {
+  
 
-    // if (this.state.checkedFavorite || this.state.showImg) {
-    //   console.log("Item id = " + this.state.item.ItemID);
 
       const data = {
         userid: 1,
-        itemid: this.state.item.ItemID
+        itemid: item.ItemID
       };
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
@@ -209,19 +196,8 @@ class Contribution extends Component {
         .then(
           result => {
             console.log("fetch POST= ", result);
-            let favorite = JSON.parse(result.d);
-            if (favorite == -1) {
-              this.setState({
-                checkedFavorite: true
-              });
-
-              console.log("Allready Exist this favorite");
-              return;
-            } else {
-              this.setState({
-                checkedFavorite: true
-              });
-            }
+            // let favorite = JSON.parse(result.d);
+             this.GetItems();
             console.log(result.d);
             console.log(result);
           },
@@ -308,7 +284,7 @@ class Contribution extends Component {
                 left: 2
               }}
             >
-              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+              <TouchableOpacity onPress={() =>     this.Favorite(item)}>
                 {this.state.itemsFromFavorite.filter(data => (data.ItemID == item.ItemID))!=""? (
                   <Icona
                     name="heart"
