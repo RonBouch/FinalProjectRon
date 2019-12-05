@@ -19,13 +19,13 @@ const DNav = createDrawerNavigator(
   {
     Home: { screen: Home },
 
+    Contribution: { screen: Contribution },
+
     Profile: { screen: Profile },
 
     ProfilePost: { screen: ProfilePost },
 
     EditPage: { screen: EditPage },
-
-    Contribution: { screen: Contribution },
 
     Publish: { screen: Publish },
 

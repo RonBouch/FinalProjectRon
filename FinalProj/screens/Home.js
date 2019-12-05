@@ -56,14 +56,18 @@ export default class Home extends Component {
             <View>
               <View
                 style={{
-                  marginTop: 20,
+                  // marginTop: 20,
                   alignItems: "center",
                   width: width,
                   justifyContent: "center"
                 }}
               >
+<<<<<<< HEAD
               
               {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
+=======
+                {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
+>>>>>>> be0b2bb27a3f93585c0c8c843fc4fa0900bf695f
                 <Slider props={this.props} />
               </View>
             </View>
@@ -79,12 +83,11 @@ export default class Home extends Component {
                   borderColor: "white",
                   borderRadius: 30,
                   elevation: 15,
-                  backgroundColor: "#fff",
                   shadowColor: "rgba(0,0,0, .4)",
                   shadowOffset: { height: 1, width: 1 },
                   shadowOpacity: 1,
                   shadowRadius: 1,
-                  backgroundColor: "rgb(67, 204, 29)"
+                  backgroundColor: "rgba(67, 204, 29,.9)"
                 }}
                 onPress={() => this.props.navigation.navigate("Contribution")}
               >

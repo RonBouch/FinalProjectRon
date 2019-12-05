@@ -39,10 +39,10 @@ export default StyleSheet.create({
     padding: "2%"
   },
   line: {
-    width: "90%",
+    width: "100%",
     alignSelf: "center",
     height: 1,
-    backgroundColor: "gray"
+    backgroundColor: "black"
     // margin: 10
   },
   searchButton: {
@@ -67,7 +67,6 @@ export default StyleSheet.create({
     width: 60,
     height: 60,
     justifyContent: "center",
-    position: "absolute",
     left: 5
   },
   open: {
@@ -78,7 +77,8 @@ export default StyleSheet.create({
   topBar: {
     backgroundColor: "#6495ed",
     width: "100%",
-    alignItems: "flex-end"
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   logo: {
     width: 60,
