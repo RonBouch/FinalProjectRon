@@ -221,259 +221,210 @@ class Contribution extends Component {
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
-        // console.log("Extr ",this.state.extraDetails+ " Index",index)
-        return index != this.state.extraDetails && !this.state.showImg ? (
-          <TouchableOpacity
-            key={index}
-            onPress={() => {
-              this.infoWindow(index, item);
-            }}
-            style={{
-              height: 50,
-              // marginBottom: "2%",
-              // backgroundColor: 'gray',
-              marginTop: 2,
-              justifyContent: "space-between",
-              flexDirection: "row-reverse",
-              width: "100%",
-              backgroundColor: "#f0f8ff",
-              alignItems: "center"
-            }}
-          >
-            <Text>{item.ItemDate}</Text>
-            <Text>{item.City}</Text>
-            <View style={{ flexDirection: "row-reverse" }}>
-              <Text>{item.ItemName}</Text>
-              <Icon
-                style={{ margin: 2 }}
-                name="ios-checkbox-outline"
-                size={20}
-                color="blue"
-              />
-            </View>
-          </TouchableOpacity>
-        ) : (
+        return (
           <View
             key={index}
             style={{
-              backgroundColor: "#e6e6fa",
-              width: "100%",
-              justifyContent: "space-between",
-              marginTop: 2
+              backgroundColor: "white",
+              width: "95%",
+              height: 260,
+              margin: 10,
+              borderWidth: 1,
+              borderColor: "#e6e6fa",
+              elevation: 10
             }}
           >
-            <TouchableOpacity
+            {/* <View style={styles.line}></View> */}
+            <View
               style={{
-                marginTop: 2,
-                justifyContent: "space-between",
+                position: "absolute",
+                zIndex: 1,
+                margin: 5,
+                left: 2
+              }}
+            >
+              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+                {this.state.checkedFavorite ? (
+                  <Icona
+                    name="heart"
+                    type="font-awesome"
+                    size={14}
+                    color="red"
+                    raised
+                  />
+                ) : (
+                  <Icona
+                    name="heart"
+                    type="feather"
+                    size={14}
+                    color="black"
+                    raised
+                  />
+                )}
+              </TouchableOpacity>
+              {/* <TouchableOpacity>
+                <Icon
+                  name="md-call"
+                  size={30}
+                  color="green"
+                  onPress={() => this._pressCall(item.UserPhone)}
+                />
+              </TouchableOpacity> */}
+            </View>
+            <Image
+              source={{
+                uri:
+                  "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                  item.ItemImg
+              }}
+              style={{
+                width: "100%",
+                height: "50%"
+              }}
+            />
+            <View
+              style={{
+                justifyContent: "space-around",
                 flexDirection: "row-reverse",
-                alignItems: "center"
+                alignItems: "center",
+                height: "10%"
               }}
               onPress={() => {
                 this.infoWindow(index);
               }}
             >
-              <Text>{item.ItemDate}</Text>
-              <Text>{item.City}</Text>
-              <View style={{ flexDirection: "row-reverse" }}>
-                <Text>{item.ItemName}</Text>
-                <Icon
-                  style={{ margin: 2 }}
-                  name="ios-checkbox-outline"
-                  size={20}
-                  color="blue"
-                />
-              </View>
-            </TouchableOpacity>
-
-            <View style={styles.line}></View>
-
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  fontFamily: "serif"
+                }}
+              >
+                {item.ItemDate}
+              </Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontFamily: "serif",
+                  fontSize: 18
+                }}
+              >
+                {item.City}
+              </Text>
+              <Text
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: 18,
+                  fontFamily: "serif"
+                }}
+              >
+                {item.ItemName}
+              </Text>
+            </View>
+            <View style={{ margin: 10, height: "20%" }}>
+              <Text>{item.ItemAbout}</Text>
+            </View>
             <View
               style={{
-                width: "100%",
-                padding: 5
+                flexDirection: "row",
+                justifyContent: "space-around",
+                height: "10%"
               }}
-            >
-              <View style={{ flexDirection: "row" }}>
-                <Image
-                  source={{
-                    uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/image/" +
-                      item.ItemImg
-                  }}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderWidth: 4,
-                    borderColor: "black",
-                    margin: 4
-                  }}
-                />
-                <View
-                  style={{
-                    flexDirection: "column",
-                    justifyContent: "space-around"
-                  }}
-                >
-                  <Text style={{ marginRight: 200 }}>
-                    על הפריט : {item.ItemAbout}
-                  </Text>
-
-                  <View
-                    style={{
-                      width: 250,
-                      flexDirection: "row",
-                      padding: 5,
-                      justifyContent: "space-around",
-                      borderWidth: 1,
-                      marginTop: 10,
-                      backgroundColor: "rgba(255,255,255,.5)",
-                      marginRight: 200
-                    }}
-                  >
-                    <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
-                      <Icon name="md-heart" size={40} color="red" />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                      <Icon name="ios-chatbubbles" size={40} color="blue" />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                      <Icon
-                        name="md-call"
-                        size={40}
-                        color="green"
-                        onPress={() => this._pressCall(item.UserPhone)}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            </View>
+            ></View>
           </View>
         );
       });
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.main}>
-          <View style={styles.topBar}>
-            <TouchableHighlight
-              onPress={() =>
-                this.props.navigation.dispatch(DrawerActions.openDrawer())
-              }
-              style={styles.touchableHighlight}
-              underlayColor={"rgba(0,0,0,0.8)"}
-            >
-              <Icona
-                iconStyle={{ marginEnd: "10%" }}
-                name="bars"
-                type="font-awesome"
-                color="white"
-                size={28}
-              />
-            </TouchableHighlight>
-            <TouchableHighlight
-              onPress={() => this.props.navigation.navigate("Home")}
-            >
-              <Image
-                source={require("../assets/TenYadLogo.png")}
-                style={styles.logo}
-              />
-            </TouchableHighlight>
-          </View>
-          <ScrollView
-            style={{
-              marginHorizontal: 20,
-              width: "100%",
-              backgroundColor: "white"
-            }}
-          >
-            <View style={styles.view}>
+      <ImageBackground
+        source={require("../assets/background2.jpg")}
+        style={styles.imageBackground}
+      >
+        <View style={styles.container}>
+          <View style={styles.main}>
+            <View style={styles.topBar}>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
+                style={styles.touchableHighlight}
+                underlayColor={"rgba(0,0,0,0.8)"}
+              >
+                <Icona
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="bars"
+                  type="font-awesome"
+                  color="white"
+                  size={28}
+                />
+              </TouchableHighlight>
               <View
                 style={{
-                  marginTop: 10,
-                  flexDirection: "row",
-                  flexWrap: "wrap"
+                  marginTop: 35,
+                  justifyContent: "center"
                 }}
               >
-                <CheckBox
-                  title="הצג תמונה לכולם"
-                  iconRight
-                  checked={this.state.showImg}
-                  onPress={() =>
-                    this.setState({ showImg: !this.state.showImg })
-                  }
-                  // containerStyle={{width:200,height:50}}
-                />
-                <CheckBox
-                  title="רק עם תמונה"
-                  iconRight
-                  // containerStyle={{width:200,height:50}}
-                />
-
-                <Dropdown
-                  label="קטגוריה"
-                  itemColor="black"
-                  dropdownMargins={{ min: 0, max: 1 }}
-                  dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{ width: 180, padding: 5, marginTop: 10 }}
-                  data={Type}
-                  onChangeText={this.Type}
-                />
-                <Dropdown
-                  label="איזור"
-                  itemColor="black"
-                  dropdownMargins={{ min: 0, max: 1 }}
-                  dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
-                  data={Region}
-                  onChangeText={this.Region}
-                />
-
-                <TouchableOpacity
-                  //   onPress={this.handleSubmit}
-                  style={styles.searchButton}
+                <Text
+                  style={{
+                    color: "rgba(255,255,255,.9)",
+                    fontWeight: "bold",
+                    fontSize: 25,
+                    fontFamily: "serif",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: 1, height: 4 },
+                    textShadowRadius: 5
+                  }}
                 >
-                  <Text style={{ color: "white" }}>חפש {"  "}</Text>
-                  <Icona
-                    name="search"
-                    type="font-awesome"
-                    color="white"
-                    size={18}
-                  />
-                </TouchableOpacity>
+                  תרומות
+                </Text>
               </View>
-              <View style={styles.line}></View>
-
-              <View
-                style={{
-                  justifyContent: "space-between",
-                  flexDirection: "row-reverse",
-                  width: "100%",
-                  backgroundColor: "#6495ed",
-                  marginBottom: 10
-                }}
+              <TouchableHighlight
+                onPress={() => this.props.navigation.navigate("Home")}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                  תאריך פרסום
-                </Text>
-                <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                  {" "}
-                  עיר/יישוב{" "}
-                </Text>
-                <Text style={{ fontWeight: "bold", fontSize: 16 }}>
-                  חפצים למסירה
-                </Text>
-              </View>
-
-              {Items}
+                <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={styles.logo}
+                />
+              </TouchableHighlight>
             </View>
-          </ScrollView>
+            <View
+              style={{
+                width: "100%",
+                height: "10%",
+                flexDirection: "row",
+                backgroundColor: "white",
+                elevation: 15,
+                justifyContent: "space-around"
+              }}
+            >
+              <Dropdown
+                label="קטגוריה"
+                itemColor="black"
+                dropdownMargins={{ min: 0, max: 1 }}
+                dropdownOffset={{ top: 0, left: 0 }}
+                containerStyle={{ width: 180, padding: 5, marginTop: 10 }}
+                data={Type}
+                onChangeText={this.Type}
+              />
+              <Dropdown
+                label="איזור"
+                itemColor="black"
+                dropdownMargins={{ min: 0, max: 1 }}
+                dropdownOffset={{ top: 0, left: 0 }}
+                containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
+                data={Region}
+                onChangeText={this.Region}
+              />
+            </View>
+
+            <ScrollView style={styles.scrollview}>{Items}</ScrollView>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
