@@ -26,16 +26,10 @@ class Login extends React.Component {
     this.password = "";
     this.email = "";
     this.vaildForm = false;
-    (global.id = 0),
-      (global.firstName = ""),
-      (global.lastName = ""),
-      (global.email = ""),
-      (global.password = ""),
-      (global.birthday = ""),
-      (global.gender = ""),
-      (this.state = {
-        message: ""
-      });
+    global.user = null;
+    this.state = {
+      message: ""
+    };
     this.state = {
       token: "",
       txtToken: "",
@@ -148,14 +142,7 @@ class Login extends React.Component {
               return;
             } else {
               // this.btnSendPushFromClient();
-              global.id = u.UserID;
-              global.firstName = u.FirstName;
-              global.lastName = u.LastName;
-              global.email = u.Email;
-              global.password = u.Password;
-              global.birthday = u.Birthday;
-              global.gender = u.Gender;
-              global.image = u.Image;
+              global.user = u;
 
               this.props.navigation.navigate("DrawerNavigator");
             }
