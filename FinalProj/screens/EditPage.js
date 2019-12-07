@@ -41,10 +41,10 @@ var radio_props = [
 export default class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.firstName = global.firstName;
-    this.lastName = global.lastName;
-    this.email = global.email;
-    this.password = global.password;
+    this.firstName = global.user.FirstNane;
+    this.lastName = global.user.LastName;
+    this.email = global.user.Email;
+    this.password = global.user.Password;
     this.vaildForm = false;
     this.state = {
       message: "",
@@ -200,14 +200,14 @@ export default class Register extends React.Component {
               <TextInput
                 style={styles.input}
                 placeholder="שם פרטי"
-                defaultValue={global.firstName}
+                defaultValue={global.user.FirstNane}
                 onChangeText={this.changeFirstName}
               />
 
               <TextInput
                 style={styles.input}
                 placeholder="שם משפחה"
-                defaultValue={global.lastName}
+                defaultValue={global.user.LastName}
                 onChangeText={this.changeLastName}
               />
 
@@ -215,7 +215,7 @@ export default class Register extends React.Component {
                 style={styles.input}
                 keyboardType="email-address"
                 placeholder="אמייל"
-                defaultValue={global.email}
+                defaultValue={global.user.Email}
                 onChangeText={this.changeEmail}
               />
 
@@ -223,7 +223,7 @@ export default class Register extends React.Component {
                 style={styles.input}
                 secureTextEntry={true}
                 placeholder="סיסמא"
-                defaultValue={global.password}
+                defaultValue={global.user.Password}
                 onChangeText={this.changePassword}
               />
 
