@@ -70,14 +70,14 @@ namespace DALproj
 
         }
 
-        public static User Register(string firstName, string lastName, string email, string password, string gender, string birthday)
+        public static User Register(string firstName, string lastName,  string gender,string email, string password, string birthday)
         {
             User u = null;
             SqlDataReader reader = null;
             SqlDataReader reader2 = null;
             try
             {
-                comm.CommandText = $"SELECT * FROM UserTB WHERE Email ='{email}'";
+                comm.CommandText = $"SELECT * FROM Users WHERE Email ='{email}'";
                 comm.Connection.Open();
                 reader = comm.ExecuteReader();
                 if (reader.Read())
@@ -86,13 +86,15 @@ namespace DALproj
                 }
                 else
                 {
+                    comm.Connection.Close();
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO UserTB(FirstName, LastName, Email, Password, Gender, Birthday) VALUES('{firstName}', '{lastName}', '{email}', '{password}', '{gender}' , '{birthday.ToString()}')";
+                    comm.CommandText = $"INSERT INTO Users(isAdmin,FirstName, LastName,Gender, Email, Password, , Birthday,Image) VALUES('{false}', '{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
+                    comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
                     {
-                        comm.CommandText = "SELECT max(UserID) as maxID FROM UserTB";
+                        comm.CommandText = "SELECT max(UserID) as maxID FROM Users";
                         reader2 = comm.ExecuteReader();
                         if (reader2.Read())
                         {
@@ -102,9 +104,9 @@ namespace DALproj
                                 isAdmin = false,
                                 FirstName = firstName,
                                 LastName = lastName,
+                                Gender = gender,
                                 Email = email,
                                 Password = password,
-                                Gender = gender,
                                 Birthday = birthday
                             };
                         }

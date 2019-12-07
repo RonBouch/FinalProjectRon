@@ -28,9 +28,9 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
-        public static string Register(string firstName, string lastName, string email, string password, string gender, string birthday)
+        public static string Register(string firstName, string lastName, string gender, string email, string password, string birthday)
         {
-            User u = DBServices.Register(firstName, lastName, email, password, gender, birthday);
+            User u = DBServices.Register(firstName, lastName, gender, email, password, birthday);
             if (u != null)
             {
 

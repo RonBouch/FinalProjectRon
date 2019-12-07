@@ -31,9 +31,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string Register(string firstName, string lastName, string email, string password, string gender, string birthday)
+    public string Register(string firstName, string lastName, string gender, string email, string password, string birthday)
     {
-        return BALServices.Register(firstName, lastName, email, password, gender, birthday);
+        return BALServices.Register(firstName, lastName, gender, email, password, birthday);
     }
 
 
