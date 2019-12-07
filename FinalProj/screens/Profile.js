@@ -23,7 +23,8 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount(){
-      this.setState({img:global.image},function(){
+    console.log("global profile ",global.user.Image)
+      this.setState({img:global.user.Image},function(){
           console.log("img state",this.state.img)
       })
   }
@@ -90,9 +91,9 @@ export default class Profile extends React.Component {
       //הקוד של התמונה ושם במשתנה base64 לוקח את ה 
       let imageBase64 = result.base64;
     // שם במשתנה הגלובלי את שם התמונה החדשה
-      global.image= global.id +global.firstName+".jpg";
+      global.user.Image= global.user.UserID +global.user.FirstName+".jpg";
       //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת  
-      const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
+      const formData = { base64:imageBase64, imageName:global.user.UserID +global.user.FirstName+".jpg" };
       //לעלות את התמונה לשרת fetch עושה   
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
@@ -106,7 +107,7 @@ export default class Profile extends React.Component {
       })
       .then(
         result => {
-          this.setState({ img:global.id +global.firstName+".jpg" });
+          this.setState({ img:global.user.UserID +global.user.FirstName+".jpg" });
   
           console.log("result = ",result);
         },
@@ -195,7 +196,7 @@ export default class Profile extends React.Component {
                 )}
               </TouchableOpacity>
               <Text style={{ marginTop: 30, fontWeight: "bold", fontSize: 24 }}>
-                ברוך הבא, {global.firstName} {global.lastName}
+                ברוך הבא, {global.user.FirstName} {global.user.LastName}
               </Text>
 
               <TouchableOpacity

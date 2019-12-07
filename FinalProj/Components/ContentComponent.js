@@ -20,13 +20,14 @@ export default class ContentComponent extends Component {
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
     console.log("Change Picture .");
-    this.setState({ img: global.image });
+    console.log("global contnenet ",global.user)
+    this.setState({ img: global.user.Image });
     // do some stuff on every screen focus
   };
 
   // add a focus listener onDidMount
   async componentDidMount() {
-    this.setState({ img: global.image });
+    this.setState({ img:global.user.Image });
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       this.onFocusFunction();
