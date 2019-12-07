@@ -20,14 +20,14 @@ export default class ContentComponent extends Component {
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
     console.log("Change Picture .");
-    console.log("global contnenet ",global.user)
+    console.log("global contnenet ", global.user);
     this.setState({ img: global.user.Image });
     // do some stuff on every screen focus
   };
 
   // add a focus listener onDidMount
   async componentDidMount() {
-    this.setState({ img:global.user.Image });
+    this.setState({ img: global.user.Image });
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       this.onFocusFunction();
@@ -176,7 +176,7 @@ export default class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("S3")}
+              onPress={() => this.props.navigation.navigate("FirstPage")}
             >
               <View style={styles.row}>
                 <Icon
