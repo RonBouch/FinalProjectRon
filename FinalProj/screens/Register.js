@@ -81,6 +81,7 @@ export default class Register extends React.Component {
   //אימות שדות במהלך הרשמה
   registerValidatation() {
     let errors = {};
+    let formIsValid = true;
 
     //בדיקה האם הוזן שם פרטי
     if (this.firstName == "") {

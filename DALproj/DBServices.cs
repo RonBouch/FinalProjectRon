@@ -25,16 +25,15 @@ namespace DALproj
 
         public static User Login(string email, string password)
         {
-
-            User u = null;
+            User u = null; //יצירת אובייקט ריק
             try
             {
                 comm.CommandText = $"SELECT * " + " " +
                               "FROM Users " + "" +
-                              $"WHERE Email='{email}' AND Password='{password}' ";
-                comm.Connection.Open();
-                SqlDataReader reader = comm.ExecuteReader();
-                if (reader.Read())
+                              $"WHERE Email='{email}' AND Password='{password}' "; //יצירת שאילתא לSQL
+                comm.Connection.Open(); //פתיחת החיבור של השרת עם הSQL 
+                SqlDataReader reader = comm.ExecuteReader(); //ביצוע השאילתא שיצרנו בSQL
+                if (reader.Read()) // במידה וקיים משתמש כזה קבלת המידע עליו והזנתו באובייקט שיצרנו
                 {
                     u = new User()
                     {
@@ -51,22 +50,22 @@ namespace DALproj
                     };
                 }
 
-                comm.Connection.Close();
+                comm.Connection.Close(); //סגירת החיבור של השרת עם הSQL 
 
-                return u;
+                return u;  //החזרת האובייקט עם כל המידע שקיבלנו 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message); //קבלת הודעת שגיאה במידה וקיימת בעיה בפונקציה
             }
             finally
             {
                 if (comm.Connection.State != ConnectionState.Closed)
                 {
-                    comm.Connection.Close();
+                    comm.Connection.Close(); // וידוא סיגרת החיבור לSQL
                 }
             }
-            return u;
+            return u; //החזרת האובייקט ריק במידה ולא קיים משתמש כזה
 
         }
 
