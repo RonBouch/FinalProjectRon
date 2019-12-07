@@ -6,9 +6,9 @@ export default StyleSheet.create({
     paddingTop: 0,
     zIndex: 1,
     width: "100%",
-    paddingHorizontal: 8,
+    paddingHorizontal: 8
   },
-  inputa: {maxHeight: 40},
+  inputa: { maxHeight: 40 },
   inputContainer: {
     display: "flex",
     flexShrink: 0,
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     paddingLeft: 12,
     paddingRight: "5%",
     width: "100%",
-    justifyContent: "flex-start",
+    justifyContent: "flex-start"
   },
   plus: {
     position: "absolute",
@@ -97,7 +97,7 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   main: {
-    flex:1,
+    flex: 1,
     alignItems: "center",
     width: "100%",
     height: "100%"
@@ -150,7 +150,8 @@ export default StyleSheet.create({
   },
   textMessage: {
     margin: 10,
-    color: "red"
+    color: "red",
+    textAlign: "center"
   },
 
   faceBookButton: {
