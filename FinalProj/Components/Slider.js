@@ -60,16 +60,24 @@ export default class extends Component {
   async componentDidMount() {
     this.GetItems();
   }
+
+  // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש 
   ImageArray = async items => {
-    for (let index = 1; index <= 5; index++) {
-      await this.setState(prevState => ({
-        imagesSlider: [
-          items[items.length - index].ItemImg,
-          ...prevState.imagesSlider
-        ]
-      }));
+    for (let index = 1; index <= 5; index++) { // יצירת לולאה שרצה 5 פעמים 
+      
+      if(items.length<index){ // בדיקה אם העורך של המערך קטן מ5 
+        await this.setState(prevState => ({  // מוסיף למערך החדש את המשתנה של המערך הישן במיקום האחרון - מיקום של מונה הלולאה  
+          imagesSlider: [ 
+            items[items.length - index].ItemImg,
+            ...prevState.imagesSlider
+          ]
+        }));
+       }
+      
     }
   };
+
+  
   GetItems = async () => {
     console.log("Get Items");
 
