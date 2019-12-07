@@ -89,15 +89,12 @@ class Contribution extends Component {
         result => {
           let itemsFromFavorite = JSON.parse(result.d);
           if (itemsFromFavorite == null) {
-            this.setState({
-              //   message: "הרשמה נכשלה"
-            });
+           console.log("no Favorite")
             return;
           } else {
             this.setState({
               itemsFromFavorite: itemsFromFavorite
             });
-            // console.log("Item Favorite", itemsFromFavorite)
           }
         },
         error => {
@@ -172,9 +169,6 @@ class Contribution extends Component {
   };
 
   Favorite = (item) => {
-  
-
-
       const data = {
         userid: 1,
         itemid: item.ItemID
