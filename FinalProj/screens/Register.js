@@ -13,6 +13,7 @@ import {
   Image
 } from "react-native";
 import { Icon } from "react-native-elements";
+import { withNavigation } from "react-navigation";
 
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
@@ -35,7 +36,7 @@ var radio_props = [
   }
 ];
 
-export default class Register extends React.Component {
+ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.firstName = "";
@@ -187,8 +188,7 @@ export default class Register extends React.Component {
               });
               return;
             } else {
-              console.log("ID" + id);
-              id = u.ID;
+              
 
               this.props.navigation.navigate("DrawerNavigator");
             }
@@ -315,3 +315,4 @@ export default class Register extends React.Component {
     );
   }
 }
+export default withNavigation(Register);

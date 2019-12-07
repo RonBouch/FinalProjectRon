@@ -71,7 +71,7 @@ export default class Profile extends React.Component {
     // פתיחת גלריה לבחירת תמונה 
     if( await ImagePicker!=null){
       let result = await ImagePicker.launchImageLibraryAsync({
-    // נותן אופציה לשנות תמונה בגודל וכו
+    // נותן אופציה לשנות את התמונה 
         allowsEditing: true,
     // גודל התמונה שתתקבל
         aspect: [4, 3], 
@@ -93,6 +93,7 @@ export default class Profile extends React.Component {
       global.image= global.id +global.firstName+".jpg";
       //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת  
       const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
+      //לעלות את התמונה לשרת fetch עושה   
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
         method: "post",
