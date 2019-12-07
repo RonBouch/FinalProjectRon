@@ -71,7 +71,7 @@ export default class Profile extends React.Component {
     // פתיחת גלריה לבחירת תמונה 
     if( await ImagePicker!=null){
       let result = await ImagePicker.launchImageLibraryAsync({
-    // נותן אופציה לשנות את התמונה 
+    // נותן אופציה לשנות את גודל התמונה 
         allowsEditing: true,
     // גודל התמונה שתתקבל
         aspect: [4, 3], 
@@ -80,7 +80,7 @@ export default class Profile extends React.Component {
         quality:0.5
       });
 
-  // אם לא נבחרה אף תמונה והמשתמש ביטל את השימוש של הגלריה , כדי שלא יהיה הערה 
+  // בדיקה אם לא נבחרה תמונה 
       if (result.cancelled) {
         console.log("result ", result);
        
