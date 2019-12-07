@@ -200,7 +200,7 @@ export default class Register extends React.Component {
               <TextInput
                 style={styles.input}
                 placeholder="שם פרטי"
-                defaultValue={global.user.FirstNane}
+                defaultValue={global.user.FirstName}
                 onChangeText={this.changeFirstName}
               />
 

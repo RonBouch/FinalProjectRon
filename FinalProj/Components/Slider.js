@@ -65,7 +65,7 @@ export default class extends Component {
   ImageArray = async items => {
     for (let index = 1; index <= 5; index++) { // יצירת לולאה שרצה 5 פעמים 
       
-      if(items.length<index){ // בדיקה אם העורך של המערך קטן מ5 
+      if(!items.length<index){ // בדיקה אם העורך של המערך קטן מ5 
         await this.setState(prevState => ({  // מוסיף למערך החדש את המשתנה של המערך הישן במיקום האחרון - מיקום של מונה הלולאה  
           imagesSlider: [ 
             items[items.length - index].ItemImg,
@@ -77,7 +77,7 @@ export default class extends Component {
     }
   };
 
-  
+
   GetItems = async () => {
     console.log("Get Items");
 
