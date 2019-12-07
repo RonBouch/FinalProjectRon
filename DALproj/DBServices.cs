@@ -89,7 +89,7 @@ namespace DALproj
                     comm.Connection.Close();
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(isAdmin,FirstName, LastName,Gender, Email, Password, , Birthday,Image) VALUES('{false}', '{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName,Gender, Email, Password, Birthday,Image) VALUES('{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
@@ -100,7 +100,7 @@ namespace DALproj
                         {
                             u = new User()
                             {
-                                UserID = (int)reader2["maxUserID"],
+                                UserID = (int)reader2["maxID"],
                                 isAdmin = false,
                                 FirstName = firstName,
                                 LastName = lastName,
