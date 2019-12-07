@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
-  Linking
+  Linking,
+  TextInput
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
@@ -38,6 +39,7 @@ class Contribution extends Component {
       showImg: false,
       checkedFavorite: false,
       itemsFromFavorite:null,
+      searchItem:"",
     };
   }
 
@@ -201,7 +203,16 @@ class Contribution extends Component {
         );
     
   };
+  SearchItem= e =>{
+    this.setState(prevState => ({  
+      searchItem: e,
+        ...prevState.imagesSlider
+      
+    }));
+    }
   render() {
+
+
     let Type = [
       {
         value: "הכל"
@@ -253,6 +264,8 @@ class Contribution extends Component {
     if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
       
       Items = this.state.items.map((item, index) => {
+        if(item.ItemName.includes(this.state.searchItem)){
+
         return (
           <View
             key={index}
@@ -368,7 +381,10 @@ class Contribution extends Component {
             ></View>
           </View>
         );
+      }
+
       });
+      
     }
 
 
@@ -430,14 +446,47 @@ class Contribution extends Component {
             <View
               style={{
                 width: "100%",
-                height: "10%",
-                flexDirection: "row",
+                // height: "10%",
+                // flexDirection: "row",
+                alignItems:'center',
                 backgroundColor: "white",
                 elevation: 15,
                 justifyContent: "space-around"
               }}
             >
-              <Dropdown
+              <View style={{
+    flexDirection: "row",
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 1,
+    marginTop: 5
+  }}>
+          <Icona
+            iconStyle={{
+              marginEnd: "10%"
+            }}
+            name="search"
+            type="font-awesome"
+            color="black"
+            size={18}
+          />
+          <TextInput
+            // keyboardType="email-address"
+            placeholder="חפש פריט"
+            // placeholderTextColor="black"
+            onChangeText={this.SearchItem}
+            style={{ width: 200 }}
+          />
+        </View>
+             
+             <View style={{
+                flexDirection: "row",
+                elevation: 15,
+                justifyContent: "space-around"
+              }}>
+             <Dropdown
                 label="קטגוריה"
                 itemColor="black"
                 dropdownMargins={{ min: 0, max: 1 }}
@@ -455,8 +504,10 @@ class Contribution extends Component {
                 data={Region}
                 onChangeText={this.Region}
               />
+             </View>
+            
             </View>
-
+            
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
         </View>
