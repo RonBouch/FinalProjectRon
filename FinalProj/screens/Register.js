@@ -159,7 +159,7 @@ export default class Register extends React.Component {
         gender: this.gender,
         email: this.email,
         password: this.password,
-        birthday: this.state.date,
+        birthday: this.state.date
       };
       console.log(data);
       fetch(
@@ -188,7 +188,7 @@ export default class Register extends React.Component {
               return;
             } else {
               console.log("ID" + id);
-              id = u.ID;
+              id = u.UserID;
 
               this.props.navigation.navigate("DrawerNavigator");
             }
