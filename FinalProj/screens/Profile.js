@@ -88,10 +88,8 @@ export default class Profile extends React.Component {
       let match = /\.(\w+)$/.exec(filename);
       let type = match ? `image/${match[1]}` : `image`;
      
-      console.log("Imgg name ", this.state.img)
       global.image= global.id +global.firstName+".jpg";
       const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
-      // console.log("formdata = ", formData);
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
         method: "post",
@@ -119,7 +117,6 @@ export default class Profile extends React.Component {
 
   };
   render() {
-      console.log("IMG  ", global.image)
     return (
         <View style={styles.container}>
           <View style={styles.main}>
@@ -166,6 +163,7 @@ export default class Profile extends React.Component {
                 }}
                 onPress={this.openGallery}
               >
+               {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונה ברירת מחדל.  */}
                 {this.state.img != "" ? (
                   <Image
                   style={{
@@ -173,10 +171,8 @@ export default class Profile extends React.Component {
                     width: 150,
                     borderRadius: 100
                   }}
-                  source={{
-                    uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img +'?time'+new Date()
-                  }}
+                  
+                         source={{uri:"http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img +'?time'+new Date() }}
                 />
                 ) : (
                   <Image
