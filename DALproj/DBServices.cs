@@ -352,42 +352,45 @@ namespace DALproj
 
         public static int InsertFavorite(int userid, int itemid)
         {
-            int check = 1;
+            int check = 1;// יצירת משתנה והתחלתו ב1
             SqlDataReader reader = null;
             try
             {
+                //של המשתמש Favorite שתבדוק אם הפריט קיים בטבלת  Sql יצירת שאילתא ל 
                 comm.CommandText = $"SELECT * FROM Favorite WHERE UserID={userid} and ItemID={itemid}";
-                comm.Connection.Open();
+                comm.Connection.Open();//פתיחת החיבור של השרת עם הSQL 
                 reader = comm.ExecuteReader();
-                if (reader.Read())
+                if (reader.Read()) // אם קיים הפריט
                 {
-                    comm.Connection.Close();
+                    comm.Connection.Close();//סגירת החיבור של השרת עם הSQL
+                    //Favorite יצירת שאילתא שתמחק את הפריט מטבלת ה 
                     comm.CommandText = $"DELETE  FROM Favorite WHERE UserID={userid} and ItemID={itemid}";
-                    comm.Connection.Open();
-                    int delete = comm.ExecuteNonQuery();
-              
-                    check = -1;
-                    return check;
+                    comm.Connection.Open();//פתיחת החיבור של השרת עם הSQL
+                    int delete = comm.ExecuteNonQuery();//מחיקת הפריט מהטבלה 
+               
+                    check = -1; // הכנסת הערך -1 למשתה
+                    return check; // מחזיר את המשתנה עם הערך המוחזר
                 }
                 else
                 {
-                    comm.Connection.Close();
+                    comm.Connection.Close();//סגירת החיבור של השרת עם הSQL 
                 }
+                //את מספר זהות הפריט ואת מספר זהות המשתמש Favorite יצירת שאילתא שתכניס לטבלת 
                 comm.CommandText = $"INSERT INTO Favorite(UserID,ItemID) VALUES({userid}, {itemid})";
-                comm.Connection.Open();
+                comm.Connection.Open();//פתיחת החיבור של השרת עם הSQL 
 
-                int res = comm.ExecuteNonQuery();
-                if (res == 1)
+                int res = comm.ExecuteNonQuery(); // שם במשתנה 1 אם נוצר שורה חדשה בטבלה   
+                if (res == 1)// בדיקה אם נוצר בטבלה שורה חדשה
                 {
                     check = 1;
 
-                    return check;
+                    return check; // מחזיר את המשתנה שהערך שלו 1
 
                 }
-                else
+                else //אם לא נוצר שורה חדשה
                 {
                     check = 0;
-                    return check;
+                    return check; // החזרת המשתנה שהערך שלו 0
                 }
             }
             catch (Exception e)

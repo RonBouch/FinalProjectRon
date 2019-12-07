@@ -60,7 +60,7 @@ export default class extends Component {
   async componentDidMount() {
     this.GetItems();
   }
-  makeImageArray = async items => {
+  ImageArray = async items => {
     for (let index = 1; index <= 5; index++) {
       await this.setState(prevState => ({
         imagesSlider: [
@@ -96,7 +96,7 @@ export default class extends Component {
             });
             return;
           } else {
-            this.makeImageArray(items);
+            this.ImageArray(items);
           }
         },
         error => {
