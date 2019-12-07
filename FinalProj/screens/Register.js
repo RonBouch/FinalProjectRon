@@ -160,7 +160,7 @@ var radio_props = [
         gender: this.gender,
         email: this.email,
         password: this.password,
-        birthday: this.state.date,
+        birthday: this.state.date
       };
       console.log(data);
       fetch(
