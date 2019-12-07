@@ -49,7 +49,7 @@ export default class Register extends React.Component {
     this.state = {
       message: "",
       date: "",
-      formIsValid: false,
+      formIsValid: true,
       errors: {}
     };
   }
@@ -78,60 +78,72 @@ export default class Register extends React.Component {
     this.gender = e;
   };
 
-  validateForm() {
+  //אימות שדות במהלך הרשמה
+  registerValidatation() {
     let errors = {};
-    let formIsValid = true;
 
+    //בדיקה האם הוזן שם פרטי
     if (this.firstName == "") {
       formIsValid = false;
       errors["firstName"] = "* אנא הכנס שם פרטי";
     }
+    //בדיקה האם הוזן שם משפחה
     if (this.lastName == "") {
       formIsValid = false;
       errors["lastName"] = "* אנא הכנס שם משפחה";
     }
+    //בדיקה האם הוזנה כתובת מייל
     if (!this.email) {
       formIsValid = false;
       errors["email"] = "* אנא הכנס כתובת מייל";
     }
+    //בדיקה האם כתובת המייל שהוזנה תקינה
     if (this.email != "") {
-      let pattern1 = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
-      if (!pattern1.test(this.email)) {
+      let pattern = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+      if (!pattern.test(this.email)) {
         formIsValid = false;
         errors["email"] = "* כתובת המייל אינה תקינה";
       }
     }
+    //בדיקה האם הוזנה סיסמא
     if (this.password == "") {
       formIsValid = false;
       errors["password"] = "* אנא הכנס סיסמה ";
     }
+    //בדיקה האם הסיסמא שהוזנה תקינה
     if (this.password != "") {
-      let re = /^(?=.{4,})[a-zA-Z0-9_.-]*$/;
-      let res = re.test(this.password);
-      if (!res) {
+      // let pattern = /^(?=.{4,})[a-zA-Z0-9_.-]*$/;
+      let pattern = /^(?=.{6,12})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/;
+      if (!pattern.test(this.password)) {
         formIsValid = false;
-        errors["password"] = "* הכנס סיסמה בעלת 4 מספרים ואותיות";
+        errors["password"] =
+          "* הכנס סיסמה בעלת 6 תווים" +
+          "\n" +
+          "בשילוב אות גדולה אות קטנה ומספר";
       }
     }
+    //בדיקה האם אימות הסיסמא הוזן
     if (this.verifyPassword == "") {
       formIsValid = false;
       errors["verifyPassword"] = "* אנא אמת סיסמה";
     }
+    //בדיקה האם הסיסמאות תואמות
     if (this.verifyPassword != "") {
       if (this.verifyPassword != this.password) {
         formIsValid = false;
         errors["verifyPassword"] = "* הסיסמה אינה זהה";
       }
     }
+    //בדיקה האם הוזן תאריך לידה
     if (!this.state.date) {
       formIsValid = false;
       errors["birthday"] = "* אנא הכנס תאריך לידה";
     }
+    //בדיקה האם הוזן מגדר
     if (!this.gender) {
       formIsValid = false;
       errors["gender"] = "* אנא בחר מגדר";
     }
-
     this.setState({
       errors: errors
     });
@@ -139,7 +151,7 @@ export default class Register extends React.Component {
   }
 
   register = () => {
-    if (this.validateForm()) {
+    if (this.registerValidatation()) {
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
@@ -218,6 +230,7 @@ export default class Register extends React.Component {
           style={styles.input}
           secureTextEntry={true}
           placeholder="סיסמא"
+          maxLength={12}
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changePassword}
         />
@@ -226,6 +239,7 @@ export default class Register extends React.Component {
           style={styles.input}
           secureTextEntry={true}
           placeholder="אימות סיסמא"
+          maxLength={12}
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeVerifyPassword}
         />

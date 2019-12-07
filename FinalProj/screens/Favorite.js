@@ -119,6 +119,7 @@ export default class Favorite extends React.Component {
     });
     this.Favorite();
   }
+
   Favorite = () => {
     console.log("state item ", this.state.item.ItemID);
 

@@ -214,6 +214,7 @@ class Login extends React.Component {
           <TextInput
             secureTextEntry={true}
             placeholder="סיסמא"
+            maxLength={12}
             placeholderTextColor="rgba(255,255,255,.7)"
             onChangeText={this.changePass}
             style={{ width: 150 }}
