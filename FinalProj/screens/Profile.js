@@ -68,27 +68,30 @@ export default class Profile extends React.Component {
     );
   };
   openGallery = async () => {
-    //   this.setState({img:""})
+    // פתיחת גלריה לבחירת תמונה 
     if( await ImagePicker!=null){
       let result = await ImagePicker.launchImageLibraryAsync({
+    // נותן אופציה לשנות תמונה בגודל וכו
         allowsEditing: true,
+    // גודל התמונה שתתקבל
         aspect: [4, 3], 
         base64:true,
-        quality:0.1
+    // איכות התמונה
+        quality:0.5
       });
+
+  // אם לא נבחרה אף תמונה והמשתמש ביטל את השימוש של הגלריה , כדי שלא יהיה הערה 
       if (result.cancelled) {
         console.log("result ", result);
        
       }
+  // אחרי שהמשתמש בחר את תמונת הפרופיל
       else{
-        let localUri = result.uri;
-      let filename = localUri.split("/").pop();
+      //הקוד של התמונה ושם במשתנה base64 לוקח את ה 
       let imageBase64 = result.base64;
-  
-      let match = /\.(\w+)$/.exec(filename);
-      let type = match ? `image/${match[1]}` : `image`;
-     
+    // שם במשתנה הגלובלי את שם התמונה החדשה
       global.image= global.id +global.firstName+".jpg";
+      //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת  
       const formData = { base64:imageBase64, imageName:global.id +global.firstName+".jpg" };
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
@@ -111,6 +114,11 @@ export default class Profile extends React.Component {
         }
         );
     }
+
+          // let localUri = result.uri;
+      // let filename = localUri.split("/").pop();
+      // let match = /\.(\w+)$/.exec(filename);
+      // let type = match ? `image/${match[1]}` : `image`;
   }
    
    
@@ -163,7 +171,7 @@ export default class Profile extends React.Component {
                 }}
                 onPress={this.openGallery}
               >
-               {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונה ברירת מחדל.  */}
+               {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונת ברירת מחדל.  */}
                 {this.state.img != "" ? (
                   <Image
                   style={{
@@ -171,7 +179,7 @@ export default class Profile extends React.Component {
                     width: 150,
                     borderRadius: 100
                   }}
-                  
+                        // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן 
                          source={{uri:"http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img +'?time'+new Date() }}
                 />
                 ) : (

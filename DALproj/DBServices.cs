@@ -42,7 +42,6 @@ namespace DALproj
                         isAdmin = bool.Parse(reader["isAdmin"].ToString()),
                         FirstName = reader["FirstName"].ToString(),
                         LastName = reader["LastName"].ToString(),
-                        City = reader["City"].ToString(),
                         Gender = reader["Gender"].ToString(),
                         Email = reader["Email"].ToString(),
                         Password = reader["Password"].ToString(),
@@ -89,7 +88,7 @@ namespace DALproj
                     comm.Connection.Close();
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName,Gender, Email, Password, Birthday,Image) VALUES('{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
+                    comm.CommandText = $"INSERT INTO Users(isAdmin,FirstName, LastName,Gender, Email, Password, Birthday,Image) VALUES('{0}','{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
