@@ -179,7 +179,7 @@ export default class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("S3")}
+              onPress={() => this.props.navigation.navigate("FirstPage")}
             >
               <View style={styles.row}>
                 <Icon

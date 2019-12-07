@@ -143,7 +143,6 @@ class Login extends React.Component {
             } else {
               // this.btnSendPushFromClient();
               global.user = u;
-
               this.props.navigation.navigate("DrawerNavigator");
             }
             console.log(result.d);

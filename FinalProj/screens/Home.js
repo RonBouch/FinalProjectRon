@@ -6,7 +6,8 @@ import {
   TouchableHighlight,
   Image,
   ImageBackground,
-  Dimensions
+  Dimensions,
+  Button
 } from "react-native";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
@@ -62,8 +63,7 @@ export default class Home extends Component {
                   justifyContent: "center"
                 }}
               >
-              
-              {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
+                {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
                 <Slider props={this.props} />
               </View>
             </View>
