@@ -253,9 +253,6 @@ class Contribution extends Component {
     if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
       
       Items = this.state.items.map((item, index) => {
-        // console.log("ITem ID =====",this.state.itemsFromFavorite.length)
-        console.log( item.ItemID+" "+this.state.itemsFromFavorite.filter(data => (data.ItemID == item.ItemID)))
-        // console.log("Include ", item.ItemID +" " +this.state.itemsFromFavorite.includes(item.ItemID)     )
         return (
           <View
             key={index}
