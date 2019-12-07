@@ -156,10 +156,10 @@ export default class Register extends React.Component {
       const data = {
         firstName: this.firstName,
         lastName: this.lastName,
+        gender: this.gender,
         email: this.email,
         password: this.password,
         birthday: this.state.date,
-        gender: this.gender
       };
       console.log(data);
       fetch(
@@ -190,7 +190,7 @@ export default class Register extends React.Component {
               console.log("ID" + id);
               id = u.ID;
 
-              this.props.navigation.navigate("Home");
+              this.props.navigation.navigate("DrawerNavigator");
             }
             console.log(result.d);
             console.log(result);
