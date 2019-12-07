@@ -36,9 +36,10 @@ var radio_props = [
   }
 ];
 
- class Register extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
+    global.user = null;
     this.firstName = "";
     this.lastName = "";
     this.email = "";
@@ -162,7 +163,6 @@ var radio_props = [
         password: this.password,
         birthday: this.state.date
       };
-      console.log(data);
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Register",
         {
@@ -174,26 +174,23 @@ var radio_props = [
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
             console.log("fetch POST= ", result);
             let u = JSON.parse(result.d);
-            console.log("u = " + u);
+
             if (u == null) {
               this.setState({
                 message: "הרשמה נכשלה"
               });
+
               return;
             } else {
-              
-
+              global.user = u;
               this.props.navigation.navigate("DrawerNavigator");
             }
-            console.log(result.d);
-            console.log(result);
           },
           error => {
             console.log("err post=", error);

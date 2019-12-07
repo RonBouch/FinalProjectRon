@@ -105,7 +105,7 @@ export default StyleSheet.create({
 
   //Login Page Style
 
-  linebottom: {
+  LoginRegisterSelected: {
     margin: 20,
     color: "rgb(196, 58, 37)",
     fontWeight: "bold",
@@ -114,6 +114,16 @@ export default StyleSheet.create({
     textShadowColor: "rgb(0, 0, 0)",
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 1
+  },
+  LoginRegisterNotSelected: {
+    margin: 20,
+    color: "rgba(255,255,255,.9)",
+    fontWeight: "bold",
+    fontSize: 25,
+    fontFamily: "serif",
+    textShadowColor: "gray",
+    textShadowOffset: { width: 1, height: 4 },
+    textShadowRadius: 5
   },
   form: {
     alignItems: "center",
