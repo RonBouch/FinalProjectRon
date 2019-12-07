@@ -43,7 +43,6 @@ export default class ContentComponent extends Component {
   }
 
   render() {
-    console.log("IMg name ", this.state.img);
     return (
       <TouchableOpacity
         activeOpacity={1}
