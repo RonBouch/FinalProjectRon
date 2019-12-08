@@ -6,11 +6,14 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Alert,
+  AsyncStorage
 } from "react-native";
 import { Icon } from "react-native-elements";
-
-export default class ContentComponent extends Component {
+import { withNavigation,NavigationActions } from "react-navigation";
+import FirstPage from '../screens/FirstPage'
+ class ContentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -178,7 +181,27 @@ export default class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("FirstPage")}
+              onPress={(props) =>Alert.alert(
+                'Log out',
+                'Do you want to logout?',
+                [
+                  {text: 'Cancel', onPress: () => {return null}},
+                  {text: 'Confirm', onPress: () => {
+                    // AsyncStorage.clear();
+                    // const resetAction = NavigationActions.reset({
+                    //   index: 0,
+                    //   actions: [
+                    //     NavigationActions.navigate({ routeName: 'FirstPage'})
+                    //   ]
+                    // })
+                    // return () => this.props.navigation.dispatch(resetAction)
+                                        AsyncStorage.clear();
+
+                    this.props.navigation.navigate('FirstPage')
+                  }},
+                ],
+                { cancelable: false }
+              )  }
             >
               <View style={styles.row}>
                 <Icon
@@ -197,6 +220,8 @@ export default class ContentComponent extends Component {
     );
   }
 }
+export default withNavigation(ContentComponent);
+
 const styles = StyleSheet.create({
   drawerTransparent: {
     flex: 1,

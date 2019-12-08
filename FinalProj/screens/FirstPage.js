@@ -6,7 +6,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,
+  ImageBackground,AsyncStorage,
   Image
 } from "react-native";
 
@@ -18,7 +18,9 @@ export default class FirstPage extends React.Component {
       LoginRegister: true
     };
   }
-
+  componentWillMount(){
+  AsyncStorage.clear();
+}
   changeToRegister = () => {
     this.setState({ LoginRegister: false });
   };

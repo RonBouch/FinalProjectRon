@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import ContentComponent from "./ContentComponent";
@@ -11,7 +11,7 @@ import Publish from "../screens/Publish";
 import Profile from "../screens/Profile";
 import EditPage from "../screens/EditPage";
 import ProfilePost from "../screens/ProfilePost";
-import Register from "../screens/Register";
+import FirstPage from "../screens/FirstPage";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
 
@@ -19,8 +19,9 @@ const DNav = createDrawerNavigator(
   {
     Home: { screen: Home },
 
+    FirstPage:{screen:FirstPage},
     Contribution: { screen: Contribution },
-
+     Publish:{screen:Publish},
     S3:{screen:S3},
     Profile: { screen: Profile },
 
@@ -30,12 +31,11 @@ const DNav = createDrawerNavigator(
 
     AssociationsList: { screen: AssociationsList },
 
-    Login: { screen: Login },
+    
 
     AssociationPage: { screen: AssociationPage },
 
-    Register: { screen: Register }
-  },
+      },
   {
     initialRouteName: "Home",
     contentComponent: ContentComponent,
