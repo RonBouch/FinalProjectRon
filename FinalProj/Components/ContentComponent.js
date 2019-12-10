@@ -11,9 +11,9 @@ import {
   AsyncStorage
 } from "react-native";
 import { Icon } from "react-native-elements";
-import { withNavigation,NavigationActions } from "react-navigation";
-import FirstPage from '../screens/FirstPage'
- class ContentComponent extends Component {
+import { withNavigation, NavigationActions } from "react-navigation";
+import FirstPage from "../screens/FirstPage";
+class ContentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,16 +23,15 @@ import FirstPage from '../screens/FirstPage'
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
     console.log("Change Picture .");
-    console.log("global contnenet ",global.user)
-    this.setState({ img: global.user.UserID+global.user.Email+".jpg" });
+    console.log("global contnenet ", global.user);
+    this.setState({ img: global.user.UserID + global.user.Email + ".jpg" });
     // do some stuff on every screen focus
   };
 
   // add a focus listener onDidMount
   async componentDidMount() {
-    if(global.user!=null){
-      this.setState({ img:global.user.UserID+global.user.Email+".jpg" });
- 
+    if (global.user != null) {
+      this.setState({ img: global.user.UserID + global.user.Email + ".jpg" });
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
@@ -46,7 +45,12 @@ import FirstPage from '../screens/FirstPage'
   }
 
   render() {
-    console.log("Img Length" , (this.state.img==(global.user.Image)) , this.state.img ,global.user.Image)
+    console.log(
+      "Img Length",
+      this.state.img == global.user.Image,
+      this.state.img,
+      global.user.Image
+    );
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -60,30 +64,42 @@ import FirstPage from '../screens/FirstPage'
         >
           <ScrollView>
             <View style={styles.header}>
-              {this.state.img != "" ? (
-                <Image
-                  style={{
-                    height: 150,
-                    width: 150,
-                    borderRadius: 100
-                  }}
-                  source={{
-                    uri:this.state.img==(global.user.Image) ?
-                      "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
-                      this.state.img +
-                      "?time" +
-                      new Date():
-                     global.user.Image
-                  }}
-                />
-              ) : (
-                <Image
-                  source={require("../assets/profileIcon.png")}
-                  style={[styles.headerImage, { width: 150, height: 150 }]}
-                />
-              )}
-
-              <Text style={[styles.text, { color: "white" }]}>תן יד</Text>
+              <View style={{ alignItems: "center", marginTop: 25 }}>
+                {this.state.img != "" ? (
+                  <Image
+                    style={{
+                      height: 150,
+                      width: 150,
+                      borderRadius: 100
+                    }}
+                    source={{
+                      uri:
+                        this.state.img == global.user.Image
+                          ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
+                            this.state.img +
+                            "?time" +
+                            new Date()
+                          : global.user.Image
+                    }}
+                  />
+                ) : (
+                  <Image
+                    source={require("../assets/profileIcon.png")}
+                    style={[styles.headerImage, { width: 150, height: 150 }]}
+                  />
+                )}
+              </View>
+              <View
+                style={{
+                  marginTop: 10,
+                  alignItems: "center",
+                  textAlign: "center"
+                }}
+              >
+                <Text style={[styles.text, { color: "white", fontSize: 16 }]}>
+                  {global.user.FirstName} {global.user.LastName}
+                </Text>
+              </View>
             </View>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
@@ -183,27 +199,37 @@ import FirstPage from '../screens/FirstPage'
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={(props) =>Alert.alert(
-                'Log out',
-                'Do you want to logout?',
-                [
-                  {text: 'Cancel', onPress: () => {return null}},
-                  {text: 'Confirm', onPress: () => {
-                    // AsyncStorage.clear();
-                    // const resetAction = NavigationActions.reset({
-                    //   index: 0,
-                    //   actions: [
-                    //     NavigationActions.navigate({ routeName: 'FirstPage'})
-                    //   ]
-                    // })
-                    // return () => this.props.navigation.dispatch(resetAction)
-                                        AsyncStorage.clear();
+              onPress={props =>
+                Alert.alert(
+                  "Log out",
+                  "Do you want to logout?",
+                  [
+                    {
+                      text: "Cancel",
+                      onPress: () => {
+                        return null;
+                      }
+                    },
+                    {
+                      text: "Confirm",
+                      onPress: () => {
+                        // AsyncStorage.clear();
+                        // const resetAction = NavigationActions.reset({
+                        //   index: 0,
+                        //   actions: [
+                        //     NavigationActions.navigate({ routeName: 'FirstPage'})
+                        //   ]
+                        // })
+                        // return () => this.props.navigation.dispatch(resetAction)
+                        AsyncStorage.clear();
 
-                    this.props.navigation.navigate('FirstPage')
-                  }},
-                ],
-                { cancelable: false }
-              )  }
+                        this.props.navigation.navigate("FirstPage");
+                      }
+                    }
+                  ],
+                  { cancelable: false }
+                )
+              }
             >
               <View style={styles.row}>
                 <Icon
@@ -236,10 +262,10 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    height: 200,
+    height: 250,
     backgroundColor: "#6495ed",
-    alignItems: "center",
     justifyContent: "center"
+    // textAlign: "center"
   },
   headerImage: {
     borderRadius: 100
@@ -259,7 +285,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: "bold",
-    marginLeft: 15,
     color: "#111"
   },
   line: {
