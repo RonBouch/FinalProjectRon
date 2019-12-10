@@ -272,7 +272,7 @@ namespace DALproj
         public static List<Item> GetItems()
         {
             List<Item> items = new List<Item>();
-            comm.CommandText = $"SELECT * from Items";
+            comm.CommandText = $"SELECT  * from Items ORDER BY ItemID DESC";
             comm.Connection.Open();
             SqlDataReader reader = comm.ExecuteReader();
             while (reader.Read())

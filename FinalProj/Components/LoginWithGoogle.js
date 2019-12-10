@@ -84,7 +84,7 @@ export default class LoginWithGoogle extends React.Component {
 
             return;
           } else {
-            console.log("U = " ,u);
+            // console.log("U = " ,u);
             global.user = u;
 
             this.props.navigation.navigate('DrawerNavigator');

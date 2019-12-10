@@ -46,7 +46,8 @@ import FirstPage from '../screens/FirstPage'
   }
 
   render() {
-    console.log("Img Length" , (this.state.img==(global.user.Image)) , this.state.img ,global.user.Image)
+    // console.log(global.user.Image)
+  
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -68,7 +69,7 @@ import FirstPage from '../screens/FirstPage'
                     borderRadius: 100
                   }}
                   source={{
-                    uri:this.state.img==(global.user.Image) ?
+                    uri:(global.user.Image!=null&&this.state.img==(global.user.Image)) ?
                       "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                       this.state.img +
                       "?time" +
@@ -183,27 +184,30 @@ import FirstPage from '../screens/FirstPage'
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={(props) =>Alert.alert(
+              onPress={
+                
+                (props) =>Alert.alert(
                 'Log out',
                 'Do you want to logout?',
                 [
                   {text: 'Cancel', onPress: () => {return null}},
                   {text: 'Confirm', onPress: () => {
-                    // AsyncStorage.clear();
-                    // const resetAction = NavigationActions.reset({
-                    //   index: 0,
-                    //   actions: [
-                    //     NavigationActions.navigate({ routeName: 'FirstPage'})
-                    //   ]
-                    // })
-                    // return () => this.props.navigation.dispatch(resetAction)
-                                        AsyncStorage.clear();
+                    AsyncStorage.clear();
+                    const resetAction = NavigationActions.reset({
+                      index: 0,
+                      key:1,
+                      actions: [
+                        NavigationActions.navigate({ routeName: 'FirstPage'})
+                      ]
+                    })
+                    return () => this.props.navigation.dispatch(resetAction)
 
                     this.props.navigation.navigate('FirstPage')
                   }},
                 ],
                 { cancelable: false }
-              )  }
+              ) 
+            }
             >
               <View style={styles.row}>
                 <Icon

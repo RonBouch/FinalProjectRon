@@ -114,7 +114,7 @@ class Login extends React.Component {
         password: this.password,
         email: this.email
       };
-      console.log(data);
+      
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Login",
         {
@@ -126,16 +126,12 @@ class Login extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
-            console.log("fetch POST= ", result);
             let u = JSON.parse(result.d);
-            console.log("u = " + u);
             if (u == null) {
-              console.log("ASffasasf");
               this.setState({
                 message: "התחברות נכשלה"
               });

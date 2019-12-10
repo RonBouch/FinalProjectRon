@@ -23,9 +23,7 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount(){
-    console.log("global profile ",global.user.Image)
       this.setState({img:global.user.Image},function(){
-          console.log("img state",this.state.img)
       })
   }
   openCamera = async () => {
@@ -48,7 +46,7 @@ export default class Profile extends React.Component {
     let type = match ? `image/${match[1]}` : `image`;
 
     const formData = { base64:imageBase64, imageName: "imgRon1.jpg" };
-    console.log("formdata = ", formData);
+    // console.log("formdata = ", formData);
     await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
     {
       method: "post",
@@ -95,7 +93,7 @@ export default class Profile extends React.Component {
       //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת  
       const formData = { base64:imageBase64, imageName:global.user.UserID +global.user.Email+".jpg" ,userid:global.user.UserID};
       //לעלות את התמונה לשרת fetch עושה   
-      console.log(global.user.UserID +global.user.Email+".jpg",global.user.UserID)
+      // console.log(global.user.UserID +global.user.Email+".jpg",global.user.UserID)
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
         method: "post",
