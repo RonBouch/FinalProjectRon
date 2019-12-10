@@ -5,7 +5,7 @@ import Register from "./screens/Register";
 import S1 from "./screens/S1";
 import FirstPage from "./screens/FirstPage";
 import DrawerNavigator from "./Components/DrawerNavigator";
-import LoginWithGoogle from './Components/LoginWithGoogle'
+import LoginWithGoogle from "./Components/LoginWithGoogle";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -20,21 +20,18 @@ const MainNavigator = createStackNavigator(
     FirstPage: {
       screen: FirstPage,
       navigationOptions: {
-          title: "FirstPage",
-          headerLeft: null
-      },
-  },
- 
+        title: "FirstPage",
+        headerLeft: null
+      }
+    },
+
     DrawerNavigator: { screen: DrawerNavigator },
 
     // FirstPage: { screen: FirstPage },
 
- 
-
-
     Login: { screen: Login },
 
-    LoginWithGoogle:{screen:LoginWithGoogle},
+    LoginWithGoogle: { screen: LoginWithGoogle },
     Home: { screen: Home },
 
     S1: { screen: S1 },
