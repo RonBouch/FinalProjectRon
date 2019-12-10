@@ -43,9 +43,9 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
-        public static string RegisterWithGoogle(string firstName, string lastName, string email, string password)
+        public static string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
         {
-            User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password);
+            User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password,image);
             if (u != null)
             {
 
@@ -183,7 +183,23 @@ namespace BALproj
         }
 
 
+        public static string UploadImage(string base64, string imageName, int userid)
+        {
+            string check = DBServices.UploadImage(base64, imageName,userid);
+            if (check!=null)
+            {
 
+
+            }
+            else
+            {
+                
+
+            }
+
+            return new JavaScriptSerializer().Serialize(check);
+
+        }
     }
 
 

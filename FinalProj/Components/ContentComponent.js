@@ -23,16 +23,16 @@ import FirstPage from '../screens/FirstPage'
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
     console.log("Change Picture .");
-    // console.log("global contnenet ",global.user)
-    this.setState({ img: global.user.Image });
+    console.log("global contnenet ",global.user)
+    this.setState({ img: global.user.UserID+global.user.Email+".jpg" });
     // do some stuff on every screen focus
   };
 
   // add a focus listener onDidMount
   async componentDidMount() {
     if(global.user!=null){
-      this.setState({ img:global.user.Image });
-
+      this.setState({ img:global.user.UserID+global.user.Email+".jpg" });
+ 
     }
 
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
@@ -46,6 +46,7 @@ import FirstPage from '../screens/FirstPage'
   }
 
   render() {
+    console.log("Img Length" , (this.state.img==(global.user.Image)) , this.state.img ,global.user.Image)
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -67,16 +68,17 @@ import FirstPage from '../screens/FirstPage'
                     borderRadius: 100
                   }}
                   source={{
-                    uri:
+                    uri:this.state.img==(global.user.Image) ?
                       "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                       this.state.img +
                       "?time" +
-                      new Date()
+                      new Date():
+                     global.user.Image
                   }}
                 />
               ) : (
                 <Image
-                  source={require("../assets/TenYadLogo.png")}
+                  source={require("../assets/profileIcon.png")}
                   style={[styles.headerImage, { width: 150, height: 150 }]}
                 />
               )}

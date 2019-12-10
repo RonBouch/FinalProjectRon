@@ -91,10 +91,11 @@ export default class Profile extends React.Component {
       //הקוד של התמונה ושם במשתנה base64 לוקח את ה 
       let imageBase64 = result.base64;
     // שם במשתנה הגלובלי את שם התמונה החדשה
-      global.user.Image= global.user.UserID +global.user.FirstName+".jpg";
+      global.user.Image= global.user.UserID +global.user.Email+".jpg";
       //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת  
-      const formData = { base64:imageBase64, imageName:global.user.UserID +global.user.FirstName+".jpg" };
+      const formData = { base64:imageBase64, imageName:global.user.UserID +global.user.Email+".jpg" ,userid:global.user.UserID};
       //לעלות את התמונה לשרת fetch עושה   
+      console.log(global.user.UserID +global.user.Email+".jpg",global.user.UserID)
       await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
       {
         method: "post",
@@ -107,8 +108,8 @@ export default class Profile extends React.Component {
       })
       .then(
         result => {
-          this.setState({ img:global.user.UserID +global.user.FirstName+".jpg" });
-  
+          this.setState({ img:global.user.UserID +global.user.Email+".jpg" });
+         
           console.log("result = ",result);
         },
         error => {
@@ -182,7 +183,14 @@ export default class Profile extends React.Component {
                     borderRadius: 100
                   }}
                         // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן 
-                         source={{uri:"http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/"+this.state.img +'?time'+new Date() }}
+                        source={{
+                          uri:this.state.img==(global.user.UserID +global.user.Email+".jpg") ?
+                            "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
+                            this.state.img +
+                            "?time" +
+                            new Date():
+                            this.state.img
+                        }}
                 />
                 ) : (
                   <Image

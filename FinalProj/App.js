@@ -5,7 +5,7 @@ import Register from "./screens/Register";
 import S1 from "./screens/S1";
 import FirstPage from "./screens/FirstPage";
 import DrawerNavigator from "./Components/DrawerNavigator";
-
+import LoginWithGoogle from './Components/LoginWithGoogle'
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -24,15 +24,17 @@ const MainNavigator = createStackNavigator(
           headerLeft: null
       },
   },
-
+ 
     DrawerNavigator: { screen: DrawerNavigator },
 
     // FirstPage: { screen: FirstPage },
 
-  
+ 
+
 
     Login: { screen: Login },
 
+    LoginWithGoogle:{screen:LoginWithGoogle},
     Home: { screen: Home },
 
     S1: { screen: S1 },
@@ -42,7 +44,7 @@ const MainNavigator = createStackNavigator(
     headerMode: "none",
     defaultNavigationOptions: { headerVisable: false }
   },
-  { initialRouteName: "DrawerNavigator" }
+  { initialRouteName: "FirstPage" }
 );
 
 export default createAppContainer(MainNavigator);

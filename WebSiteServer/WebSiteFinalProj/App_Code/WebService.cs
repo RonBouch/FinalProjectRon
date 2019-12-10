@@ -38,9 +38,9 @@ public class WebService : System.Web.Services.WebService
 
 
     [WebMethod]
-    public string RegisterWithGoogle(string firstName, string lastName, string email, string password)
+    public string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
     {
-        return BALServices.RegisterWithGoogle(firstName, lastName, email, password);
+        return BALServices.RegisterWithGoogle(firstName, lastName, email, password,image);
     }
 
     [WebMethod]
@@ -92,9 +92,19 @@ public class WebService : System.Web.Services.WebService
 
 
     [WebMethod]
-    public string UploadImage(string base64, string imageName) {
+    public string UploadImage(string base64, string imageName , int userid) {
 
-        return new JavaScriptSerializer().Serialize(SaveImage(base64, imageName));
+        
+        if(SaveImage(base64, imageName))
+        {
+            return BALServices.UploadImage(base64, imageName, userid);
+
+        }
+        else
+        {
+            return new JavaScriptSerializer().Serialize(false);
+        }
+        //return new JavaScriptSerializer().Serialize(SaveImage(base64, imageName));
     }
 
     public bool SaveImage(string base64, string imageName)

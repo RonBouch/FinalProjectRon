@@ -164,7 +164,7 @@ class Login extends React.Component {
   // };
 
   // GoogleBtn = () => {
-  //   this.props.navigation.navigate("GooglePage");
+  //   this.props.navigation.navigate("LoginWithGoogle");
   // };
 
   render() {
@@ -223,7 +223,7 @@ class Login extends React.Component {
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
-            // onPress={() => this.props.navigation.navigate("GooglePage")}
+            onPress={() => this.props.navigation.navigate("LoginWithGoogle")}
             style={{ margin: 20 }}
           >
             <Image
