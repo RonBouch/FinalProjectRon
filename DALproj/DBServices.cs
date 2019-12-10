@@ -395,14 +395,14 @@ namespace DALproj
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);//קבלת הודעת שגיאה במידה וקיימת בעיה בפונקציה
             }
             finally
             {
 
                 if (comm.Connection.State != ConnectionState.Closed)
                 {
-                    comm.Connection.Close();
+                    comm.Connection.Close();// וידוא סיגרת החיבור לSQL
                 }
 
             }
