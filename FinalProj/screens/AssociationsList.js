@@ -15,7 +15,8 @@ import {
   Dimensions,
   ScrollView,
   StatusBar,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from "react-native";
 import { Left } from "native-base";
 
@@ -28,7 +29,8 @@ class AssociationsList extends Component {
     super(props);
     this.state = {
       associations: null,
-      associationTypes: null
+      associationTypes: null,
+      dataAssociations: null,
     };
   }
   componentDidMount() {
@@ -63,6 +65,7 @@ class AssociationsList extends Component {
             return;
           } else {
             this.setState({
+              dataAssociations: associations,
               associations: associations
             });
           }
@@ -107,12 +110,24 @@ class AssociationsList extends Component {
       );
   };
 
+  FilterAssociation = (value,index) => {
+    if(index != 0){
+      let typeId = this.state.associationTypes[index-1].AssociationTypeID;
+      let data = this.state.dataAssociations.filter((item)=>{return item.AssociationTypeID == typeId});
+      this.setState({associations:data});
+    }
+   else{
+    this.setState({associations:this.state.dataAssociations});
+   }
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     let Associations = [];
     let AssociationTypes = [];
 
     if (this.state.associationTypes != null) {
+      AssociationTypes.push({value: 'הכל'});
       this.state.associationTypes.map(associationTypes => {
         AssociationTypes.push({ value: associationTypes.AssociationTypeName });
       });
@@ -251,7 +266,7 @@ class AssociationsList extends Component {
                     marginLeft: "5%",
                     fontSize: 16
                   }}
-                  // onChangeText={this.City}
+                  //onChangeText={this.City}
                 />
                 <Dropdown
                   label="סוג עמותה"
@@ -265,7 +280,7 @@ class AssociationsList extends Component {
                     marginLeft: "5%"
                   }}
                   data={AssociationTypes}
-                  // onChangeText={this.Type}
+                  onChangeText={(value, index) =>{ this.FilterAssociation(value,index)}}
                 />
 
                 {Associations}

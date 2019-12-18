@@ -22,12 +22,11 @@ const DNav = createDrawerNavigator(
     S3: { screen: S3 },
 
 
-    // FirstPage:{screen:FirstPage},
+    //FirstPage:{screen:FirstPage},
     Contribution: { screen: Contribution },
      Publish:{screen:Publish},
     S3:{screen:S3},
     Profile: { screen: Profile },
-
     ProfilePost: { screen: ProfilePost },
 
     EditPage: { screen: EditPage },

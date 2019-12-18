@@ -11,7 +11,7 @@ import {
   AsyncStorage
 } from "react-native";
 import { Icon } from "react-native-elements";
-import { withNavigation, NavigationActions } from "react-navigation";
+import { withNavigation, NavigationActions,StackActions } from "react-navigation";
 import FirstPage from "../screens/FirstPage";
 class ContentComponent extends Component {
   constructor(props) {
@@ -44,6 +44,12 @@ class ContentComponent extends Component {
     this.focusListener.remove();
   }
 
+  logout = async () =>{
+    await AsyncStorage.clear();
+    //this.props.navigation.navigate('App');
+    //לצאת מהאפליקציה או לא
+  }
+
   render() {
     // console.log(global.user.Image)
   
@@ -61,7 +67,7 @@ class ContentComponent extends Component {
           <ScrollView>
             <View style={styles.header}>
               <View style={{ alignItems: "center", marginTop: 25 }}>
-                {this.state.img != "" ? (
+                {this.state.img != "" && global.user != null ? (
                   <Image
                     style={{
                       height: 150,
@@ -93,7 +99,8 @@ class ContentComponent extends Component {
                 }}
               >
                 <Text style={[styles.text, { color: "white", fontSize: 16 }]}>
-                  {global.user.FirstName} {global.user.LastName}
+
+                  {(global.user ? global.user.FirstName : '')} {(global.user ? global.user.LastName : '')}
                 </Text>
               </View>
             </View>
@@ -195,30 +202,16 @@ class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={
+              onPress={this.logout}
                 
-                (props) =>Alert.alert(
-                'Log out',
-                'Do you want to logout?',
-                [
-                  {text: 'Cancel', onPress: () => {return null}},
-                  {text: 'Confirm', onPress: () => {
-                    AsyncStorage.clear();
-                    const resetAction = NavigationActions.reset({
-                      index: 0,
-                      key:1,
-                      actions: [
-                        NavigationActions.navigate({ routeName: 'FirstPage'})
-                      ]
-                    })
-                    return () => this.props.navigation.dispatch(resetAction)
-
-                    this.props.navigation.navigate('FirstPage')
-                  }},
-                ],
-                { cancelable: false }
-              ) 
-            }
+            //     (props) =>Alert.alert(
+            //     'Log out',
+            //     'Do you want to logout?',
+            //     [
+            //       {text: 'Cancel', onPress: () => {return null}},
+            //       {text: 'Confirm', onPress: () => {
+            //         // AsyncStorage.clear();
+            // }}
             >
               <View style={styles.row}>
                 <Icon
