@@ -351,7 +351,27 @@ namespace DALproj
 
             return associationTypes;
         }
+        public static List<ItemTypes> GetItemTypes()
+        {
+            List<ItemTypes> itemTypes = new List<ItemTypes>();
+            comm.CommandText = $"SELECT * from ItemTypes";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                ItemTypes it = new ItemTypes()
+                {
+                    ItemTypeID = reader["ItemTypeID"].ToString(),
+                    ItemType = reader["ItemType"].ToString(),
 
+                };
+                itemTypes.Add(it);
+            }
+
+            comm.Connection.Close();
+
+            return itemTypes;
+        }
 
         public static int InsertFavorite(int userid, int itemid)
         {

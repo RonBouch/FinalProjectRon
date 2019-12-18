@@ -46,7 +46,7 @@ class ContentComponent extends Component {
 
   logout = async () =>{
     await AsyncStorage.clear();
-    //this.props.navigation.navigate('App');
+    this.props.navigation.navigate('FirstPage');
     //לצאת מהאפליקציה או לא
   }
 
