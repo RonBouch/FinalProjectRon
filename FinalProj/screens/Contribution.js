@@ -47,26 +47,24 @@ class Contribution extends Component {
     };
   }
 
-    // define a separate function to get triggered on focus
-    onFocusFunction = () => {
-      console.log("Change Picture .");
-      this.GetItems();
-      // do some stuff on every screen focus
-    };
-  
-    // add a focus listener onDidMount
-    async componentDidMount() {
-  
-      this.focusListener = this.props.navigation.addListener("didFocus", () => {
-        this.onFocusFunction();
-      });
-    }
-  
-    // and don't forget to remove the listener
-    componentWillUnmount() {
-      this.focusListener.remove();
-    }
-  
+  // define a separate function to get triggered on focus
+  onFocusFunction = () => {
+    console.log("Change Picture .");
+    this.GetItems();
+    // do some stuff on every screen focus
+  };
+
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
+
+  // and don't forget to remove the listener
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
 
   _pressCall = phone => {
     const url = "tel:" + phone;
@@ -95,7 +93,7 @@ class Contribution extends Component {
         result => {
           let itemsFromFavorite = JSON.parse(result.d);
           if (itemsFromFavorite == null) {
-           console.log("no Favorite")
+            console.log("no Favorite");
             return;
           } else {
             this.setState({
@@ -211,44 +209,42 @@ class Contribution extends Component {
     }
   };
 
-  Favorite = (item) => {
-      const data = {
-        userid: 1,
-        itemid: item.ItemID
-      };
-      fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
-        {
-          method: "post",
-          headers: new Headers({
-            "Content-Type": "application/Json;"
-          }),
-          body: JSON.stringify(data)
+  Favorite = item => {
+    const data = {
+      userid: 1,
+      itemid: item.ItemID
+    };
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertFavorite",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        }),
+        body: JSON.stringify(data)
+      }
+    )
+      .then(res => {
+        console.log("res=", res);
+        return res.json();
+      })
+      .then(
+        result => {
+          console.log("fetch POST= ", result);
+          // let favorite = JSON.parse(result.d);
+          this.GetItems();
+          console.log(result.d);
+          console.log(result);
+        },
+        error => {
+          console.log("err post=", error);
         }
-      )
-        .then(res => {
-          console.log("res=", res);
-          return res.json();
-        })
-        .then(
-          result => {
-            console.log("fetch POST= ", result);
-            // let favorite = JSON.parse(result.d);
-             this.GetItems();
-            console.log(result.d);
-            console.log(result);
-          },
-          error => {
-            console.log("err post=", error);
-          }
-        );
-    
+      );
   };
-  SearchItem= e =>{
-    this.setState(prevState => ({  
+  SearchItem = e => {
+    this.setState(prevState => ({
       searchItem: e,
-        ...prevState.imagesSlider
-      
+      ...prevState.imagesSlider
     }));
     }
 
@@ -327,50 +323,51 @@ class Contribution extends Component {
     if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
       console.log("Items from filter = > ",this.state.items)
       Items = this.state.items.map((item, index) => {
-        if(item.ItemName.includes(this.state.searchItem)){
-
-        return (
-          <View
-            key={index}
-            style={{
-              backgroundColor: "white",
-              width: "95%",
-              height: 260,
-              margin: 10,
-              borderWidth: 1,
-              borderColor: "#e6e6fa",
-              elevation: 10
-            }}
-          >
-            {/* <View style={styles.line}></View> */}
+        if (item.ItemName.includes(this.state.searchItem)) {
+          return (
             <View
+              key={index}
               style={{
-                position: "absolute",
-                zIndex: 1,
-                margin: 5,
-                left: 2
+                backgroundColor: "white",
+                width: "95%",
+                height: 260,
+                margin: 10,
+                borderWidth: 1,
+                borderColor: "#e6e6fa",
+                elevation: 10
               }}
             >
-              <TouchableOpacity onPress={() =>     this.Favorite(item)}>
-                {this.state.itemsFromFavorite.filter(data => (data.ItemID == item.ItemID))!=""? (
-                  <Icona
-                    name="heart"
-                    type="font-awesome"
-                    size={14}
-                    color="red"
-                    raised
-                  />
-                ) : (
-                  <Icona
-                    name="heart"
-                    type="feather"
-                    size={14}
-                    color="black"
-                    raised
-                  />
-                )}
-              </TouchableOpacity>
-              {/* <TouchableOpacity>
+              {/* <View style={styles.line}></View> */}
+              <View
+                style={{
+                  position: "absolute",
+                  zIndex: 1,
+                  margin: 5,
+                  left: 2
+                }}
+              >
+                <TouchableOpacity onPress={() => this.Favorite(item)}>
+                  {this.state.itemsFromFavorite.filter(
+                    data => data.ItemID == item.ItemID
+                  ) != "" ? (
+                    <Icona
+                      name="heart"
+                      type="font-awesome"
+                      size={14}
+                      color="red"
+                      raised
+                    />
+                  ) : (
+                    <Icona
+                      name="heart"
+                      type="feather"
+                      size={14}
+                      color="black"
+                      raised
+                    />
+                  )}
+                </TouchableOpacity>
+                {/* <TouchableOpacity>
                 <Icon
                   name="md-call"
                   size={30}
@@ -378,81 +375,75 @@ class Contribution extends Component {
                   onPress={() => this._pressCall(item.UserPhone)}
                 />
               </TouchableOpacity> */}
-            </View>
-            <Image
-              source={{
-                uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/image/" +
-                  item.ItemImg
-              }}
-              style={{
-                width: "100%",
-                height: "50%"
-              }}
-            />
-            <View
-              style={{
-                justifyContent: "space-around",
-                flexDirection: "row-reverse",
-                alignItems: "center",
-                height: "10%"
-              }}
-              onPress={() => {
-                this.infoWindow(index);
-              }}
-            >
-              <Text
+              </View>
+              <Image
+                source={{
+                  uri:
+                    "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                    item.ItemImg
+                }}
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
+                  width: "100%",
+                  height: "50%"
+                }}
+              />
+              <View
+                style={{
+                  justifyContent: "space-around",
+                  flexDirection: "row-reverse",
+                  alignItems: "center",
+                  height: "10%"
+                }}
+                onPress={() => {
+                  this.infoWindow(index);
                 }}
               >
-                {item.ItemDate}
-              </Text>
-              <Text
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    fontFamily: "serif"
+                  }}
+                >
+                  {item.ItemDate}
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    fontFamily: "serif",
+                    fontSize: 18
+                  }}
+                >
+                  {item.City}
+                </Text>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    fontFamily: "serif"
+                  }}
+                >
+                  {item.ItemName}
+                </Text>
+              </View>
+              <View style={{ margin: 10, height: "20%" }}>
+                <Text>{item.ItemAbout}</Text>
+              </View>
+              <View
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontFamily: "serif",
-                  fontSize: 18
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  height: "10%"
                 }}
-              >
-                {item.City}
-              </Text>
-              <Text
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
-                }}
-              >
-                {item.ItemName}
-              </Text>
+              ></View>
             </View>
-            <View style={{ margin: 10, height: "20%" }}>
-              <Text>{item.ItemAbout}</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                height: "10%"
-              }}
-            ></View>
-          </View>
-        );
-      }
-
+          );
+        }
       });
-      
     }
-
-
-
-
 
     return (
       <ImageBackground
@@ -511,7 +502,7 @@ class Contribution extends Component {
                 width: "100%",
                 // height: "10%",
                 // flexDirection: "row",
-                alignItems:'center',
+                alignItems: "center",
                 backgroundColor: "white",
                 elevation: 15,
                 justifyContent: "space-around"
@@ -575,7 +566,7 @@ class Contribution extends Component {
              </View>
             
             </View>
-            
+
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
           <TouchableOpacity

@@ -1,6 +1,10 @@
 import React from "react";
+import * as Facebook from "expo-facebook";
+
 import styles from "../Components/StyleSheet";
 import { Ionicons } from "@expo/vector-icons";
+import { LoginButton, AccessToken } from "react-native-fbsdk";
+
 import {
   Text,
   View,
@@ -20,6 +24,7 @@ import { Icon } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { AuthSession } from "expo";
+import LoginWithFacebook from "../Components/LoginWithFacebook";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -114,7 +119,7 @@ class Login extends React.Component {
         password: this.password,
         email: this.email
       };
-      
+
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Login",
         {
@@ -162,6 +167,32 @@ class Login extends React.Component {
   // GoogleBtn = () => {
   //   this.props.navigation.navigate("LoginWithGoogle");
   // };
+
+  logInFB = async () => {
+    try {
+      await Facebook.initializeAsync("2363780303934516");
+      const {
+        type,
+        token,
+        expires,
+        permissions,
+        declinedPermissions
+      } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ["public_profile"]
+      });
+      if (type === "success") {
+        // Get the user's name using Facebook's Graph API
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}`
+        );
+        Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
+      } else {
+        // type === 'cancel'
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  };
 
   render() {
     return (
@@ -227,8 +258,11 @@ class Login extends React.Component {
               style={{ height: 55, width: 55, marginTop: 8 }}
             />
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.FaceBookBtn} style={{ margin: 20 }}>
+          <TouchableOpacity
+            onPress={this.logInFB}
+            // onPress={() => LoginWithFacebook.FacebookLogin()}
+            style={{ margin: 20 }}
+          >
             <Image
               source={require("../assets/facebookIcon2.png")}
               style={{ height: 70, width: 70 }}
