@@ -27,6 +27,7 @@
     "react-native-material-dropdown": "^0.11.1",
     "react-native-paper": "^2.16.0",
     "react-native-reanimated": "^1.2.0",
+    "react-native-searchable-dropdown": "^1.1.1",
     "react-native-simple-radio-button": "^2.7.3",
     "react-native-swiper": "^1.5.14",
     "react-native-tabbar-bottom": "^1.0.4",

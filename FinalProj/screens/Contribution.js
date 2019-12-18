@@ -597,12 +597,6 @@ class Contribution extends Component {
             source={require("../assets/add-reminder.png")}
             style={{width:50,height:50,borderRadius:200}}
             />
-            {/* <Icona
-              type="font-awesome"
-              size={40}
-              name="bell"
-            /> */}
-            
               </TouchableOpacity>
         </View>
       </ImageBackground>
