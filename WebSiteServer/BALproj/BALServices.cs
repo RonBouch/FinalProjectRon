@@ -117,7 +117,19 @@ namespace BALproj
                 return new JavaScriptSerializer().Serialize("No AssociationTypes");
             }
         }
+        public static string GetItemTypes()
+        {
+            List<ItemTypes> itemTypes = DBServices.GetItemTypes();
 
+            if (itemTypes != null)
+            {
+                return new JavaScriptSerializer().Serialize(itemTypes);
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize("No itemType");
+            }
+        }
         public static int InsertFavorite(int userid, int itemid)
         {
             int check = DBServices.InsertFavorite(userid, itemid);

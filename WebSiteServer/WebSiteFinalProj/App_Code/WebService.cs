@@ -66,6 +66,12 @@ public class WebService : System.Web.Services.WebService
         return BALServices.GetAssociationTypes();
 
     }
+    [WebMethod]
+    public string GetItemTypes()
+    {
+        return BALServices.GetItemTypes();
+
+    }
 
     [WebMethod]
     public int InsertFavorite(int userid, int itemid)

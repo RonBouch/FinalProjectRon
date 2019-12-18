@@ -47,6 +47,7 @@
     <Compile Include="DBServices.cs" />
     <Compile Include="Favorite.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

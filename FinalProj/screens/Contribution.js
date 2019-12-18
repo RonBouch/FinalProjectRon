@@ -8,7 +8,9 @@ import {
   Text,
   ScrollView,
   Linking,
-  TextInput
+  Dimensions,
+  TextInput,
+  ActionButton
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
@@ -35,11 +37,13 @@ class Contribution extends Component {
       // checkedB: false,
       item: null,
       items: null,
+      dataItems:null,
       extraDetails: -1,
       showImg: false,
       checkedFavorite: false,
-      itemsFromFavorite: null,
-      searchItem: ""
+      itemsFromFavorite:null,
+      searchItem:"",
+      itemTypes:[],
     };
   }
 
@@ -95,7 +99,10 @@ class Contribution extends Component {
             this.setState({
               itemsFromFavorite: itemsFromFavorite
             });
+
           }
+          this.GetItemTypes();
+
         },
         error => {
           console.log("err post=", error);
@@ -119,6 +126,7 @@ class Contribution extends Component {
       })
       .then(
         result => {
+
           // console.log("fetch POST= ", result);
           let items = JSON.parse(result.d);
           if (items == null) {
@@ -129,6 +137,7 @@ class Contribution extends Component {
           } else {
             // console.log("U = " + items);
             this.setState({
+              dataItems:items,
               items: items
             });
             this.GetItemsFromFavorite();
@@ -140,6 +149,38 @@ class Contribution extends Component {
       );
   };
 
+  GetItemTypes = async () => {
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemTypes",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        })
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          let itemTypes = JSON.parse(result.d);
+          if (itemTypes == null) {
+            this.setState({
+              message: "לא קיימים סוגי פריטים"
+            });
+            return;
+          } else {
+            this.setState({
+              itemTypes: itemTypes
+            });
+          }
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
   static navigationOptions = {
     drawerLabel: "Contribution"
   };
@@ -205,8 +246,32 @@ class Contribution extends Component {
       searchItem: e,
       ...prevState.imagesSlider
     }));
-  };
+    }
+
+
+    FilterItemTypes=(value,index)=>{
+      if(index != 0){
+        console.log("index = > ",index)
+        // console.log("ITEM FROM DB => ",this.state.itemTypes[index].ItemTypeID)
+        let typeId = this.state.itemTypes[index].ItemTypeID;
+        let data = this.state.dataItems.filter((item)=>{return item.ItemType == typeId});
+        console.log("DATA +>",data)
+        this.setState({items:data});
+      }
+     else{
+      this.setState({items:this.state.dataItems});
+     }
+    }
   render() {
+    // console.log("ItemType== >",this.state.itemTypes)
+    let ItemTypes = [];
+
+    if (this.state.itemTypes != null) {
+      this.state.itemTypes.map(type => {
+        ItemTypes.push({ value: type.ItemType });
+      });
+    }
+
     let Type = [
       {
         value: "הכל"
@@ -255,7 +320,8 @@ class Contribution extends Component {
     ];
     let Items = [];
 
-    if (this.state.items != null && this.state.itemsFromFavorite != null) {
+    if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
+      console.log("Items from filter = > ",this.state.items)
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
           return (
@@ -442,66 +508,93 @@ class Contribution extends Component {
                 justifyContent: "space-around"
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 200,
-                  height: 40,
-                  alignItems: "center",
-                  marginTop: 5,
-                  borderBottomWidth: 0.2,
-                  borderBottomColor: "rgb(150,150,150)",
-                  fontSize: 16
-                }}
-              >
-                <Icona
-                  iconStyle={{
-                    marginEnd: "10%"
-                  }}
-                  name="search"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={18}
-                />
-                <TextInput
-                  // keyboardType="email-address"
-                  placeholder="חפש פריט"
-                  placeholderTextColor="rgb(150,150,150)"
-                  onChangeText={this.SearchItem}
-                  style={{ width: 200 }}
-                />
-              </View>
-
-              <View
-                style={{
-                  flexDirection: "row",
-                  elevation: 15,
-                  justifyContent: "space-around"
-                }}
-              >
-                <Dropdown
+              <View style={{
+    flexDirection: "row",
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 1,
+    marginTop: 5
+  }}>
+          <Icona
+            iconStyle={{
+              marginEnd: "10%"
+            }}
+            name="search"
+            type="font-awesome"
+            color="black"
+            size={18}
+          />
+          <TextInput
+            // keyboardType="email-address"
+            placeholder="חפש פריט"
+            // placeholderTextColor="black"
+            onChangeText={this.SearchItem}
+            style={{ width: 200 }}
+          />
+        </View>
+             
+             <View style={{
+                flexDirection: "row",
+                elevation: 15,
+                justifyContent: "space-around"
+              }}>
+            <Dropdown
                   label="קטגוריה"
                   itemColor="black"
-                  dropdownMargins={{ min: 0, max: 1 }}
+                  dropdownMargins={{ min: 0, max: 10 }}
                   dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{ width: 180, padding: 5, marginTop: 10 }}
-                  data={Type}
-                  onChangeText={this.Type}
+                  containerStyle={{
+                    width: "40%",
+                    padding: 5,
+                    marginTop: 10,
+                    marginLeft: "5%"
+                  }}
+                  data={ItemTypes}
+                  onChangeText={(value, index) =>{ this.FilterItemTypes(value,index)}}
                 />
-                <Dropdown
-                  label="איזור"
-                  itemColor="black"
-                  dropdownMargins={{ min: 0, max: 1 }}
-                  dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
-                  data={Region}
-                  onChangeText={this.Region}
-                />
-              </View>
+              <Dropdown
+                label="איזור"
+                itemColor="black"
+                dropdownMargins={{ min: 0, max: 1 }}
+                dropdownOffset={{ top: 0, left: 0 }}
+                containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
+                data={Region}
+                onChangeText={this.Region}
+              />
+             </View>
+            
             </View>
 
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
+          <TouchableOpacity
+                style={{
+                  position: "absolute",
+                  bottom: 10,
+                  // width: Dimensions.get("window").width - 85,
+                  padding:5,
+                  right:'5%',
+                  alignItems:'center',
+                  flexDirection: "row-reverse",
+                  backgroundColor:'white',
+                  borderRadius: 200,
+
+                }}
+              >
+            
+            <Image
+            source={require("../assets/add-reminder.png")}
+            style={{width:50,height:50,borderRadius:200}}
+            />
+            {/* <Icona
+              type="font-awesome"
+              size={40}
+              name="bell"
+            /> */}
+            
+              </TouchableOpacity>
         </View>
       </ImageBackground>
     );
