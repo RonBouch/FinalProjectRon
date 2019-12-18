@@ -342,5 +342,18 @@ export default StyleSheet.create({
     marginBottom: 10,
     position: "absolute",
     bottom: 0
+  },
+  updateButton: {
+    flexDirection: "row",
+    elevation: 10,
+    backgroundColor: "rgba(208, 222, 9,.9)",
+    borderRadius: 20,
+    height: 40,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "white",
+    borderWidth: 1,
+    marginTop: 10
   }
 });
