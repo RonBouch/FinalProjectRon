@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import styles from "../Components/StyleSheet";
 import * as ImagePicker from 'expo-image-picker';
 // import Constants from 'expo-constants';
@@ -12,6 +12,7 @@ import {
   withKeyboardAwareScrollView
 } from "react-native-dropdown-autocomplete";
 import cities from "../city_list";
+import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import {
   Text,
@@ -25,7 +26,8 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  ImageBackground
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
@@ -43,6 +45,12 @@ class Publish extends React.Component {
     this.rentOrSell = "";
     let formIsValid = false;
     this.state = {
+      selectedItems: [
+        {
+          id: 7,
+          name: 'Go',
+        }],
+
       errors: {},
       resLabel: "",
       Show: false,
@@ -295,9 +303,13 @@ class Publish extends React.Component {
     return (
   
 
-      
+       <ImageBackground
+        source={require("../assets/background2.jpg")}
+        style={styles.imageBackground}>
+
+        <View style={styles.container}>
     
-      <View style={styles.main}>
+       <View style={styles.main}>
    
         <View style={styles.topBar}>
           <TouchableHighlight
@@ -325,43 +337,68 @@ class Publish extends React.Component {
             />
           </TouchableHighlight>
         </View>
-        <View style={styles.container}>
 
 
+        <Fragment>
+     
+     {/* Single */}
+     <SearchableDropdown
+     // onPress={(item) => {
+     //   console.log(item)
+     //   // const items = this.state.selectedItems;
+     //   // items.push(item)
+     //   this.setState({ selectedItems: item });
+     // }}
+       onItemSelect={(item) => {
+         console.log(item)
+         // const items = this.state.selectedItems;
+         // items.push(item)
+         this.setState({ selectedItems: item });
+       }}
+       containerStyle={{ padding: 5,}}
+       // onRemoveItem={(item, index) => {
+       //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+       //   this.setState({ selectedItems: items });
+       // }}
+       itemStyle={{
+         padding: 10,
+         marginTop: 2,
+         backgroundColor: '#ddd',
+         borderColor: '#bbb',
+         borderWidth: 1,
+         borderRadius: 5,
+       }}
+       itemTextStyle={{ color: '#222' }}
+       itemsContainerStyle={{  maxHeight:200,}}
+       items={data}
+       // defaultIndex={2}
+       resetValue={false}
+       textInputProps={
+         {
+           placeholder: "עיר/ישוב",
+           underlineColorAndroid: "transparent",
+           style: {
+               padding: 12,
+               borderWidth: 1,
+               borderColor: '#ccc',
+               borderRadius: 5,
+           },
+           onTextChange: text => console.log(text)
+         }
+       }
+       listProps={
+         {
+           nestedScrollEnabled: true,
+         }
+       }
+   />
 
-        <View style={styles.autocompletesContainer}>
-        <SafeAreaView>
-          {autocompletes.map(() => (
-            <Autocomplete
-              key={shortid.generate()}
-              style={styles.input}
-              scrollToInput={ev => scrollToInput(ev)}
-              handleSelectItem={(item, id) => this.handleSelectItem(item, id)}
-              onDropdownClose={() => onDropdownClose()}
-              onDropdownShow={() => onDropdownShow()}
-              renderIcon={() => (
-                <Ionicons name="ios-add-circle-outline" size={20} color="#c7c6c1" style={styles.plus} />
-              )}
-              data={data}
-              // fetchDataUrl={apiUrl}
-              minimumCharactersCount={2}
-              highlightText
-              valueExtractor={item => item.name}
-              rightContent
-              rightTextExtractor={item => item.properties}
-            />
-          ))}
-        </SafeAreaView>
-      </View>
+ </Fragment>
+ <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
   
 
 
-        <View style={{ alignItems: "center", marginTop: 10 }}> 
-        <ScrollView
-                contentContainerStyle={styles.scrollview}
-                // scrollEnabled={scrollEnabled}
-                onContentSizeChange={this.onContentSizeChange}
-              >
+
                 <View style={{ alignItems: "center", marginTop: 10 }}>
                   <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
 
@@ -554,17 +591,15 @@ class Publish extends React.Component {
                     <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
                   )}
                 </View>
-              </ScrollView>
-        </View>
-  
-            {/* <KeyboardAvoidingView style={styles.container} behavior="padding">
-            
-            </KeyboardAvoidingView> */}
+              
+              
+                </ScrollView>
 
            
           </View>
         </View>
+        </ImageBackground>
     );
   }
 }
-export default withKeyboardAwareScrollView(Publish);
+export default (Publish);

@@ -58,6 +58,22 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
+        public static string RegisterWithFacebook(string firstName, string lastName, string email, string password, string image)
+        {
+            User u = DBServices.RegisterWithFacebook(firstName, lastName, email, password, image);
+            if (u != null)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return new JavaScriptSerializer().Serialize(u);
+        }
+
+
         public static string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
         {
             Item p = DBServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, itemAbout, itemImg);

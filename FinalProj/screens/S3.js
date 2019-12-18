@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,Fragment } from "react";
 import {
   StyleSheet,
   View,
@@ -7,28 +7,48 @@ import {
   TextInput,
   ImageBackground,
   TouchableHighlight,
-  Image
+  Image,Dimensions
+  ,ScrollView
 } from "react-native";
 import { Icon as Icona } from "react-native-elements";
 import styles from "../Components/StyleSheet";
+const screenHeight = Math.round(Dimensions.get('window').height);
 
 import { Ionicons } from "@expo/vector-icons";
 import shortid from "shortid";
 import {
   Autocomplete,
-  withKeyboardAwareScrollView
+  
 } from "react-native-dropdown-autocomplete";
+import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import cities from "../city_list";
 import Slider from "../Components/Slider";
 class S3 extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      selectedItems: [
+        {
+          id: 7,
+          name: 'Go',
+        }],
+        screenHeight:""
+    }
+  }
+  
   handleSelectItem(item, index) {
     const { onDropdownClose } = this.props;
     onDropdownClose();
     console.log(item);
   }
-
+  getScreenSize = () => {  
+    // const screenWidth = Math.round(Dimensions.get('window').width);  
+    const screenHeight = Math.round(Dimensions.get('window').height);  
+    this.setState({ screenHeight: screenHeight })  
+    }  
   render() {
+    
     const autocompletes = [...Array(1).keys()];
 
     const data = cities;
@@ -90,7 +110,122 @@ class S3 extends Component {
               </TouchableHighlight>
             </View>
 
-            <View style={styles1.autocompletesContainer}>
+         
+
+          {/* <View  style={{flex:1}}> */}
+          
+        <Fragment>
+     
+          {/* Single */}
+          <SearchableDropdown
+          // onPress={(item) => {
+          //   console.log(item)
+          //   // const items = this.state.selectedItems;
+          //   // items.push(item)
+          //   this.setState({ selectedItems: item });
+          // }}
+            onItemSelect={(item) => {
+              console.log(item)
+              // const items = this.state.selectedItems;
+              // items.push(item)
+              this.setState({ selectedItems: item });
+            }}
+            containerStyle={{ padding: 5,}}
+            // onRemoveItem={(item, index) => {
+            //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+            //   this.setState({ selectedItems: items });
+            // }}
+            itemStyle={{
+              padding: 10,
+              marginTop: 2,
+              backgroundColor: '#ddd',
+              borderColor: '#bbb',
+              borderWidth: 1,
+              borderRadius: 5,
+            }}
+            itemTextStyle={{ color: '#222' }}
+            itemsContainerStyle={{  maxHeight:200,}}
+            items={data}
+            // defaultIndex={2}
+            resetValue={false}
+            textInputProps={
+              {
+                placeholder: "עיר/ישוב",
+                underlineColorAndroid: "transparent",
+                style: {
+                    padding: 12,
+                    borderWidth: 1,
+                    borderColor: '#ccc',
+                    borderRadius: 5,
+                },
+                onTextChange: text => console.log(text)
+              }
+            }
+            listProps={
+              {
+                nestedScrollEnabled: true,
+              }
+            }
+        />
+
+      </Fragment>
+      <ScrollView  contentContainerStyle={{flexGrow:1,}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
+          
+      {/* </View> */}
+      <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={{height:200,width:200}}
+                /> 
+                      <Slider/>
+                      <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={{height:200,width:200}}
+                /> 
+  
+            
+                </ScrollView>
+          </View>
+        </View>
+      </ImageBackground>
+    );
+  }
+}
+// const styles1 = StyleSheet.create({
+//   autocompletesContainer: {
+//     marginTop: 30,
+//     // zIndex: 1,
+//     width: "100%"
+//     // paddingHorizontal: 8
+//   },
+//   // input: { maxHeight: 40 },
+//   inputContainer: {
+//     // display: "flex",
+//     // flexShrink: 0,
+//     // flexGrow: 0,
+//     // flexDirection: "row",
+//     // flexWrap: "wrap",
+//     // alignItems: "center",
+//     // borderBottomWidth: 1,
+//     // borderColor: "#c7c6c1",
+//     // paddingVertical: 13,
+//     // paddingLeft: 12,
+//     // paddingRight: "5%",
+//     // width: "100%",
+//     // justifyContent: "flex-start"
+//   },
+//   container: {
+//     // flex: 1,
+//     // backgroundColor: "#ffffff"
+//   },
+//   plus: {
+//     position: "absolute",
+//     left: 15,
+//     top: 10
+//   }
+// });
+
+export default (S3);
+   {/* <View style={styles1.autocompletesContainer}>
               <SafeAreaView>
                 {autocompletes.map(() => (
                   <Autocomplete
@@ -121,45 +256,4 @@ class S3 extends Component {
                   />
                 ))}
               </SafeAreaView>
-            </View>
-          </View>
-        </View>
-      </ImageBackground>
-    );
-  }
-}
-const styles1 = StyleSheet.create({
-  autocompletesContainer: {
-    marginTop: 30,
-    // zIndex: 1,
-    width: "100%"
-    // paddingHorizontal: 8
-  },
-  // input: { maxHeight: 40 },
-  inputContainer: {
-    // display: "flex",
-    // flexShrink: 0,
-    // flexGrow: 0,
-    // flexDirection: "row",
-    // flexWrap: "wrap",
-    // alignItems: "center",
-    // borderBottomWidth: 1,
-    // borderColor: "#c7c6c1",
-    // paddingVertical: 13,
-    // paddingLeft: 12,
-    // paddingRight: "5%",
-    // width: "100%",
-    // justifyContent: "flex-start"
-  },
-  container: {
-    // flex: 1,
-    // backgroundColor: "#ffffff"
-  },
-  plus: {
-    position: "absolute",
-    left: 15,
-    top: 10
-  }
-});
-
-export default withKeyboardAwareScrollView(S3);
+            </View> */}
