@@ -23,7 +23,7 @@ public class WebService : System.Web.Services.WebService
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
     }
-    
+
     [WebMethod]
     public string Login(string email, string password)
     {
@@ -38,11 +38,17 @@ public class WebService : System.Web.Services.WebService
 
 
     [WebMethod]
-    public string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
+    public string RegisterWithGoogle(string firstName, string lastName, string email, string password, string image)
     {
-        return BALServices.RegisterWithGoogle(firstName, lastName, email, password,image);
+        return BALServices.RegisterWithGoogle(firstName, lastName, email, password, image);
     }
 
+    [WebMethod]
+    public string RegisterWithFacebook(string firstName, string lastName, string email, string password, string image)
+    {
+        return BALServices.RegisterWithFacebook(firstName, lastName, email, password, image);
+
+    }
     [WebMethod]
     public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
     {
@@ -66,6 +72,7 @@ public class WebService : System.Web.Services.WebService
         return BALServices.GetAssociationTypes();
 
     }
+
     [WebMethod]
     public string GetItemTypes()
     {

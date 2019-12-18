@@ -545,6 +545,87 @@ namespace DALproj
         }
 
 
+        public static User RegisterWithFacebook(string firstName, string lastName, string email, string password, string image)
+        {
+            User u = null;
+            SqlDataReader reader = null;
+            SqlDataReader reader2 = null;
+            string Facebook = "Facebook";
+            try
+            {
+                comm.CommandText = $"SELECT * FROM Users WHERE Email ='{email}'and Password = '{Facebook}'";
+                comm.Connection.Open();
+                reader = comm.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    u = new User()
+                    {
+                        UserID = (int)reader["UserID"],
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        Email = email,
+                        Password = null,
+                        Image = reader["Image"].ToString(),
+
+                    };
+
+                    return u;
+
+                }
+
+                else
+                {
+
+
+                    if (email == null || email == "")
+                    {
+
+                        return u;
+                    }
+                    if (!reader.IsClosed)
+                        reader.Close();
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}')";
+                    int res = comm.ExecuteNonQuery();
+                    if (res == 1)
+                    {
+                        comm.CommandText = "SELECT max(UserID) as maxID FROM Users";
+                        reader2 = comm.ExecuteReader();
+                        if (reader2.Read())
+                        {
+                            u = new User()
+                            {
+                                UserID = (int)reader2["maxID"],
+                                FirstName = firstName,
+                                LastName = lastName,
+                                Email = email,
+                                Password = password,
+                                Image = image,
+
+                            };
+                        }
+                        return u;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+
+            return u;
+        }
+
         public static int DeleteItem(int userid, int itemid)
         {
             int check = 1;
