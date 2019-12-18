@@ -583,21 +583,26 @@ class Contribution extends Component {
                   position: "absolute",
                   bottom: 10,
                   // width: Dimensions.get("window").width - 85,
-                  padding:10,
+                  padding:5,
                   right:'5%',
                   alignItems:'center',
                   flexDirection: "row-reverse",
-                  backgroundColor:'orange',
+                  backgroundColor:'white',
                   borderRadius: 200,
 
                 }}
               >
             
-            <Icona
+            <Image
+            source={require("../assets/add-reminder.png")}
+            style={{width:50,height:50,borderRadius:200}}
+            />
+            {/* <Icona
               type="font-awesome"
               size={40}
               name="bell"
-            />
+            /> */}
+            
               </TouchableOpacity>
         </View>
       </ImageBackground>
