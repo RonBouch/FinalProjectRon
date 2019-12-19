@@ -15,6 +15,7 @@ namespace DALproj
         public string ItemType { get; set; }
         public string ItemName { get; set; }
         public string City { get; set; }
+        public string Region { get; set; }
         public string ItemAbout { get; set; }
         public string ItemImg { get; set; }
         public string ItemDate { get; set; }

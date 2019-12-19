@@ -272,32 +272,7 @@ class Contribution extends Component {
       });
     }
 
-    let Type = [
-      {
-        value: "הכל"
-      },
-      {
-        value: "מוצרי חשמל"
-      },
-      {
-        value: "בגדים"
-      },
-      {
-        value: "ריהוט וכלי בית"
-      },
-      {
-        value: "ספרים ומדיה דיגיטלית"
-      },
-      {
-        value: "לתינוק ולילד"
-      },
-      {
-        value: "סיוע חברתי וסביבתי"
-      },
-      {
-        value: "שונות"
-      }
-    ];
+
     let Region = [
       {
         value: "הכל"
@@ -379,7 +354,7 @@ class Contribution extends Component {
               <Image
                 source={{
                   uri:
-                    "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                    "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                     item.ItemImg
                 }}
                 style={{
