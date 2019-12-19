@@ -260,7 +260,7 @@ class Login extends React.Component {
           </TouchableOpacity>
           <TouchableOpacity
             // onPress={this.logInFB}
-            onPress={() => LoginWithFacebook.FacebookLogin()}
+            onPress={() => this.props.navigation.navigate("LoginWithFacebook")}
             style={{ margin: 20 }}
           >
             <Image

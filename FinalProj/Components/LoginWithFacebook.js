@@ -1,5 +1,13 @@
 import React from "react";
 import * as Facebook from "expo-facebook";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Button,
+  AsyncStorage
+} from "react-native";
 import { Alert } from "react-native";
 
 export default class LoginWithFacebook extends React.Component {
@@ -16,7 +24,11 @@ export default class LoginWithFacebook extends React.Component {
     };
   }
 
-  static async FacebookLogin() {
+  componentDidMount() {
+    this.FacebookLogin();
+  }
+
+  FacebookLogin = async () => {
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
@@ -57,7 +69,7 @@ export default class LoginWithFacebook extends React.Component {
     const data = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      email: this.state.Email,
+      email: this.state.email,
       password: "Facebook",
       gender: "Facebook",
       birthday: "1900-01-01",
@@ -96,5 +108,12 @@ export default class LoginWithFacebook extends React.Component {
           console.log("err post=", error);
         }
       );
+  };
+  render() {
+    return (
+      <View>
+        <Text>sfhf</Text>
+      </View>
+    );
   }
 }
