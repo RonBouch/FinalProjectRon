@@ -114,7 +114,7 @@ export default class Register extends React.Component {
   EditProfile = () => {
     if (this.validateForm()) {
       const data = {
-        id:id,
+        id:global.user.UserID,
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
@@ -122,7 +122,7 @@ export default class Register extends React.Component {
       };
       console.log(data);
       fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebServise.asmx/EditProfile",
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/EditProfile",
         {
           method: "post",
           headers: new Headers({

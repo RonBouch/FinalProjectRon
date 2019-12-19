@@ -4,6 +4,7 @@ import { Alert } from "react-native";
 export default class LoginWithFacebook {
   static async FacebookLogin() {
     try {
+      
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
         {
