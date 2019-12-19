@@ -50,9 +50,17 @@ public class WebService : System.Web.Services.WebService
 
     }
     [WebMethod]
-    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
-    {
-        return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, itemAbout, itemImg);
+    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city,string region, string itemAbout, string itemImg , string base64)
+    {    
+        if (SaveImage(base64, itemImg)&& base64!="")
+        {
+            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64);
+
+        }
+        else
+        {
+            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64);
+        }
     }
     [WebMethod]
     public string GetItems()

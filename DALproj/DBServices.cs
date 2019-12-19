@@ -213,7 +213,7 @@ namespace DALproj
         }
 
 
-        public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string itemAbout, string itemImg)
+        public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg, string base64)
         {
             string itemDate = string.Format("{0:HH:mm}", DateTime.Now);
             Item p = null;
@@ -223,7 +223,7 @@ namespace DALproj
             {
 
 
-                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,ItemAbout,ItemImg,ItemDate) VALUES('{int.Parse(userId)}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{itemAbout}','{itemImg}','{itemDate}')";
+                    comm.CommandText = $"INSERT INTO Items(UserID,UserName,Userphone,ItemType,ItemName,City,Region,ItemAbout,ItemImg,ItemDate) VALUES('{int.Parse(userId)}','{userName}','{userPhone}','{itemType}','{itemName}','{city}','{region}','{itemAbout}','{itemImg}','{itemDate}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
@@ -240,6 +240,7 @@ namespace DALproj
                             UserPhone=userPhone,
                             ItemType=itemType,
                             City=city,
+                            Region=region,
                             ItemAbout=itemAbout,
                             ItemImg=itemImg,
                             ItemDate=itemDate,

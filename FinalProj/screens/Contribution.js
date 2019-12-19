@@ -379,7 +379,7 @@ class Contribution extends Component {
               <Image
                 source={{
                   uri:
-                    "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                    "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                     item.ItemImg
                 }}
                 style={{

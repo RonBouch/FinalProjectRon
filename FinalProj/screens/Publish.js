@@ -58,6 +58,9 @@ class Publish extends React.Component {
       delta: 0.1,
       latitude: 37.78825,
       longitude: -122.4324,
+      formData:"",
+
+
 
       userName: "",
       userPhone: "",
@@ -178,29 +181,81 @@ class Publish extends React.Component {
   };
 
   openGallery = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality:0.1
-    });
-    if (!result.cancelled) {
-      console.log("result ", result);
-      // this.setState({ img: result.uri });
-      // alert(this.state.img);
-    }
-  };
+    // פתיחת גלריה לבחירת תמונה
+    if ((await ImagePicker) != null) {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        // נותן אופציה לשנות את גודל התמונה
+        allowsEditing: true,
+        // גודל התמונה שתתקבל
+        aspect: [4, 3],
+        base64: true,
+        // איכות התמונה
+        quality: 0.5
+      });
+
+      // בדיקה אם לא נבחרה תמונה
+      if (result.cancelled) {
+        console.log("result ", result);
+      }
+      // אחרי שהמשתמש בחר את תמונת הפרופיל
+      else {
+        //הקוד של התמונה ושם במשתנה base64 לוקח את ה
+        let imageBase64 = result.base64;
+       
+        //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
+        const formData = {
+          base64: imageBase64,
+          imageName: global.user.UserID +this.state.itemName + ".jpg",
+        };
+        this.setState({formData:formData})
+        //לעלות את התמונה לשרת fetch עושה
+        
+        // await fetch(
+        //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+        //   {
+        //     method: "post",
+        //     headers: new Headers({
+        //       "Content-Type": "application/Json;"
+        //     }),
+        //     body: JSON.stringify(formData)
+        //   }
+        // )
+        //   .then(res => {
+        //     return res.json();
+        //   })
+        //   .then(
+        //     result => {
+        //       this.setState({
+        //         img: global.user.UserID + global.user.Email + ".jpg"
+        //       });
+
+        //       console.log("result = ", result);
+        //     },
+        //     error => {
+        //       console.log("err post=", error);
+        //     }
+        //   );
+        //   }
+        }
+        }
+      
+      }
+
 
   handleSubmit = async () => {
     if (this.isValid()) {
       const data = {
-        userId: 1,
+        userId: global.user.UserID,
         userName: this.state.userName,
         userPhone: this.state.userPhone,
         itemType: this.state.itemType,
         itemName: this.state.itemName,
-        city: this.state.city,
+        city: this.state.selectedItems.name,
+        region:this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
-        itemImg: this.state.itemImg
+        itemImg: this.state.formData.imageName!=null?this.state.formData.imageName:"",
+        base64:this.state.formData.base64!=null?this.state.formData.base64:""
+      
       };
       console.log(JSON.stringify(data));
 
@@ -255,10 +310,6 @@ class Publish extends React.Component {
     return true;
   }
 
-  // onContentSizeChange = (contentWidth, contentHeight) => {
-  //   this.setState({ screenHeight: contentHeight });
-  // };
-
   handleSelectItem(item, index) {
     const { onDropdownClose } = this.props;
     onDropdownClose();
@@ -266,10 +317,9 @@ class Publish extends React.Component {
   }
 
   render() {
-    const autocompletes = [...Array(1).keys()];
+    console.log("formData -- > ",this.state.formData)
+    // console.log("item .->",this.state.selectedItems.shem_napa)
     const data = cities;
-    // console.log("cities ",data)
-    const { scrollToInput, onDropdownClose, onDropdownShow } = this.props;
 
     let itemType = [
       {
@@ -297,8 +347,6 @@ class Publish extends React.Component {
         value: "שונות"
       }
     ];
-
-    // const scrollEnabled = this.state.screenHeight > height;
     return (
   
 
@@ -326,7 +374,26 @@ class Publish extends React.Component {
               size={28}
             />
           </TouchableHighlight>
-
+          <View
+                style={{
+                  marginTop: 35,
+                  justifyContent: "center"
+                }}
+              >
+                <Text
+                  style={{
+                    color: "rgba(255,255,255,.9)",
+                    fontWeight: "bold",
+                    fontSize: 25,
+                    fontFamily: "serif",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: 1, height: 4 },
+                    textShadowRadius: 5
+                  }}
+                >
+                  פרסם פריט
+                </Text>
+              </View>
           <TouchableHighlight
             onPress={() => this.props.navigation.navigate("Home")}
           >
@@ -370,8 +437,6 @@ class Publish extends React.Component {
                       />
 
                     </View>
-     
-     
      
      
        {/* קטגוריית הפריט */}
@@ -479,10 +544,10 @@ class Publish extends React.Component {
 
         </View>
       
- <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column',alignItems:'center',width:'100%'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column',alignItems:'center',width:'100%'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
   
- {/* מס' טלפון */}
- <View  style={styles.publushInput} >
+        {/* מס' טלפון */}
+          <View  style={styles.publushInput} >
                   <Icon
                       name="phone"
                       type="font-awesome"
@@ -505,7 +570,7 @@ class Publish extends React.Component {
 
 
 
-  {/* איש קשר  */}
+        {/* איש קשר  */}
 
                   <View
                   style={styles.publushInput}
@@ -529,7 +594,7 @@ class Publish extends React.Component {
                    
                   </View>
       
-      {/* על הפריט */}
+       {/* על הפריט */}
                   <View
                     style={{
                       marginTop: 15,
@@ -557,7 +622,7 @@ class Publish extends React.Component {
                   </View>
             
               
-                 {/* מצלמה */}
+       {/* מצלמה */}
 
                   <View style={styles.addImage}>
                     <TouchableOpacity
@@ -582,7 +647,7 @@ class Publish extends React.Component {
                   </View>
 
 
-               {/* פרסם פריט */}
+       {/* פרסם פריט */}
                   <View>
                     <TouchableOpacity
                       onPress={() => this.handleSubmit()}
