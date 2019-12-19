@@ -11,7 +11,9 @@ import {
   Autocomplete,
   withKeyboardAwareScrollView
 } from "react-native-dropdown-autocomplete";
-import cities from "../city_list";
+// import cities from "../city_list";
+import cities from "../cityAndRegion";
+
 import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import {
@@ -45,11 +47,7 @@ class Publish extends React.Component {
     this.rentOrSell = "";
     let formIsValid = false;
     this.state = {
-      selectedItems: [
-        {
-          id: 7,
-          name: 'Go',
-        }],
+      selectedItems: [],
 
       errors: {},
       resLabel: "",
@@ -270,6 +268,7 @@ class Publish extends React.Component {
   render() {
     const autocompletes = [...Array(1).keys()];
     const data = cities;
+    // console.log("cities ",data)
     const { scrollToInput, onDropdownClose, onDropdownShow } = this.props;
 
     let itemType = [
@@ -337,9 +336,84 @@ class Publish extends React.Component {
             />
           </TouchableHighlight>
         </View>
+         <View style={{flexDirection:'row'}}>
+     <Text style={{ color: "red" }}>*</Text>
+
+     <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
+     
+         </View>
+    
+        <View style={{ alignItems: "center", marginTop: 30 ,width:'100%'}}>
+     
+     
+     
+     
+        {/* שם הפריט  */}
+       
+        <View style={styles.publushInput}
+                    >
+                     <Icon
+                      name="edit"
+                      type="font-awesome"
+                      color="rgb(150,150,150)"
+                      size={24}
+                    />
+                      <TextInput
+                        placeholderTextColor="rgb(150,150,150)"
+                        style={{
+                          marginLeft: "8%", fontSize: 14
+                        }}
+                        placeholder="שם הפריט"
+                        onChangeText={e => {
+                          this.setState({ itemName: e });
+                        }}
+                      />
+
+                    </View>
+     
+     
+     
+     
+       {/* קטגוריית הפריט */}
+          
+        <View style={styles.publushInput}>
+        <Icon
+                      name="mouse-pointer"
+                      type="font-awesome"
+                      color="rgb(150,150,150)"
+                      size={24}
+                    />
+         {/* <Text style={{ color: "red" }}>*</Text> */}
+
+                 <Dropdown
+                      // label="קטגוריית הפריט"
+                      placeholderTextColor="rgb(150,150,150)"
+
+                      itemColor="black"
+                     placeholder="קטגוריית הפריט"
+                      style={{ marginLeft: "8%", fontSize: 14 }}
+                      dropdownMargins={{ min: 0, max: 1 }}
+                      dropdownOffset={{ top: 0, left: 0 }}
+                      
+                      inputContainerStyle={{borderBottomWidth: 0}}
+                
 
 
-        <Fragment>
+                      containerStyle={{ width:'90%',height:10}}
+                      data={itemType}
+                      onChangeText={this.ItemType}
+                    />
+                  </View>
+   
+        {/* עיר ישוב */}
+        <View style={styles.publushInput}> 
+        <Icon
+                      name="map-marker"
+                      type="font-awesome"
+                      color="rgb(150,150,150)"
+                      size={24}
+                    />
+  <Fragment>
      
      {/* Single */}
      <SearchableDropdown
@@ -349,13 +423,15 @@ class Publish extends React.Component {
      //   // items.push(item)
      //   this.setState({ selectedItems: item });
      // }}
+     placeholderTextColor="rgb(150,150,150)"
+
        onItemSelect={(item) => {
          console.log(item)
          // const items = this.state.selectedItems;
          // items.push(item)
          this.setState({ selectedItems: item });
        }}
-       containerStyle={{ padding: 5,}}
+       containerStyle={{width:'100%'}}
        // onRemoveItem={(item, index) => {
        //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
        //   this.setState({ selectedItems: items });
@@ -363,7 +439,7 @@ class Publish extends React.Component {
        itemStyle={{
          padding: 10,
          marginTop: 2,
-         backgroundColor: '#ddd',
+         backgroundColor: 'white',
          borderColor: '#bbb',
          borderWidth: 1,
          borderRadius: 5,
@@ -378,10 +454,13 @@ class Publish extends React.Component {
            placeholder: "עיר/ישוב",
            underlineColorAndroid: "transparent",
            style: {
-               padding: 12,
-               borderWidth: 1,
-               borderColor: '#ccc',
-               borderRadius: 5,
+              //  margin: 10,
+              //  borderWidth: 1,
+              
+               marginLeft: "8%",
+                fontSize: 14, 
+        
+              //  borderBottomColor: "rgb(150,150,150)",
            },
            onTextChange: text => console.log(text)
          }
@@ -390,59 +469,27 @@ class Publish extends React.Component {
          {
            nestedScrollEnabled: true,
          }
+
        }
+      
+
    />
 
  </Fragment>
- <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
+
+        </View>
+      
+ <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column',alignItems:'center',width:'100%'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
   
-
-
-
-                <View style={{ alignItems: "center", marginTop: 10 }}>
-                  <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
-
-
- 
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 0.2,
-                      borderBottomColor: "rgb(150,150,150)",
-                      width: 200,
-                      margin: 15
-                    }}
-                  >
-                    <Text style={{ color: "red" }}> *</Text>
-                    <TextInput
-                      placeholder="עיר/יישוב"
-                      placeholderTextColor="rgb(150,150,150)"
-                      style={{
-                        width: "80%",
-                        marginRight: "8%",
-                        fontSize: 16
-                      }}
-                      onChangeText={this.City}
-                    />
-                    <Icon
-                      name="map-marker"
+ {/* מס' טלפון */}
+ <View  style={styles.publushInput} >
+                  <Icon
+                      name="phone"
                       type="font-awesome"
                       color="rgb(150,150,150)"
                       size={24}
                     />
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 0.2,
-                      borderBottomColor: "rgb(150,150,150)",
-                      width: 200,
-                      marginBottom: 15
-                    }}
-                  >
-                    <Text style={{ color: "red" }}> *</Text>
+                    {/* <Text style={{ color: "red" }}> *</Text> */}
 
                     <TextInput
                       keyboardType="number-pad"
@@ -451,25 +498,25 @@ class Publish extends React.Component {
                       onChangeText={e => {
                         this.setState({ userPhone: e });
                       }}
-                      style={{ width: "80%", marginRight: "8%", fontSize: 16 }}
+                      style={{marginLeft: "8%", fontSize: 14  }}
                     />
-                    <Icon
-                      name="phone"
+                    
+                  </View>
+
+
+
+  {/* איש קשר  */}
+
+                  <View
+                  style={styles.publushInput}
+                  >
+                   <Icon
+                      name="user"
                       type="font-awesome"
                       color="rgb(150,150,150)"
                       size={24}
                     />
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      borderBottomWidth: 0.2,
-                      borderBottomColor: "rgb(150,150,150)",
-                      width: 200,
-                      marginBottom: 15
-                    }}
-                  >
-                    <Text style={{ color: "red" }}> *</Text>
+                    {/* <Text style={{ color: "red" }}> *</Text> */}
 
                     <TextInput
                       placeholder="איש קשר"
@@ -477,57 +524,17 @@ class Publish extends React.Component {
                       onChangeText={e => {
                         this.setState({ userName: e });
                       }}
-                      style={{ width: "80%", marginRight: "8%", fontSize: 16 }}
+                      style={{ marginLeft: "8%", fontSize: 14 }}
                     />
-                    <Icon
-                      name="user"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
+                   
                   </View>
-
-                  <View style={{ flexDirection: "row" }}>
-                    <Text style={{ color: "red" }}>*</Text>
-
-                    <Dropdown
-                      label="קטגוריית הפריט"
-                      itemColor="black"
-                      dropdownMargins={{ min: 0, max: 1 }}
-                      dropdownOffset={{ top: 0, left: 0 }}
-                      containerStyle={{ width: "80%", padding: 5 }}
-                      data={itemType}
-                      onChangeText={this.ItemType}
-                    />
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                    <View
-                      style={{
-                        borderBottomWidth: 0.2,
-                        borderBottomColor: "rgb(150,150,150)",
-                        width: 105,
-                        padding: 5
-                      }}
-                    >
-                      <TextInput
-                        placeholderTextColor="rgb(150,150,150)"
-                        style={{
-                          width: "100%",
-                          textAlign: "center",
-                          fontSize: 16
-                        }}
-                        placeholder="שם הפריט"
-                        onChangeText={e => {
-                          this.setState({ itemName: e });
-                        }}
-                      />
-                    </View>
-                  </View>
+      
+      {/* על הפריט */}
                   <View
                     style={{
-                      marginTop: 20,
+                      marginTop: 15,
                       borderWidth: 1,
-                      width: 210,
+                      width: '60%',
                       height: 100,
                       backgroundColor: "white",
                       justifyContent: "center",
@@ -545,10 +552,12 @@ class Publish extends React.Component {
                       style={{
                         textAlign: "center",
                         fontSize: 16,
-                        width: 200
                       }}
                     />
                   </View>
+            
+              
+                 {/* מצלמה */}
 
                   <View style={styles.addImage}>
                     <TouchableOpacity
@@ -572,6 +581,8 @@ class Publish extends React.Component {
                     </TouchableOpacity>
                   </View>
 
+
+               {/* פרסם פריט */}
                   <View>
                     <TouchableOpacity
                       onPress={() => this.handleSubmit()}
@@ -590,10 +601,10 @@ class Publish extends React.Component {
                   {!this.state.Show && (
                     <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
                   )}
-                </View>
               
               
                 </ScrollView>
+                </View>
 
            
           </View>

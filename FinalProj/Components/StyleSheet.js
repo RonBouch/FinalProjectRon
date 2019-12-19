@@ -53,6 +53,15 @@ export default StyleSheet.create({
     borderWidth: 2,
     marginTop: 10
   },
+  publushInput:{
+    flexDirection: "row" ,
+    marginTop:10,
+    width:'70%',
+      borderWidth:  2,
+      borderRadius:20,
+       borderColor: "black",
+       padding:10
+  },
   //Basic Design
 
   backgroundImage: {
