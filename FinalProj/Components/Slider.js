@@ -28,7 +28,7 @@ const Slider = props => (
     <Image
       style={styles.image}
       source={{
-        uri: "http://ruppinmobile.tempdomain.co.il/site11/image/" + props.uri
+        uri: "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" + props.uri
       }}
     />
   </View>
