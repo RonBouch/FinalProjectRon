@@ -43,7 +43,7 @@ export default class LoginWithGoogle extends React.Component {
         //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
         scopes: ["profile", "email"]
       });
-      // console.log("Google Details - ", result)
+      console.log("Google Details - ", result);
       if (result.type === "success") {
         this.setState({
           signedIn: true,

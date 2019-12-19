@@ -18,3 +18,4 @@ C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\bin\Debug\DALproj.pdb
 C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.csproj.CoreCompileInputs.cache
 C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.dll
 C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.pdb
+C:\Users\TOMER\Desktop\FinalProjectRon\DALproj\obj\Debug\DALproj.csprojAssemblyReference.cache
