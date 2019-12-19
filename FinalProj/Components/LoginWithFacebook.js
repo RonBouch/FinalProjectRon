@@ -30,6 +30,7 @@ export default class LoginWithFacebook extends React.Component {
 
   FacebookLogin = async () => {
     try {
+      
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
         {
