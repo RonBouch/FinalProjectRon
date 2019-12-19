@@ -74,10 +74,14 @@ class Publish extends React.Component {
       imageBade64:""
     };
   }
+  componentDidMount(){
+    this.GetItemTypes();
+  }
 
-  ItemType = e => {
+  ItemType = (e,i) => {
+    console.log(e," ",i+2)
     this.setState({
-      itemType: e
+      itemType: (i+2)
     });
   };
 
@@ -110,7 +114,7 @@ class Publish extends React.Component {
   CheckCity = async () => {
     const { city } = this.state;
     var detials = city.split(",", 2);
-    console.log("detials = " + detials);
+    // console.log("detials = " + detials);
     if (detials[1] !== "") {
       this.setState({
         delta: 0.01
@@ -159,7 +163,7 @@ class Publish extends React.Component {
     let type = match ? `image/${match[1]}` : `image`;
 
     const formData = { base64:imageBase64, imageName: "imgRon1.jpg" };
-    console.log("formdata = ", formData);
+    // console.log("formdata = ", formData);
     await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
     {
       method: "post",
@@ -309,44 +313,62 @@ class Publish extends React.Component {
     // return valid;
     return true;
   }
-
+  GetItemTypes = async () => {
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemTypes",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        })
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          let itemTypes = JSON.parse(result.d);
+          console.log(itemTypes)
+          if (itemTypes == null) {
+            this.setState({
+              message: "לא קיימים סוגי פריטים"
+            });
+            return;
+          } else {
+            this.setState({
+              itemTypes: itemTypes
+            });
+          }
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
   handleSelectItem(item, index) {
     const { onDropdownClose } = this.props;
     onDropdownClose();
-    console.log(item);
+    // console.log(item);
   }
 
   render() {
-    console.log("formData -- > ",this.state.formData)
-    // console.log("item .->",this.state.selectedItems.shem_napa)
+    console.log("item type = ",this.state.itemType)
+    let ItemTypes = [];
+    if (this.state.itemTypes != null) {
+      this.state.itemTypes.map((type,index) => {
+        
+        if(index!=0){
+
+          ItemTypes.push({ value: type.ItemType });
+
+        }
+      });
+    }
+
     const data = cities;
 
-    let itemType = [
-      {
-        value: "הכל"
-      },
-      {
-        value: "מוצרי חשמל"
-      },
-      {
-        value: "בגדים"
-      },
-      {
-        value: "ריהוט וכלי בית"
-      },
-      {
-        value: "ספרים ומדיה דיגיטלית"
-      },
-      {
-        value: "לתינוק ולילד"
-      },
-      {
-        value: "סיוע חברתי וסביבתי"
-      },
-      {
-        value: "שונות"
-      }
-    ];
+    
     return (
   
 
@@ -459,14 +481,14 @@ class Publish extends React.Component {
                       style={{ marginLeft: "8%", fontSize: 14 }}
                       dropdownMargins={{ min: 0, max: 1 }}
                       dropdownOffset={{ top: 0, left: 0 }}
-                      
+                      data={ItemTypes}
+                      onChangeText={(e,i)=>this.ItemType(e,i)}
+
                       inputContainerStyle={{borderBottomWidth: 0}}
                 
 
 
                       containerStyle={{ width:'90%',height:10}}
-                      data={itemType}
-                      onChangeText={this.ItemType}
                     />
                   </View>
    
@@ -491,7 +513,7 @@ class Publish extends React.Component {
      placeholderTextColor="rgb(150,150,150)"
 
        onItemSelect={(item) => {
-         console.log(item)
+        //  console.log(item)
          // const items = this.state.selectedItems;
          // items.push(item)
          this.setState({ selectedItems: item });
@@ -611,7 +633,7 @@ class Publish extends React.Component {
                       maxLength={60}
                       onChangeText={e => {
                         this.setState({ itemAbout: e });
-                        console.log(this.state.itemAbout);
+                        // console.log(this.state.itemAbout);
                       }}
                       placeholder="ספר בקצרה על הנכס עד 60 תווים..."
                       style={{

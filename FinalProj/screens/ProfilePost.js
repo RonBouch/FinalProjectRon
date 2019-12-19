@@ -54,7 +54,7 @@ export default class ProfilePost extends React.Component {
 
   GetItemsByID = async () => {
     const data = {
-      userid: 1
+      userid: global.user.UserID
     };
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsByID",
@@ -101,20 +101,21 @@ export default class ProfilePost extends React.Component {
     Linking.openURL(url);
   };
 
-  async DeleteItem(item) {
-    await this.setState({
-      item: item
-    });
-    this.DeleteItemByID();
-  }
-  DeleteItemByID = () => {
-    console.log("state item ", this.state.item.ItemID);
+  // async DeleteItem(item) {
+  //   await this.setState({
+  //     item: item
+  //   });
+  //   this.DeleteItemByID();
+  // }
+  DeleteItemByID = (item) => {
+    console.log("item = ",item)
 
-    if (this.state.item.ItemID != null) {
+    if (item.ItemID != null) {
       const data = {
-        userid: 1,
-        itemid: this.state.item.ItemID
+        userid: global.user.UserID,
+        itemid: item.ItemID
       };
+      console.log("DATA = ",data)
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/DeleteItem",
         {
@@ -185,11 +186,11 @@ export default class ProfilePost extends React.Component {
                 left: 2
               }}
             >
-              <TouchableOpacity onPress={() => this.FavoriteChack(item)}>
+              <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
                 <Icona
-                  name="heart"
+                  name="trash"
                   type="font-awesome"
-                  size={14}
+                  size={18}
                   color="red"
                   raised
                 />
@@ -206,7 +207,7 @@ export default class ProfilePost extends React.Component {
             <Image
               source={{
                 uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                   item.ItemImg
               }}
               style={{
