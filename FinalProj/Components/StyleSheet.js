@@ -53,14 +53,13 @@ export default StyleSheet.create({
     borderWidth: 2,
     marginTop: 10
   },
-  publushInput:{
-    flexDirection: "row" ,
-    marginTop:10,
-    width:'70%',
-      borderWidth:  2,
-      borderRadius:20,
-       borderColor: "black",
-       padding:10
+  publushInput: {
+    flexDirection: "row",
+    marginTop: 10,
+    width: "70%",
+    borderBottomWidth: 0.2,
+    borderColor: "black",
+    padding: 5
   },
   //Basic Design
 
@@ -246,12 +245,14 @@ export default StyleSheet.create({
   publishButton: {
     backgroundColor: "rgba(0,0,255,.7)",
     flexDirection: "row",
-    height: 45,
-    width: 200,
+    height: 35,
+    marginTop: 10,
+    width: 150,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     borderColor: "white",
-    borderWidth: 2
+    borderWidth: 1
   },
   radioPublish: {
     flexDirection: "row",

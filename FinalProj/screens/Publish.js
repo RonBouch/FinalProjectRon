@@ -1,6 +1,6 @@
-import React, { Component,Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import styles from "../Components/StyleSheet";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 // import Constants from 'expo-constants';
 // import * as Permissions from 'expo-permissions';
 import { Icon } from "react-native-elements";
@@ -14,7 +14,7 @@ import {
 // import cities from "../city_list";
 import cities from "../cityAndRegion";
 
-import SearchableDropdown from 'react-native-searchable-dropdown';
+import SearchableDropdown from "react-native-searchable-dropdown";
 
 import {
   Text,
@@ -58,9 +58,7 @@ class Publish extends React.Component {
       delta: 0.1,
       latitude: 37.78825,
       longitude: -122.4324,
-      formData:"",
-
-
+      formData: "",
 
       userName: "",
       userPhone: "",
@@ -70,17 +68,17 @@ class Publish extends React.Component {
       itemAbout: "",
       itemImg: "sdvw",
 
-      imageName:"",
-      imageBade64:""
+      imageName: "",
+      imageBade64: ""
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.GetItemTypes();
   }
 
-  ItemType = (e,i) => {
+  ItemType = (e, i) => {
     this.setState({
-      itemType: (i+2)
+      itemType: i + 2
     });
   };
 
@@ -143,8 +141,8 @@ class Publish extends React.Component {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
       aspect: [4, 3],
-      base64:true,
-      quality:0.1
+      base64: true,
+      quality: 0.1
     });
 
     if (result.cancelled) {
@@ -158,25 +156,28 @@ class Publish extends React.Component {
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
 
-    const formData = { base64:imageBase64, imageName: "imgRon1.jpg" };
-    await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
-    {
-      method: "post",
-          headers: new Headers({
-            "Content-Type": "application/Json;"
-          }),
-          body: JSON.stringify(formData)
-    }).then ( res => {
-      return res.json();
-    })
-    .then(
-      result => {
-        console.log("result = ",result);
-      },
-      error => {
-        console.log("err post=", error);
+    const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
+    await fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        }),
+        body: JSON.stringify(formData)
       }
-    );
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          console.log("result = ", result);
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
   };
 
   openGallery = async () => {
@@ -200,15 +201,15 @@ class Publish extends React.Component {
       else {
         //הקוד של התמונה ושם במשתנה base64 לוקח את ה
         let imageBase64 = result.base64;
-       
+
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
           base64: imageBase64,
-          imageName: global.user.UserID +this.state.itemName + ".jpg",
+          imageName: global.user.UserID + this.state.itemName + ".jpg"
         };
-        this.setState({formData:formData})
+        this.setState({ formData: formData });
         //לעלות את התמונה לשרת fetch עושה
-        
+
         // await fetch(
         //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
         //   {
@@ -235,11 +236,9 @@ class Publish extends React.Component {
         //     }
         //   );
         //   }
-        }
-        }
-      
       }
-
+    }
+  };
 
   handleSubmit = async () => {
     if (this.isValid()) {
@@ -250,11 +249,14 @@ class Publish extends React.Component {
         itemType: this.state.itemType,
         itemName: this.state.itemName,
         city: this.state.selectedItems.name,
-        region:this.state.selectedItems.shem_napa,
+        region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
-        itemImg: this.state.formData.imageName!=null?this.state.formData.imageName:"",
-        base64:this.state.formData.base64!=null?this.state.formData.base64:""
-      
+        itemImg:
+          this.state.formData.imageName != null
+            ? this.state.formData.imageName
+            : "",
+        base64:
+          this.state.formData.base64 != null ? this.state.formData.base64 : ""
       };
 
       fetch(
@@ -347,47 +349,39 @@ class Publish extends React.Component {
   render() {
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
-      this.state.itemTypes.map((type,index) => {
-        
-        if(index!=0){
-
+      this.state.itemTypes.map((type, index) => {
+        if (index != 0) {
           ItemTypes.push({ value: type.ItemType });
-
         }
       });
     }
 
     const data = cities;
 
-    
     return (
-  
-
-       <ImageBackground
+      <ImageBackground
         source={require("../assets/background2.jpg")}
-        style={styles.imageBackground}>
-
+        style={styles.imageBackground}
+      >
         <View style={styles.container}>
-    
-       <View style={styles.main}>
-   
-        <View style={styles.topBar}>
-          <TouchableHighlight
-            onPress={() =>
-              this.props.navigation.dispatch(DrawerActions.openDrawer())
-            }
-            style={styles.touchableHighlight}
-            underlayColor={"rgba(0,0,0,0.8)"}
-          >
-            <Icon
-              iconStyle={{ marginEnd: "10%" }}
-              name="bars"
-              type="font-awesome"
-              color="white"
-              size={28}
-            />
-          </TouchableHighlight>
-          <View
+          <View style={styles.main}>
+            <View style={styles.topBar}>
+              <TouchableHighlight
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
+                style={styles.touchableHighlight}
+                underlayColor={"rgba(0,0,0,0.8)"}
+              >
+                <Icon
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="bars"
+                  type="font-awesome"
+                  color="white"
+                  size={28}
+                />
+              </TouchableHighlight>
+              <View
                 style={{
                   marginTop: 35,
                   justifyContent: "center"
@@ -407,285 +401,291 @@ class Publish extends React.Component {
                   פרסם פריט
                 </Text>
               </View>
-          <TouchableHighlight
-            onPress={() => this.props.navigation.navigate("Home")}
-          >
-            <Image
-              source={require("../assets/TenYadLogo.png")}
-              style={styles.logo}
-            />
-          </TouchableHighlight>
-        </View>
-         <View style={{flexDirection:'row'}}>
-     <Text style={{ color: "red" }}>*</Text>
+              <TouchableHighlight
+                onPress={() => this.props.navigation.navigate("Home")}
+              >
+                <Image
+                  source={require("../assets/TenYadLogo.png")}
+                  style={styles.logo}
+                />
+              </TouchableHighlight>
+            </View>
 
-     <Text>באמצעות טופס זה תוכלו לפרסם את הפריט שתרצו לתרום!</Text>
-     
-         </View>
-    
-        <View style={{ alignItems: "center", marginTop: 30 ,width:'100%'}}>
-     
-     
-     
-     
-        {/* שם הפריט  */}
-       
-        <View style={styles.publushInput}
-                    >
-                     <Icon
-                      name="edit"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
-                      <TextInput
-                        placeholderTextColor="rgb(150,150,150)"
-                        style={{
-                          marginLeft: "8%", fontSize: 14
-                        }}
-                        placeholder="שם הפריט"
-                        onChangeText={e => {
-                          this.setState({ itemName: e });
-                        }}
-                      />
+            <ScrollView style={styles.scrollview}>
+              <View
+                style={{ alignItems: "center", marginTop: 10, width: "100%" }}
+              >
+                {/* שם הפריט  */}
 
-                    </View>
-     
-     
-       {/* קטגוריית הפריט */}
-          
-        <View style={styles.publushInput}>
-        <Icon
-                      name="mouse-pointer"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
-         {/* <Text style={{ color: "red" }}>*</Text> */}
-
-                 <Dropdown
-                      // label="קטגוריית הפריט"
-                      placeholderTextColor="rgb(150,150,150)"
-
-                      itemColor="black"
-                     placeholder="קטגוריית הפריט"
-                      style={{ marginLeft: "8%", fontSize: 14 }}
-                      dropdownMargins={{ min: 0, max: 1 }}
-                      dropdownOffset={{ top: 0, left: 0 }}
-                      data={ItemTypes}
-                      onChangeText={(e,i)=>this.ItemType(e,i)}
-
-                      inputContainerStyle={{borderBottomWidth: 0}}
-                
-
-
-                      containerStyle={{ width:'90%',height:10}}
-                    />
-                  </View>
-   
-        {/* עיר ישוב */}
-        <View style={styles.publushInput}> 
-        <Icon
-                      name="map-marker"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
-  <Fragment>
-     
-     {/* Single */}
-     <SearchableDropdown
-     // onPress={(item) => {
-     //   // const items = this.state.selectedItems;
-     //   // items.push(item)
-     //   this.setState({ selectedItems: item });
-     // }}
-     placeholderTextColor="rgb(150,150,150)"
-
-       onItemSelect={(item) => {
-         // const items = this.state.selectedItems;
-         // items.push(item)
-         this.setState({ selectedItems: item });
-       }}
-       containerStyle={{width:'100%'}}
-       // onRemoveItem={(item, index) => {
-       //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-       //   this.setState({ selectedItems: items });
-       // }}
-       itemStyle={{
-         padding: 10,
-         marginTop: 2,
-         backgroundColor: 'white',
-         borderColor: '#bbb',
-         borderWidth: 1,
-         borderRadius: 5,
-       }}
-       itemTextStyle={{ color: '#222' }}
-       itemsContainerStyle={{  maxHeight:200,}}
-       items={data}
-       // defaultIndex={2}
-       resetValue={false}
-       textInputProps={
-         {
-           placeholder: "עיר/ישוב",
-           underlineColorAndroid: "transparent",
-           style: {
-              //  margin: 10,
-              //  borderWidth: 1,
-              
-               marginLeft: "8%",
-                fontSize: 14, 
-        
-              //  borderBottomColor: "rgb(150,150,150)",
-           },
-           onTextChange: text => console.log(text)
-         }
-       }
-       listProps={
-         {
-           nestedScrollEnabled: true,
-         }
-
-       }
-      
-
-   />
-
- </Fragment>
-
-        </View>
-      
-          <ScrollView  contentContainerStyle={{flexGrow:1,flexDirection:'column',alignItems:'center',width:'100%'}} style={styles.scrollableView} horizontal showsHorizontalScrollIndicator={false}>
-  
-        {/* מס' טלפון */}
-          <View  style={styles.publushInput} >
+                <View style={styles.publushInput}>
                   <Icon
-                      name="phone"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
-                    {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                    <TextInput
-                      keyboardType="number-pad"
-                      placeholderTextColor="rgb(150,150,150)"
-                      placeholder={"מס' טלפון"}
-                      onChangeText={e => {
-                        this.setState({ userPhone: e });
-                      }}
-                      style={{marginLeft: "8%", fontSize: 14  }}
-                    />
-                    
-                  </View>
-
-
-
-        {/* איש קשר  */}
-
-                  <View
-                  style={styles.publushInput}
-                  >
-                   <Icon
-                      name="user"
-                      type="font-awesome"
-                      color="rgb(150,150,150)"
-                      size={24}
-                    />
-                    {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                    <TextInput
-                      placeholder="איש קשר"
-                      placeholderTextColor="rgb(150,150,150)"
-                      onChangeText={e => {
-                        this.setState({ userName: e });
-                      }}
-                      style={{ marginLeft: "8%", fontSize: 14 }}
-                    />
-                   
-                  </View>
-      
-       {/* על הפריט */}
-                  <View
+                    name="edit"
+                    type="font-awesome"
+                    color="rgb(150,150,150)"
+                    size={24}
+                  />
+                  <TextInput
+                    placeholderTextColor="rgb(150,150,150)"
                     style={{
-                      marginTop: 15,
-                      borderWidth: 1,
-                      width: '60%',
-                      height: 100,
-                      backgroundColor: "white",
-                      justifyContent: "center",
-                      borderColor: "black"
+                      marginLeft: "8%",
+                      fontSize: 14
                     }}
-                  >
-                    <TextInput
-                      multiline={true}
-                      maxLength={60}
-                      onChangeText={e => {
-                        this.setState({ itemAbout: e });
-                      }}
-                      placeholder="ספר בקצרה על הנכס עד 60 תווים..."
-                      style={{
-                        textAlign: "center",
-                        fontSize: 16,
-                      }}
-                    />
-                  </View>
-            
-              
-       {/* מצלמה */}
-
-                  <View style={styles.addImage}>
-                    <TouchableOpacity
-                      onPress={this.openCamera}
-                      style={styles.uploadIcon}
-                    >
-                      <View>
-                        <Ionicons name="ios-camera" size={60} color="black" />
-                      </View>
-                      <Text style={styles.textIcon}>מצלמה</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      onPress={this.openGallery}
-                      style={styles.uploadIcon}
-                    >
-                      <View>
-                        <Ionicons name="md-images" size={60} color="black" />
-                        <Text style={styles.textIcon}> גלריה</Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-
-
-       {/* פרסם פריט */}
-                  <View>
-                    <TouchableOpacity
-                      onPress={() => this.handleSubmit()}
-                      style={styles.publishButton}
-                    >
-                      <Text style={{ color: "white" }}>פרסם פריט {"  "}</Text>
-                      <Icon
-                        name="upload"
-                        type="font-awesome"
-                        color="white"
-                        size={18}
-                      />
-                    </TouchableOpacity>
-                  </View>
-
-                  {!this.state.Show && (
-                    <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
-                  )}
-              
-              
-                </ScrollView>
+                    placeholder="שם הפריט"
+                    onChangeText={e => {
+                      this.setState({ itemName: e });
+                    }}
+                  />
                 </View>
 
-           
+                {/* קטגוריית הפריט */}
+
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="mouse-pointer"
+                    type="font-awesome"
+                    color="rgb(150,150,150)"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}>*</Text> */}
+
+                  <Dropdown
+                    // label="קטגוריית הפריט"
+                    placeholderTextColor="rgb(150,150,150)"
+                    itemColor="black"
+                    placeholder="קטגוריית הפריט"
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                    dropdownMargins={{ min: 0, max: 1 }}
+                    dropdownOffset={{ top: 0, left: 0 }}
+                    data={ItemTypes}
+                    onChangeText={(e, i) => this.ItemType(e, i)}
+                    inputContainerStyle={{ borderBottomWidth: 0 }}
+                    containerStyle={{ width: "90%", height: 10 }}
+                  />
+                </View>
+
+                {/* עיר ישוב */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="map-marker"
+                    type="font-awesome"
+                    color="rgb(150,150,150)"
+                    size={24}
+                  />
+                  <Fragment>
+                    {/* Single */}
+                    <SearchableDropdown
+                      // onPress={(item) => {
+                      //   // const items = this.state.selectedItems;
+                      //   // items.push(item)
+                      //   this.setState({ selectedItems: item });
+                      // }}
+                      placeholderTextColor="rgb(150,150,150)"
+                      onItemSelect={item => {
+                        // const items = this.state.selectedItems;
+                        // items.push(item)
+                        this.setState({ selectedItems: item });
+                      }}
+                      containerStyle={{ width: "100%" }}
+                      // onRemoveItem={(item, index) => {
+                      //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                      //   this.setState({ selectedItems: items });
+                      // }}
+                      itemStyle={{
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "white",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                        borderRadius: 5
+                      }}
+                      itemTextStyle={{ color: "#222" }}
+                      itemsContainerStyle={{ maxHeight: 200 }}
+                      items={data}
+                      // defaultIndex={2}
+                      resetValue={false}
+                      textInputProps={{
+                        placeholder: "עיר/ישוב",
+                        underlineColorAndroid: "transparent",
+                        style: {
+                          //  margin: 10,
+                          //  borderWidth: 1,
+
+                          marginLeft: "8%",
+                          fontSize: 14
+
+                          //  borderBottomColor: "rgb(150,150,150)",
+                        },
+                        onTextChange: text => console.log(text)
+                      }}
+                      listProps={{
+                        nestedScrollEnabled: true
+                      }}
+                    />
+                  </Fragment>
+                </View>
+
+                {/* מס' טלפון */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="phone"
+                    type="font-awesome"
+                    color="rgb(150,150,150)"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    keyboardType="number-pad"
+                    placeholderTextColor="rgb(150,150,150)"
+                    placeholder={"מס' טלפון"}
+                    onChangeText={e => {
+                      this.setState({ userPhone: e });
+                    }}
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* איש קשר  */}
+
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="user"
+                    type="font-awesome"
+                    color="rgb(150,150,150)"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    placeholder="איש קשר"
+                    placeholderTextColor="rgb(150,150,150)"
+                    onChangeText={e => {
+                      this.setState({ userName: e });
+                    }}
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* על הפריט */}
+                <View
+                  style={{
+                    marginTop: 20,
+                    borderWidth: 0.5,
+                    width: "70%",
+                    height: 100,
+                    backgroundColor: "rgba(255,255,255,.01)",
+                    justifyContent: "center",
+                    borderColor: "black"
+                  }}
+                >
+                  <TextInput
+                    multiline={true}
+                    maxLength={60}
+                    onChangeText={e => {
+                      this.setState({ itemAbout: e });
+                    }}
+                    placeholderTextColor="rgb(150,150,150)"
+                    placeholder="ספר בקצרה על הפריט עד 60 תווים..."
+                    style={{
+                      textAlign: "center",
+                      fontSize: 16
+                    }}
+                  />
+                </View>
+
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <TouchableOpacity
+                    style={{
+                      margin: 5,
+                      borderWidth: 1
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 120,
+                        width: 100
+                      }}
+                      source={require("../assets/plusBackground.png")}
+                    ></Image>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      margin: 5,
+                      borderWidth: 1
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 120,
+                        width: 100
+                      }}
+                      source={require("../assets/plusBackground.png")}
+                    ></Image>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      margin: 5,
+                      borderWidth: 1
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 120,
+                        width: 100
+                      }}
+                      source={require("../assets/plusBackground.png")}
+                    ></Image>
+                  </TouchableOpacity>
+                </View>
+                {/* מצלמה */}
+                {/* 
+                <View style={styles.addImage}>
+                  <TouchableOpacity
+                    onPress={this.openCamera}
+                    style={styles.uploadIcon}
+                  >
+                    <View>
+                      <Ionicons name="ios-camera" size={60} color="black" />
+                    </View>
+                    <Text style={styles.textIcon}>מצלמה</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={this.openGallery}
+                    style={styles.uploadIcon}
+                  >
+                    <View>
+                      <Ionicons name="md-images" size={60} color="black" />
+                      <Text style={styles.textIcon}> גלריה</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View> */}
+
+                {/* פרסם פריט */}
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.handleSubmit()}
+                    style={styles.publishButton}
+                  >
+                    <Text style={{ color: "white" }}>פרסם {"  "}</Text>
+                    <Icon
+                      name="upload"
+                      type="font-awesome"
+                      color="white"
+                      size={18}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                {!this.state.Show && (
+                  <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
+                )}
+              </View>
+            </ScrollView>
           </View>
         </View>
-        </ImageBackground>
+      </ImageBackground>
     );
   }
 }
-export default (Publish);
+export default Publish;
