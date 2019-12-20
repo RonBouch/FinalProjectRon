@@ -581,11 +581,7 @@ namespace DALproj
                 {
 
 
-                    if (email == null || email == "")
-                    {
-
-                        return u;
-                    }
+               
                     if (!reader.IsClosed)
                         reader.Close();
                     comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}')";
@@ -603,6 +599,8 @@ namespace DALproj
                                 LastName = lastName,
                                 Email = email,
                                 Password = password,
+                                Birthday = birthday,
+                                Gender = gender,
                                 Image = image,
 
                             };
