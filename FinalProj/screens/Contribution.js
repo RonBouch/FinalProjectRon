@@ -74,7 +74,7 @@ class Contribution extends Component {
 
   GetItemsFromFavorite = async () => {
     const data = {
-      userid: 1
+      userid: global.user.UserID
     };
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
@@ -211,7 +211,7 @@ class Contribution extends Component {
 
   Favorite = item => {
     const data = {
-      userid: 1,
+      userid: global.user.UserID,
       itemid: item.ItemID
     };
     fetch(
@@ -251,11 +251,8 @@ class Contribution extends Component {
 
     FilterItemTypes=(value,index)=>{
       if(index != 0){
-        console.log("index = > ",index)
-        // console.log("ITEM FROM DB => ",this.state.itemTypes[index].ItemTypeID)
         let typeId = this.state.itemTypes[index].ItemTypeID;
         let data = this.state.dataItems.filter((item)=>{return item.ItemType == typeId});
-        console.log("DATA +>",data)
         this.setState({items:data});
       }
      else{
@@ -263,7 +260,6 @@ class Contribution extends Component {
      }
     }
   render() {
-    // console.log("ItemType== >",this.state.itemTypes)
     let ItemTypes = [];
 
     if (this.state.itemTypes != null) {
@@ -296,7 +292,6 @@ class Contribution extends Component {
     let Items = [];
 
     if (this.state.items != null&&this.state.itemsFromFavorite!=null) {
-      console.log("Items from filter = > ",this.state.items)
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
           return (

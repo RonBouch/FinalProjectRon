@@ -29,7 +29,7 @@ const DNav = createDrawerNavigator(
     Home: { screen: Home },
 
 
-    FirstPage: { screen: FirstPage },
+    // FirstPage: { screen: FirstPage },
     Publish: { screen: Publish },
     S3: { screen: S3 },
 
@@ -49,10 +49,10 @@ const DNav = createDrawerNavigator(
     drawerBackgroundColor: "transparent"
   }
 );
-
-const AppContainer = createAppContainer(DNav);
-export default class DrawerNavigator extends Component {
-  render() {
-    return <AppContainer />;
-  }
-}
+export default DNav;
+// const AppContainer = createAppContainer(DNav);
+// export default class DrawerNavigator extends Component {
+//   render() {
+//     return <AppContainer />;
+//   }
+// }

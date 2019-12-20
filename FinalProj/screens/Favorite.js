@@ -121,7 +121,7 @@ export default class Favorite extends React.Component {
   }
 
   Favorite = () => {
-    console.log("state item ", this.state.item.ItemID);
+    // console.log("state item ", this.state.item.ItemID);
 
     if (this.state.item.ItemID != null) {
       const data = {
