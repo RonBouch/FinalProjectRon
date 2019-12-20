@@ -24,10 +24,7 @@ export default class LoginWithFacebook extends React.Component {
         const response = await fetch(
           `https://graph.facebook.com/me?fields=email,name,picture.type(large)&access_token=${token}`
         );
-        // Alert.alert("Logged in!", `Hi ${await response.json()}!`);
-        // console.log(await response.json());
-        // this.props.navigation.navigate("DrawerNavigator");
-        // return await response.json()
+      
 
         const user = await response.json();
         // console.log("user =", user);
