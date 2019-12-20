@@ -584,7 +584,7 @@ namespace DALproj
                
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}')";
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Birthday,Gender,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{birthday}','{gender}','{image}')";
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
                     {
