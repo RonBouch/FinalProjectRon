@@ -10,8 +10,12 @@ import {
   Alert,
   AsyncStorage
 } from "react-native";
-import { Icon } from "react-native-elements";
-import { withNavigation, NavigationActions,StackActions } from "react-navigation";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import {
+  withNavigation,
+  NavigationActions,
+  StackActions
+} from "react-navigation";
 import FirstPage from "../screens/FirstPage";
 class ContentComponent extends Component {
   constructor(props) {
@@ -44,15 +48,15 @@ class ContentComponent extends Component {
     this.focusListener.remove();
   }
 
-  logout = async () =>{
+  logout = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate('FirstPage');
+    this.props.navigation.navigate("FirstPage");
     //לצאת מהאפליקציה או לא
-  }
+  };
 
   render() {
     // console.log(global.user.Image)
-  
+
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -76,7 +80,8 @@ class ContentComponent extends Component {
                     }}
                     source={{
                       uri:
-                      global.user.Image!=null&& (this.state.img == global.user.Image)
+                        global.user.Image != null &&
+                        this.state.img == global.user.Image
                           ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                             this.state.img +
                             "?time" +
@@ -98,9 +103,11 @@ class ContentComponent extends Component {
                   textAlign: "center"
                 }}
               >
-                <Text style={[styles.text, { color: "white", fontSize: 16 }]}>
-
-                  {(global.user ? global.user.FirstName : '')} {(global.user ? global.user.LastName : '')}
+                <Text
+                  style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                >
+                  {global.user ? global.user.FirstName : ""}{" "}
+                  {global.user ? global.user.LastName : ""}
                 </Text>
               </View>
             </View>
@@ -110,7 +117,7 @@ class ContentComponent extends Component {
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
+                  style={{ width: "25%", textAlign: "center" }}
                   name="home"
                   type="font-awesome"
                   color="gray"
@@ -126,8 +133,8 @@ class ContentComponent extends Component {
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="thumbs-up"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="hand-holding-heart"
                   type="font-awesome"
                   color="gray"
                   size={28}
@@ -142,8 +149,8 @@ class ContentComponent extends Component {
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="user"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="gratipay"
                   type="font-awesome"
                   color="gray"
                   size={28}
@@ -158,8 +165,8 @@ class ContentComponent extends Component {
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="envelope"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="place-of-worship"
                   type="font-awesome"
                   color="gray"
                   size={28}
@@ -168,55 +175,55 @@ class ContentComponent extends Component {
               </View>
             </TouchableHighlight>
 
+            <View style={styles.line}></View>
+
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
               onPress={() => this.props.navigation.navigate("Profile")}
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="envelope"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="user-edit"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={24}
                 />
                 <Text style={styles.text}>פרופיל</Text>
               </View>
             </TouchableHighlight>
-
-            <View style={styles.line}></View>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
               onPress={() => this.props.navigation.navigate("S3")}
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="share"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="info"
                   type="font-awesome"
                   color="gray"
                   size={28}
                 />
-                <Text style={styles.text}>About</Text>
+                <Text style={styles.text}>אודות</Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
               onPress={this.logout}
-                
-            //     (props) =>Alert.alert(
-            //     'Log out',
-            //     'Do you want to logout?',
-            //     [
-            //       {text: 'Cancel', onPress: () => {return null}},
-            //       {text: 'Confirm', onPress: () => {
-            //         // AsyncStorage.clear();
-            // }}
+
+              //     (props) =>Alert.alert(
+              //     'Log out',
+              //     'Do you want to logout?',
+              //     [
+              //       {text: 'Cancel', onPress: () => {return null}},
+              //       {text: 'Confirm', onPress: () => {
+              //         // AsyncStorage.clear();
+              // }}
             >
               <View style={styles.row}>
                 <Icon
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="home"
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="sign-out-alt"
                   type="font-awesome"
                   color="gray"
                   size={28}
@@ -254,8 +261,9 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    paddingVertical: 15,
-    paddingLeft: 10
+    width: "100%",
+    paddingVertical: 15
+    // paddingLeft: 10
   },
   menu: {
     width: 10,
@@ -265,6 +273,7 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   text: {
+    width: "30%",
     fontSize: 20,
     fontWeight: "bold",
     color: "#111"
