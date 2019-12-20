@@ -357,6 +357,19 @@ class Publish extends React.Component {
     }
 
     const data = cities;
+    // const napa =[];
+    // if(data!=null){
+    //   data.map((city,i)=>{
+     
+    //     if(napa.includes(city.lishka)!=true)
+    //     {
+
+    //       napa.push(city.lishka);
+
+    //     }
+    //   })
+    // }
+    // console.log("napa  == = = = = ", napa)
 
     return (
       <ImageBackground
