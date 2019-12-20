@@ -79,7 +79,6 @@ class Publish extends React.Component {
   }
 
   ItemType = (e,i) => {
-    console.log(e," ",i+2)
     this.setState({
       itemType: (i+2)
     });
@@ -114,7 +113,6 @@ class Publish extends React.Component {
   CheckCity = async () => {
     const { city } = this.state;
     var detials = city.split(",", 2);
-    // console.log("detials = " + detials);
     if (detials[1] !== "") {
       this.setState({
         delta: 0.01
@@ -135,13 +133,11 @@ class Publish extends React.Component {
     }
 
     // let geocode = await Location.geocodeAsync(address);
-    // console.log("geocode  = " + geocode[0].latitude);
 
     // this.setState({
     //   latitude: geocode[0].latitude,
     //   longitude: geocode[0].longitude
     // });
-    // console.log("latitdue  = " + this.state.latitude);
   };
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
@@ -163,7 +159,6 @@ class Publish extends React.Component {
     let type = match ? `image/${match[1]}` : `image`;
 
     const formData = { base64:imageBase64, imageName: "imgRon1.jpg" };
-    // console.log("formdata = ", formData);
     await fetch("http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage" ,  
     {
       method: "post",
@@ -261,7 +256,6 @@ class Publish extends React.Component {
         base64:this.state.formData.base64!=null?this.state.formData.base64:""
       
       };
-      console.log(JSON.stringify(data));
 
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
@@ -274,7 +268,6 @@ class Publish extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
@@ -329,7 +322,6 @@ class Publish extends React.Component {
       .then(
         result => {
           let itemTypes = JSON.parse(result.d);
-          console.log(itemTypes)
           if (itemTypes == null) {
             this.setState({
               message: "לא קיימים סוגי פריטים"
@@ -353,7 +345,6 @@ class Publish extends React.Component {
   }
 
   render() {
-    console.log("item type = ",this.state.itemType)
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type,index) => {
@@ -505,7 +496,6 @@ class Publish extends React.Component {
      {/* Single */}
      <SearchableDropdown
      // onPress={(item) => {
-     //   console.log(item)
      //   // const items = this.state.selectedItems;
      //   // items.push(item)
      //   this.setState({ selectedItems: item });
@@ -513,7 +503,6 @@ class Publish extends React.Component {
      placeholderTextColor="rgb(150,150,150)"
 
        onItemSelect={(item) => {
-        //  console.log(item)
          // const items = this.state.selectedItems;
          // items.push(item)
          this.setState({ selectedItems: item });
@@ -633,7 +622,6 @@ class Publish extends React.Component {
                       maxLength={60}
                       onChangeText={e => {
                         this.setState({ itemAbout: e });
-                        // console.log(this.state.itemAbout);
                       }}
                       placeholder="ספר בקצרה על הנכס עד 60 תווים..."
                       style={{

@@ -26,8 +26,7 @@ class ContentComponent extends Component {
   }
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
-    console.log("Change Picture .");
-    console.log("global contnenet ", global.user);
+   
     this.setState({ img: global.user.UserID + global.user.Email + ".jpg" });
     // do some stuff on every screen focus
   };
@@ -55,8 +54,7 @@ class ContentComponent extends Component {
   };
 
   render() {
-    // console.log(global.user.Image)
-
+  
     return (
       <TouchableOpacity
         activeOpacity={1}

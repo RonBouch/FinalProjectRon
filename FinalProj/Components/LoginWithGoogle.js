@@ -104,7 +104,6 @@ export default class LoginWithGoogle extends React.Component {
   };
 
   storeData = async (key, value) => {
-    console.log("value ->", JSON.stringify(value));
     await AsyncStorage.setItem(key, JSON.stringify(value));
   };
 

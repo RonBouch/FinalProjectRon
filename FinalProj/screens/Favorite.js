@@ -121,7 +121,6 @@ export default class Favorite extends React.Component {
   }
 
   Favorite = () => {
-    // console.log("state item ", this.state.item.ItemID);
 
     if (this.state.item.ItemID != null) {
       const data = {
@@ -144,11 +143,9 @@ export default class Favorite extends React.Component {
         })
         .then(
           result => {
-            // console.log("fetch POST= ", result);
 
             let favorite = JSON.parse(result.d);
             this.GetItemsFromFavorite();
-            console.log("YESYESTWS");
             if (favorite == -1) {
               console.log("Allready Exist this favorite");
               return;
