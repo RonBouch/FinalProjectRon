@@ -546,7 +546,7 @@ namespace DALproj
         }
 
 
-        public static User RegisterWithFacebook(string firstName, string lastName, string email, string password, string image)
+        public static User RegisterWithFacebook(string firstName, string lastName, string email, string password,string birthday,string gender, string image)
         {
             User u = null;
             SqlDataReader reader = null;
@@ -567,6 +567,8 @@ namespace DALproj
                         LastName = reader["LastName"].ToString(),
                         Email = email,
                         Password = null,
+                        Birthday = reader["Birthday"].ToString(),
+                        Gender = reader["Gender"].ToString(),
                         Image = reader["Image"].ToString(),
 
                     };

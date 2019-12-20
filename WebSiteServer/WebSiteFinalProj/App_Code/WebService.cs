@@ -44,9 +44,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string RegisterWithFacebook(string firstName, string lastName, string email, string password, string image)
+    public string RegisterWithFacebook(string firstName, string lastName, string email, string password, string birthday, string gender, string image)
     {
-        return BALServices.RegisterWithFacebook(firstName, lastName, email, password, image);
+        return BALServices.RegisterWithFacebook(firstName, lastName, email, password, birthday, gender, image);
 
     }
     [WebMethod]
