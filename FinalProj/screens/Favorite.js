@@ -125,7 +125,7 @@ export default class Favorite extends React.Component {
 
     if (this.state.item.ItemID != null) {
       const data = {
-        userid: 1,
+        userid: global.user.UserID,
         itemid: this.state.item.ItemID
       };
       fetch(
@@ -223,7 +223,7 @@ export default class Favorite extends React.Component {
             <Image
               source={{
                 uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/image/" +
+                  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                   item.ItemImg
               }}
               style={{
