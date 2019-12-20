@@ -34,19 +34,54 @@ export default class LoginWithFacebook extends React.Component {
         const response = await fetch(
           `https://graph.facebook.com/me?fields=email,name,picture.type(large)&access_token=${token}`
         );
-        // Alert.alert("Logged in!", `Hi ${await response.json()}!`);
-        // console.log(await response.json());
-        // this.props.navigation.navigate("DrawerNavigator");
-        // return await response.json()
+      
 
         const user = await response.json();
-        // console.log("user =", user);
-
-        this.setState({
-          firstName: user.name,
-          image: user.picture.data.url,
-          email: user.email
-        });
+        if(user!=null){
+          const data = {
+            firstName: user.name,
+            lastName: "",
+            email: user.email ,
+            password: "Facebook",
+            image:user.picture.data.url 
+          };
+          console.log("DAta To DB",data)
+          fetch(
+            "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithFacebook",
+            {
+              method: "post",
+              headers: new Headers({
+                "Content-Type": "application/Json;"
+              }),
+              body: JSON.stringify(data)
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(
+              result => {
+                let u = JSON.parse(result.d);
+                console.log("u   -- > ",u)
+                if (u == null) {
+                  this.props.navigation.navigate("FirstPage");
+      
+                  return;
+                } else {
+                  // console.log("U = " ,u);
+                  global.user = u;
+                  // this.storeData("user", u);
+                  this.props.navigation.navigate("DrawerNavigator");
+                }
+                console.log(result.d);
+                console.log(result);
+              },
+              error => {
+                console.log("err post=", error);
+              }
+            );
+        }
+      
         return;
       } else {
         // type === 'cancel'
@@ -55,47 +90,6 @@ export default class LoginWithFacebook extends React.Component {
       alert(`Facebook Login Error: ${message}`);
     }
 
-    const data = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.Email,
-      password: "Facebook",
-      gender: "Facebook",
-      birthday: "1900-01-01",
-      image: this.state.image
-    };
-    fetch(
-      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithFacebook",
-      {
-        method: "post",
-        headers: new Headers({
-          "Content-Type": "application/Json;"
-        }),
-        body: JSON.stringify(data)
-      }
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          let u = JSON.parse(result.d);
-          if (u == null) {
-            this.props.navigation.navigate("FirstPage");
-
-            return;
-          } else {
-            // console.log("U = " ,u);
-            global.user = u;
-            this.storeData("user", u);
-            this.props.navigation.navigate("DrawerNavigator");
-          }
-          console.log(result.d);
-          console.log(result);
-        },
-        error => {
-          console.log("err post=", error);
-        }
-      );
+    
   }
 }
