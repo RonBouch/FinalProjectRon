@@ -54,7 +54,7 @@ export default class Favorite extends React.Component {
 
   GetItemsFromFavorite = async () => {
     const data = {
-      userid: 1
+      userid:global.user.UserID
     };
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
