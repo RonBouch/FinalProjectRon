@@ -143,7 +143,6 @@ export default class Favorite extends React.Component {
         })
         .then(
           result => {
-            // console.log("fetch POST= ", result);
 
             let favorite = JSON.parse(result.d);
             this.GetItemsFromFavorite();
