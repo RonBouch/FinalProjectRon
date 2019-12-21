@@ -67,7 +67,7 @@ class Publish extends React.Component {
       city: "",
       itemAbout: "",
       itemImg: "sdvw",
-
+     img:"",
       imageName: "",
       imageBade64: ""
     };
@@ -205,9 +205,10 @@ class Publish extends React.Component {
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
           base64: imageBase64,
-          imageName: global.user.UserID + this.state.itemName + ".jpg"
+          // imageName: global.user.UserID + this.state.itemName + ".jpg"
         };
-        this.setState({ formData: formData });
+        this.setState({ formData: formData,img:result.uri });
+        console.log("uri =  =",result.uri)
         //לעלות את התמונה לשרת fetch עושה
 
         // await fetch(
@@ -607,47 +608,68 @@ class Publish extends React.Component {
                 </View>
 
                 <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <TouchableOpacity
+                  <TouchableOpacity  onPress={this.openGallery}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-                    <Image
+                 {this.state.img!=""? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={require("../assets/plusBackground.png")}
-                    ></Image>
+                      source={{uri:this.state.img}}
+                    ></Image>: <Image
+                    style={{
+                      height: 120,
+                      width: 100
+                    }}
+                    source={require("../assets/plusBackground.png")}
+                  ></Image>}
+                   
                   </TouchableOpacity>
-                  <TouchableOpacity
+                  <TouchableOpacity  onPress={this.openGallery}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-                    <Image
+              {this.state.img!=""? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={require("../assets/plusBackground.png")}
-                    ></Image>
+                      source={{uri:this.state.img}}
+                    ></Image>: <Image
+                    style={{
+                      height: 120,
+                      width: 100
+                    }}
+                    source={require("../assets/plusBackground.png")}
+                  ></Image>}
+                   
                   </TouchableOpacity>
-                  <TouchableOpacity
+                  <TouchableOpacity  onPress={this.openGallery}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-                    <Image
+                  {this.state.img!=""? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={require("../assets/plusBackground.png")}
-                    ></Image>
+                      source={{uri:this.state.img}}
+                    ></Image>: <Image
+                    style={{
+                      height: 120,
+                      width: 100
+                    }}
+                    source={require("../assets/plusBackground.png")}
+                  ></Image>}
+                   
                   </TouchableOpacity>
                 </View>
                 {/* מצלמה */}
