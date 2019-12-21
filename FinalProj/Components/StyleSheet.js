@@ -365,5 +365,14 @@ export default StyleSheet.create({
     borderColor: "white",
     borderWidth: 1,
     marginTop: 10
+  },
+  inputUpdate: {
+    flexDirection: "row",
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 1,
+    marginTop: 5
   }
 });

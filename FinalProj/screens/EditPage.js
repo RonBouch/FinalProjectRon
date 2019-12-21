@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
@@ -38,7 +37,7 @@ var radio_props = [
   }
 ];
 
-export default class Register extends React.Component {
+export default class EditPage extends React.Component {
   constructor(props) {
     super(props);
     this.firstName = global.user.FirstNane;
@@ -114,7 +113,7 @@ export default class Register extends React.Component {
   EditProfile = () => {
     if (this.validateForm()) {
       const data = {
-        id:global.user.UserID,
+        id: global.user.UserID,
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
@@ -149,9 +148,8 @@ export default class Register extends React.Component {
               console.log("ID" + id);
               id = u.ID;
 
-              alert('היי ,'+this.firstName+" "+this.lastName);
+              alert("היי ," + this.firstName + " " + this.lastName);
               this.props.navigation.navigate("HomePage");
-              
             }
             console.log(result.d);
             console.log(result);
@@ -165,9 +163,8 @@ export default class Register extends React.Component {
 
   render() {
     return (
- 
-        <View style={styles.container}>
-          <View style={styles.main}>
+      <View style={styles.container}>
+        <View style={styles.main}>
           <View style={styles.topBar}>
             <TouchableHighlight
               onPress={() =>
@@ -194,62 +191,61 @@ export default class Register extends React.Component {
               />
             </TouchableHighlight>
           </View>
-         
-            <KeyboardAvoidingView style={styles.container} behavior="padding">
-            
-              <TextInput
-                style={styles.input}
-                placeholder="שם פרטי"
-                defaultValue={global.user.FirstName}
-                onChangeText={this.changeFirstName}
-              />
 
-              <TextInput
-                style={styles.input}
-                placeholder="שם משפחה"
-                defaultValue={global.user.LastName}
-                onChangeText={this.changeLastName}
-              />
+          <KeyboardAvoidingView style={styles.container} behavior="padding">
+            <TextInput
+              style={styles.input}
+              placeholder="שם פרטי"
+              defaultValue={global.user.FirstName}
+              onChangeText={this.changeFirstName}
+            />
 
-              <TextInput
-                style={styles.input}
-                keyboardType="email-address"
-                placeholder="אמייל"
-                defaultValue={global.user.Email}
-                onChangeText={this.changeEmail}
-              />
+            <TextInput
+              style={styles.input}
+              placeholder="שם משפחה"
+              defaultValue={global.user.LastName}
+              onChangeText={this.changeLastName}
+            />
 
-              <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                placeholder="סיסמא"
-                defaultValue={global.user.Password}
-                onChangeText={this.changePassword}
-              />
+            <TextInput
+              style={styles.input}
+              keyboardType="email-address"
+              placeholder="אמייל"
+              defaultValue={global.user.Email}
+              onChangeText={this.changeEmail}
+            />
 
-              <TouchableOpacity
-                style={styles.registerButton2}
-                onPress={this.EditProfile}
-              >
-                <Text>
-                  עדכן
-                  {"  "}
-                </Text>
-                <Icon name="edit" type="font-awesome" color="black" size={18} />
-              </TouchableOpacity>
+            <TextInput
+              style={styles.input}
+              secureTextEntry={true}
+              placeholder="סיסמא"
+              defaultValue={global.user.Password}
+              onChangeText={this.changePassword}
+            />
 
-              <Text style={styles.textMessage}>
-                {this.state.errors.firstName ||
-                  this.state.errors.lastName ||
-                  this.state.errors.email ||
-                  this.state.errors.password ||
-                  this.state.errors.verifyPassword ||
-                  this.state.errors.birthday ||
-                  this.state.errors.gender}
+            <TouchableOpacity
+              style={styles.registerButton2}
+              onPress={this.EditProfile}
+            >
+              <Text>
+                עדכן
+                {"  "}
               </Text>
-            </KeyboardAvoidingView>
-          </View>
+              <Icon name="edit" type="font-awesome" color="black" size={18} />
+            </TouchableOpacity>
+
+            <Text style={styles.textMessage}>
+              {this.state.errors.firstName ||
+                this.state.errors.lastName ||
+                this.state.errors.email ||
+                this.state.errors.password ||
+                this.state.errors.verifyPassword ||
+                this.state.errors.birthday ||
+                this.state.errors.gender}
+            </Text>
+          </KeyboardAvoidingView>
         </View>
+      </View>
     );
   }
 }

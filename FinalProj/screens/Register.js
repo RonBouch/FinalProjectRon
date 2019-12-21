@@ -249,7 +249,7 @@ class Register extends React.Component {
           date={this.state.date}
           mode="date"
           placeholder="יום הולדת"
-          format="DD-MM-YYYY"
+          format="DD/MM/YYYY"
           minDate={
             new Date().getDate() +
             "-" +

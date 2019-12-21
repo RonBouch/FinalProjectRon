@@ -12,6 +12,7 @@ import Profile from "../screens/Profile";
 import EditPage from "../screens/EditPage";
 import ProfilePost from "../screens/ProfilePost";
 import PostPage from "../screens/PostPage";
+import EditProfile from "../screens/EditProfile";
 import FirstPage from "../screens/FirstPage";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
@@ -26,6 +27,8 @@ const DNav = createDrawerNavigator(
     Contribution: { screen: Contribution },
 
     Profile: { screen: Profile },
+
+    EditProfile: { screen: EditProfile },
 
     Home: { screen: Home },
 
