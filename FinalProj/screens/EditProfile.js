@@ -13,6 +13,7 @@ import {
   KeyboardAvoidingView,
   Image
 } from "react-native";
+import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
 import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
