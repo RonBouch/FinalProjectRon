@@ -575,7 +575,7 @@ class Contribution extends Component {
 
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               position: "absolute",
               bottom: 10,
@@ -592,7 +592,7 @@ class Contribution extends Component {
               source={require("../assets/add-reminder.png")}
               style={{ width: 50, height: 50, borderRadius: 200 }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </ImageBackground>
     );
