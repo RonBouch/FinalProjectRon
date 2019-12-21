@@ -424,7 +424,6 @@ class Publish extends React.Component {
               </TouchableHighlight>
             </View>
 
-            <ScrollView style={styles.scrollview}>
               <View
                 style={{ alignItems: "center", marginTop: 10, width: "100%" }}
               >
@@ -493,7 +492,7 @@ class Publish extends React.Component {
                       //   this.setState({ selectedItems: item });
                       // }}
                       placeholderTextColor="rgb(150,150,150)"
-                      onItemSelect={item => {
+                      onItemSelect={(item) => {
                         console.log(item,"item")
                         // const items = this.state.selectedItems;
                         // items.push(item)
@@ -510,7 +509,7 @@ class Publish extends React.Component {
                         backgroundColor: "white",
                         borderColor: "#bbb",
                         borderWidth: 1,
-                        borderRadius: 5
+                        borderRadius: 5,
                       }}
                       itemTextStyle={{ color: "#222" }}
                       itemsContainerStyle={{ maxHeight: 200 }}
@@ -694,8 +693,11 @@ class Publish extends React.Component {
                 {!this.state.Show && (
                   <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
                 )}
-              </View>
+                <ScrollView  contentContainerStyle={{flexGrow:1}}  horizontal showsHorizontalScrollIndicator={false} >
+
             </ScrollView>
+
+              </View>
           </View>
         </View>
       </ImageBackground>
