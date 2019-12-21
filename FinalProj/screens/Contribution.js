@@ -257,6 +257,8 @@ class Contribution extends Component {
     }
   };
   render() {
+    const { navigate } = this.props.navigation;
+
     let ItemTypes = [];
 
     if (this.state.itemTypes != null) {
@@ -291,7 +293,7 @@ class Contribution extends Component {
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
           return (
-            <View
+            <TouchableOpacity
               key={index}
               style={{
                 backgroundColor: "white",
@@ -302,6 +304,11 @@ class Contribution extends Component {
                 borderColor: "#e6e6fa",
                 elevation: 10
               }}
+              onPress={() =>
+                navigate("PostPage", {
+                  item: item
+                })
+              }
             >
               {/* <View style={styles.line}></View> */}
               <View
@@ -350,7 +357,7 @@ class Contribution extends Component {
                 }}
                 style={{
                   width: "100%",
-                  height: "50%"
+                  height: "70%"
                 }}
               />
               <View
@@ -364,40 +371,68 @@ class Contribution extends Component {
                   this.infoWindow(index);
                 }}
               >
-                <Text
+                <View
                   style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    fontFamily: "serif"
+                    flexDirection: "column",
+                    marginTop: 30,
+                    alignItems: "center"
                   }}
                 >
-                  {item.ItemDate}
-                </Text>
-                <Text
+                  <Text style={{ color: "gray" }}>תאריך</Text>
+                  <Text
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      fontFamily: "serif"
+                    }}
+                  >
+                    {item.ItemDate}
+                  </Text>
+                </View>
+                <View
                   style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontFamily: "serif",
-                    fontSize: 18
+                    flexDirection: "column",
+                    marginTop: 30,
+                    alignItems: "center"
                   }}
                 >
-                  {item.City}
-                </Text>
-                <Text
+                  <Text style={{ color: "gray" }}>עיר</Text>
+
+                  <Text
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontFamily: "serif",
+                      fontSize: 18
+                    }}
+                  >
+                    {item.City}
+                  </Text>
+                </View>
+                <View
                   style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    fontFamily: "serif"
+                    flexDirection: "column",
+                    marginTop: 30,
+                    alignItems: "center"
                   }}
                 >
-                  {item.ItemName}
-                </Text>
+                  <Text style={{ color: "gray" }}>שם פריט</Text>
+                  <Text
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      fontFamily: "serif"
+                    }}
+                  >
+                    {item.ItemName}
+                  </Text>
+                </View>
               </View>
-              <View style={{ margin: 10, height: "20%" }}>
+              {/* <View style={{ margin: 10, height: "20%" }}>
                 <Text>{item.ItemAbout}</Text>
-              </View>
+              </View> */}
               <View
                 style={{
                   flexDirection: "row",
@@ -405,7 +440,7 @@ class Contribution extends Component {
                   height: "10%"
                 }}
               ></View>
-            </View>
+            </TouchableOpacity>
           );
         }
       });

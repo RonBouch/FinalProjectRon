@@ -11,6 +11,7 @@ import Publish from "../screens/Publish";
 import Profile from "../screens/Profile";
 import EditPage from "../screens/EditPage";
 import ProfilePost from "../screens/ProfilePost";
+import PostPage from "../screens/PostPage";
 import FirstPage from "../screens/FirstPage";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
@@ -19,7 +20,7 @@ const DNav = createDrawerNavigator(
   {
     Contribution: { screen: Contribution },
 
-    Publish:{screen:Publish},
+    Publish: { screen: Publish },
     S3: { screen: S3 },
 
     Contribution: { screen: Contribution },
@@ -28,12 +29,13 @@ const DNav = createDrawerNavigator(
 
     Home: { screen: Home },
 
-
     // FirstPage: { screen: FirstPage },
     Publish: { screen: Publish },
     S3: { screen: S3 },
 
     ProfilePost: { screen: ProfilePost },
+
+    PostPage: { screen: PostPage },
 
     EditPage: { screen: EditPage },
 

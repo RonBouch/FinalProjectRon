@@ -56,7 +56,7 @@ class AssociationPage extends Component {
     this.state.adress = this.state.association.AssociationAdress;
     this.state.phone = this.state.association.AssociationPhone;
     this.state.additionalPhone = this.state.association.AssociationAdditionalPhone;
-
+    console.log("image: ", this.state.association.AssociationImage);
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
