@@ -9,8 +9,7 @@ import {
   ScrollView,
   Linking,
   Dimensions,
-  TextInput,
-  
+  TextInput
 } from "react-native";
 import region from "../region";
 import { Dropdown } from "react-native-material-dropdown";
@@ -18,7 +17,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
-import {  createAppContainer } from "react-navigation";
+import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import Publish from "../screens/Publish";
 import Favorite from "../screens/Favorite";
@@ -233,86 +232,75 @@ class Contribution extends Component {
   FilterItemTypes = (value, index) => {
     if (index != 0) {
       let data = null;
-      let typeId =null;
-      console.log(index)
-      if(this.state.filterItemsByRegion!=null){
-    
-         typeId = this.state.itemTypes[index].ItemTypeID;
+      let typeId = null;
+      console.log(index);
+      if (this.state.filterItemsByRegion != null) {
+        typeId = this.state.itemTypes[index].ItemTypeID;
 
-         data = this.state.dataItems.filter(item => {
-          console.log(item)
-          return (item.ItemType == typeId&& item.Region == this.state.filterItemsByRegion);
+        data = this.state.dataItems.filter(item => {
+          console.log(item);
+          return (
+            item.ItemType == typeId &&
+            item.Region == this.state.filterItemsByRegion
+          );
+        });
+      } else {
+        typeId = this.state.itemTypes[index].ItemTypeID;
+        console.log(typeId);
+
+        data = this.state.dataItems.filter(item => {
+          console.log(item);
+
+          return item.ItemType == typeId;
         });
       }
-        else{
-           typeId = this.state.itemTypes[index].ItemTypeID;
-          console.log(typeId)
-
-          data = this.state.dataItems.filter(item => {
-            console.log(item)
-
-           return item.ItemType == typeId;
-         });
-        }
-        this.setState({ items: data,
-          filterItemsByType:typeId });
-      
-      
-    } 
-    else {
-      if(this.state.filterItemsByRegion!=null){
+      this.setState({ items: data, filterItemsByType: typeId });
+    } else {
+      if (this.state.filterItemsByRegion != null) {
         let data = this.state.dataItems.filter(item => {
           return item.Region == this.state.filterItemsByRegion;
-          
-      });
-      this.setState({ items: data,
-        filterItemsByType:null });
-    }
-      else{
-        this.setState({ items: this.state.dataItems,
-          filterItemsByType:null });
+        });
+        this.setState({ items: data, filterItemsByType: null });
+      } else {
+        this.setState({ items: this.state.dataItems, filterItemsByType: null });
       }
-      
     }
   };
   FilterByRegion = (value, index) => {
     if (index != 0) {
-      let data=null;
-      if(this.state.filterItemsByType!=null){
-         data = this.state.dataItems.filter(item => {
-          return (item.Region == value && this.state.filterItemsByType==item.ItemType);
+      let data = null;
+      if (this.state.filterItemsByType != null) {
+        data = this.state.dataItems.filter(item => {
+          return (
+            item.Region == value &&
+            this.state.filterItemsByType == item.ItemType
+          );
         });
-
-      }
-       else{
-         data = this.state.dataItems.filter(item => {
+      } else {
+        data = this.state.dataItems.filter(item => {
           return item.Region == value;
         });
-       }
-        this.setState({ items: data,
-          filterItemsByRegion:value });
-     
+      }
+      this.setState({ items: data, filterItemsByRegion: value });
     } else {
-      if(this.state.filterItemsByType!=null){
+      if (this.state.filterItemsByType != null) {
         let data = this.state.dataItems.filter(item => {
           return item.ItemType == this.state.filterItemsByType;
-          
-      });
-      this.setState({ items: data,
-        filterItemsByRegion:null });
-    }
-      else{
-        this.setState({ items: this.state.dataItems,
-          filterItemsByRegion:null });
+        });
+        this.setState({ items: data, filterItemsByRegion: null });
+      } else {
+        this.setState({
+          items: this.state.dataItems,
+          filterItemsByRegion: null
+        });
       }
-      
     }
   };
   render() {
     const { navigate } = this.props.navigation;
 
     let ItemTypes = [];
-    let data= region;
+    let data = region;
     let Items = [];
 
     if (this.state.itemTypes != null) {
@@ -321,13 +309,8 @@ class Contribution extends Component {
       });
     }
 
-   
-  
-
     if (this.state.items != null && this.state.itemsFromFavorite != null) {
       Items = this.state.items.map((item, index) => {
-
-
         if (item.ItemName.includes(this.state.searchItem)) {
           return (
             <TouchableOpacity
@@ -378,31 +361,37 @@ class Contribution extends Component {
                   )}
                 </TouchableOpacity>
                 {/* <TouchableOpacity>
-                <Icon
-                  name="md-call"
-                  size={30}
-                  color="green"
-                  onPress={() => this._pressCall(item.UserPhone)}
-                />
-              </TouchableOpacity> */}
+                  <Icon
+                    name="md-call"
+                    size={30}
+                    color="green"
+                    onPress={() => this._pressCall(item.UserPhone)}
+                    
+                  />
+                </TouchableOpacity> */}
               </View>
-              <Image
-                source={{
-                  uri:
-                    "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                    item.ItemImg
-                }}
-                style={{
-                  width: "100%",
-                  height: "70%"
-                }}
-              />
+              <View style={{ height: "70%" }}>
+                <Image
+                  source={{
+                    uri:
+                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+                      item.ItemImg
+                  }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderTopLeftRadius: 100,
+                    borderBottomRightRadius: 100
+                  }}
+                />
+              </View>
               <View
                 style={{
                   justifyContent: "space-around",
                   flexDirection: "row-reverse",
-                  alignItems: "center",
-                  height: "10%"
+                  alignContant: "center",
+                  height: "30%",
+                  marginTop: 10
                 }}
                 onPress={() => {
                   this.infoWindow(index);
@@ -411,14 +400,13 @@ class Contribution extends Component {
                 <View
                   style={{
                     flexDirection: "column",
-                    marginTop: 30,
                     alignItems: "center"
                   }}
                 >
                   <Text style={{ color: "gray" }}>תאריך</Text>
                   <Text
                     style={{
-                      color: "black",
+                      color: "#6495ed",
                       fontWeight: "bold",
                       fontSize: 18,
                       fontFamily: "serif"
@@ -430,7 +418,6 @@ class Contribution extends Component {
                 <View
                   style={{
                     flexDirection: "column",
-                    marginTop: 30,
                     alignItems: "center"
                   }}
                 >
@@ -438,7 +425,7 @@ class Contribution extends Component {
 
                   <Text
                     style={{
-                      color: "black",
+                      color: "#6495ed",
                       fontWeight: "bold",
                       fontFamily: "serif",
                       fontSize: 18
@@ -450,14 +437,13 @@ class Contribution extends Component {
                 <View
                   style={{
                     flexDirection: "column",
-                    marginTop: 30,
                     alignItems: "center"
                   }}
                 >
                   <Text style={{ color: "gray" }}>שם פריט</Text>
                   <Text
                     style={{
-                      color: "black",
+                      color: "#6495ed",
                       fontWeight: "bold",
                       fontSize: 18,
                       fontFamily: "serif"
@@ -467,16 +453,6 @@ class Contribution extends Component {
                   </Text>
                 </View>
               </View>
-              {/* <View style={{ margin: 10, height: "20%" }}>
-                <Text>{item.ItemAbout}</Text>
-              </View> */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  height: "10%"
-                }}
-              ></View>
             </TouchableOpacity>
           );
         }
@@ -537,7 +513,7 @@ class Contribution extends Component {
             </View>
             <View
               style={{
-                width: "100%",         
+                width: "100%",
                 alignItems: "center",
                 backgroundColor: "white",
                 elevation: 15,
@@ -605,7 +581,8 @@ class Contribution extends Component {
                   data={data}
                   onChangeText={(value, index) => {
                     this.FilterByRegion(value, index);
-                  }}                />
+                  }}
+                />
               </View>
             </View>
 
