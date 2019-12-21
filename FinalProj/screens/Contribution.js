@@ -12,6 +12,8 @@ import {
   TextInput,
   ActionButton
 } from "react-native";
+import region from "../region";
+
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
 
@@ -38,6 +40,8 @@ class Contribution extends Component {
       item: null,
       items: null,
       dataItems: null,
+      filterItemsByRegion: null,
+      filterItemsByType: null,
       extraDetails: -1,
       showImg: false,
       checkedFavorite: false,
@@ -190,6 +194,7 @@ class Contribution extends Component {
     this.setState({
       region: e
     });
+    console.log(e)
   };
   infoWindow = (index, item) => {
     if (this.state.extraDetails == -1 || this.state.extraDetails != index) {
@@ -247,19 +252,88 @@ class Contribution extends Component {
 
   FilterItemTypes = (value, index) => {
     if (index != 0) {
-      let typeId = this.state.itemTypes[index].ItemTypeID;
-      let data = this.state.dataItems.filter(item => {
-        return item.ItemType == typeId;
+      let data = null;
+      let typeId =null;
+      console.log(index)
+      if(this.state.filterItemsByRegion!=null){
+    
+         typeId = this.state.itemTypes[index].ItemTypeID;
+
+         data = this.state.dataItems.filter(item => {
+          console.log(item)
+          return (item.ItemType == typeId&& item.Region == this.state.filterItemsByRegion);
+        });
+      }
+        else{
+           typeId = this.state.itemTypes[index].ItemTypeID;
+          console.log(typeId)
+
+          data = this.state.dataItems.filter(item => {
+            console.log(item)
+
+           return item.ItemType == typeId;
+         });
+        }
+        this.setState({ items: data,
+          filterItemsByType:typeId });
+      
+      
+    } 
+    else {
+      if(this.state.filterItemsByRegion!=null){
+        let data = this.state.dataItems.filter(item => {
+          return item.Region == this.state.filterItemsByRegion;
+          
       });
-      this.setState({ items: data });
+      this.setState({ items: data,
+        filterItemsByType:null });
+    }
+      else{
+        this.setState({ items: this.state.dataItems,
+          filterItemsByType:null });
+      }
+      
+    }
+  };
+  FilterByRegion = (value, index) => {
+    if (index != 0) {
+      let data=null;
+      if(this.state.filterItemsByType!=null){
+         data = this.state.dataItems.filter(item => {
+          return (item.Region == value && this.state.filterItemsByType==item.ItemType);
+        });
+
+      }
+       else{
+         data = this.state.dataItems.filter(item => {
+          return item.Region == value;
+        });
+       }
+        this.setState({ items: data,
+          filterItemsByRegion:value });
+     
     } else {
-      this.setState({ items: this.state.dataItems });
+      if(this.state.filterItemsByType!=null){
+        let data = this.state.dataItems.filter(item => {
+          return item.ItemType == this.state.filterItemsByType;
+          
+      });
+      this.setState({ items: data,
+        filterItemsByRegion:null });
+    }
+      else{
+        this.setState({ items: this.state.dataItems,
+          filterItemsByRegion:null });
+      }
+      
     }
   };
   render() {
     const { navigate } = this.props.navigation;
 
     let ItemTypes = [];
+    let data= region;
+    let Items = [];
 
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map(type => {
@@ -267,30 +341,13 @@ class Contribution extends Component {
       });
     }
 
-    let Region = [
-      {
-        value: "הכל"
-      },
-      {
-        value: "צפון"
-      },
-      {
-        value: "שפלה"
-      },
-      {
-        value: "שרון"
-      },
-      {
-        value: "מרכז"
-      },
-      {
-        value: "דרום"
-      }
-    ];
-    let Items = [];
+   
+  
 
     if (this.state.items != null && this.state.itemsFromFavorite != null) {
       Items = this.state.items.map((item, index) => {
+
+
         if (item.ItemName.includes(this.state.searchItem)) {
           return (
             <TouchableOpacity
@@ -567,9 +624,10 @@ class Contribution extends Component {
                   dropdownMargins={{ min: 0, max: 1 }}
                   dropdownOffset={{ top: 0, left: 0 }}
                   containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
-                  data={Region}
-                  onChangeText={this.Region}
-                />
+                  data={data}
+                  onChangeText={(value, index) => {
+                    this.FilterByRegion(value, index);
+                  }}                />
               </View>
             </View>
 
