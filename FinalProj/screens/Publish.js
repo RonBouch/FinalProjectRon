@@ -494,6 +494,7 @@ class Publish extends React.Component {
                       // }}
                       placeholderTextColor="rgb(150,150,150)"
                       onItemSelect={item => {
+                        console.log(item,"item")
                         // const items = this.state.selectedItems;
                         // items.push(item)
                         this.setState({ selectedItems: item });
