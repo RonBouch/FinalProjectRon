@@ -252,7 +252,7 @@ export default class Profile extends React.Component {
 
               <TouchableOpacity
                 style={styles.updateButton}
-                onPress={() => this.props.navigation.navigate("EditPage")}
+                onPress={() => this.props.navigation.navigate("EditProfile")}
               >
                 <Text style={styles.register}>
                   עידכון פרטים
