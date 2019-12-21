@@ -215,7 +215,7 @@ namespace DALproj
 
         public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg, string base64)
         {
-            string itemDate = string.Format("{0:HH:mm}", DateTime.Now);
+            string itemDate = DateTime.Now.ToString("dd/MM/yyyy");
             Item p = null;
             SqlDataReader reader2 = null;
 
