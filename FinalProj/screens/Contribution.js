@@ -10,33 +10,23 @@ import {
   Linking,
   Dimensions,
   TextInput,
-  ActionButton
+  
 } from "react-native";
 import region from "../region";
-
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
-
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
-
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import {  createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-import S3 from "./S3";
 import Publish from "../screens/Publish";
 import Favorite from "../screens/Favorite";
-
-import { CheckBox } from "react-native-elements";
-import { array } from "prop-types";
 
 class Contribution extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: "",
-      region: "",
-      // checkedB: false,
       item: null,
       items: null,
       dataItems: null,
@@ -185,17 +175,7 @@ class Contribution extends Component {
   static navigationOptions = {
     drawerLabel: "Contribution"
   };
-  Type = e => {
-    this.setState({
-      type: e
-    });
-  };
-  Region = e => {
-    this.setState({
-      region: e
-    });
-    console.log(e)
-  };
+
   infoWindow = (index, item) => {
     if (this.state.extraDetails == -1 || this.state.extraDetails != index) {
       this.setState({
@@ -557,9 +537,7 @@ class Contribution extends Component {
             </View>
             <View
               style={{
-                width: "100%",
-                // height: "10%",
-                // flexDirection: "row",
+                width: "100%",         
                 alignItems: "center",
                 backgroundColor: "white",
                 elevation: 15,
