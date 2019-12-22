@@ -53,11 +53,10 @@ const Slider = props => (
     </View>
   </View>
 );
-const Slider2 = props => (
-  
-  
+const Slider2 = props =>(
+
   <View style={styles.container}>
-<Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +props.item}} onError={console.log(props.item)} defaultSource={require("../assets/bg.jpg")} />
+<Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +props.item}}   />
      {/* <Image
       style={styles.image}
       source={{
@@ -79,9 +78,7 @@ const Slider2 = props => (
         backgroundColor: "rgba(0,0,0,.8)"
       }}
     >
-      <Text style={{ color: "white", fontSize: 14 }}>
-        {props.item.ItemName}
-      </Text>
+  
     </View>
   </View>
 );
@@ -104,29 +101,48 @@ export default class extends Component {
       itemImageArray:null,
       imageName: [],
       items: null,
+      checkURL:null,
       show: false
     };
   }
+  async checkImageURL(url){
+    await fetch(url)
+       .then(res => {
+        //  console.log(res.status)
+       if(res.status == 404){
+        //  console.log("False Image")
+          this.setState({checkURL:false})
+
+         return false;
+       }else{
+        //  console.log("true ")
+          this.setState({checkURL:true})
+         return true;
+      }
+    })
+   //  .catch(err=>console.log(err))
+   }
   async componentDidMount() {
    
     if(this.props.img!=null&&this.props.img!=undefined)
     {
       let imgArr=[];
       for(i=0;i<3;i++){
+       if(this.state.checkURL){
         imgArr.push(i+this.props.img)
-       
+      console.log("img in array ",i+this.props.img)
+       }
       }
       this.setState({
      itemImageArray:imgArr
       })
-   console.log("img to slider ",this.props.img)
     }
     else{
       // this.GetItems();
 
     }
   }
-
+  
   // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
   ImageArray = async items => {
     for (let index = 0; index < 5; index++) {
@@ -163,7 +179,8 @@ export default class extends Component {
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
-              message: "הרשמה נכשלה"
+              message: "הרשמה נכשלה",
+              
             });
             return;
           } else {
@@ -177,7 +194,8 @@ export default class extends Component {
   };
 
   render() {
-    console.log(this.state.itemImageArray)
+    console.log("check url",this.state.checkURL)
+    console.log("item in array - >",this.state.itemImageArray)
     return (
       <View style={{ width: "100%", height: 200 }}>
       {
