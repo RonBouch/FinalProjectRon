@@ -31,7 +31,7 @@ export default class FirstPage extends React.Component {
 
   retriveData = async () => {
     let u = await AsyncStorage.getItem('user');
-    console.log('u->>',u);
+    // console.log('u->>',u);
     if(u != null){
       global.user = JSON.parse(u);
       this.props.navigation.navigate("DrawerNavigator");

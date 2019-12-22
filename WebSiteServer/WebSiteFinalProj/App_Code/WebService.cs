@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using BALproj;
-using DALproj;
 
 /// <summary>
 /// Summary description for WebService
@@ -51,21 +50,10 @@ public class WebService : System.Web.Services.WebService
 
     }
     [WebMethod]
-    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city,string region, string itemAbout, string itemImg , string base64,List<ImageArray> imageArray)
+    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city,string region, string itemAbout, string itemImg )
     {    
-        if (imageArray != null && imageArray[0] != null)
-        {
-            for(int i = 0;imageArray[i]!=null; i++)
-            { 
-                SaveImage(imageArray[i].base64, imageArray[i].imageName);
-            }
-            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64, imageArray);
-
-        }
-        else
-        {
-            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64, imageArray);
-        }
+       
+            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg);
     }
     [WebMethod]
     public string GetItems()
@@ -120,10 +108,19 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     public string UploadImage(string base64, string imageName , int userid) {
 
-        
         if(SaveImage(base64, imageName))
         {
-            return BALServices.UploadImage(base64, imageName, userid);
+
+            if (userid != 0)
+            {
+                return BALServices.UploadImage(base64, imageName, userid);
+
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize(true);
+
+            }
 
         }
         else

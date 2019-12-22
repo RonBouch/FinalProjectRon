@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon } from "react-native-elements";
+import Slider from '../Components/Slider'
 import {
   View,
   TouchableHighlight,
@@ -50,6 +51,11 @@ class PostPage extends Component {
   };
 
   render() {
+
+    const { navigate } = this.props.navigation;
+
+
+
     this.state.item = this.props.navigation.state.params.item;
     this.state.ItemName = this.state.item.ItemName;
     this.state.ItemAbout = this.state.item.ItemAbout;
@@ -90,7 +96,7 @@ class PostPage extends Component {
               </TouchableOpacity>
             </View>
 
-            <Image
+            {/* <Image
               source={{
                 uri:
                   "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
@@ -100,7 +106,8 @@ class PostPage extends Component {
                 width: 400,
                 height: 200
               }}
-            />
+            /> */}
+            <Slider img={this.props.navigation.state.params.item.ItemImg}/>
 
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
               {this.state.item.ItemName}

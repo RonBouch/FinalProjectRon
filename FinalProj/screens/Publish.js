@@ -29,7 +29,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   SafeAreaView,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from "react-native";
 import { Dropdown } from "react-native-material-dropdown";
 
@@ -74,19 +75,28 @@ class Publish extends React.Component {
   }
   componentDidMount() {
     this.GetItemTypes();
-  }
+    // this.retriveData('user');
 
+  }
+  // retriveData = async () => {
+  //   let u = await AsyncStorage.getItem('user');
+  //   // console.log('u->>',u);
+  //   if(u != null){
+  //     global.user = JSON.parse(u);
+  //   }
+  // }
+  
   ItemType = (e, i) => {
     this.setState({
       itemType: i + 2
     });
   };
 
-  City = e => {
-    this.setState({
-      city: e
-    });
-  };
+  // City = e => {
+  //   this.setState({
+  //     city: e
+  //   });
+  // };
   UserPhone = e => {
     this.setState({
       userPhone: e
@@ -204,11 +214,12 @@ class Publish extends React.Component {
 
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
-          UserID:global.user.UserID,
           base64: imageBase64,
-          imageName: global.user.UserID + this.state.itemName +index+ ".jpg"
+          imageName: index+global.user.LastName+global.user.UserID+".jpg",
+          userid:0,
         };
-
+      
+        console.log(formData.imageName)
 
         
         if(this.state.img.length>2||this.state.img[index]!=null){
@@ -283,15 +294,43 @@ class Publish extends React.Component {
         city: this.state.selectedItems.name,
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
-        itemImg:
-        global.user.UserID + this.state.itemName + ".jpg",
-        base64:
-          this.state.formData.base64 != null ? this.state.formData.base64 : "",
-          imageArray:this.state.formData,
+        itemImg:global.user.UserID +global.user.LastName + ".jpg"
+        // base64:
+        //   this.state.formData.base64 != null ? this.state.formData.base64 : "",
       
         };
+        if(this.state.formData!=""&&this.state.formData!=null){
+     
+         for(i=0;this.state.formData[i]!=null;i++)
+         {
+           const imageToUpload=this.state.formData[i];
+           console.log("send pic to upload", JSON.stringify(imageToUpload.imageName))
+          await fetch(
+            "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+            {
+              method: "post",
+              headers: new Headers({
+                "Content-Type": "application/Json;"
+              }),
+              body: JSON.stringify(imageToUpload)
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(
+              result => {
+               
+  
+                console.log("result = ", result);
+              },
+              error => {
+                console.log("err post=", error);
+              }
+            );
+        }
 
-        console.log( JSON.stringify(data))
+        // console.log( JSON.stringify(data))
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
         {
@@ -323,6 +362,8 @@ class Publish extends React.Component {
             console.log("err post=", error);
           }
         );
+         }
+          
     }
   };
 
@@ -390,20 +431,7 @@ class Publish extends React.Component {
     }
 
     const data = cities;
-    // const napa =[];
-    // if(data!=null){
-    //   data.map((city,i)=>{
-
-    //     if(napa.includes(city.lishka)!=true)
-    //     {
-
-    //       napa.push(city.lishka);
-
-    //     }
-    //   })
-    // }
-    // console.log("napa  == = = = = ", napa)
-  
+    
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}

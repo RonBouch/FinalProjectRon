@@ -74,9 +74,9 @@ namespace BALproj
         }
 
 
-        public static string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region, string itemAbout, string itemImg, string base64, List<ImageArray> imageArray)
+        public static string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region, string itemAbout, string itemImg)
         {
-            Item p = DBServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64, imageArray);
+            Item p = DBServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg);
             if (p != null)
             {
 
