@@ -132,7 +132,7 @@ export default class extends Component {
             <TouchableOpacity
               key={i}
               onPress={() =>
-                this.props.props.navigation.navigate("Contribution")
+                this.props.props.navigation.navigate("PostPage", { item: item })
               }
             >
               <Slider item={item} key={i} />
