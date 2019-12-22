@@ -172,6 +172,7 @@ export default class Favorite extends React.Component {
     // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
+    console.log("test:", this.state.items);
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
@@ -336,9 +337,25 @@ export default class Favorite extends React.Component {
               </TouchableOpacity>
             </View>
 
-            <ScrollView style={styles.scrollview}>
-              <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
-            </ScrollView>
+            {Items[0] != null ? (
+              <ScrollView style={styles.scrollview}>
+                <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+              </ScrollView>
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Text>אין פריטים להצגה</Text>
+              </View>
+            )}
+
+            {/* <View style={{ flex: 1, alignItems: "center" }}>
+                  <Text>dfhrd</Text>
+                </View> */}
           </View>
         </View>
       </ImageBackground>

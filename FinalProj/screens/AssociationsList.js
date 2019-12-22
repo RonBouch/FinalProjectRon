@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
 
 import { DrawerActions } from "react-navigation-drawer";
+import { Icon as Icona } from "react-native-elements";
 import {
   Text,
   View,
@@ -241,51 +242,138 @@ class AssociationsList extends Component {
                 />
               </TouchableOpacity>
             </View>
-            <ScrollView
+            <View
               style={{
-                marginHorizontal: 20,
-                width: "100%"
+                width: "100%",
+                height: "15%",
+                alignItems: "center",
+                backgroundColor: "white",
+                elevation: 15
               }}
             >
               <View
                 style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-
                   flexDirection: "row",
-                  flexWrap: "wrap",
-                  width: "100%"
+                  width: 200,
+                  marginTop: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderColor: "black",
+                  borderBottomWidth: 0.4
                 }}
               >
-                <TextInput
-                  placeholder="חיפוש"
-                  placeholderTextColor="rgb(150,150,150)"
-                  style={{
-                    borderBottomWidth: 0.2,
-                    borderBottomColor: "rgb(150,150,150)",
-                    width: "40%",
-                    marginLeft: "5%",
-                    fontSize: 16
+                <Icona
+                  iconStyle={{
+                    marginEnd: "10%"
                   }}
-                  //onChangeText={this.City}
+                  name="search"
+                  type="font-awesome"
+                  color="black"
+                  size={18}
                 />
+                <TextInput
+                  placeholder="חיפוש "
+                  placeholderTextColor="black"
+                  onChangeText={this.SearchItem}
+                  style={{
+                    fontSize: 12,
+                    width: 200
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 30,
+                  width: "100%",
+                  justifyContent: "space-around"
+                }}
+              >
+                <Text>סינון לפי:</Text>
                 <Dropdown
                   label="סוג עמותה"
                   itemColor="black"
+                  baseColor="black"
+                  fontSize={12}
                   dropdownMargins={{ min: 0, max: 10 }}
                   dropdownOffset={{ top: 0, left: 0 }}
                   containerStyle={{
-                    width: "40%",
-                    padding: 5,
-                    marginTop: 10,
-                    marginLeft: "5%"
+                    width: 150
                   }}
                   data={AssociationTypes}
                   onChangeText={(value, index) => {
                     this.FilterAssociation(value, index);
                   }}
                 />
+              </View>
+              {/* <View
+              style={{
+                width: "100%",
+                height: "10%",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                backgroundColor: "white",
+                elevation: 15
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: 200,
+                  marginTop: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderColor: "black",
+                  borderBottomWidth: 0.4
+                }}
+              >
+                <Icona
+                  iconStyle={{
+                    marginEnd: "10%"
+                  }}
+                  name="search"
+                  type="font-awesome"
+                  color="black"
+                  size={18}
+                />
+                <TextInput
+                  placeholder="חיפוש"
+                  placeholderTextColor="black"
+                  // onChangeText={this.SearchItem}
+                  style={{
+                    fontSize: 12,
+                    width: 200
+                  }}
+                />
+              </View>
+              <Dropdown
+                label="סוג עמותה"
+                itemColor="black"
+                dropdownMargins={{ min: 0, max: 10 }}
+                dropdownOffset={{ top: 0, left: 0 }}
+                containerStyle={{
+                  width: "40%",
+                  marginTop: "5%"
+                }}
+                data={AssociationTypes}
+                onChangeText={(value, index) => {
+                  this.FilterAssociation(value, index);
+                }}
+              />
+            </View> */}
+            </View>
 
+            <ScrollView style={styles.scrollview}>
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                  margin: 10,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  width: "100%"
+                }}
+              >
                 {Associations}
               </View>
             </ScrollView>
