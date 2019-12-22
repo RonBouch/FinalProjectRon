@@ -64,7 +64,7 @@ class PostPage extends Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -78,16 +78,16 @@ class PostPage extends Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
 
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <Image

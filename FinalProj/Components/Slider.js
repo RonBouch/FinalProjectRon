@@ -28,9 +28,26 @@ const Slider = props => (
     <Image
       style={styles.image}
       source={{
-        uri: "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" + props.uri
+        uri:
+          "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+          props.item.ItemImg
       }}
     />
+    <View
+      style={{
+        width: "100%",
+        height: "13%",
+        position: "absolute",
+        alignItems: "center",
+        justifyContent: "center",
+        top: "87%",
+        backgroundColor: "rgba(0,0,0,.8)"
+      }}
+    >
+      <Text style={{ color: "white", fontSize: 14 }}>
+        {props.item.ItemName}
+      </Text>
+    </View>
   </View>
 );
 const styles = {
@@ -38,12 +55,8 @@ const styles = {
     // padding: 8
   },
   image: {
-    // flex:1,
-    // alignContent:'center',
-    // marginLeft:30,
     width: "100%",
     height: "100%",
-    // borderRadius: 40,
 
     resizeMode: "cover"
   }
@@ -53,6 +66,7 @@ export default class extends Component {
     super(props);
     this.state = {
       imagesSlider: [],
+      imageName: [],
       items: null,
       show: false
     };
@@ -61,21 +75,19 @@ export default class extends Component {
     this.GetItems();
   }
 
-  // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש 
+  // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
   ImageArray = async items => {
-    for (let index = 0; index < 5; index++) { // יצירת לולאה שרצה 5 פעמים 
-      if(items.length>index){ // בדיקה אם העורך של המערך קטן מ5 
-        await this.setState(prevState => ({  // מוסיף למערך החדש את המשתנה של המערך הישן  
-          imagesSlider: [ 
-            items[index].ItemImg,
-            ...prevState.imagesSlider
-          ]
+    for (let index = 0; index < 5; index++) {
+      // יצירת לולאה שרצה 5 פעמים
+      if (items.length > index) {
+        // בדיקה אם העורך של המערך קטן מ5
+        await this.setState(prevState => ({
+          // מוסיף למערך החדש את המשתנה של המערך הישן
+          imagesSlider: [items[index], ...prevState.imagesSlider]
         }));
-       }
-      
+      }
     }
   };
-
 
   GetItems = async () => {
     console.log("Get Items");
@@ -115,15 +127,7 @@ export default class extends Component {
   render() {
     return (
       <View style={{ width: "100%", height: 200 }}>
-        <Swiper
-          style={{ alignItems: "center" }}
-          showsButtons
-          buttonWrapperStyle={{
-            flexDirection: "row-reverse"
-          }}
-          autoplay
-          height={240}
-        >
+        <Swiper autoplay={true} autoplayTimeout={5}>
           {this.state.imagesSlider.map((item, i) => (
             <TouchableOpacity
               key={i}
@@ -131,9 +135,8 @@ export default class extends Component {
                 this.props.props.navigation.navigate("Contribution")
               }
             >
-              <Slider uri={item} key={i} />
+              <Slider item={item} key={i} />
             </TouchableOpacity>
-            
           ))}
         </Swiper>
       </View>

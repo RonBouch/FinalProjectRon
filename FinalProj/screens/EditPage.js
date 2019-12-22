@@ -166,7 +166,7 @@ export default class EditPage extends React.Component {
       <View style={styles.container}>
         <View style={styles.main}>
           <View style={styles.topBar}>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
               }
@@ -180,7 +180,7 @@ export default class EditPage extends React.Component {
                 color="white"
                 size={28}
               />
-            </TouchableHighlight>
+            </TouchableOpacity>
 
             <TouchableHighlight
               onPress={() => this.props.navigation.navigate("Home")}

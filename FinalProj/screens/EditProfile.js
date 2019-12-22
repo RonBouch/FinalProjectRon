@@ -69,7 +69,7 @@ export default class EditProfile extends React.Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -83,7 +83,7 @@ export default class EditProfile extends React.Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -104,14 +104,14 @@ export default class EditProfile extends React.Component {
                   עדכון פרטים
                 </Text>
               </View>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
             <KeyboardAvoidingView
               style={{ alignItems: "center" }}

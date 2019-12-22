@@ -32,8 +32,6 @@ const DNav = createDrawerNavigator(
 
     EditProfile: { screen: EditProfile },
 
-    Home: { screen: Home },
-
     // FirstPage: { screen: FirstPage },
     S3: { screen: S3 },
 

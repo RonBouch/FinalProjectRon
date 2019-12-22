@@ -9,10 +9,10 @@ import {
   Dimensions,
   Button
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
 // import StyleSheet from "../Components/StyleSheet";
-import { Icon } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Slider from "../Components/Slider";
 const { width } = Dimensions.get("window");
@@ -29,12 +29,11 @@ export default class Home extends Component {
       >
         <View style={styles.container}>
           <View style={styles.topBar}>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={() =>
                 this.props.navigation.dispatch(DrawerActions.openDrawer())
               }
               style={styles.touchableHighlight}
-              underlayColor={"rgba(0,0,0,0.8)"}
             >
               <Icon
                 iconStyle={{ marginEnd: "10%" }}
@@ -43,15 +42,35 @@ export default class Home extends Component {
                 color="white"
                 size={28}
               />
-            </TouchableHighlight>
-            <TouchableHighlight
+            </TouchableOpacity>
+            <View
+              style={{
+                marginTop: 35,
+                justifyContent: "center"
+              }}
+            >
+              <Text
+                style={{
+                  color: "rgba(255,255,255,.9)",
+                  fontWeight: "bold",
+                  fontSize: 25,
+                  fontFamily: "serif",
+                  textShadowColor: "black",
+                  textShadowOffset: { width: 1, height: 4 },
+                  textShadowRadius: 5
+                }}
+              >
+                דף הבית
+              </Text>
+            </View>
+            <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Image
                 source={require("../assets/TenYadLogo.png")}
                 style={styles.logo}
               />
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
           <View style={{ flex: 1 }}>
             <View>
@@ -67,23 +86,30 @@ export default class Home extends Component {
                 <Slider props={this.props} />
               </View>
             </View>
-            <View style={{ flex: 3, alignItems: "center" }}>
+            <View
+              style={{
+                height: "50%",
+                flexDirection: "row",
+                marginTop: 30,
+                alignItems: "center",
+                justifyContent: "space-around"
+              }}
+            >
               <TouchableOpacity
                 style={{
-                  marginTop: 40,
                   justifyContent: "center",
                   alignItems: "center",
-                  height: 100,
-                  width: 200,
+                  height: 150,
+                  width: 150,
                   borderWidth: 1,
                   borderColor: "white",
                   borderRadius: 30,
-                  elevation: 15,
+                  // elevation: 15,
                   shadowColor: "rgba(0,0,0, .4)",
                   shadowOffset: { height: 1, width: 1 },
                   shadowOpacity: 1,
                   shadowRadius: 1,
-                  backgroundColor: "rgba(67, 204, 29,.9)"
+                  backgroundColor: "#6495ed"
                 }}
                 onPress={() => this.props.navigation.navigate("Contribution")}
               >
@@ -93,26 +119,32 @@ export default class Home extends Component {
                     color: "white"
                   }}
                 >
-                  פורום תרומות
+                  תרומות
                 </Text>
+                <Text></Text>
+                <Icon
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="hand-holding-heart"
+                  type="font-awesome"
+                  color="white"
+                  size={34}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  marginTop: 40,
                   justifyContent: "center",
                   alignItems: "center",
-                  height: 100,
-                  width: 200,
+                  height: 150,
+                  width: 150,
                   borderWidth: 1,
                   borderColor: "white",
                   borderRadius: 30,
                   elevation: 15,
-                  backgroundColor: "#fff",
                   shadowColor: "rgba(0,0,0, .4)",
                   shadowOffset: { height: 1, width: 1 },
                   shadowOpacity: 1,
                   shadowRadius: 1,
-                  backgroundColor: "#dc143c"
+                  backgroundColor: "#6495ed"
                 }}
                 onPress={() =>
                   this.props.navigation.navigate("AssociationsList")
@@ -126,6 +158,14 @@ export default class Home extends Component {
                 >
                   עמותות
                 </Text>
+                <Text></Text>
+                <Icon
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="place-of-worship"
+                  type="font-awesome"
+                  color="white"
+                  size={34}
+                />
               </TouchableOpacity>
             </View>
           </View>

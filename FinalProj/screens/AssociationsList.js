@@ -30,7 +30,7 @@ class AssociationsList extends Component {
     this.state = {
       associations: null,
       associationTypes: null,
-      dataAssociations: null,
+      dataAssociations: null
     };
   }
   componentDidMount() {
@@ -110,16 +110,17 @@ class AssociationsList extends Component {
       );
   };
 
-  FilterAssociation = (value,index) => {
-    if(index != 0){
-      let typeId = this.state.associationTypes[index-1].AssociationTypeID;
-      let data = this.state.dataAssociations.filter((item)=>{return item.AssociationTypeID == typeId});
-      this.setState({associations:data});
+  FilterAssociation = (value, index) => {
+    if (index != 0) {
+      let typeId = this.state.associationTypes[index - 1].AssociationTypeID;
+      let data = this.state.dataAssociations.filter(item => {
+        return item.AssociationTypeID == typeId;
+      });
+      this.setState({ associations: data });
+    } else {
+      this.setState({ associations: this.state.dataAssociations });
     }
-   else{
-    this.setState({associations:this.state.dataAssociations});
-   }
-  }
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -127,7 +128,7 @@ class AssociationsList extends Component {
     let AssociationTypes = [];
 
     if (this.state.associationTypes != null) {
-      AssociationTypes.push({value: 'הכל'});
+      AssociationTypes.push({ value: "הכל" });
       this.state.associationTypes.map(associationTypes => {
         AssociationTypes.push({ value: associationTypes.AssociationTypeName });
       });
@@ -196,7 +197,7 @@ class AssociationsList extends Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -210,7 +211,7 @@ class AssociationsList extends Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -231,14 +232,14 @@ class AssociationsList extends Component {
                   עמותות
                 </Text>
               </View>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
             <ScrollView
               style={{
@@ -280,7 +281,9 @@ class AssociationsList extends Component {
                     marginLeft: "5%"
                   }}
                   data={AssociationTypes}
-                  onChangeText={(value, index) =>{ this.FilterAssociation(value,index)}}
+                  onChangeText={(value, index) => {
+                    this.FilterAssociation(value, index);
+                  }}
                 />
 
                 {Associations}

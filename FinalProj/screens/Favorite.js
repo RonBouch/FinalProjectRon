@@ -54,7 +54,7 @@ export default class Favorite extends React.Component {
 
   GetItemsFromFavorite = async () => {
     const data = {
-      userid:global.user.UserID
+      userid: global.user.UserID
     };
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemsFromFavorite",
@@ -121,7 +121,6 @@ export default class Favorite extends React.Component {
   }
 
   Favorite = () => {
-
     if (this.state.item.ItemID != null) {
       const data = {
         userid: global.user.UserID,
@@ -143,7 +142,6 @@ export default class Favorite extends React.Component {
         })
         .then(
           result => {
-
             let favorite = JSON.parse(result.d);
             this.GetItemsFromFavorite();
             if (favorite == -1) {
@@ -293,7 +291,7 @@ export default class Favorite extends React.Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -307,7 +305,7 @@ export default class Favorite extends React.Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -328,14 +326,14 @@ export default class Favorite extends React.Component {
                   מועדפים
                 </Text>
               </View>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <ScrollView style={styles.scrollview}>
