@@ -204,20 +204,32 @@ class Publish extends React.Component {
 
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
+          UserID:global.user.UserID,
           base64: imageBase64,
           imageName: global.user.UserID + this.state.itemName +index+ ".jpg"
         };
+
+
+        
         if(this.state.img.length>2||this.state.img[index]!=null){
+          
+          const list = this.state.formData.map((item, j) => {
+              if (j === index) {
+                return formData;
+              } else {
+                return item;
+              }
+          })
+           
           let imageArray = this.state.img.filter(image => {
-            // console.log(image);
             return (
               image != this.state.img[index]
                           );
           });
           imageArray.push(result.uri)
-          console.log("ararattas f",imageArray)
          this.setState({
-           img:imageArray
+           img:imageArray,
+           formData:list,
          })
         }
         else{
@@ -227,7 +239,7 @@ class Publish extends React.Component {
           });
   
         }
-                console.log("form data =  =",this.state.formData)
+                // console.log("form data =  =",this.state.formData)
         //לעלות את התמונה לשרת fetch עושה
 
         // await fetch(
@@ -258,7 +270,7 @@ class Publish extends React.Component {
         //   }
       }
     }
-  };
+  }
 
   handleSubmit = async () => {
     if (this.isValid()) {
@@ -272,13 +284,14 @@ class Publish extends React.Component {
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
         itemImg:
-          this.state.formData.imageName != null
-            ? this.state.formData.imageName
-            : "",
+        global.user.UserID + this.state.itemName + ".jpg",
         base64:
-          this.state.formData.base64 != null ? this.state.formData.base64 : ""
-      };
+          this.state.formData.base64 != null ? this.state.formData.base64 : "",
+          imageArray:this.state.formData,
+      
+        };
 
+        console.log( JSON.stringify(data))
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
         {
