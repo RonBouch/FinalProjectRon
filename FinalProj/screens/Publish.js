@@ -204,9 +204,13 @@ class Publish extends React.Component {
 
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
+          UserID:global.user.UserID,
           base64: imageBase64,
           imageName: global.user.UserID + this.state.itemName +index+ ".jpg"
         };
+
+
+        
         if(this.state.img.length>2||this.state.img[index]!=null){
           
           const list = this.state.formData.map((item, j) => {
@@ -238,34 +242,35 @@ class Publish extends React.Component {
                 // console.log("form data =  =",this.state.formData)
         //לעלות את התמונה לשרת fetch עושה
 
-        await fetch(
-          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-          {
-            method: "post",
-            headers: new Headers({
-              "Content-Type": "application/Json;"
-            }),
-            body: JSON.stringify(formData)
-          }
-        )
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                img: global.user.UserID + global.user.Email + ".jpg"
-              });
+        // await fetch(
+        //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+        //   {
+        //     method: "post",
+        //     headers: new Headers({
+        //       "Content-Type": "application/Json;"
+        //     }),
+        //     body: JSON.stringify(formData)
+        //   }
+        // )
+        //   .then(res => {
+        //     return res.json();
+        //   })
+        //   .then(
+        //     result => {
+        //       this.setState({
+        //         img: global.user.UserID + global.user.Email + ".jpg"
+        //       });
 
-              console.log("result = ", result);
-            },
-            error => {
-              console.log("err post=", error);
-            }
-          );
-          }
+        //       console.log("result = ", result);
+        //     },
+        //     error => {
+        //       console.log("err post=", error);
+        //     }
+        //   );
+        //   }
       }
     }
+  }
 
   handleSubmit = async () => {
     if (this.isValid()) {
@@ -279,13 +284,14 @@ class Publish extends React.Component {
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
         itemImg:
-          this.state.formData.imageName != null
-            ? this.state.formData.imageName
-            : "",
+        global.user.UserID + this.state.itemName + ".jpg",
         base64:
-          this.state.formData.base64 != null ? this.state.formData.base64 : ""
-      };
+          this.state.formData.base64 != null ? this.state.formData.base64 : "",
+          imageArray:this.state.formData,
+      
+        };
 
+        console.log( JSON.stringify(data))
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
         {

@@ -19,9 +19,10 @@ import S3 from "../screens/S3.js";
 
 const DNav = createDrawerNavigator(
   {
+    Publish: { screen: Publish },
+
     Home: { screen: Home },
 
-    Publish: { screen: Publish },
 
     Contribution: { screen: Contribution },
 
@@ -48,7 +49,7 @@ const DNav = createDrawerNavigator(
     AssociationPage: { screen: AssociationPage }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Publish",
     contentComponent: ContentComponent,
     drawerWidth: Dimensions.get("window").width,
     drawerPosition: "right",

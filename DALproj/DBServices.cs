@@ -213,7 +213,7 @@ namespace DALproj
         }
 
 
-        public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg, string base64)
+        public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg, string base64, List<ImageArray> imageArray )
         {
             string itemDate = DateTime.Now.ToString("dd/MM/yyyy");
             Item p = null;

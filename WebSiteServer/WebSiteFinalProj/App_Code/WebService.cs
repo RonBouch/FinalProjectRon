@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using BALproj;
+using DALproj;
 
 /// <summary>
 /// Summary description for WebService
@@ -50,16 +51,20 @@ public class WebService : System.Web.Services.WebService
 
     }
     [WebMethod]
-    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city,string region, string itemAbout, string itemImg , string base64)
+    public string InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city,string region, string itemAbout, string itemImg , string base64,List<ImageArray> imageArray)
     {    
-        if (SaveImage(base64, itemImg)&& base64!="")
+        if (imageArray != null && imageArray[0] != null)
         {
-            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64);
+            for(int i = 0;imageArray[i]!=null; i++)
+            { 
+                SaveImage(imageArray[i].base64, imageArray[i].imageName);
+            }
+            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64, imageArray);
 
         }
         else
         {
-            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64);
+            return BALServices.InsertItem(userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg, base64, imageArray);
         }
     }
     [WebMethod]
