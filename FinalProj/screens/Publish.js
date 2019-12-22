@@ -67,7 +67,7 @@ class Publish extends React.Component {
       city: "",
       itemAbout: "",
       itemImg: "sdvw",
-     img:"",
+     img:[],
       imageName: "",
       imageBade64: ""
     };
@@ -180,7 +180,7 @@ class Publish extends React.Component {
       );
   };
 
-  openGallery = async () => {
+  openGallery = async (index) => {
     // פתיחת גלריה לבחירת תמונה
     if ((await ImagePicker) != null) {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -205,10 +205,29 @@ class Publish extends React.Component {
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
           base64: imageBase64,
-          // imageName: global.user.UserID + this.state.itemName + ".jpg"
+          imageName: global.user.UserID + this.state.itemName +index+ ".jpg"
         };
-        this.setState({ formData: formData,img:result.uri });
-        console.log("uri =  =",result.uri)
+        if(this.state.img.length>2||this.state.img[index]!=null){
+          let imageArray = this.state.img.filter(image => {
+            // console.log(image);
+            return (
+              image != this.state.img[index]
+                          );
+          });
+          imageArray.push(result.uri)
+          console.log("ararattas f",imageArray)
+         this.setState({
+           img:imageArray
+         })
+        }
+        else{
+          this.setState({ 
+            formData: [...formData,formData],
+            img:[...this.state.img, result.uri] 
+          });
+  
+        }
+                console.log("form data =  =",this.state.formData)
         //לעלות את התמונה לשרת fetch עושה
 
         // await fetch(
@@ -608,18 +627,18 @@ class Publish extends React.Component {
                 </View>
 
                 <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <TouchableOpacity  onPress={this.openGallery}
+                  <TouchableOpacity  onPress={()=>this.openGallery(0)}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-                 {this.state.img!=""? <Image
+                 {this.state.img[0]!=null? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={{uri:this.state.img}}
+                      source={{uri:this.state.img[0]}}
                     ></Image>: <Image
                     style={{
                       height: 120,
@@ -629,18 +648,18 @@ class Publish extends React.Component {
                   ></Image>}
                    
                   </TouchableOpacity>
-                  <TouchableOpacity  onPress={this.openGallery}
+                  <TouchableOpacity  onPress={()=>this.openGallery(1)}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-              {this.state.img!=""? <Image
+              {this.state.img[1]!=null? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={{uri:this.state.img}}
+                      source={{uri:this.state.img[1]}}
                     ></Image>: <Image
                     style={{
                       height: 120,
@@ -650,18 +669,18 @@ class Publish extends React.Component {
                   ></Image>}
                    
                   </TouchableOpacity>
-                  <TouchableOpacity  onPress={this.openGallery}
+                  <TouchableOpacity  onPress={()=>this.openGallery(2)}
                     style={{
                       margin: 5,
                       borderWidth: 1
                     }}
                   >
-                  {this.state.img!=""? <Image
+                  {this.state.img[2]!=null? <Image
                       style={{
                         height: 120,
                         width: 100
                       }}
-                      source={{uri:this.state.img}}
+                      source={{uri:this.state.img[2]}}
                     ></Image>: <Image
                     style={{
                       height: 120,
