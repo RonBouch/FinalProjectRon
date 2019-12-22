@@ -53,8 +53,9 @@ const Slider = props => (
     </View>
   </View>
 );
-const Slider2 = props =>(
-
+const Slider2 = props => (
+  
+  
   <View style={styles.container}>
 <Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +props.item}}   />
      {/* <Image
@@ -128,6 +129,7 @@ export default class extends Component {
     {
       let imgArr=[];
       for(i=0;i<3;i++){
+        console.log( await this.checkImageURL("http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+i+this.props.img));
        if(this.state.checkURL){
         imgArr.push(i+this.props.img)
       console.log("img in array ",i+this.props.img)
@@ -136,9 +138,10 @@ export default class extends Component {
       this.setState({
      itemImageArray:imgArr
       })
+  //  console.log("img to slider ",this.props.img)
     }
     else{
-      // this.GetItems();
+      this.GetItems();
 
     }
   }
@@ -194,7 +197,7 @@ export default class extends Component {
   };
 
   render() {
-    console.log("check url",this.state.checkURL)
+    // console.log("check url",this.state.checkURL)
     console.log("item in array - >",this.state.itemImageArray)
     return (
       <View style={{ width: "100%", height: 200 }}>
