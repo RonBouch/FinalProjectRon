@@ -208,16 +208,24 @@ class Publish extends React.Component {
           imageName: global.user.UserID + this.state.itemName +index+ ".jpg"
         };
         if(this.state.img.length>2||this.state.img[index]!=null){
+          
+          const list = this.state.formData.map((item, j) => {
+              if (j === index) {
+                return formData;
+              } else {
+                return item;
+              }
+          })
+           
           let imageArray = this.state.img.filter(image => {
-            // console.log(image);
             return (
               image != this.state.img[index]
                           );
           });
           imageArray.push(result.uri)
-          console.log("ararattas f",imageArray)
          this.setState({
-           img:imageArray
+           img:imageArray,
+           formData:list,
          })
         }
         else{
@@ -227,38 +235,37 @@ class Publish extends React.Component {
           });
   
         }
-                console.log("form data =  =",this.state.formData)
+                // console.log("form data =  =",this.state.formData)
         //לעלות את התמונה לשרת fetch עושה
 
-        // await fetch(
-        //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-        //   {
-        //     method: "post",
-        //     headers: new Headers({
-        //       "Content-Type": "application/Json;"
-        //     }),
-        //     body: JSON.stringify(formData)
-        //   }
-        // )
-        //   .then(res => {
-        //     return res.json();
-        //   })
-        //   .then(
-        //     result => {
-        //       this.setState({
-        //         img: global.user.UserID + global.user.Email + ".jpg"
-        //       });
+        await fetch(
+          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+          {
+            method: "post",
+            headers: new Headers({
+              "Content-Type": "application/Json;"
+            }),
+            body: JSON.stringify(formData)
+          }
+        )
+          .then(res => {
+            return res.json();
+          })
+          .then(
+            result => {
+              this.setState({
+                img: global.user.UserID + global.user.Email + ".jpg"
+              });
 
-        //       console.log("result = ", result);
-        //     },
-        //     error => {
-        //       console.log("err post=", error);
-        //     }
-        //   );
-        //   }
+              console.log("result = ", result);
+            },
+            error => {
+              console.log("err post=", error);
+            }
+          );
+          }
       }
     }
-  };
 
   handleSubmit = async () => {
     if (this.isValid()) {
