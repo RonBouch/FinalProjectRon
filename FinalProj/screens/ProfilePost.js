@@ -107,15 +107,15 @@ export default class ProfilePost extends React.Component {
   //   });
   //   this.DeleteItemByID();
   // }
-  DeleteItemByID = (item) => {
-    console.log("item = ",item)
+  DeleteItemByID = item => {
+    console.log("item = ", item);
 
     if (item.ItemID != null) {
       const data = {
         userid: global.user.UserID,
         itemid: item.ItemID
       };
-      console.log("DATA = ",data)
+      console.log("DATA = ", data);
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/DeleteItem",
         {
@@ -280,7 +280,7 @@ export default class ProfilePost extends React.Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -294,7 +294,7 @@ export default class ProfilePost extends React.Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -315,14 +315,14 @@ export default class ProfilePost extends React.Component {
                   מועדפים
                 </Text>
               </View>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
 
             <ScrollView style={styles.scrollview}>

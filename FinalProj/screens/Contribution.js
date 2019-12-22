@@ -318,7 +318,7 @@ class Contribution extends Component {
               style={{
                 backgroundColor: "white",
                 width: "95%",
-                height: 260,
+                height: 210,
                 margin: 10,
                 borderWidth: 1,
                 borderColor: "#e6e6fa",
@@ -391,7 +391,7 @@ class Contribution extends Component {
                   flexDirection: "row-reverse",
                   alignContant: "center",
                   height: "30%",
-                  marginTop: 10
+                  marginTop: 15
                 }}
                 onPress={() => {
                   this.infoWindow(index);
@@ -403,13 +403,13 @@ class Contribution extends Component {
                     alignItems: "center"
                   }}
                 >
-                  <Text style={{ color: "gray" }}>תאריך</Text>
+                  <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
                   <Text
                     style={{
                       color: "#6495ed",
-                      fontWeight: "bold",
-                      fontSize: 18,
-                      fontFamily: "serif"
+                      // fontWeight: "bold",
+                      fontSize: 16
+                      // fontFamily: "serif"
                     }}
                   >
                     {item.ItemDate}
@@ -421,14 +421,14 @@ class Contribution extends Component {
                     alignItems: "center"
                   }}
                 >
-                  <Text style={{ color: "gray" }}>עיר</Text>
+                  <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
 
                   <Text
                     style={{
                       color: "#6495ed",
-                      fontWeight: "bold",
-                      fontFamily: "serif",
-                      fontSize: 18
+                      // fontWeight: "bold",
+                      // fontFamily: "serif",
+                      fontSize: 16
                     }}
                   >
                     {item.City}
@@ -440,13 +440,11 @@ class Contribution extends Component {
                     alignItems: "center"
                   }}
                 >
-                  <Text style={{ color: "gray" }}>שם פריט</Text>
+                  <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
                   <Text
                     style={{
                       color: "#6495ed",
-                      fontWeight: "bold",
-                      fontSize: 18,
-                      fontFamily: "serif"
+                      fontSize: 16
                     }}
                   >
                     {item.ItemName}
@@ -467,7 +465,7 @@ class Contribution extends Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -481,7 +479,7 @@ class Contribution extends Component {
                   color="white"
                   size={28}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -502,33 +500,33 @@ class Contribution extends Component {
                   תרומות
                 </Text>
               </View>
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate("Home")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
                   style={styles.logo}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
             <View
               style={{
                 width: "100%",
+                height: "15%",
                 alignItems: "center",
                 backgroundColor: "white",
-                elevation: 15,
-                justifyContent: "space-around"
+                elevation: 15
               }}
             >
               <View
                 style={{
                   flexDirection: "row",
                   width: 200,
-                  height: 40,
+                  marginTop: 10,
+                  justifyContent: "center",
                   alignItems: "center",
                   borderColor: "black",
-                  borderBottomWidth: 1,
-                  marginTop: 5
+                  borderBottomWidth: 0.4
                 }}
               >
                 <Icona
@@ -541,32 +539,32 @@ class Contribution extends Component {
                   size={18}
                 />
                 <TextInput
-                  // keyboardType="email-address"
                   placeholder="חפש פריט"
-                  // placeholderTextColor="black"
+                  placeholderTextColor="black"
                   onChangeText={this.SearchItem}
-                  style={{ width: 200 }}
+                  style={{
+                    fontSize: 12,
+                    width: 200
+                  }}
                 />
               </View>
-
               <View
                 style={{
                   flexDirection: "row",
-                  elevation: 15,
+                  marginTop: 20,
+                  width: "100%",
                   justifyContent: "space-around"
                 }}
               >
+                <Text>סינון לפי:</Text>
                 <Dropdown
                   label="קטגוריה"
                   itemColor="black"
+                  baseColor="black"
+                  fontSize={12}
                   dropdownMargins={{ min: 0, max: 10 }}
                   dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{
-                    width: "40%",
-                    padding: 5,
-                    marginTop: 10,
-                    marginLeft: "5%"
-                  }}
+                  containerStyle={{ width: 100 }}
                   data={ItemTypes}
                   onChangeText={(value, index) => {
                     this.FilterItemTypes(value, index);
@@ -575,9 +573,11 @@ class Contribution extends Component {
                 <Dropdown
                   label="איזור"
                   itemColor="black"
+                  baseColor="black"
+                  fontSize={12}
                   dropdownMargins={{ min: 0, max: 1 }}
                   dropdownOffset={{ top: 0, left: 0 }}
-                  containerStyle={{ width: 100, padding: 5, marginTop: 10 }}
+                  containerStyle={{ width: 100 }}
                   data={data}
                   onChangeText={(value, index) => {
                     this.FilterByRegion(value, index);

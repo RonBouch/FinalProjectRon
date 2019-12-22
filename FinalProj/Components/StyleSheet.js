@@ -81,6 +81,8 @@ export default StyleSheet.create({
   },
   topBar: {
     backgroundColor: "#6495ed",
+    borderColor: "white",
+    borderBottomWidth: 0.5,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between"
