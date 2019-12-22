@@ -57,7 +57,7 @@ const Slider2 = props => (
   
   
   <View style={styles.container}>
-<Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +props.item}}   />
+<Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/0shaon.jpg"  +   "?time" + new Date()}} />
      {/* <Image
       style={styles.image}
       source={{
@@ -210,8 +210,11 @@ export default class extends Component {
               key={i}
   
             >
+            {i<=this.state.itemImageArray.length?
               <Slider2 item={item} key={i} />
-            </TouchableOpacity>
+              :console.log("yeeeee")
+            }
+              </TouchableOpacity>
           ))}
         </Swiper>
         
