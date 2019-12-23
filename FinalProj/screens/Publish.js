@@ -41,6 +41,7 @@ class Publish extends React.Component {
 
   onFocusFunction = async() => {
     console.log("Focus s")
+
     this.GetItemTypes();
 
     // do some stuff on every screen focus
