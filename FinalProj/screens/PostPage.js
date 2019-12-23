@@ -61,7 +61,7 @@ class PostPage extends Component {
     this.state.ItemAbout = this.state.item.ItemAbout;
     this.state.ItemDate = this.state.item.ItemDate;
     this.state.UserPhone = this.state.item.UserPhone;
-    console.log(this.state.item.ItemImg);
+    console.log("props from contribution",this.props.navigation.state.params.item.ItemImg);
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -107,7 +107,7 @@ class PostPage extends Component {
                 height: 200
               }}
             /> */}
-            <Slider img={this.props.navigation.state.params.item.ItemImg}/>
+            <Slider img={this.props.navigation.state.params.item.ItemImg} navigation={this.props.navigation}/>
 
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
               {this.state.item.ItemName}

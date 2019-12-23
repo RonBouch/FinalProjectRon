@@ -55,33 +55,38 @@ const Slider = props => (
 );
 const Slider2 = props => (
   
-  
-  <View style={styles.container}>
-<Image source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/0shaon.jpg"  +   "?time" + new Date()}} />
-     {/* <Image
-      style={styles.image}
-      source={{
-        uri:
-          "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-          props.item.ItemImg
-      }}
-      onError={console.log("ERRR")}
-    /> */}
 
-    <View
-      style={{
-        width: "100%",
-        height: "13%",
-        position: "absolute",
-        alignItems: "center",
-        justifyContent: "center",
-        top: "87%",
-        backgroundColor: "rgba(0,0,0,.8)"
-      }}
-    >
-  
-    </View>
+  <View style={styles.container}>
+
+  {/* <Image
+    style={{
+      width: 70,
+      height: 70,
+      position: "absolute",
+      left: 5,
+      zIndex: 1
+    }}
+    source={require("../assets/new1.gif")}
+  /> */}
+
+<Image style={styles.image} source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+props.item}} />
+
+  <View
+    style={{
+      width: "100%",
+      height: "13%",
+      position: "absolute",
+      alignItems: "center",
+      justifyContent: "center",
+      top: "87%",
+      backgroundColor: "rgba(0,0,0,.8)"
+    }}
+  >
+    <Text style={{ color: "white", fontSize: 14 }}>
+      {props.item.ItemName}
+    </Text>
   </View>
+</View>
 );
 const styles = {
   container: {
@@ -106,6 +111,44 @@ export default class extends Component {
       show: false
     };
   }
+  // define a separate function to get triggered on focus
+  onFocusFunction = async() => {
+    this.RealoadScreen();
+    // do some stuff on every screen focus
+  };
+
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
+
+  // and don't forget to remove the listener
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+  async RealoadScreen(){
+    if(this.props.img!=null&&this.props.img!=undefined)
+    {
+      console.log("propss ",this.props.img)
+      let imgArr=[];
+      for(i=0;i<3;i++){
+        console.log( await this.checkImageURL("http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+i+this.props.img));
+       if(this.state.checkURL){
+        imgArr.push(i+this.props.img)
+      console.log("img in array ",i+this.props.img)
+       }
+      }
+      this.setState({
+     itemImageArray:imgArr
+      })
+    }
+    else{
+      this.GetItems();
+
+    }
+  }
   async checkImageURL(url){
     await fetch(url)
        .then(res => {
@@ -123,29 +166,7 @@ export default class extends Component {
     })
    //  .catch(err=>console.log(err))
    }
-  async componentDidMount() {
-   
-    if(this.props.img!=null&&this.props.img!=undefined)
-    {
-      let imgArr=[];
-      for(i=0;i<3;i++){
-        console.log( await this.checkImageURL("http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+i+this.props.img));
-       if(this.state.checkURL){
-        imgArr.push(i+this.props.img)
-      console.log("img in array ",i+this.props.img)
-       }
-      }
-      this.setState({
-     itemImageArray:imgArr
-      })
-  //  console.log("img to slider ",this.props.img)
-    }
-    else{
-      this.GetItems();
 
-    }
-  }
-  
   // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
   ImageArray = async items => {
     for (let index = 0; index < 5; index++) {
@@ -197,8 +218,11 @@ export default class extends Component {
   };
 
   render() {
+
     // console.log("check url",this.state.checkURL)
     console.log("item in array - >",this.state.itemImageArray)
+    // console.log("slider array - > ",this.state.imagesSlider)
+    console.log("image from post page",this.props.img)
     return (
       <View style={{ width: "100%", height: 200 }}>
       {

@@ -83,7 +83,7 @@ export default class Home extends Component {
                 }}
               >
                 {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
-                <Slider props={this.props} />
+                <Slider props={this.props} navigation={this.props.navigation} />
               </View>
             </View>
             <View
