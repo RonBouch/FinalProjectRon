@@ -125,6 +125,7 @@ class Publish extends React.Component {
       console.log("result ", result);
     }
     else{
+
       let imageBase64 = result.base64;
 
       const formData = {
@@ -164,7 +165,7 @@ class Publish extends React.Component {
       }
     }
 
-    // let localUri = result.uri;
+    
     // let filename = localUri.split("/").pop();
     // let imageBase64 = result.base64;
 
@@ -235,35 +236,6 @@ class Publish extends React.Component {
           });
   
         }
-                // console.log("form data =  =",this.state.formData)
-        //לעלות את התמונה לשרת fetch עושה
-
-        // await fetch(
-        //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-        //   {
-        //     method: "post",
-        //     headers: new Headers({
-        //       "Content-Type": "application/Json;"
-        //     }),
-        //     body: JSON.stringify(formData)
-        //   }
-        // )
-        //   .then(res => {
-        //     return res.json();
-        //   })
-        //   .then(
-        //     result => {
-        //       this.setState({
-        //         img: global.user.UserID + global.user.Email + ".jpg"
-        //       });
-
-        //       console.log("result = ", result);
-        //     },
-        //     error => {
-        //       console.log("err post=", error);
-        //     }
-        //   );
-        //   }
       }
     }
   }
@@ -653,7 +625,7 @@ class Publish extends React.Component {
               </View>
 
        
-
+            {/* מצלמה/גלריה */}
                 <View style={{ flexDirection: "row", marginTop: 10 }}>
                   <TouchableOpacity style={{ margin: 5, borderWidth: 1 }} 
                    onPress={() =>Alert.alert(
@@ -682,12 +654,14 @@ class Publish extends React.Component {
 
 
 
-                  <TouchableOpacity  onPress={()=>this.openGallery(1)}
-                    style={{
-                      margin: 5,
-                      borderWidth: 1
-                    }}
-                  >
+                  <TouchableOpacity  style={{ margin: 5, borderWidth: 1 }}  onPress={() =>Alert.alert(
+                  'בחר תמונה',
+                  'האם תרצה גלריה/מצלמה?',
+                  [
+                    {text: 'מצלמה', onPress: () => {this.openCamera(1)}},
+                    {text: 'גלריה', onPress: () => {this.openGallery(1)}}
+                   ])}
+                    >
               {this.state.img[1]!=null? <Image
                       style={{
                         height: 120,
@@ -706,12 +680,14 @@ class Publish extends React.Component {
 
 
 
-                  <TouchableOpacity  onPress={()=>this.openGallery(2)}
-                    style={{
-                      margin: 5,
-                      borderWidth: 1
-                    }}
-                  >
+                  <TouchableOpacity  style={{ margin: 5, borderWidth: 1 }}  onPress={() =>Alert.alert(
+                  'בחר תמונה',
+                  'האם תרצה גלריה/מצלמה?',
+                  [
+                    {text: 'מצלמה', onPress: () => {this.openCamera(2)}},
+                    {text: 'גלריה', onPress: () => {this.openGallery(2)}}
+                   ])}
+                    >
                   {this.state.img[2]!=null? <Image
                       style={{
                         height: 120,
@@ -728,30 +704,7 @@ class Publish extends React.Component {
                    
                   </TouchableOpacity>
                 </View>
-                {/* מצלמה */}
-                {/* 
-                <View style={styles.addImage}>
-                  <TouchableOpacity
-                    onPress={this.openCamera}
-                    style={styles.uploadIcon}
-                  >
-                    <View>
-                      <Ionicons name="ios-camera" size={60} color="black" />
-                    </View>
-                    <Text style={styles.textIcon}>מצלמה</Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={this.openGallery}
-                    style={styles.uploadIcon}
-                  >
-                    <View>
-                      <Ionicons name="md-images" size={60} color="black" />
-                      <Text style={styles.textIcon}> גלריה</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View> */}
-
+              
               {/* פרסם פריט */}
               <View>
                 <TouchableOpacity
