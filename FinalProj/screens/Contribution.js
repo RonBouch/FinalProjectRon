@@ -42,7 +42,7 @@ class Contribution extends Component {
 
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
-    console.log("Change Picture .");
+    // console.log("Change Picture .");
     this.GetItems();
     // do some stuff on every screen focus
   };
@@ -374,8 +374,7 @@ class Contribution extends Component {
                 <Image
                   source={{
                     uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                      item.ItemImg
+                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +0+ item.ItemImg
                   }}
                   style={{
                     width: "100%",

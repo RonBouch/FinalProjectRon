@@ -215,7 +215,7 @@ class Publish extends React.Component {
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
           base64: imageBase64,
-          imageName: index+global.user.LastName+global.user.UserID+".jpg",
+          imageName: index+this.state.itemName+global.user.UserID+".jpg",
           userid:0,
         };
       
@@ -294,7 +294,7 @@ class Publish extends React.Component {
         city: this.state.selectedItems.name,
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
-        itemImg:global.user.UserID +global.user.LastName + ".jpg"
+        itemImg:this.state.itemName+global.user.UserID+".jpg"
         // base64:
         //   this.state.formData.base64 != null ? this.state.formData.base64 : "",
       

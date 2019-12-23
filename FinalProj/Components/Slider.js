@@ -33,7 +33,7 @@ const Slider = props => (
       source={{
         uri:
           "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-          props.item.ItemImg
+         0+ props.item.ItemImg
       }}
     />
     <View
@@ -145,7 +145,7 @@ export default class extends Component {
       })
     }
     else{
-      this.GetItems();
+      await this.GetItems();
 
     }
   }
@@ -159,7 +159,7 @@ export default class extends Component {
 
          return false;
        }else{
-        //  console.log("true ")
+         console.log("true ")
           this.setState({checkURL:true})
          return true;
       }

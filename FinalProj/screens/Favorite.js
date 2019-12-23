@@ -220,7 +220,7 @@ export default class Favorite extends React.Component {
               source={{
                 uri:
                   "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                  item.ItemImg
+                  0+item.ItemImg
               }}
               style={{
                 width: "100%",
