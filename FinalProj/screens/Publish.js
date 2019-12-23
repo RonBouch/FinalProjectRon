@@ -1,65 +1,31 @@
 import React, { Component, Fragment } from "react";
 import styles from "../Components/StyleSheet";
 import * as ImagePicker from "expo-image-picker";
-// import Constants from 'expo-constants';
-// import * as Permissions from 'expo-permissions';
 import { Icon } from "react-native-elements";
-import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions } from "react-navigation-drawer";
-import shortid from "shortid";
-import {
-  Autocomplete,
-  withKeyboardAwareScrollView
-} from "react-native-dropdown-autocomplete";
-// import cities from "../city_list";
 import cities from "../cityAndRegion";
-
 import SearchableDropdown from "react-native-searchable-dropdown";
+import { Dropdown } from "react-native-material-dropdown";
 
 import {
   Text,
   View,
-  TouchableHighlight,
-  Dimensions,
   Alert,
   TextInput,
   Image,
   TouchableOpacity,
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
-  AsyncStorage
 } from "react-native";
-import { Dropdown } from "react-native-material-dropdown";
-
-// const { height, width } = Dimensions.get("window");
-
-// const DissmisKeyboard = ({ children }) => (
-//   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-//     {children}
-//   </TouchableWithoutFeedback>
-// );
 
 class Publish extends React.Component {
   constructor(props) {
     super(props);
-    this.rentOrSell = "";
-    let formIsValid = false;
     this.state = {
       selectedItems: [],
-
       errors: {},
       resLabel: "",
-      Show: false,
-
-      location: null,
-      data: "",
-      delta: 0.1,
-      latitude: 37.78825,
-      longitude: -122.4324,
+      showErrLabel: false,
       formData: "",
 
       userName: "",
@@ -68,13 +34,9 @@ class Publish extends React.Component {
       itemName: "",
       city: "",
       itemAbout: "",
-      itemImg: "sdvw",
-     img:[],
-      imageName: "",
-      imageBade64: "",
+      img:[],
 
       lastRefresh: Date(Date.now()).toString(),
-
     };
     this.refreshScreen = this.refreshScreen.bind(this)
 
@@ -84,35 +46,14 @@ class Publish extends React.Component {
   }
   componentDidMount() {
     this.GetItemTypes();
-    // this.retriveData('user');
-
   }
- 
+
   ItemType = (e, i) => {
     this.setState({
       itemType: i + 2
     });
   };
-  UserPhone = e => {
-    this.setState({
-      userPhone: e
-    });
-  };
-  UserName = e => {
-    this.setState({
-      userName: e
-    });
-  };
-  ItemName = e => {
-    this.setState({
-      itemName: e
-    });
-  };
-  ItemAbout = e => {
-    this.setState({
-      itemAbout: e
-    });
-  };
+
   openCamera = async (index) => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
@@ -252,9 +193,6 @@ class Publish extends React.Component {
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
         itemImg:this.state.itemName+global.user.UserID+".jpg"
-        // base64:
-        //   this.state.formData.base64 != null ? this.state.formData.base64 : "",
-      
         };
         if(this.state.formData!=""&&this.state.formData!=null){
      
@@ -371,12 +309,7 @@ class Publish extends React.Component {
         }
       );
   };
-  handleSelectItem(item, index) {
-    const { onDropdownClose } = this.props;
-    onDropdownClose();
-    // console.log(item);
-  }
-
+  
   render() {
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
@@ -386,9 +319,8 @@ class Publish extends React.Component {
         }
       });
     }
-
     const data = cities;
-    
+  
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -721,9 +653,13 @@ class Publish extends React.Component {
                 </TouchableOpacity>
               </View>
 
-              {!this.state.Show && (
+              {!this.state.showErrLabel && (
                 <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
               )}
+              
+
+
+              {/* לא להוריד את הSCROLL VIEW!!!!!!!!!! */}
               <ScrollView
                 contentContainerStyle={{ flexGrow: 1 }}
                 horizontal
