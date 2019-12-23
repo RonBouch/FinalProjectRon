@@ -66,7 +66,7 @@ export default class EditProfile extends React.Component {
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
-      birthday: this.birthday,
+      birthday: global.user.Birthday,
       id: global.user.UserID
     };
     console.log(data);
@@ -95,8 +95,7 @@ export default class EditProfile extends React.Component {
             });
             return;
           } else {
-            console.log("ID" + id);
-            id = u.ID;
+            global.user = u;
 
             alert("היי ," + this.firstName + " " + this.lastName);
             this.props.navigation.navigate("Home");

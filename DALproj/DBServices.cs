@@ -141,7 +141,7 @@ namespace DALproj
             try
             {
 
-                comm.CommandText = $"UPDATE  Users   SET FirstName = '{firstName}',LastName =  '{lastName}', Gender = '{gender}', Birthday ='{birthday}'  where UserID ='{id}'";
+                comm.CommandText = $"UPDATE  Users   SET FirstName = '{firstName}',LastName =  '{lastName}', Gender = '{gender}', Birthday ='{birthday.ToString()}'  where UserID ='{id}'";
                 comm.Connection.Open();
                 int res = comm.ExecuteNonQuery();
                 if (res == 1)
