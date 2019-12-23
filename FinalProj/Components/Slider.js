@@ -8,8 +8,6 @@ import {
   TouchableOpacity
 } from "react-native";
 import Swiper from "react-native-swiper";
-import { array } from "prop-types";
-import { withNavigation } from "react-navigation";
 
 const { width } = Dimensions.get("window");
 const Slider = props => (
@@ -57,17 +55,6 @@ const Slider2 = props => (
   
 
   <View style={styles.container}>
-
-  {/* <Image
-    style={{
-      width: 70,
-      height: 70,
-      position: "absolute",
-      left: 5,
-      zIndex: 1
-    }}
-    source={require("../assets/new1.gif")}
-  /> */}
 
 <Image style={styles.image} source={{ uri:  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+props.item}} />
 

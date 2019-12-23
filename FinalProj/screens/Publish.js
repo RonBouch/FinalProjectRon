@@ -21,6 +21,7 @@ import {
   View,
   TouchableHighlight,
   Dimensions,
+  Alert,
   TextInput,
   Image,
   TouchableOpacity,
@@ -70,33 +71,28 @@ class Publish extends React.Component {
       itemImg: "sdvw",
      img:[],
       imageName: "",
-      imageBade64: ""
+      imageBade64: "",
+
+      lastRefresh: Date(Date.now()).toString(),
+
     };
+    this.refreshScreen = this.refreshScreen.bind(this)
+
+  }
+  refreshScreen() {
+    this.setState({ lastRefresh: Date(Date.now()).toString() })
   }
   componentDidMount() {
     this.GetItemTypes();
     // this.retriveData('user');
 
   }
-  // retriveData = async () => {
-  //   let u = await AsyncStorage.getItem('user');
-  //   // console.log('u->>',u);
-  //   if(u != null){
-  //     global.user = JSON.parse(u);
-  //   }
-  // }
-  
+ 
   ItemType = (e, i) => {
     this.setState({
       itemType: i + 2
     });
   };
-
-  // City = e => {
-  //   this.setState({
-  //     city: e
-  //   });
-  // };
   UserPhone = e => {
     this.setState({
       userPhone: e
@@ -117,37 +113,7 @@ class Publish extends React.Component {
       itemAbout: e
     });
   };
-
-  CheckCity = async () => {
-    const { city } = this.state;
-    var detials = city.split(",", 2);
-    if (detials[1] !== "") {
-      this.setState({
-        delta: 0.01
-      });
-    } else {
-      this.setState({
-        delta: 0.2
-      });
-    }
-    if (
-      (await Location.geocodeAsync(city)) == "" ||
-      (await Location.geocodeAsync(city)) == null
-    ) {
-      this.setState({
-        resLabel: "*עיר או רחוב לא תקינים, נסה שוב!"
-      });
-      return;
-    }
-
-    // let geocode = await Location.geocodeAsync(address);
-
-    // this.setState({
-    //   latitude: geocode[0].latitude,
-    //   longitude: geocode[0].longitude
-    // });
-  };
-  openCamera = async () => {
+  openCamera = async (index) => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
       aspect: [4, 3],
@@ -156,38 +122,57 @@ class Publish extends React.Component {
     });
 
     if (result.cancelled) {
-      return;
+      console.log("result ", result);
+    }
+    else{
+      let imageBase64 = result.base64;
+
+      const formData = {
+        base64: imageBase64,
+        imageName: index+this.state.itemName+global.user.UserID+".jpg",
+        userid:0,
+      };
+      console.log(formData.imageName)
+
+      if(this.state.img.length>2||this.state.img[index]!=null){
+          
+        const list = this.state.formData.map((item, j) => {
+            if (j === index) {
+              return formData;
+            } else {
+              return item;
+            }
+        })
+         
+        let imageArray = this.state.img.filter(image => {
+          return (
+            image != this.state.img[index]
+                        );
+        });
+        imageArray.push(result.uri)
+       this.setState({
+         img:imageArray,
+         formData:list,
+       })
+      }
+      else{
+        this.setState({ 
+          formData: [...this.state.formData,formData],
+          img:[...this.state.img, result.uri] 
+        });
+
+      }
     }
 
-    let localUri = result.uri;
-    let filename = localUri.split("/").pop();
-    let imageBase64 = result.base64;
+    // let localUri = result.uri;
+    // let filename = localUri.split("/").pop();
+    // let imageBase64 = result.base64;
 
-    let match = /\.(\w+)$/.exec(filename);
-    let type = match ? `image/${match[1]}` : `image`;
+    // let match = /\.(\w+)$/.exec(filename);
+    // let type = match ? `image/${match[1]}` : `image`;
 
-    const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
-    await fetch(
-      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-      {
-        method: "post",
-        headers: new Headers({
-          "Content-Type": "application/Json;"
-        }),
-        body: JSON.stringify(formData)
-      }
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          console.log("result = ", result);
-        },
-        error => {
-          console.log("err post=", error);
-        }
-      );
+    // const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
+
   };
 
   openGallery = async (index) => {
@@ -355,7 +340,7 @@ class Publish extends React.Component {
               });
               return;
             } else {
-              this.props.navigation.navigate("Home");
+              this.props.navigation.navigate("Contribution");
             }
           },
           error => {
@@ -670,9 +655,15 @@ class Publish extends React.Component {
        
 
                 <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <TouchableOpacity  onPress={()=>this.openGallery(0)}
-                    style={{ margin: 5,
-                      borderWidth: 1 }}>
+                  <TouchableOpacity style={{ margin: 5, borderWidth: 1 }} 
+                   onPress={() =>Alert.alert(
+                  'בחר תמונה',
+                  'האם תרצה גלריה/מצלמה?',
+                  [
+                    {text: 'מצלמה', onPress: () => {this.openCamera(0)}},
+                    {text: 'גלריה', onPress: () => {this.openGallery(0)}}
+                   ])}
+                    >
                  {this.state.img[0]!=null? <Image
                       style={{
                         height: 120,
