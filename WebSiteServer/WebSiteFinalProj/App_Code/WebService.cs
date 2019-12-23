@@ -36,6 +36,12 @@ public class WebService : System.Web.Services.WebService
         return BALServices.Register(firstName, lastName, gender, email, password, birthday);
     }
 
+    [WebMethod]
+    public string EditProfile(string firstName, string lastName, string gender, string birthday, int id)
+    {
+        return BALServices.EditProfile( firstName,  lastName,  gender,  birthday,  id);
+    }
+
 
     [WebMethod]
     public string RegisterWithGoogle(string firstName, string lastName, string email, string password, string image)

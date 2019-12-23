@@ -44,22 +44,72 @@ export default class EditProfile extends React.Component {
     super(props);
     this.firstName = "";
     this.lastName = "";
-    this.email = "";
-    this.password = "";
-    this.verifyPassword = "";
     this.birthday = "";
     this.gender = "";
-    this.vaildForm = false;
     this.state = {
-      message: "",
-      date: "",
-      formIsValid: true,
-      errors: {}
+      date: ""
     };
   }
+  changeFirstName = e => {
+    this.firstName = e;
+  };
+
+  changeLastName = e => {
+    this.lastName = e;
+  };
   changeGender = e => {
     this.gender = e;
   };
+
+  EditProfile = () => {
+    const data = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      gender: this.gender,
+      birthday: this.birthday,
+      id: global.user.UserID
+    };
+    console.log(data);
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/EditProfile",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        }),
+        body: JSON.stringify(data)
+      }
+    )
+      .then(res => {
+        console.log("res=", res);
+        return res.json();
+      })
+      .then(
+        result => {
+          console.log("fetch POST= ", result);
+          let u = JSON.parse(result.d);
+          console.log("u = " + u);
+          if (u == null) {
+            this.setState({
+              message: "הרשמה נכשלה"
+            });
+            return;
+          } else {
+            console.log("ID" + id);
+            id = u.ID;
+
+            alert("היי ," + this.firstName + " " + this.lastName);
+            this.props.navigation.navigate("Home");
+          }
+          console.log(result.d);
+          console.log(result);
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
   render() {
     return (
       <ImageBackground
@@ -183,7 +233,7 @@ export default class EditProfile extends React.Component {
 
               <TouchableOpacity
                 style={styles.registerButton}
-                onPress={this.register}
+                onPress={this.EditProfile}
               >
                 <Text
                   style={{ fontWeight: "bold", color: "white", fontSize: 18 }}
@@ -198,16 +248,6 @@ export default class EditProfile extends React.Component {
                   size={18}
                 />
               </TouchableOpacity>
-
-              <Text style={styles.textMessage}>
-                {this.state.errors.firstName ||
-                  this.state.errors.lastName ||
-                  this.state.errors.email ||
-                  this.state.errors.password ||
-                  this.state.errors.verifyPassword ||
-                  this.state.errors.birthday ||
-                  this.state.errors.gender}
-              </Text>
             </KeyboardAvoidingView>
           </View>
         </View>

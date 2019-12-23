@@ -43,6 +43,23 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
+
+        public static string EditProfile(string firstName, string lastName, string gender, string birthday, int id)
+        {
+            User u = DBServices.EditProfile(firstName, lastName, gender, birthday, id);
+            if (u != null)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return new JavaScriptSerializer().Serialize(u);
+
+        }
+
         public static string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
         {
             User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password,image);

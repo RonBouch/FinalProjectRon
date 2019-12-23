@@ -131,6 +131,61 @@ namespace DALproj
             return u;
         }
 
+
+
+
+        public static User EditProfile(string firstName, string lastName, string gender, string birthday,int id)
+        {
+            User u = null;
+            SqlDataReader reader2 = null;
+            try
+            {
+
+                comm.CommandText = $"UPDATE  Users   SET FirstName = '{firstName}',LastName =  '{lastName}', Gender = '{gender}', Birthday ='{birthday}'  where UserID ='{id}'";
+                comm.Connection.Open();
+                int res = comm.ExecuteNonQuery();
+                if (res == 1)
+                {
+                    comm.CommandText = $"SELECT * FROM Users where UserID ='{id}'";
+                    reader2 = comm.ExecuteReader();
+                    if (reader2.Read())
+                    {
+                        u = new User()
+                        {
+                            UserID = (int)reader2["UserID"],
+                            FirstName = firstName,
+                            LastName = lastName,
+                            Gender = gender,
+                            Birthday = birthday,
+                            Email = reader2["Email"].ToString(),
+                            Password = reader2["Password"].ToString()
+                        };
+                    }
+                    return u;
+                }
+
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (!reader2.IsClosed)
+                    reader2.Close();
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+
+            return u;
+        }
+
+
+
         public static User RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
         {
             User u = null;
