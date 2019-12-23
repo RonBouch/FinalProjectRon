@@ -6,7 +6,6 @@ import { DrawerActions } from "react-navigation-drawer";
 import cities from "../cityAndRegion";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { Dropdown } from "react-native-material-dropdown";
-
 import {
   Text,
   View,
@@ -36,17 +35,30 @@ class Publish extends React.Component {
       itemAbout: "",
       img:[],
 
-      lastRefresh: Date(Date.now()).toString(),
     };
-    this.refreshScreen = this.refreshScreen.bind(this)
 
   }
-  refreshScreen() {
-    this.setState({ lastRefresh: Date(Date.now()).toString() })
-  }
-  componentDidMount() {
+
+  onFocusFunction = async() => {
+    console.log("Focus s")
     this.GetItemTypes();
+
+    // do some stuff on every screen focus
+  };
+
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
   }
+
+  // and don't forget to remove the listener
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
+
 
   ItemType = (e, i) => {
     this.setState({

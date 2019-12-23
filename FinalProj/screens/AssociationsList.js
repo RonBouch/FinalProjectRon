@@ -31,7 +31,8 @@ class AssociationsList extends Component {
     this.state = {
       associations: null,
       associationTypes: null,
-      dataAssociations: null
+      dataAssociations: null,
+      searchAssociation:"",
     };
   }
   componentDidMount() {
@@ -124,6 +125,7 @@ class AssociationsList extends Component {
   };
 
   render() {
+
     const { navigate } = this.props.navigation;
     let Associations = [];
     let AssociationTypes = [];
@@ -137,6 +139,8 @@ class AssociationsList extends Component {
 
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
+      if (association.AssociationName.includes(this.state.searchAssociation)){
+
         return (
           <View
             key={index}
@@ -188,6 +192,9 @@ class AssociationsList extends Component {
             </TouchableOpacity>
           </View>
         );
+      }
+
+     
       });
     }
     return (
@@ -274,7 +281,7 @@ class AssociationsList extends Component {
                 <TextInput
                   placeholder="חיפוש "
                   placeholderTextColor="black"
-                  onChangeText={this.SearchItem}
+                  onChangeText={e=>{this.setState({searchAssociation:e})}}
                   style={{
                     fontSize: 12,
                     width: 200
