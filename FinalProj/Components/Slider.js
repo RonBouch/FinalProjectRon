@@ -104,15 +104,27 @@ export default class extends Component {
     super(props);
     this.state = {
       imagesSlider: [],
-      itemImageArray:null,
+      itemImageArray:[],
       imageName: [],
       items: null,
       checkURL:null,
-      show: false
+      checkArrayComplete: false,
+      lastRefresh: Date(Date.now()).toString(),
+
     };
+    this.refreshScreen = this.refreshScreen.bind(this)
+
+  }
+  refreshScreen() {
+    this.setState({ lastRefresh: Date(Date.now()).toString() })
   }
   // define a separate function to get triggered on focus
   onFocusFunction = async() => {
+    this.setState({
+      checkArrayComplete:false,
+      imagesSlider:[],
+      itemImageArray:[],
+    })
     this.RealoadScreen();
     // do some stuff on every screen focus
   };
@@ -131,17 +143,16 @@ export default class extends Component {
   async RealoadScreen(){
     if(this.props.img!=null&&this.props.img!=undefined)
     {
-      console.log("propss ",this.props.img)
       let imgArr=[];
       for(i=0;i<3;i++){
         console.log( await this.checkImageURL("http://ruppinmobile.tempdomain.co.il/site11/imageStorage/"+i+this.props.img));
        if(this.state.checkURL){
         imgArr.push(i+this.props.img)
-      console.log("img in array ",i+this.props.img)
        }
       }
       this.setState({
-     itemImageArray:imgArr
+     itemImageArray:imgArr,
+     checkArrayComplete:true,
       })
     }
     else{
@@ -152,19 +163,16 @@ export default class extends Component {
   async checkImageURL(url){
     await fetch(url)
        .then(res => {
-        //  console.log(res.status)
        if(res.status == 404){
-        //  console.log("False Image")
           this.setState({checkURL:false})
 
          return false;
        }else{
-         console.log("true ")
           this.setState({checkURL:true})
          return true;
       }
     })
-   //  .catch(err=>console.log(err))
+    .catch(err=>console.log(err))
    }
 
   // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
@@ -179,11 +187,10 @@ export default class extends Component {
         }));
       }
     }
+    this.setState({checkArrayComplete:true})
   };
 
   GetItems = async () => {
-    console.log("Get Items");
-
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
       {
@@ -194,12 +201,10 @@ export default class extends Component {
       }
     )
       .then(res => {
-        // console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-          // console.log("fetch POST= ", result);
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
@@ -219,43 +224,44 @@ export default class extends Component {
 
   render() {
 
-    // console.log("check url",this.state.checkURL)
-    console.log("item in array - >",this.state.itemImageArray)
-    // console.log("slider array - > ",this.state.imagesSlider)
-    console.log("image from post page",this.props.img)
     return (
       <View style={{ width: "100%", height: 200 }}>
-      {
-        this.state.itemImageArray!=null?
+      {this.state.checkArrayComplete?
         
-        <Swiper autoplay={false} >
-          {this.state.itemImageArray.map((item, i) => (
-            <TouchableOpacity
-              key={i}
-  
-            >
-            {i<=this.state.itemImageArray.length?
-              <Slider2 item={item} key={i} />
-              :console.log("yeeeee")
-            }
-              </TouchableOpacity>
-          ))}
-        </Swiper>
         
-        :
-        <Swiper autoplay={true} autoplayTimeout={5}>
-          {this.state.imagesSlider.map((item, i) => (
-            <TouchableOpacity
-              key={i}
-              onPress={() =>
-                this.props.props.navigation.navigate("PostPage", { item: item })
+          this.state.itemImageArray!=null&&this.state.itemImageArray!=""?
+          
+          <Swiper autoplay={false} >
+            {this.state.itemImageArray.map((item, i) => (
+              <TouchableOpacity
+                key={i}
+    
+              >
+              {i<=this.state.itemImageArray.length?
+                <Slider2 item={item} key={i} />
+                :console.log("yeeeee")
               }
-            >
-              <Slider item={item} key={i} />
-            </TouchableOpacity>
-          ))}
-        </Swiper>
-      }
+                </TouchableOpacity>
+            ))}
+          </Swiper>
+          
+          :
+          <Swiper autoplay={true} autoplayTimeout={5}>
+            {this.state.imagesSlider.map((item, i) => (
+              <TouchableOpacity
+                key={i}
+                onPress={() =>
+                  this.props.props.navigation.navigate("PostPage", { item: item })
+                }
+              >
+                <Slider item={item} key={i} />
+              </TouchableOpacity>
+            ))}
+          </Swiper>
+        
+        
+        :console.log("Reload array")}
+    
         
       </View>
     );
