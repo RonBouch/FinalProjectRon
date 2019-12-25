@@ -39,6 +39,7 @@ class Contribution extends Component {
       itemTypes: [],
       remindView:false,
       nameToRemind:"",
+      reminders:null,
     };
   }
 
@@ -66,7 +67,103 @@ class Contribution extends Component {
     // console.log("url  asasds",url)
     Linking.openURL(url);
   };
+  AddReminder() {
+    const data = {
+      itemName:this.state.nameToRemind,
+      userid: global.user.UserID,
+      token:global.user.Token,
+    };
+    console.log("DAta - ",data)
+    fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/AddReminder",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        }),
+        body: JSON.stringify(data)
+      }
+    )
+      .then(res => {
+        console.log("res=", res);
+        this.setState({remindView:false})
 
+        return res.json();
+      })
+       , error => {
+          console.log("err post=", error);
+        }
+      
+  };
+  GetReminders(){
+   fetch(
+      "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
+      {
+        method: "post",
+        headers: new Headers({
+          "Content-Type": "application/Json;"
+        })
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          let reminders = JSON.parse(result.d);
+          if (reminders == null) {
+            this.setState({
+              message: "לא קיימים סוגי פריטים"
+            });
+            return;
+          } else {
+            this.setState({
+              reminders: reminders
+            });
+            console.log(reminders)
+            console.log("last Item = ",this.state.items[0].ItemName)
+            data =reminders.filter(re => {
+              console.log(re);
+              return (
+                re.ItemName.includes(this.state.items[0].ItemName) )})
+         console.log("DATA REMIN" , data);
+         this.SendPushFromClient(data);
+              }
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  };
+  SendPushFromClient = (R) => {
+    console.log("R",R[0].Token)
+    let per = {
+      to: R[0].Token,
+      title: "היי מישהו העלה - " +R[0].ItemName+"\n",
+      body: "כנס עכשיו לראות :)!",
+      badge: 10,
+      // data: { name: "nir", grade: 100 }
+    };
+
+    // POST adds a random id to the object sent
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      body: JSON.stringify(per),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json != null) {
+          console.log(`
+                returned from server\n
+                json.data= ${JSON.stringify(json.data)}`);
+        } else {
+          alert("err json");
+        }
+      });
+  };
   GetItemsFromFavorite = async () => {
     const data = {
       userid: global.user.UserID
@@ -140,35 +237,7 @@ class Contribution extends Component {
         }
       );
   };
-  btnSendPushFromClient = () => {
-    console.log("global token",global.user.Token)
-    let per = {
-      to: global.user.Token,
-      title: "תודה שנכנסת שוב :)",
-      body: "מצא את הדירה שלך עכשיו!",
-      badge: 3,
-      data: { name: "nir", grade: 100 }
-    };
-
-    // POST adds a random id to the object sent
-    fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      body: JSON.stringify(per),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        if (json != null) {
-          console.log(`
-                returned from server\n
-                json.data= ${JSON.stringify(json.data)}`);
-        } else {
-          alert("err json");
-        }
-      });
-  };
+ 
   GetItemTypes = async () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemTypes",
@@ -194,6 +263,7 @@ class Contribution extends Component {
             this.setState({
               itemTypes: itemTypes
             });
+            this.GetReminders();
           }
         },
         error => {
@@ -677,7 +747,7 @@ class Contribution extends Component {
               </View>
               <View>
                 <TouchableOpacity
-                  onPress={() => this.handleSubmit()}
+                  onPress={() => this.AddReminder()}
                   style={styles.publishButton}
                 >
                   <Text style={{ color: "white" }}>תתריע לי {"  "}</Text>
@@ -691,7 +761,7 @@ class Contribution extends Component {
               </View>
               </View>
            </View>
-        :console.log("Remind false ")}
+        :console.log(" ")}
         
         
           <TouchableOpacity

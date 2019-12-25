@@ -42,7 +42,6 @@ export default class LoginWithGoogle extends React.Component {
     });
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
 
-    console.log("Token from google  = " + this.state.token);
  
   this.signIn();
 }

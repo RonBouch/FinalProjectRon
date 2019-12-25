@@ -46,7 +46,7 @@
     <Compile Include="Association.cs" />
     <Compile Include="DBServices.cs" />
     <Compile Include="Favorite.cs" />
-    <Compile Include="ImageArray.cs" />
+    <Compile Include="Reminder.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

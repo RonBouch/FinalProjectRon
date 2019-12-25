@@ -122,6 +122,21 @@ namespace BALproj
         }
 
 
+        public static string GetReminders()
+        {
+            List<Reminder> p = DBServices.GetReminders();
+
+            if (p != null)
+            {
+                return new JavaScriptSerializer().Serialize(p);
+            }
+            else
+            {
+                return new JavaScriptSerializer().Serialize("No reminder");
+            }
+
+
+        }
 
         public static string GetAssociations()
         {
@@ -166,6 +181,21 @@ namespace BALproj
         public static int InsertFavorite(int userid, int itemid)
         {
             int check = DBServices.InsertFavorite(userid, itemid);
+            if (check == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return check;
+        }
+
+        public static int AddReminder(string itemName, int userid, string token)
+        {
+            int check = DBServices.AddReminder(itemName,userid, token);
             if (check == 1)
             {
 

@@ -68,6 +68,12 @@ public class WebService : System.Web.Services.WebService
 
     }
     [WebMethod]
+    public string GetReminders()
+    {
+        return BALServices.GetReminders();
+    }
+
+    [WebMethod]
     public string GetAssociations()
     {
         return BALServices.GetAssociations();
@@ -91,6 +97,12 @@ public class WebService : System.Web.Services.WebService
     public int InsertFavorite(int userid, int itemid)
     {
         return BALServices.InsertFavorite(userid, itemid);
+    }
+
+    [WebMethod]
+    public int AddReminder(string itemName,int userid, string token)
+    {
+        return BALServices.AddReminder(itemName,userid, token);
     }
     [WebMethod]
     public string GetItemsFromFavorite(int userid)

@@ -133,10 +133,6 @@ namespace DALproj
 
             return u;
         }
-
-
-
-
         public static User EditProfile(string firstName, string lastName, string gender, string birthday,int id)
         {
             User u = null;
@@ -186,9 +182,6 @@ namespace DALproj
 
             return u;
         }
-
-
-
         public static User RegisterWithGoogle(string firstName, string lastName, string email, string password,string image,string token)
         {
             User u = null;
@@ -271,8 +264,6 @@ namespace DALproj
 
             return u;
         }
-
-
         public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg)
         {
             string itemDate = DateTime.Now.ToString("dd/MM/yyyy");
@@ -328,8 +319,6 @@ namespace DALproj
 
 
         }
-
-
         public static List<Item> GetItems()
         {
             List<Item> items = new List<Item>();
@@ -360,8 +349,6 @@ namespace DALproj
 
             return items;
         }
-
-
         public static List<Association> GetAssociations()
         {
             List<Association> associations = new List<Association>();
@@ -391,7 +378,6 @@ namespace DALproj
 
             return associations;
         }
-
         public static List<AssociationType> GetAssociationTypes()
         {
             List<AssociationType> associationTypes = new List<AssociationType>();
@@ -434,7 +420,6 @@ namespace DALproj
 
             return itemTypes;
         }
-
         public static int InsertFavorite(int userid, int itemid)
         {
             int check = 1;// יצירת משתנה והתחלתו ב1
@@ -493,7 +478,6 @@ namespace DALproj
             }
             return check;
         }
-
         public static List<Item> GetItemsFromFavorite(int userid)
         {
             List<Item> items= null;
@@ -576,7 +560,6 @@ namespace DALproj
             }
             return items;
         }
-
         public static List<Item> GetItemsByID(int userid)
         {
             List<Item> items = new List<Item>();
@@ -607,8 +590,6 @@ namespace DALproj
 
             return items;
         }
-
-
         public static User RegisterWithFacebook(string firstName, string lastName, string email, string password,string birthday,string gender, string image,string token)
         {
             User u = null;
@@ -691,7 +672,6 @@ namespace DALproj
 
             return u;
         }
-
         public static int DeleteItem(int userid, int itemid)
         {
             int check = 1;
@@ -731,6 +711,81 @@ namespace DALproj
 
             }
             return check;
+        }
+
+        public static int AddReminder(string itemName,int userid, string token)
+        {
+            int check = 1;// יצירת משתנה והתחלתו ב1
+            SqlDataReader reader = null;
+            try
+            {
+                //של המשתמש Favorite שתבדוק אם הפריט קיים בטבלת  Sql יצירת שאילתא ל 
+                comm.CommandText = $"SELECT * FROM Reminders WHERE UserID='{userid}' and ItemName='{itemName}'";
+                comm.Connection.Open();//פתיחת החיבור של השרת עם הSQL 
+                reader = comm.ExecuteReader();
+                if (reader.Read()) // אם קיים הפריט
+                {
+                    check = -1; // הכנסת הערך -1 למשתה
+                    return check; // מחזיר את המשתנה עם הערך המוחזר
+                }
+                else
+                {
+                    comm.Connection.Close();//סגירת החיבור של השרת עם הSQL 
+                }
+                //את מספר זהות הפריט ואת מספר זהות המשתמש Favorite יצירת שאילתא שתכניס לטבלת 
+                comm.CommandText = $"INSERT INTO Reminders(ItemName,UserID,Token) VALUES( '{itemName}','{userid}', '{token}')";
+                comm.Connection.Open();//פתיחת החיבור של השרת עם הSQL 
+
+                int res = comm.ExecuteNonQuery(); // שם במשתנה 1 אם נוצר שורה חדשה בטבלה   
+                if (res == 1)// בדיקה אם נוצר בטבלה שורה חדשה
+                {
+                    check = 1;
+
+                    return check; // מחזיר את המשתנה שהערך שלו 1
+
+                }
+                else //אם לא נוצר שורה חדשה
+                {
+                    check = 0;
+                    return check; // החזרת המשתנה שהערך שלו 0
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);//קבלת הודעת שגיאה במידה וקיימת בעיה בפונקציה
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();// וידוא סיגרת החיבור לSQL
+                }
+
+            }
+            return check;
+        }
+        public static List<Reminder> GetReminders()
+        {
+            List<Reminder> items = new List<Reminder>();
+            comm.CommandText = $"SELECT  * from Reminders ORDER BY ItemName DESC";
+            comm.Connection.Open();
+            SqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                Reminder p = new Reminder()
+                {
+                    ReminderID = int.Parse(reader["ReminderID"].ToString()),
+                     ItemName=reader["ItemName"].ToString(),
+                     UserID=reader["UserID"].ToString(),
+                     Token=reader["Token"].ToString(),
+                };
+                items.Add(p);
+            }
+
+            comm.Connection.Close();
+
+            return items;
         }
 
         public static string UploadImage(string base64, string imageName,int userid)

@@ -51,10 +51,7 @@ class Login extends React.Component {
    await registerForPushNotificationsAsync().then(tok => {
       this.setState({ token: tok });
     });
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
-
-    console.log("Token   = " + this.state.token);
- 
+    this._notificationSubscription = Notifications.addListener(this._handleNotification); 
   }
   _handleNotification = notification => {
     this.setState({ notification: notification });
