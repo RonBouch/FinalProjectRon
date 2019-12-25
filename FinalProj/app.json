@@ -1,18 +1,18 @@
 {
   "expo": {
-    "name": "FinalProj",
-    "slug": "FinalProj",
+    "name": "תן יד",
+    "slug": "Ten Yad",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/g.png",
     "facebookScheme": "fb2363780303934516",
     "facebookAppId": "2363780303934516",
-    "facebookDisplayName": "FinalProj",
+    "facebookDisplayName": "תן יד",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

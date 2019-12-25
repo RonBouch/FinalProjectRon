@@ -136,12 +136,12 @@ class Contribution extends Component {
       );
   };
   SendPushFromClient = (R) => {
-    console.log("R",R[0].Token)
     let per = {
+      name:"תן יד",
       to: R[0].Token,
       title: "היי מישהו העלה - " +R[0].ItemName+"\n",
       body: "כנס עכשיו לראות :)!",
-      badge: 10,
+      badge: 3,
       // data: { name: "nir", grade: 100 }
     };
 

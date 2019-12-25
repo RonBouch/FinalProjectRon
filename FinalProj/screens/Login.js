@@ -57,34 +57,34 @@ class Login extends React.Component {
     this.setState({ notification: notification });
   };
 
-  btnSendPushFromClient = () => {
-    let per = {
-      to: this.state.token,
-      title: "תודה שנכנסת שוב :)",
-      body: "מצא את הדירה שלך עכשיו!",
-      badge: 3,
-      data: { name: "nir", grade: 100 }
-    };
+  // btnSendPushFromClient = () => {
+  //   let per = {
+  //     to: this.state.token,
+  //     title: "תודה שנכנסת שוב :)",
+  //     body: "מצא את הדירה שלך עכשיו!",
+  //     badge: 3,
+  //     data: { name: "nir", grade: 100 }
+  //   };
 
-    // POST adds a random id to the object sent
-    fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      body: JSON.stringify(per),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        if (json != null) {
-          console.log(`
-                returned from server\n
-                json.data= ${JSON.stringify(json.data)}`);
-        } else {
-          alert("err json");
-        }
-      });
-  };
+  //   // POST adds a random id to the object sent
+  //   fetch("https://exp.host/--/api/v2/push/send", {
+  //     method: "POST",
+  //     body: JSON.stringify(per),
+  //     headers: {
+  //       "Content-type": "application/json; charset=UTF-8"
+  //     }
+  //   })
+  //     .then(response => response.json())
+  //     .then(json => {
+  //       if (json != null) {
+  //         console.log(`
+  //               returned from server\n
+  //               json.data= ${JSON.stringify(json.data)}`);
+  //       } else {
+  //         alert("err json");
+  //       }
+  //     });
+  // };
   changePass = e => {
     this.password = e;
   };
