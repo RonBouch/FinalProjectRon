@@ -36,7 +36,9 @@ class Contribution extends Component {
       checkedFavorite: false,
       itemsFromFavorite: null,
       searchItem: "",
-      itemTypes: []
+      itemTypes: [],
+      remindView:false,
+      nameToRemind:"",
     };
   }
 
@@ -536,6 +538,8 @@ class Contribution extends Component {
                 />
               </TouchableOpacity>
             </View>
+          
+    
             <View
               style={{
                 width: "100%",
@@ -611,12 +615,87 @@ class Contribution extends Component {
                   }}
                 />
               </View>
+         
+             
+           
             </View>
 
+            
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
+          {this.state.remindView?
+          <View style={{position: "absolute",width:'100%',height:'100%', justifyContent:'center',alignItems: "center",flexDirection: "row-reverse",backgroundColor: "rgba(255,255,255,.8)", }}>
+            
+           <View style={{backgroundColor:'#add8e6',width:'90%',height:'30%',alignItems:'center',padding:20,borderRadius:20}}> 
+           <TouchableOpacity
+          onPress={()=>this.setState({remindView:false})}
+            style={{
+              position: "absolute",
+              // totp: 5,
+              right: 0,
+              alignItems: "center",
+              flexDirection: "row-reverse",
+              borderRadius: 200
+            }}
+          >
+            <Image
+              source={require("../assets/x.png")}
+              style={{ width: 40, height: 40, borderRadius: 200 }}
+            />
+          </TouchableOpacity>
+                <Text style={{color: "rgba(255,255,255,.9)",
+                    fontWeight: "bold",
+                    fontSize: 25,
+                    fontFamily: "serif",
+                    textShadowColor: "black",
+                    textShadowOffset: { width: 1, height: 4 },
+                    textShadowRadius: 5
+                    }}>
+                    להתריע לך ?
+                    </Text>
+                    <Text style={{padding:5}}>אנא רשום את שם הפריט שתרצה לקבל עבורו התרעה במידה ומישהו יפרסם..</Text>
+
+                    
+              <View style={styles.publushInput}>
+                <Icona
+                  name="edit"
+                  type="font-awesome"
+                  color="rgb(150,150,150)"
+                  size={24}
+                />
+                <TextInput
+                  placeholderTextColor="rgb(150,150,150)"
+                  style={{
+                    marginLeft: "8%",
+                    fontSize: 14
+                  }}
+                  placeholder="שם הפריט"
+                  onChangeText={e => {
+                    this.setState({ nameToRemind: e });
+                  }}
+                />
+              </View>
+              <View>
+                <TouchableOpacity
+                  onPress={() => this.handleSubmit()}
+                  style={styles.publishButton}
+                >
+                  <Text style={{ color: "white" }}>תתריע לי {"  "}</Text>
+                  <Icona
+                    name="upload"
+                    type="font-awesome"
+                    color="white"
+                    size={18}
+                  />
+                </TouchableOpacity>
+              </View>
+              </View>
+           </View>
+        :console.log("Remind false ")}
+        
+        
           <TouchableOpacity
-          onPress={()=>this.btnSendPushFromClient()}
+          onPress={()=>this.setState({remindView:true})}
             style={{
               position: "absolute",
               bottom: 10,
