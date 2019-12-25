@@ -121,13 +121,16 @@ class Contribution extends Component {
               reminders: reminders
             });
             console.log(reminders)
-            console.log("last Item = ",this.state.items[0].ItemName)
             data =reminders.filter(re => {
               console.log(re);
               return (
                 re.ItemName.includes(this.state.items[0].ItemName) )})
          console.log("DATA REMIN" , data);
-         this.SendPushFromClient(data);
+         for(i=0;i<data.length;i++)
+         {
+          this.SendPushFromClient(data[i]);
+
+         }
               }
         },
         error => {
@@ -138,10 +141,12 @@ class Contribution extends Component {
   SendPushFromClient = (R) => {
     let per = {
       name:"תן יד",
-      to: R[0].Token,
-      title: "היי מישהו העלה - " +R[0].ItemName+"\n",
+      to: R.Token,
+      title: "היי מישהו העלה - " +R.ItemName+"\n",
       body: "כנס עכשיו לראות :)!",
       badge: 3,
+      backgroundColor: "black",
+
       // data: { name: "nir", grade: 100 }
     };
 
