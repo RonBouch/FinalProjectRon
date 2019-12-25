@@ -219,8 +219,7 @@ export default class Profile extends React.Component {
                     // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן
                     source={{
                       uri:
-                        this.state.img ==
-                        global.user.UserID + global.user.Email + ".jpg"
+                        this.state.img ==global.user.UserID + global.user.Email + ".jpg"
                           ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                             this.state.img +
                             "?time" +

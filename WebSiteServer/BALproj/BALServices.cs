@@ -28,9 +28,9 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
-        public static string Register(string firstName, string lastName, string gender, string email, string password, string birthday)
+        public static string Register(string firstName, string lastName, string gender, string email, string password, string birthday,string token)
         {
-            User u = DBServices.Register(firstName, lastName, gender, email, password, birthday);
+            User u = DBServices.Register(firstName, lastName, gender, email, password, birthday,token);
             if (u != null)
             {
 
@@ -60,9 +60,9 @@ namespace BALproj
 
         }
 
-        public static string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
+        public static string RegisterWithGoogle(string firstName, string lastName, string email, string password,string image,string token)
         {
-            User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password,image);
+            User u = DBServices.RegisterWithGoogle(firstName, lastName, email, password,image,token);
             if (u != null)
             {
 
@@ -75,9 +75,9 @@ namespace BALproj
             return new JavaScriptSerializer().Serialize(u);
         }
 
-        public static string RegisterWithFacebook(string firstName, string lastName, string email, string password, string birthday, string gender, string image)
+        public static string RegisterWithFacebook(string firstName, string lastName, string email, string password, string birthday, string gender, string image,string token)
         {
-            User u = DBServices.RegisterWithFacebook(firstName, lastName, email, password, birthday, gender, image);
+            User u = DBServices.RegisterWithFacebook(firstName, lastName, email, password, birthday, gender, image,token);
             if (u != null)
             {
 

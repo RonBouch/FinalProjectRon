@@ -11,6 +11,8 @@ import {
 import * as Google from "expo-google-app-auth";
 import { setProvidesAudioData } from "expo/build/AR";
 //import Expo from "expo"
+import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
+import { Notifications } from "expo";
 
 const WSURL =
   "http://ruppinmobile.tempdomain.co.il/site11//WebServise.asmx/Register";
@@ -29,12 +31,25 @@ export default class LoginWithGoogle extends React.Component {
       password: "",
       gender: "",
       birthday: null,
-      image: null
+      image: null,
+      token:"",
+      notification:"",
     };
   }
-  componentDidMount() {
-    this.signIn();
-  }
+  async componentDidMount () {
+    await registerForPushNotificationsAsync().then(tok => {
+      this.setState({ token: tok });
+    });
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+
+    console.log("Token from google  = " + this.state.token);
+ 
+  this.signIn();
+}
+  _handleNotification = notification => {
+    this.setState({ notification: notification });
+  };
+  
   signIn = async () => {
     try {
       const result = await Google.logInAsync({
@@ -66,7 +81,8 @@ export default class LoginWithGoogle extends React.Component {
       password: "Google",
       gender: "Google",
       birthday: "1900-01-01",
-      image: this.state.image
+      image: this.state.image,
+      token:this.state.token
     };
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithGoogle",

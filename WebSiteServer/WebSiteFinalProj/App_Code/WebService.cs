@@ -31,9 +31,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string Register(string firstName, string lastName, string gender, string email, string password, string birthday)
+    public string Register(string firstName, string lastName, string gender, string email, string password, string birthday,string token)
     {
-        return BALServices.Register(firstName, lastName, gender, email, password, birthday);
+        return BALServices.Register(firstName, lastName, gender, email, password, birthday,token);
     }
 
     [WebMethod]
@@ -44,15 +44,15 @@ public class WebService : System.Web.Services.WebService
 
 
     [WebMethod]
-    public string RegisterWithGoogle(string firstName, string lastName, string email, string password, string image)
+    public string RegisterWithGoogle(string firstName, string lastName, string email, string password, string image,string token)
     {
-        return BALServices.RegisterWithGoogle(firstName, lastName, email, password, image);
+        return BALServices.RegisterWithGoogle(firstName, lastName, email, password, image,token);
     }
 
     [WebMethod]
-    public string RegisterWithFacebook(string firstName, string lastName, string email, string password, string birthday, string gender, string image)
+    public string RegisterWithFacebook(string firstName, string lastName, string email, string password, string birthday, string gender, string image,string token)
     {
-        return BALServices.RegisterWithFacebook(firstName, lastName, email, password, birthday, gender, image);
+        return BALServices.RegisterWithFacebook(firstName, lastName, email, password, birthday, gender, image,token);
 
     }
     [WebMethod]

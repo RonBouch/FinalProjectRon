@@ -138,7 +138,35 @@ class Contribution extends Component {
         }
       );
   };
+  btnSendPushFromClient = () => {
+    console.log("global token",global.user.Token)
+    let per = {
+      to: global.user.Token,
+      title: "תודה שנכנסת שוב :)",
+      body: "מצא את הדירה שלך עכשיו!",
+      badge: 3,
+      data: { name: "nir", grade: 100 }
+    };
 
+    // POST adds a random id to the object sent
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      body: JSON.stringify(per),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json != null) {
+          console.log(`
+                returned from server\n
+                json.data= ${JSON.stringify(json.data)}`);
+        } else {
+          alert("err json");
+        }
+      });
+  };
   GetItemTypes = async () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemTypes",
@@ -587,7 +615,8 @@ class Contribution extends Component {
 
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
-          {/* <TouchableOpacity
+          <TouchableOpacity
+          onPress={()=>this.btnSendPushFromClient()}
             style={{
               position: "absolute",
               bottom: 10,
@@ -604,7 +633,7 @@ class Contribution extends Component {
               source={require("../assets/add-reminder.png")}
               style={{ width: 50, height: 50, borderRadius: 200 }}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );

@@ -16,8 +16,9 @@ import {
   Dimensions,
   AsyncStorage
 } from "react-native";
-// import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync.js";
-import { Notifications, Permissions } from "expo";
+import registerForPushNotificationsAsync from "../Components/registerForPushNotificationsAsync";
+import { Notifications } from "expo";
+import {Permissions} from 'expo-permissions'
 import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
@@ -40,51 +41,53 @@ class Login extends React.Component {
       token: "",
       txtToken: "",
       notification: {},
-      LoginRegister: true
+      LoginRegister: true,
+      token:"",
+      notification:"",
     };
   }
 
-  // componentDidMount() {
-  //   registerForPushNotificationsAsync().then(tok => {
-  //     this.setState({ token: tok });
-  //   });
-  //   console.log("Token   = " + this.state.tok);
-  //   this._notificationSubscription = Notifications.addListener(
-  //     this._handleNotification
-  //   );
-  // }
-  // _handleNotification = notification => {
-  //   this.setState({ notification: notification });
-  // };
+ async componentDidMount() {
+   await registerForPushNotificationsAsync().then(tok => {
+      this.setState({ token: tok });
+    });
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
 
-  // btnSendPushFromClient = () => {
-  //   let per = {
-  //     to: this.state.token,
-  //     title: "תודה שנכנסת שוב :)",
-  //     body: "מצא את הדירה שלך עכשיו!",
-  //     badge: 3,
-  //     data: { name: "nir", grade: 100 }
-  //   };
+    console.log("Token   = " + this.state.token);
+ 
+  }
+  _handleNotification = notification => {
+    this.setState({ notification: notification });
+  };
 
-  //   // POST adds a random id to the object sent
-  //   fetch("https://exp.host/--/api/v2/push/send", {
-  //     method: "POST",
-  //     body: JSON.stringify(per),
-  //     headers: {
-  //       "Content-type": "application/json; charset=UTF-8"
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       if (json != null) {
-  //         console.log(`
-  //               returned from server\n
-  //               json.data= ${JSON.stringify(json.data)}`);
-  //       } else {
-  //         alert("err json");
-  //       }
-  //     });
-  // };
+  btnSendPushFromClient = () => {
+    let per = {
+      to: this.state.token,
+      title: "תודה שנכנסת שוב :)",
+      body: "מצא את הדירה שלך עכשיו!",
+      badge: 3,
+      data: { name: "nir", grade: 100 }
+    };
+
+    // POST adds a random id to the object sent
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      body: JSON.stringify(per),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json != null) {
+          console.log(`
+                returned from server\n
+                json.data= ${JSON.stringify(json.data)}`);
+        } else {
+          alert("err json");
+        }
+      });
+  };
   changePass = e => {
     this.password = e;
   };
@@ -158,6 +161,7 @@ class Login extends React.Component {
   };
 
   FacebookLogin = async () => {
+    
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
@@ -200,7 +204,8 @@ class Login extends React.Component {
           password: "Facebook",
           gender: user.gender,
           birthday: user.birthday,
-          image: user.picture.data.url
+          image: user.picture.data.url,
+          token:this.state.token
         };
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithFacebook",
@@ -226,6 +231,7 @@ class Login extends React.Component {
                 // console.log("U = " ,u);
                 global.user = u;
                 this.storeData("user", u);
+                this.btnSendPushFromClient();
                 this.props.navigation.navigate("DrawerNavigator");
               }
               console.log(result.d);

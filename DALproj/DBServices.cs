@@ -45,7 +45,8 @@ namespace DALproj
                         Email = reader["Email"].ToString(),
                         Password = reader["Password"].ToString(),
                         Birthday = reader["Birthday"].ToString(),
-                        Image=reader["Image"].ToString()
+                        Image=reader["Image"].ToString(),
+                        Token=reader["Token"].ToString()
                     };
                 }
 
@@ -68,7 +69,7 @@ namespace DALproj
 
         }
 
-        public static User Register(string firstName, string lastName,  string gender,string email, string password, string birthday)
+        public static User Register(string firstName, string lastName,  string gender,string email, string password, string birthday,string token)
         {
             User u = null;
             SqlDataReader reader = null;
@@ -87,7 +88,7 @@ namespace DALproj
                     comm.Connection.Close();
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(isAdmin,FirstName, LastName,Gender, Email, Password, Birthday,Image) VALUES('{0}','{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}')";
+                    comm.CommandText = $"INSERT INTO Users(isAdmin,FirstName, LastName,Gender, Email, Password, Birthday,Image,Token) VALUES('{0}','{firstName}', '{lastName}', '{gender}', '{email}' , '{password}', '{birthday.ToString()}','{null}','{token}')";
                     comm.Connection.Open();
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
@@ -105,7 +106,9 @@ namespace DALproj
                                 Gender = gender,
                                 Email = email,
                                 Password = password,
-                                Birthday = birthday
+                                Birthday = birthday,
+                                Image=null,
+                                Token=token,
                             };
                         }
                         return u;
@@ -186,7 +189,7 @@ namespace DALproj
 
 
 
-        public static User RegisterWithGoogle(string firstName, string lastName, string email, string password,string image)
+        public static User RegisterWithGoogle(string firstName, string lastName, string email, string password,string image,string token)
         {
             User u = null;
             SqlDataReader reader = null;
@@ -208,6 +211,7 @@ namespace DALproj
                         Email = email,
                         Password = null,
                         Image= reader["Image"].ToString(),
+                        Token=reader["Token"].ToString()
 
                     };
 
@@ -226,7 +230,7 @@ namespace DALproj
                     }
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}')";
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image,Token) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}','{token}')";
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
                     {
@@ -242,6 +246,7 @@ namespace DALproj
                                 Email = email,
                                 Password = password,
                                 Image=image,
+                                Token=token
 
                             };
                         }
@@ -604,7 +609,7 @@ namespace DALproj
         }
 
 
-        public static User RegisterWithFacebook(string firstName, string lastName, string email, string password,string birthday,string gender, string image)
+        public static User RegisterWithFacebook(string firstName, string lastName, string email, string password,string birthday,string gender, string image,string token)
         {
             User u = null;
             SqlDataReader reader = null;
@@ -628,6 +633,7 @@ namespace DALproj
                         Birthday = reader["Birthday"].ToString(),
                         Gender = reader["Gender"].ToString(),
                         Image = reader["Image"].ToString(),
+                        Token = reader["Token"].ToString(),
 
                     };
 
@@ -642,7 +648,7 @@ namespace DALproj
                
                     if (!reader.IsClosed)
                         reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Birthday,Gender,Image) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{birthday}','{gender}','{image}')";
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Birthday,Gender,Image,Token) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{birthday}','{gender}','{image}','{token}')";
                     int res = comm.ExecuteNonQuery();
                     if (res == 1)
                     {
@@ -660,6 +666,7 @@ namespace DALproj
                                 Birthday = birthday,
                                 Gender = gender,
                                 Image = image,
+                                Token=token,
 
                             };
                         }
