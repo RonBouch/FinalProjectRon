@@ -480,6 +480,7 @@ class Contribution extends Component {
                   source={{
                     uri:
                       "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +0+ item.ItemImg
+               
                   }}
                   style={{
                     width: "100%",
