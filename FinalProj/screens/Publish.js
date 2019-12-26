@@ -468,24 +468,12 @@ class Publish extends React.Component {
                 <Fragment>
                   {/* Single */}
                   <SearchableDropdown
-                    // onPress={(item) => {
-                    //   // const items = this.state.selectedItems;
-                    //   // items.push(item)
-                    //   this.setState({ selectedItems: item });
-                    // }}
                     placeholderTextColor="rgb(150,150,150)"
                     onItemSelect={item => {
                       console.log(item, "item");
-                      // const items = this.state.selectedItems;
-                      // items.push(item)
                       this.setState({ selectedItems: item });
-                    }}
-                    
-                    containerStyle={{ width: "100%" }}
-                    // onRemoveItem={(item, index) => {
-                    //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-                    //   this.setState({ selectedItems: items });
-                    // }}
+                    }}                  
+                     containerStyle={{ width: "100%" }}
                     itemStyle={{
                       padding: 10,
                       marginTop: 2,
@@ -503,14 +491,10 @@ class Publish extends React.Component {
                       placeholder: "עיר/ישוב",
                       underlineColorAndroid: "transparent",
                       style: {
-                        //  margin: 10,
-                        //  borderWidth: 1,
-
                         marginLeft: "8%",
                         fontSize: 14
-
-                        //  borderBottomColor: "rgb(150,150,150)",
                       },
+                      
                       onTextChange: text => console.log(text)
                     }}
                     listProps={{
