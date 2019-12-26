@@ -19,5 +19,6 @@ namespace DALproj
         public string ItemAbout { get; set; }
         public string ItemImg { get; set; }
         public string ItemDate { get; set; }
+        public string Reminder { get; set; }
     }
 }

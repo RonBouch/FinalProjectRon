@@ -121,16 +121,20 @@ class Contribution extends Component {
               reminders: reminders
             });
             console.log(reminders)
-            data =reminders.filter(re => {
-              console.log(re);
-              return (
-                re.ItemName.includes(this.state.items[0].ItemName) )})
-         console.log("DATA REMIN" , data);
-         for(i=0;i<data.length;i++)
-         {
-          this.SendPushFromClient(data[i]);
-
-         }
+            console.log("Reminder item",this.state.items[0])
+            if(this.state.items[0].Reminder==""){
+              data =reminders.filter(re => {
+                console.log(re);
+                return (
+                  re.ItemName.includes(this.state.items[0].ItemName) )})
+           console.log("DATA REMIN" , data);
+           for(i=0;i<data.length;i++)
+           {
+            this.SendPushFromClient(data[i]);
+  
+           }
+            }
+       
               }
         },
         error => {

@@ -68,7 +68,6 @@ namespace DALproj
             return u; //החזרת האובייקט ריק במידה ולא קיים משתמש כזה
 
         }
-
         public static User Register(string firstName, string lastName,  string gender,string email, string password, string birthday,string token)
         {
             User u = null;
@@ -133,6 +132,89 @@ namespace DALproj
 
             return u;
         }
+        public static User RegisterWithGoogle(string firstName, string lastName, string email, string password, string image, string token)
+        {
+            User u = null;
+            SqlDataReader reader = null;
+            SqlDataReader reader2 = null;
+            string Google = "Google";
+            try
+            {
+                comm.CommandText = $"SELECT * FROM Users WHERE Email ='{email}'and Password = '{Google}'";
+                comm.Connection.Open();
+                reader = comm.ExecuteReader();
+                if (reader.Read())
+                {
+
+                    u = new User()
+                    {
+                        UserID = (int)reader["UserID"],
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString(),
+                        Email = email,
+                        Password = null,
+                        Image = reader["Image"].ToString(),
+                        Token = reader["Token"].ToString()
+
+                    };
+
+                    return u;
+
+                }
+
+                else
+                {
+
+
+                    if (email == null || email == "")
+                    {
+
+                        return u;
+                    }
+                    if (!reader.IsClosed)
+                        reader.Close();
+                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image,Token) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}','{token}')";
+                    int res = comm.ExecuteNonQuery();
+                    if (res == 1)
+                    {
+                        comm.CommandText = "SELECT max(UserID) as maxID FROM Users";
+                        reader2 = comm.ExecuteReader();
+                        if (reader2.Read())
+                        {
+                            u = new User()
+                            {
+                                UserID = (int)reader2["maxID"],
+                                FirstName = firstName,
+                                LastName = lastName,
+                                Email = email,
+                                Password = password,
+                                Image = image,
+                                Token = token
+
+                            };
+                        }
+                        return u;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+
+            return u;
+        }
+
         public static User EditProfile(string firstName, string lastName, string gender, string birthday,int id)
         {
             User u = null;
@@ -182,88 +264,7 @@ namespace DALproj
 
             return u;
         }
-        public static User RegisterWithGoogle(string firstName, string lastName, string email, string password,string image,string token)
-        {
-            User u = null;
-            SqlDataReader reader = null;
-            SqlDataReader reader2 = null;
-            string Google = "Google";
-            try
-            {
-                comm.CommandText = $"SELECT * FROM Users WHERE Email ='{email}'and Password = '{Google}'";
-                comm.Connection.Open();
-                reader = comm.ExecuteReader();
-                if (reader.Read())
-                {
-
-                    u = new User()
-                    {
-                        UserID = (int)reader["UserID"],
-                        FirstName = reader["FirstName"].ToString(),
-                        LastName = reader["LastName"].ToString(),
-                        Email = email,
-                        Password = null,
-                        Image= reader["Image"].ToString(),
-                        Token=reader["Token"].ToString()
-
-                    };
-
-                    return u;
-
-                }
-
-                else
-                {
-
-
-                    if (email == null || email == "")
-                    {
-                        
-                        return u;
-                    }
-                    if (!reader.IsClosed)
-                        reader.Close();
-                    comm.CommandText = $"INSERT INTO Users(FirstName, LastName, Email, Password,Image,Token) VALUES('{firstName}', '{lastName}', '{email}', '{password}','{image}','{token}')";
-                    int res = comm.ExecuteNonQuery();
-                    if (res == 1)
-                    {
-                        comm.CommandText = "SELECT max(UserID) as maxID FROM Users";
-                        reader2 = comm.ExecuteReader();
-                        if (reader2.Read())
-                        {
-                            u = new User()
-                            {
-                                UserID = (int)reader2["maxID"],
-                                FirstName = firstName,
-                                LastName = lastName,
-                                Email = email,
-                                Password = password,
-                                Image=image,
-                                Token=token
-
-                            };
-                        }
-                        return u;
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-
-                if (comm.Connection.State != ConnectionState.Closed)
-                {
-                    comm.Connection.Close();
-                }
-
-            }
-
-            return u;
-        }
+        
         public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg)
         {
             string itemDate = DateTime.Now.ToString("dd/MM/yyyy");
@@ -340,12 +341,22 @@ namespace DALproj
                     ItemAbout = reader["ItemAbout"].ToString(),
                     ItemImg = reader["ItemImg"].ToString(),
                     ItemDate = reader["ItemDate"].ToString(),
+                    Reminder = reader["Reminder"].ToString(),
 
                 };
                 items.Add(p);
             }
 
             comm.Connection.Close();
+            if(items[0].Reminder=="" )
+            {
+                comm.CommandText = $"UPDATE  Items   SET Reminder = '{1}' where ItemID ='{items[0].ItemID}'";
+                comm.Connection.Open();
+                int res = comm.ExecuteNonQuery();
+                comm.Connection.Close();
+                
+            }
+
 
             return items;
         }
