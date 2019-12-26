@@ -6,6 +6,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import cities from "../cityAndRegion";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { Dropdown } from "react-native-material-dropdown";
+
 import {
   Text,
   View,
@@ -41,7 +42,20 @@ class Publish extends React.Component {
 
   onFocusFunction = async() => {
     console.log("Focus s")
+   this.setState({
+    userName: "",
+    userPhone: "",
+    itemType: "",
+    itemName: "",
+    city: "",
+    itemAbout: "",
+    img:[],
+    formData: "",
+    selectedItems: [],
 
+
+
+   })
     this.GetItemTypes();
 
     // do some stuff on every screen focus
@@ -56,6 +70,7 @@ class Publish extends React.Component {
 
   // and don't forget to remove the listener
   componentWillUnmount() {
+    console.log("WILL MOUNT")
     this.focusListener.remove();
   }
 
@@ -324,6 +339,7 @@ class Publish extends React.Component {
   };
   
   render() {
+    console.log("STATE + ",this.state)
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {
@@ -406,6 +422,7 @@ class Publish extends React.Component {
                     fontSize: 14
                   }}
                   placeholder="שם הפריט"
+                  value={this.state.itemName}
                   onChangeText={e => {
                     this.setState({ itemName: e });
                   }}
@@ -432,6 +449,8 @@ class Publish extends React.Component {
                   dropdownMargins={{ min: 0, max: 1 }}
                   dropdownOffset={{ top: 0, left: 0 }}
                   data={ItemTypes}
+                  value={this.state.itemType==""?this.state.itemType:null}
+
                   onChangeText={(e, i) => this.ItemType(e, i)}
                   inputContainerStyle={{ borderBottomWidth: 0 }}
                   containerStyle={{ width: "90%", height: 10 }}
@@ -461,6 +480,7 @@ class Publish extends React.Component {
                       // items.push(item)
                       this.setState({ selectedItems: item });
                     }}
+                    
                     containerStyle={{ width: "100%" }}
                     // onRemoveItem={(item, index) => {
                     //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
@@ -514,6 +534,8 @@ class Publish extends React.Component {
                   keyboardType="number-pad"
                   placeholderTextColor="rgb(150,150,150)"
                   placeholder={"מס' טלפון"}
+                  value={this.state.userPhone}
+
                   onChangeText={e => {
                     this.setState({ userPhone: e });
                   }}
@@ -529,10 +551,13 @@ class Publish extends React.Component {
                   type="font-awesome"
                   color="rgb(150,150,150)"
                   size={24}
+
                 />
                 {/* <Text style={{ color: "red" }}> *</Text> */}
 
                 <TextInput
+                  value={this.state.userName}
+
                   placeholder="איש קשר"
                   placeholderTextColor="rgb(150,150,150)"
                   onChangeText={e => {
@@ -557,6 +582,8 @@ class Publish extends React.Component {
                 <TextInput
                   multiline={true}
                   maxLength={60}
+                  value={this.state.itemAbout}
+
                   onChangeText={e => {
                     this.setState({ itemAbout: e });
                   }}

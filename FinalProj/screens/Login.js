@@ -23,10 +23,6 @@ import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
 
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { AuthSession } from "expo";
-import LoginWithFacebook from "../Components/LoginWithFacebook";
 class Login extends React.Component {
   constructor(props) {
     super(props);

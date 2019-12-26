@@ -120,14 +120,11 @@ class Contribution extends Component {
             this.setState({
               reminders: reminders
             });
-            console.log(reminders)
-            console.log("Reminder item",this.state.items[0])
+          
             if(this.state.items[0].Reminder==""){
               data =reminders.filter(re => {
-                console.log(re);
                 return (
                   re.ItemName.includes(this.state.items[0].ItemName) )})
-           console.log("DATA REMIN" , data);
            for(i=0;i<data.length;i++)
            {
             this.SendPushFromClient(data[i]);
@@ -824,6 +821,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
     Publish: {
       screen: Publish,
       navigationOptions: {
+          gesturesEnabled: false,
         tabBarLabel: "תן חפץ",
         tabBarIcon: ({ tintColor }) => (
           <View>
