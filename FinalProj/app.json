@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "תן יד",
-    "slug": "Ten Yad",
+    "slug": "TenYad",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
