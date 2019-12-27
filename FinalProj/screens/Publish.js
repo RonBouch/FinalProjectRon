@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  SafeAreaView,
   KeyboardAvoidingView
 } from "react-native";
 
@@ -366,10 +367,109 @@ class Publish extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <ScrollView>
-              <View
-                style={{ alignItems: "center", marginTop: 10, width: "100%" }}
-              >
+            <ScrollView keyboardShouldPersistTaps="always">
+              <View style={{ marginTop: 10, padding: 5 }}>
+                <Text>פרטים:</Text>
+              </View>
+              <View style={{ alignItems: "center", width: "100%" }}>
+                {/* איש קשר  */}
+
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="user"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    placeholder="איש קשר"
+                    placeholderTextColor="rgb(150,150,150)"
+                    onChangeText={e => {
+                      this.setState({ userName: e });
+                    }}
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* מס' טלפון */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="phone"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    keyboardType="number-pad"
+                    placeholderTextColor="rgb(150,150,150)"
+                    placeholder={"מס' טלפון"}
+                    onChangeText={e => {
+                      this.setState({ userPhone: e });
+                    }}
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* עיר ישוב */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="map-marker"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+
+                  <Fragment>
+                    {/* Single */}
+                    <SearchableDropdown
+                      // onPress={(item) => {
+                      //   // const items = this.state.selectedItems;
+                      //   // items.push(item)
+                      //   this.setState({ selectedItems: item });
+                      // }}
+                      placeholderTextColor="rgb(150,150,150)"
+                      onItemSelect={item => {
+                        console.log(item, "item");
+                        // const items = this.state.selectedItems;
+                        // items.push(item)
+                        this.setState({ selectedItems: item });
+                      }}
+                      containerStyle={{ width: "100%" }}
+                      // onRemoveItem={(item, index) => {
+                      //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                      //   this.setState({ selectedItems: items });
+                      // }}
+                      itemStyle={{
+                        padding: 10,
+                        height: 30,
+                        backgroundColor: "white"
+                      }}
+                      itemsContainerStyle={{ maxHeight: 240 }}
+                      items={data}
+                      // defaultIndex={2}
+                      resetValue={false}
+                      textInputProps={{
+                        placeholder: "עיר/ישוב",
+                        underlineColorAndroid: "transparent",
+                        style: {
+                          //  margin: 10,
+                          //  borderWidth: 1,
+                          marginLeft: "8%",
+                          fontSize: 14
+                        },
+                        onTextChange: text => console.log(text)
+                      }}
+                      listProps={{
+                        nestedScrollEnabled: true
+                      }}
+                    />
+                  </Fragment>
+                </View>
+
                 {/* שם הפריט  */}
 
                 <View style={styles.publushInput}>
@@ -419,115 +519,12 @@ class Publish extends React.Component {
                   />
                 </View>
 
-                {/* עיר ישוב */}
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="map-marker"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  <Fragment>
-                    {/* Single */}
-                    <SearchableDropdown
-                      // onPress={(item) => {
-                      //   // const items = this.state.selectedItems;
-                      //   // items.push(item)
-                      //   this.setState({ selectedItems: item });
-                      // }}
-                      placeholderTextColor="rgb(150,150,150)"
-                      onItemSelect={item => {
-                        console.log(item, "item");
-                        // const items = this.state.selectedItems;
-                        // items.push(item)
-                        this.setState({ selectedItems: item });
-                      }}
-                      containerStyle={{ width: "100%" }}
-                      // onRemoveItem={(item, index) => {
-                      //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-                      //   this.setState({ selectedItems: items });
-                      // }}
-                      itemStyle={{
-                        padding: 10,
-                        marginTop: 2,
-                        backgroundColor: "white",
-                        borderColor: "#bbb",
-                        borderWidth: 1,
-                        borderRadius: 5
-                      }}
-                      itemTextStyle={{ color: "#222" }}
-                      itemsContainerStyle={{ maxHeight: 200 }}
-                      items={data}
-                      // defaultIndex={2}
-                      resetValue={false}
-                      textInputProps={{
-                        placeholder: "עיר/ישוב",
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          //  margin: 10,
-                          //  borderWidth: 1,
-
-                          marginLeft: "8%",
-                          fontSize: 14
-
-                          //  borderBottomColor: "rgb(150,150,150)",
-                        },
-                        onTextChange: text => console.log(text)
-                      }}
-                      listProps={{
-                        nestedScrollEnabled: true
-                      }}
-                    />
-                  </Fragment>
-                </View>
-
-                {/* מס' טלפון */}
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="phone"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                  <TextInput
-                    keyboardType="number-pad"
-                    placeholderTextColor="rgb(150,150,150)"
-                    placeholder={"מס' טלפון"}
-                    onChangeText={e => {
-                      this.setState({ userPhone: e });
-                    }}
-                    style={{ marginLeft: "8%", fontSize: 14 }}
-                  />
-                </View>
-
-                {/* איש קשר  */}
-
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="user"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                  <TextInput
-                    placeholder="איש קשר"
-                    placeholderTextColor="rgb(150,150,150)"
-                    onChangeText={e => {
-                      this.setState({ userName: e });
-                    }}
-                    style={{ marginLeft: "8%", fontSize: 14 }}
-                  />
-                </View>
-
                 {/* על הפריט */}
                 <View style={{ marginTop: 40 }}>
-                  <Text>בקצרה על הפריט ...</Text>
+                  <Text>תיאור:</Text>
                   <View
                     style={{
+                      margin: 5,
                       width: 300,
                       borderRadius: 10,
                       backgroundColor: "white",
@@ -554,8 +551,8 @@ class Publish extends React.Component {
                 </View>
 
                 {/* מצלמה/גלריה */}
-                <View style={{ marginTop: 30 }}>
-                  <Text>הוספת תמונה</Text>
+                <View style={{ marginTop: 30, padding: 5 }}>
+                  <Text>תמונה:</Text>
                   <View style={{ flexDirection: "row" }}>
                     <TouchableOpacity
                       style={{
