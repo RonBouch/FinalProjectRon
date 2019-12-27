@@ -55,9 +55,10 @@ export default StyleSheet.create({
   },
   publushInput: {
     flexDirection: "row",
-    marginTop: 10,
+    marginTop: 30,
     width: "70%",
-    borderBottomWidth: 0.2,
+    height: 30,
+    borderBottomWidth: 0.5,
     borderColor: "black",
     padding: 5
   },
@@ -248,7 +249,7 @@ export default StyleSheet.create({
     backgroundColor: "rgba(0,0,255,.7)",
     flexDirection: "row",
     height: 35,
-    marginTop: 10,
+    marginTop: 30,
     width: 150,
     borderRadius: 20,
     alignItems: "center",

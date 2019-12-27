@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  KeyboardAvoidingView
 } from "react-native";
 
 class Publish extends React.Component {
@@ -33,14 +34,12 @@ class Publish extends React.Component {
       itemName: "",
       city: "",
       itemAbout: "",
-      img:[],
-
+      img: []
     };
-
   }
 
-  onFocusFunction = async() => {
-    console.log("Focus s")
+  onFocusFunction = async () => {
+    console.log("Focus s");
 
     this.GetItemTypes();
 
@@ -59,15 +58,13 @@ class Publish extends React.Component {
     this.focusListener.remove();
   }
 
-
-
   ItemType = (e, i) => {
     this.setState({
       itemType: i + 2
     });
   };
 
-  openCamera = async (index) => {
+  openCamera = async index => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
       aspect: [4, 3],
@@ -77,49 +74,41 @@ class Publish extends React.Component {
 
     if (result.cancelled) {
       console.log("result ", result);
-    }
-    else{
-
+    } else {
       let imageBase64 = result.base64;
 
       const formData = {
         base64: imageBase64,
-        imageName: index+this.state.itemName+global.user.UserID+".jpg",
-        userid:0,
+        imageName: index + this.state.itemName + global.user.UserID + ".jpg",
+        userid: 0
       };
-      console.log(formData.imageName)
+      console.log(formData.imageName);
 
-      if(this.state.img.length>2||this.state.img[index]!=null){
-          
+      if (this.state.img.length > 2 || this.state.img[index] != null) {
         const list = this.state.formData.map((item, j) => {
-            if (j === index) {
-              return formData;
-            } else {
-              return item;
-            }
-        })
-         
-        let imageArray = this.state.img.filter(image => {
-          return (
-            image != this.state.img[index]
-                        );
-        });
-        imageArray.push(result.uri)
-       this.setState({
-         img:imageArray,
-         formData:list,
-       })
-      }
-      else{
-        this.setState({ 
-          formData: [...this.state.formData,formData],
-          img:[...this.state.img, result.uri] 
+          if (j === index) {
+            return formData;
+          } else {
+            return item;
+          }
         });
 
+        let imageArray = this.state.img.filter(image => {
+          return image != this.state.img[index];
+        });
+        imageArray.push(result.uri);
+        this.setState({
+          img: imageArray,
+          formData: list
+        });
+      } else {
+        this.setState({
+          formData: [...this.state.formData, formData],
+          img: [...this.state.img, result.uri]
+        });
       }
     }
 
-    
     // let filename = localUri.split("/").pop();
     // let imageBase64 = result.base64;
 
@@ -127,10 +116,9 @@ class Publish extends React.Component {
     // let type = match ? `image/${match[1]}` : `image`;
 
     // const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
-
   };
 
-  openGallery = async (index) => {
+  openGallery = async index => {
     // פתיחת גלריה לבחירת תמונה
     if ((await ImagePicker) != null) {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -155,44 +143,38 @@ class Publish extends React.Component {
         //base64 המידע שאני שלוח לשרת שזה השם שאני רוצה שיהיה לתמונה ואת
         const formData = {
           base64: imageBase64,
-          imageName: index+this.state.itemName+global.user.UserID+".jpg",
-          userid:0,
+          imageName: index + this.state.itemName + global.user.UserID + ".jpg",
+          userid: 0
         };
-      
-        console.log(formData.imageName)
 
-        
-        if(this.state.img.length>2||this.state.img[index]!=null){
-          
+        console.log(formData.imageName);
+
+        if (this.state.img.length > 2 || this.state.img[index] != null) {
           const list = this.state.formData.map((item, j) => {
-              if (j === index) {
-                return formData;
-              } else {
-                return item;
-              }
-          })
-           
+            if (j === index) {
+              return formData;
+            } else {
+              return item;
+            }
+          });
+
           let imageArray = this.state.img.filter(image => {
-            return (
-              image != this.state.img[index]
-                          );
+            return image != this.state.img[index];
           });
-          imageArray.push(result.uri)
-         this.setState({
-           img:imageArray,
-           formData:list,
-         })
-        }
-        else{
-          this.setState({ 
-            formData: [...this.state.formData,formData],
-            img:[...this.state.img, result.uri] 
+          imageArray.push(result.uri);
+          this.setState({
+            img: imageArray,
+            formData: list
           });
-  
+        } else {
+          this.setState({
+            formData: [...this.state.formData, formData],
+            img: [...this.state.img, result.uri]
+          });
         }
       }
     }
-  }
+  };
 
   handleSubmit = async () => {
     if (this.isValid()) {
@@ -205,14 +187,15 @@ class Publish extends React.Component {
         city: this.state.selectedItems.name,
         region: this.state.selectedItems.shem_napa,
         itemAbout: this.state.itemAbout,
-        itemImg:this.state.itemName+global.user.UserID+".jpg"
-        };
-        if(this.state.formData!=""&&this.state.formData!=null){
-     
-         for(i=0;this.state.formData[i]!=null;i++)
-         {
-           const imageToUpload=this.state.formData[i];
-           console.log("send pic to upload", JSON.stringify(imageToUpload.imageName))
+        itemImg: this.state.itemName + global.user.UserID + ".jpg"
+      };
+      if (this.state.formData != "" && this.state.formData != null) {
+        for (i = 0; this.state.formData[i] != null; i++) {
+          const imageToUpload = this.state.formData[i];
+          console.log(
+            "send pic to upload",
+            JSON.stringify(imageToUpload.imageName)
+          );
           await fetch(
             "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
             {
@@ -228,8 +211,6 @@ class Publish extends React.Component {
             })
             .then(
               result => {
-               
-  
                 console.log("result = ", result);
               },
               error => {
@@ -239,39 +220,38 @@ class Publish extends React.Component {
         }
 
         // console.log( JSON.stringify(data))
-      fetch(
-        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
-        {
-          method: "post",
-          headers: new Headers({
-            "Content-Type": "application/Json;"
-          }),
-          body: JSON.stringify(data)
-        }
-      )
-        .then(res => {
-          return res.json();
-        })
-        .then(
-          result => {
-            console.log("fetch POST= ", result);
-            let u = JSON.parse(result.d);
-            console.log("u = " + u);
-            if (u == null) {
-              this.setState({
-                message: "לא ניתן לעלות חפץ זה ."
-              });
-              return;
-            } else {
-              this.props.navigation.navigate("Contribution");
-            }
-          },
-          error => {
-            console.log("err post=", error);
+        fetch(
+          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
+          {
+            method: "post",
+            headers: new Headers({
+              "Content-Type": "application/Json;"
+            }),
+            body: JSON.stringify(data)
           }
-        );
-         }
-          
+        )
+          .then(res => {
+            return res.json();
+          })
+          .then(
+            result => {
+              console.log("fetch POST= ", result);
+              let u = JSON.parse(result.d);
+              console.log("u = " + u);
+              if (u == null) {
+                this.setState({
+                  message: "לא ניתן לעלות חפץ זה ."
+                });
+                return;
+              } else {
+                this.props.navigation.navigate("Contribution");
+              }
+            },
+            error => {
+              console.log("err post=", error);
+            }
+          );
+      }
     }
   };
 
@@ -322,7 +302,7 @@ class Publish extends React.Component {
         }
       );
   };
-  
+
   render() {
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
@@ -333,7 +313,7 @@ class Publish extends React.Component {
       });
     }
     const data = cities;
-  
+
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -386,299 +366,368 @@ class Publish extends React.Component {
                 />
               </TouchableOpacity>
             </View>
+            <ScrollView>
+              <View
+                style={{ alignItems: "center", marginTop: 10, width: "100%" }}
+              >
+                {/* שם הפריט  */}
 
-            <View
-              style={{ alignItems: "center", marginTop: 10, width: "100%" }}
-            >
-              {/* שם הפריט  */}
-
-              <View style={styles.publushInput}>
-                <Icon
-                  name="edit"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                <TextInput
-                  placeholderTextColor="rgb(150,150,150)"
-                  style={{
-                    marginLeft: "8%",
-                    fontSize: 14
-                  }}
-                  placeholder="שם הפריט"
-                  onChangeText={e => {
-                    this.setState({ itemName: e });
-                  }}
-                />
-              </View>
-
-              {/* קטגוריית הפריט */}
-
-              <View style={styles.publushInput}>
-                <Icon
-                  name="mouse-pointer"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                {/* <Text style={{ color: "red" }}>*</Text> */}
-
-                <Dropdown
-                  // label="קטגוריית הפריט"
-                  placeholderTextColor="rgb(150,150,150)"
-                  itemColor="black"
-                  placeholder="קטגוריית הפריט"
-                  style={{ marginLeft: "8%", fontSize: 14 }}
-                  dropdownMargins={{ min: 0, max: 1 }}
-                  dropdownOffset={{ top: 0, left: 0 }}
-                  data={ItemTypes}
-                  onChangeText={(e, i) => this.ItemType(e, i)}
-                  inputContainerStyle={{ borderBottomWidth: 0 }}
-                  containerStyle={{ width: "90%", height: 10 }}
-                />
-              </View>
-
-              {/* עיר ישוב */}
-              <View style={styles.publushInput}>
-                <Icon
-                  name="map-marker"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                <Fragment>
-                  {/* Single */}
-                  <SearchableDropdown
-                    // onPress={(item) => {
-                    //   // const items = this.state.selectedItems;
-                    //   // items.push(item)
-                    //   this.setState({ selectedItems: item });
-                    // }}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="edit"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  <TextInput
                     placeholderTextColor="rgb(150,150,150)"
-                    onItemSelect={item => {
-                      console.log(item, "item");
-                      // const items = this.state.selectedItems;
-                      // items.push(item)
-                      this.setState({ selectedItems: item });
+                    style={{
+                      marginLeft: "8%",
+                      fontSize: 14
                     }}
-                    containerStyle={{ width: "100%" }}
-                    // onRemoveItem={(item, index) => {
-                    //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-                    //   this.setState({ selectedItems: items });
-                    // }}
-                    itemStyle={{
-                      padding: 10,
-                      marginTop: 2,
-                      backgroundColor: "white",
-                      borderColor: "#bbb",
-                      borderWidth: 1,
-                      borderRadius: 5
-                    }}
-                    itemTextStyle={{ color: "#222" }}
-                    itemsContainerStyle={{ maxHeight: 200 }}
-                    items={data}
-                    // defaultIndex={2}
-                    resetValue={false}
-                    textInputProps={{
-                      placeholder: "עיר/ישוב",
-                      underlineColorAndroid: "transparent",
-                      style: {
-                        //  margin: 10,
-                        //  borderWidth: 1,
-
-                        marginLeft: "8%",
-                        fontSize: 14
-
-                        //  borderBottomColor: "rgb(150,150,150)",
-                      },
-                      onTextChange: text => console.log(text)
-                    }}
-                    listProps={{
-                      nestedScrollEnabled: true
+                    placeholder="שם הפריט"
+                    onChangeText={e => {
+                      this.setState({ itemName: e });
                     }}
                   />
-                </Fragment>
-              </View>
+                </View>
 
-              {/* מס' טלפון */}
-              <View style={styles.publushInput}>
-                <Icon
-                  name="phone"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                {/* <Text style={{ color: "red" }}> *</Text> */}
+                {/* קטגוריית הפריט */}
 
-                <TextInput
-                  keyboardType="number-pad"
-                  placeholderTextColor="rgb(150,150,150)"
-                  placeholder={"מס' טלפון"}
-                  onChangeText={e => {
-                    this.setState({ userPhone: e });
-                  }}
-                  style={{ marginLeft: "8%", fontSize: 14 }}
-                />
-              </View>
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="mouse-pointer"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}>*</Text> */}
 
-              {/* איש קשר  */}
+                  <Dropdown
+                    // label="קטגוריית הפריט"
+                    placeholderTextColor="rgb(150,150,150)"
+                    itemColor="black"
+                    baseColor="black"
+                    placeholder="קטגוריית הפריט"
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                    dropdownMargins={{ min: 0, max: 10 }}
+                    dropdownOffset={{ top: 0, left: 0 }}
+                    data={ItemTypes}
+                    onChangeText={(e, i) => this.ItemType(e, i)}
+                    inputContainerStyle={{ borderBottomWidth: 0 }}
+                    containerStyle={{ width: "90%" }}
+                  />
+                </View>
 
-              <View style={styles.publushInput}>
-                <Icon
-                  name="user"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                <TextInput
-                  placeholder="איש קשר"
-                  placeholderTextColor="rgb(150,150,150)"
-                  onChangeText={e => {
-                    this.setState({ userName: e });
-                  }}
-                  style={{ marginLeft: "8%", fontSize: 14 }}
-                />
-              </View>
-
-              {/* על הפריט */}
-              <View
-                style={{
-                  marginTop: 20,
-                  borderWidth: 0.5,
-                  width: "70%",
-                  height: 100,
-                  backgroundColor: "rgba(255,255,255,.01)",
-                  justifyContent: "center",
-                  borderColor: "black"
-                }}
-              >
-                <TextInput
-                  multiline={true}
-                  maxLength={60}
-                  onChangeText={e => {
-                    this.setState({ itemAbout: e });
-                  }}
-                  placeholderTextColor="rgb(150,150,150)"
-                  placeholder="ספר בקצרה על הפריט עד 60 תווים..."
-                  style={{
-                    textAlign: "center",
-                    fontSize: 16
-                  }}
-                />
-              </View>
-
-       
-            {/* מצלמה/גלריה */}
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <TouchableOpacity style={{ margin: 5, borderWidth: 1 }} 
-                   onPress={() =>Alert.alert(
-                  'בחר תמונה',
-                  'האם תרצה גלריה/מצלמה?',
-                  [
-                    {text: 'מצלמה', onPress: () => {this.openCamera(0)}},
-                    {text: 'גלריה', onPress: () => {this.openGallery(0)}}
-                   ])}
-                    >
-                 {this.state.img[0]!=null? <Image
-                      style={{
-                        height: 120,
-                        width: 100
+                {/* עיר ישוב */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="map-marker"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  <Fragment>
+                    {/* Single */}
+                    <SearchableDropdown
+                      // onPress={(item) => {
+                      //   // const items = this.state.selectedItems;
+                      //   // items.push(item)
+                      //   this.setState({ selectedItems: item });
+                      // }}
+                      placeholderTextColor="rgb(150,150,150)"
+                      onItemSelect={item => {
+                        console.log(item, "item");
+                        // const items = this.state.selectedItems;
+                        // items.push(item)
+                        this.setState({ selectedItems: item });
                       }}
-                      source={{uri:this.state.img[0]}}
-                    ></Image>: <Image
-                    style={{
-                      height: 120,
-                      width: 100
-                    }}
-                    source={require("../assets/plusBackground.png")}
-                  ></Image>}
-                   
-                  </TouchableOpacity>
-
-
-
-                  <TouchableOpacity  style={{ margin: 5, borderWidth: 1 }}  onPress={() =>Alert.alert(
-                  'בחר תמונה',
-                  'האם תרצה גלריה/מצלמה?',
-                  [
-                    {text: 'מצלמה', onPress: () => {this.openCamera(1)}},
-                    {text: 'גלריה', onPress: () => {this.openGallery(1)}}
-                   ])}
-                    >
-              {this.state.img[1]!=null? <Image
-                      style={{
-                        height: 120,
-                        width: 100
+                      containerStyle={{ width: "100%" }}
+                      // onRemoveItem={(item, index) => {
+                      //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                      //   this.setState({ selectedItems: items });
+                      // }}
+                      itemStyle={{
+                        padding: 10,
+                        marginTop: 2,
+                        backgroundColor: "white",
+                        borderColor: "#bbb",
+                        borderWidth: 1,
+                        borderRadius: 5
                       }}
-                      source={{uri:this.state.img[1]}}
-                    ></Image>: <Image
-                    style={{
-                      height: 120,
-                      width: 100
-                    }}
-                    source={require("../assets/plusBackground.png")}
-                  ></Image>}
-                   
-                  </TouchableOpacity>
+                      itemTextStyle={{ color: "#222" }}
+                      itemsContainerStyle={{ maxHeight: 200 }}
+                      items={data}
+                      // defaultIndex={2}
+                      resetValue={false}
+                      textInputProps={{
+                        placeholder: "עיר/ישוב",
+                        underlineColorAndroid: "transparent",
+                        style: {
+                          //  margin: 10,
+                          //  borderWidth: 1,
 
+                          marginLeft: "8%",
+                          fontSize: 14
 
-
-                  <TouchableOpacity  style={{ margin: 5, borderWidth: 1 }}  onPress={() =>Alert.alert(
-                  'בחר תמונה',
-                  'האם תרצה גלריה/מצלמה?',
-                  [
-                    {text: 'מצלמה', onPress: () => {this.openCamera(2)}},
-                    {text: 'גלריה', onPress: () => {this.openGallery(2)}}
-                   ])}
-                    >
-                  {this.state.img[2]!=null? <Image
-                      style={{
-                        height: 120,
-                        width: 100
+                          //  borderBottomColor: "rgb(150,150,150)",
+                        },
+                        onTextChange: text => console.log(text)
                       }}
-                      source={{uri:this.state.img[2]}}
-                    ></Image>: <Image
-                    style={{
-                      height: 120,
-                      width: 100
+                      listProps={{
+                        nestedScrollEnabled: true
+                      }}
+                    />
+                  </Fragment>
+                </View>
+
+                {/* מס' טלפון */}
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="phone"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    keyboardType="number-pad"
+                    placeholderTextColor="rgb(150,150,150)"
+                    placeholder={"מס' טלפון"}
+                    onChangeText={e => {
+                      this.setState({ userPhone: e });
                     }}
-                    source={require("../assets/plusBackground.png")}
-                  ></Image>}
-                   
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* איש קשר  */}
+
+                <View style={styles.publushInput}>
+                  <Icon
+                    name="user"
+                    type="font-awesome"
+                    color="black"
+                    size={24}
+                  />
+                  {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                  <TextInput
+                    placeholder="איש קשר"
+                    placeholderTextColor="rgb(150,150,150)"
+                    onChangeText={e => {
+                      this.setState({ userName: e });
+                    }}
+                    style={{ marginLeft: "8%", fontSize: 14 }}
+                  />
+                </View>
+
+                {/* על הפריט */}
+                <View style={{ marginTop: 40 }}>
+                  <Text>בקצרה על הפריט ...</Text>
+                  <View
+                    style={{
+                      width: 300,
+                      borderRadius: 10,
+                      backgroundColor: "white",
+                      justifyContent: "center",
+                      elevation: 5,
+                      borderColor: "black"
+                    }}
+                  >
+                    <TextInput
+                      numberOfLines={4}
+                      multiline={true}
+                      maxLength={60}
+                      onChangeText={e => {
+                        this.setState({ itemAbout: e });
+                      }}
+                      placeholderTextColor="rgb(150,150,150)"
+                      placeholder="תאר את הפריט עד 60 תווים"
+                      style={{
+                        textAlign: "center",
+                        fontSize: 16
+                      }}
+                    />
+                  </View>
+                </View>
+
+                {/* מצלמה/גלריה */}
+                <View style={{ marginTop: 30 }}>
+                  <Text>הוספת תמונה</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      style={{
+                        margin: 5,
+                        elevation: 5,
+                        borderRadius: 10,
+                        backgroundColor: "white"
+                      }}
+                      onPress={() =>
+                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                          {
+                            text: "מצלמה",
+                            onPress: () => {
+                              this.openCamera(0);
+                            }
+                          },
+                          {
+                            text: "גלריה",
+                            onPress: () => {
+                              this.openGallery(0);
+                            }
+                          }
+                        ])
+                      }
+                    >
+                      {this.state.img[0] != null ? (
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10
+                          }}
+                          source={{ uri: this.state.img[0] }}
+                        ></Image>
+                      ) : (
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10
+                          }}
+                          source={require("../assets/plusBackground.png")}
+                        ></Image>
+                      )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={{
+                        margin: 5,
+                        elevation: 5,
+                        borderRadius: 10,
+                        backgroundColor: "white"
+                      }}
+                      onPress={() =>
+                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                          {
+                            text: "מצלמה",
+                            onPress: () => {
+                              this.openCamera(1);
+                            }
+                          },
+                          {
+                            text: "גלריה",
+                            onPress: () => {
+                              this.openGallery(1);
+                            }
+                          }
+                        ])
+                      }
+                    >
+                      {this.state.img[1] != null ? (
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10
+                          }}
+                          source={{ uri: this.state.img[1] }}
+                        ></Image>
+                      ) : (
+                        // <View
+                        //   style={{
+                        //     height: 120,
+                        //     width: 100,
+                        //     alignItems: "center",
+                        //     justifyContent: "center"
+                        //   }}
+                        // >
+                        //   <Text style={{ fontSize: 50 }}>+</Text>
+                        // </View>
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10
+                          }}
+                          source={require("../assets/plusBackground.png")}
+                        ></Image>
+                      )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={{
+                        margin: 5,
+                        elevation: 5,
+                        borderRadius: 10,
+                        backgroundColor: "white"
+                      }}
+                      onPress={() =>
+                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                          {
+                            text: "מצלמה",
+                            onPress: () => {
+                              this.openCamera(2);
+                            }
+                          },
+                          {
+                            text: "גלריה",
+                            onPress: () => {
+                              this.openGallery(2);
+                            }
+                          }
+                        ])
+                      }
+                    >
+                      {this.state.img[2] != null ? (
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10,
+                            borderWidth: 0.5
+                          }}
+                          source={{ uri: this.state.img[2] }}
+                        ></Image>
+                      ) : (
+                        <Image
+                          style={{
+                            height: 120,
+                            width: 100,
+                            borderRadius: 10
+                          }}
+                          source={require("../assets/plusBackground.png")}
+                        ></Image>
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                {/* פרסם פריט */}
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.handleSubmit()}
+                    style={styles.publishButton}
+                  >
+                    <Text style={{ color: "white" }}>פרסם {"  "}</Text>
+                    <Icon
+                      name="upload"
+                      type="font-awesome"
+                      color="white"
+                      size={18}
+                    />
                   </TouchableOpacity>
                 </View>
-              
-              {/* פרסם פריט */}
-              <View>
-                <TouchableOpacity
-                  onPress={() => this.handleSubmit()}
-                  style={styles.publishButton}
-                >
-                  <Text style={{ color: "white" }}>פרסם {"  "}</Text>
-                  <Icon
-                    name="upload"
-                    type="font-awesome"
-                    color="white"
-                    size={18}
-                  />
-                </TouchableOpacity>
+
+                {!this.state.showErrLabel && (
+                  <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
+                )}
+
+                {/* לא להוריד את הSCROLL VIEW!!!!!!!!!! */}
               </View>
-
-              {!this.state.showErrLabel && (
-                <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
-              )}
-              
-
-
-              {/* לא להוריד את הSCROLL VIEW!!!!!!!!!! */}
-              <ScrollView
-                contentContainerStyle={{ flexGrow: 1 }}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-              ></ScrollView>
-            </View>
+            </ScrollView>
           </View>
         </View>
       </ImageBackground>
