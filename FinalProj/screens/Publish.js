@@ -6,6 +6,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import cities from "../cityAndRegion";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { Dropdown } from "react-native-material-dropdown";
+
 import {
   Text,
   View,
@@ -39,9 +40,22 @@ class Publish extends React.Component {
     };
   }
 
-  onFocusFunction = async () => {
-    console.log("Focus s");
+  onFocusFunction = async() => {
+    console.log("Focus s")
+   this.setState({
+    userName: "",
+    userPhone: "",
+    itemType: "",
+    itemName: "",
+    city: "",
+    itemAbout: "",
+    img:[],
+    formData: "",
+    selectedItems: [],
 
+
+
+   })
     this.GetItemTypes();
 
     // do some stuff on every screen focus
@@ -56,6 +70,7 @@ class Publish extends React.Component {
 
   // and don't forget to remove the listener
   componentWillUnmount() {
+    console.log("WILL MOUNT")
     this.focusListener.remove();
   }
 
@@ -305,6 +320,7 @@ class Publish extends React.Component {
   };
 
   render() {
+    console.log("STATE + ",this.state)
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {
