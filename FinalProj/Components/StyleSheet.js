@@ -249,7 +249,7 @@ export default StyleSheet.create({
     backgroundColor: "rgba(0,0,255,.7)",
     flexDirection: "row",
     height: 35,
-    marginTop: 30,
+    marginTop: 10,
     width: 150,
     borderRadius: 20,
     alignItems: "center",

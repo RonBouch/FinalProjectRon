@@ -724,7 +724,46 @@ namespace DALproj
             }
             return check;
         }
+        public static int DeleteReminder(int userid, string itemName)
+        {
+            int check = 1;
+            SqlDataReader reader = null;
+            try
+            {
+                comm.CommandText = $"SELECT * FROM Reminders WHERE UserID={userid} and ItemName='{itemName}'";
+                comm.Connection.Open();
+                reader = comm.ExecuteReader();
+                if (reader.Read())
+                {
+                    comm.Connection.Close();
+                    comm.CommandText = $"DELETE  FROM Reminders WHERE UserID={userid} and ItemName='{itemName}'";
+                    comm.Connection.Open();
+                    int delete = comm.ExecuteNonQuery();
 
+                    check = -1;
+                    return check;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+            return check;
+        }
         public static int AddReminder(string itemName,int userid, string token)
         {
             int check = 1;// יצירת משתנה והתחלתו ב1

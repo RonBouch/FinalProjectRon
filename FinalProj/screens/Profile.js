@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import {
   View,
   ImageBackground,
@@ -18,15 +18,19 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedItems: [],
+      reminders:"",
       img: ""
     };
     this.profileImage = require("../assets/profileIcon.png");
   }
 
-  componentDidMount() {
+
+  componentDidMount=async()=> {
     console.log("global profile ", global.user.Image);
     this.setState({ img: global.user.Image }, function() {
       console.log("img state", this.state.img);
+
     });
   }
   openCamera = async () => {
@@ -139,7 +143,10 @@ export default class Profile extends React.Component {
       // let type = match ? `image/${match[1]}` : `image`;
     }
   };
+ 
+
   render() {
+  
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -266,6 +273,16 @@ export default class Profile extends React.Component {
               >
                 <Text style={styles.register}>
                   הפירסומים שלי
+                  {"  "}
+                </Text>
+                <Icon name="edit" type="font-awesome" color="black" size={18} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.updateButton}
+                onPress={() => this.props.navigation.navigate("Reminders")}
+              >
+                <Text style={styles.register}>
+                  ההתרעות שלי
                   {"  "}
                 </Text>
                 <Icon name="edit" type="font-awesome" color="black" size={18} />

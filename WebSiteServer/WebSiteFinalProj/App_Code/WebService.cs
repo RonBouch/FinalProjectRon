@@ -121,6 +121,11 @@ public class WebService : System.Web.Services.WebService
     {
         return BALServices.DeleteItem(userid, itemid);
     }
+    [WebMethod]
+    public int DeleteReminder(int userid, string itemName)
+    {
+        return BALServices.DeleteReminder(userid, itemName);
+    }
 
 
     [WebMethod]

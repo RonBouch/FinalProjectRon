@@ -257,6 +257,20 @@ namespace BALproj
             return check;
         }
 
+        public static int DeleteReminder(int userid, string itemName)
+        {
+            int check = DBServices.DeleteReminder(userid, itemName);
+            if (check == 0)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return check;
+        }
 
         public static string UploadImage(string base64, string imageName, int userid)
         {
