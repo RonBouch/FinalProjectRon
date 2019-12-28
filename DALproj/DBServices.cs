@@ -291,6 +291,7 @@ namespace DALproj
                             UserName=userName,
                             UserPhone=userPhone,
                             ItemType=itemType,
+                            ItemName=itemName,
                             City=city,
                             Region=region,
                             ItemAbout=itemAbout,

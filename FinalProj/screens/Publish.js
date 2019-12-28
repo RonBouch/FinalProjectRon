@@ -235,7 +235,7 @@ class Publish extends React.Component {
             );
         }
 
-        // console.log( JSON.stringify(data))
+        console.log( JSON.stringify(data))
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
           {
@@ -567,7 +567,7 @@ class Publish extends React.Component {
                 </View>
 
                 {/* מצלמה/גלריה */}
-                <View style={{ marginTop: 30, padding: 5 }}>
+                <View style={{ marginTop: 30, padding: 5,borderRadius:40 }}>
                   <Text>תמונה:</Text>
                   <View style={{ flexDirection: "row" }}>
                     <TouchableOpacity
