@@ -26,7 +26,6 @@ class ContentComponent extends Component {
   }
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
-   
     this.setState({ img: global.user.UserID + global.user.Email + ".jpg" });
     // do some stuff on every screen focus
   };
@@ -54,7 +53,6 @@ class ContentComponent extends Component {
   };
 
   render() {
-  
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -68,7 +66,7 @@ class ContentComponent extends Component {
         >
           <ScrollView>
             <View style={styles.header}>
-              <View style={{ alignItems: "center", marginTop: 25 }}>
+              <View style={{ alignItems: "center" }}>
                 {this.state.img != "" && global.user != null ? (
                   <Image
                     style={{
@@ -119,7 +117,7 @@ class ContentComponent extends Component {
                   name="home"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>דף הבית</Text>
               </View>
@@ -135,7 +133,7 @@ class ContentComponent extends Component {
                   name="hand-holding-heart"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>תרומות</Text>
               </View>
@@ -151,7 +149,7 @@ class ContentComponent extends Component {
                   name="gratipay"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>מועדפים</Text>
               </View>
@@ -167,7 +165,7 @@ class ContentComponent extends Component {
                   name="place-of-worship"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>עמותות</Text>
               </View>
@@ -185,7 +183,7 @@ class ContentComponent extends Component {
                   name="user-edit"
                   type="font-awesome"
                   color="gray"
-                  size={24}
+                  size={16}
                 />
                 <Text style={styles.text}>פרופיל</Text>
               </View>
@@ -200,7 +198,7 @@ class ContentComponent extends Component {
                   name="info"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>אודות</Text>
               </View>
@@ -224,7 +222,7 @@ class ContentComponent extends Component {
                   name="sign-out-alt"
                   type="font-awesome"
                   color="gray"
-                  size={28}
+                  size={20}
                 />
                 <Text style={styles.text}>התנתק</Text>
               </View>
@@ -239,17 +237,18 @@ export default withNavigation(ContentComponent);
 
 const styles = StyleSheet.create({
   drawerTransparent: {
-    flex: 1,
-    backgroundColor: "transparent"
+    height: "100%",
+    marginTop: "26.5%",
+    // backgroundColor: "transparent"
   },
   drawer: {
     flex: 1,
-    width: "80%",
+    width: "70%",
     backgroundColor: "white"
   },
   header: {
     width: "100%",
-    height: 250,
+    height: 200,
     backgroundColor: "#6495ed",
     justifyContent: "center"
     // textAlign: "center"
@@ -272,7 +271,7 @@ const styles = StyleSheet.create({
   },
   text: {
     width: "30%",
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: "bold",
     color: "#111"
   },
