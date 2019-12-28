@@ -153,17 +153,17 @@ export default class Reminders extends Component {
                 <View style={styles.topBar}>
                   <TouchableOpacity
                     onPress={() =>
-                      this.props.navigation.dispatch(DrawerActions.openDrawer())
+                      this.props.navigation.navigate("Profile")
                     }
                     style={styles.touchableHighlight}
                     underlayColor={"rgba(0,0,0,0.8)"}
                   >
                     <Icona
                       iconStyle={{ marginEnd: "10%" }}
-                      name="bars"
+                      name="arrow-circle-right"
                       type="font-awesome"
                       color="white"
-                      size={28}
+                      size={32}
                     />
                   </TouchableOpacity>
                   <View

@@ -118,21 +118,21 @@ export default class EditProfile extends React.Component {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.dispatch(DrawerActions.openDrawer())
-                }
-                style={styles.touchableHighlight}
-                underlayColor={"rgba(0,0,0,0.8)"}
-              >
-                <Icona
-                  iconStyle={{ marginEnd: "10%" }}
-                  name="bars"
-                  type="font-awesome"
-                  color="white"
-                  size={28}
-                />
-              </TouchableOpacity>
+            <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate("Profile")
+                    }
+                    style={styles.touchableHighlight}
+                    underlayColor={"rgba(0,0,0,0.8)"}
+                  >
+                    <Icona
+                      iconStyle={{ marginEnd: "10%" }}
+                      name="arrow-circle-right"
+                      type="font-awesome"
+                      color="white"
+                      size={32}
+                    />
+                  </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
