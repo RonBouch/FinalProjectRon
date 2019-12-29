@@ -23,27 +23,19 @@ const DNav = createDrawerNavigator(
 
     Profile: { screen: Profile },
 
-
     Contribution: { screen: Contribution },
-
-
     Contribution: { screen: Contribution },
 
     Publish: { screen: Publish },
-
-
-
 
     Publish: { screen: Publish },
     S3: { screen: S3 },
-
-
 
     EditProfile: { screen: EditProfile },
 
     // FirstPage: { screen: FirstPage },
     S3: { screen: S3 },
-    Reminders:{screen:Reminders},
+    Reminders: { screen: Reminders },
 
     ProfilePost: { screen: ProfilePost },
 
@@ -60,6 +52,7 @@ const DNav = createDrawerNavigator(
     contentComponent: ContentComponent,
     drawerWidth: Dimensions.get("window").width,
     drawerPosition: "right",
+    overlayColor: "none",
     drawerBackgroundColor: "transparent"
   }
 );

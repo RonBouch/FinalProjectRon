@@ -32,7 +32,7 @@ class AssociationsList extends Component {
       associations: null,
       associationTypes: null,
       dataAssociations: null,
-      searchAssociation:"",
+      searchAssociation: ""
     };
   }
   componentDidMount() {
@@ -125,7 +125,6 @@ class AssociationsList extends Component {
   };
 
   render() {
-
     const { navigate } = this.props.navigation;
     let Associations = [];
     let AssociationTypes = [];
@@ -139,62 +138,61 @@ class AssociationsList extends Component {
 
     if (this.state.associations != null) {
       Associations = this.state.associations.map((association, index) => {
-      if (association.AssociationName.includes(this.state.searchAssociation)){
-
-        return (
-          <View
-            key={index}
-            style={{
-              margin: 10
-            }}
-          >
-            <TouchableOpacity
+        if (
+          association.AssociationName.includes(this.state.searchAssociation)
+        ) {
+          return (
+            <View
+              key={index}
               style={{
-                alignItems: "center",
-                justifyContent: "center",
-                height: 140,
-                width: 140,
-                borderWidth: 1,
-                borderColor: "black",
-                borderRadius: 50,
-                elevation: 10,
-                backgroundColor: "#fff",
-                shadowColor: "rgba(0,0,0, .4)",
-                shadowOffset: { height: 1, width: 1 },
-                shadowOpacity: 1,
-                shadowRadius: 1
+                margin: 10
               }}
-              onPress={() =>
-                navigate("AssociationPage", { association: association })
-              }
             >
-              <Image
-                style={{ width: 80, height: 80, alignItems: "flex-start" }}
-                source={{
-                  uri: association.AssociationImage
-                }}
-              ></Image>
-              <View
+              <TouchableOpacity
                 style={{
-                  marginLeft: "5%"
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: 140,
+                  width: 140,
+                  borderWidth: 1,
+                  borderColor: "black",
+                  borderRadius: 50,
+                  elevation: 10,
+                  backgroundColor: "#fff",
+                  shadowColor: "rgba(0,0,0, .4)",
+                  shadowOffset: { height: 1, width: 1 },
+                  shadowOpacity: 1,
+                  shadowRadius: 1
                 }}
+                onPress={() =>
+                  navigate("AssociationPage", { association: association })
+                }
               >
-                <Text
+                <Image
+                  style={{ width: 80, height: 80, alignItems: "flex-start" }}
+                  source={{
+                    uri: association.AssociationImage
+                  }}
+                ></Image>
+                <View
                   style={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    fontSize: 12
+                    marginLeft: "5%"
                   }}
                 >
-                  עמותת {association.AssociationName}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        );
-      }
-
-     
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: 12
+                    }}
+                  >
+                    עמותת {association.AssociationName}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          );
+        }
       });
     }
     return (
@@ -281,7 +279,9 @@ class AssociationsList extends Component {
                 <TextInput
                   placeholder="חיפוש "
                   placeholderTextColor="black"
-                  onChangeText={e=>{this.setState({searchAssociation:e})}}
+                  onChangeText={e => {
+                    this.setState({ searchAssociation: e });
+                  }}
                   style={{
                     fontSize: 12,
                     width: 200
@@ -313,61 +313,6 @@ class AssociationsList extends Component {
                   }}
                 />
               </View>
-              {/* <View
-              style={{
-                width: "100%",
-                height: "10%",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                backgroundColor: "white",
-                elevation: 15
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 200,
-                  marginTop: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderColor: "black",
-                  borderBottomWidth: 0.4
-                }}
-              >
-                <Icona
-                  iconStyle={{
-                    marginEnd: "10%"
-                  }}
-                  name="search"
-                  type="font-awesome"
-                  color="black"
-                  size={18}
-                />
-                <TextInput
-                  placeholder="חיפוש"
-                  placeholderTextColor="black"
-                  // onChangeText={this.SearchItem}
-                  style={{
-                    fontSize: 12,
-                    width: 200
-                  }}
-                />
-              </View>
-              <Dropdown
-                label="סוג עמותה"
-                itemColor="black"
-                dropdownMargins={{ min: 0, max: 10 }}
-                dropdownOffset={{ top: 0, left: 0 }}
-                containerStyle={{
-                  width: "40%",
-                  marginTop: "5%"
-                }}
-                data={AssociationTypes}
-                onChangeText={(value, index) => {
-                  this.FilterAssociation(value, index);
-                }}
-              />
-            </View> */}
             </View>
 
             <ScrollView style={styles.scrollview}>
@@ -375,7 +320,7 @@ class AssociationsList extends Component {
                 style={{
                   alignItems: "center",
                   justifyContent: "space-around",
-                  margin: 10,
+                  marginTop: 10,
                   flexDirection: "row",
                   flexWrap: "wrap",
                   width: "100%"

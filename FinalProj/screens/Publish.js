@@ -40,22 +40,19 @@ class Publish extends React.Component {
     };
   }
 
-  onFocusFunction = async() => {
-    console.log("Focus s")
-   this.setState({
-    userName: "",
-    userPhone: "",
-    itemType: "",
-    itemName: "",
-    city: "",
-    itemAbout: "",
-    img:[],
-    formData: "",
-    selectedItems: [],
-
-
-
-   })
+  onFocusFunction = async () => {
+    console.log("Focus s");
+    this.setState({
+      userName: "",
+      userPhone: "",
+      itemType: "",
+      itemName: "",
+      city: "",
+      itemAbout: "",
+      img: [],
+      formData: "",
+      selectedItems: []
+    });
     this.GetItemTypes();
 
     // do some stuff on every screen focus
@@ -70,7 +67,7 @@ class Publish extends React.Component {
 
   // and don't forget to remove the listener
   componentWillUnmount() {
-    console.log("WILL MOUNT")
+    console.log("WILL MOUNT");
     this.focusListener.remove();
   }
 
@@ -235,7 +232,7 @@ class Publish extends React.Component {
             );
         }
 
-        console.log( JSON.stringify(data))
+        console.log(JSON.stringify(data));
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
           {
@@ -272,19 +269,38 @@ class Publish extends React.Component {
   };
 
   isValid() {
-    // let valid = false;
-    // const { address } = this.state;
-    // if (address.length !== 0) {
-    //   valid = true;
-    // }
-    // if(this.name==""||this.room==""||this.address==""||this.phone==""||this.price==""||this.type==""||this.rentOrSell==""){
-    //   valid=false;
-    //   this.setState({
-    //     resLabel:"אנא מלא שדות חובה!"
-    //   })
-    // }
-    // return valid;
-    return true;
+    let errors = {};
+    let formIsValid = true;
+
+    //בדיקה האם הוזן איש קשר
+    if (this.state.userName == "") {
+      formIsValid = false;
+      errors["userName"] = "* אנא הזן איש קשר";
+    }
+    //בדיקה האם הוזן מספר טלפון
+    if (this.state.userPhone == "") {
+      formIsValid = false;
+      errors["userPhone"] = "* אנא הזן מספר טלפון";
+    }
+    //בדיקה האם הוזן ישוב
+    if (this.state.selectedItems.name == "") {
+      formIsValid = false;
+      errors["city"] = "* אנא הזן עיר/ישוב ";
+    }
+    //בדיקה האם הוזן שם פריט
+    if (this.state.itemName == "") {
+      formIsValid = false;
+      errors["itemName"] = "* אנא הזן שם פריט ";
+    }
+    //בדיקה האם הוזן שם פריט
+    if (this.state.itemType == "") {
+      formIsValid = false;
+      errors["itemType"] = "* אנא הזן קטגורית פריט ";
+    }
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
   }
   GetItemTypes = async () => {
     fetch(
@@ -320,7 +336,7 @@ class Publish extends React.Component {
   };
 
   render() {
-    console.log("STATE + ",this.state)
+    console.log("STATE + ", this.state);
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {
@@ -371,7 +387,7 @@ class Publish extends React.Component {
                     textShadowRadius: 5
                   }}
                 >
-                  פרסם פריט
+                  עמותות
                 </Text>
               </View>
               <TouchableOpacity
@@ -567,7 +583,7 @@ class Publish extends React.Component {
                 </View>
 
                 {/* מצלמה/גלריה */}
-                <View style={{ marginTop: 30, padding: 5,borderRadius:40 }}>
+                <View style={{ marginTop: 30, padding: 5, borderRadius: 40 }}>
                   <Text>תמונה:</Text>
                   <View style={{ flexDirection: "row" }}>
                     <TouchableOpacity
@@ -733,12 +749,15 @@ class Publish extends React.Component {
                     />
                   </TouchableOpacity>
                 </View>
-
-                {!this.state.showErrLabel && (
-                  <Text style={{ color: "red" }}> {this.state.resLabel}</Text>
-                )}
-
-                {/* לא להוריד את הSCROLL VIEW!!!!!!!!!! */}
+                <View style={{ height: 50, justifyContent: "center" }}>
+                  <Text style={styles.textMessage}>
+                    {this.state.errors.userName ||
+                      this.state.errors.userPhone ||
+                      this.state.errors.city ||
+                      this.state.errors.itemName ||
+                      this.state.errors.itemType}
+                  </Text>
+                </View>
               </View>
             </ScrollView>
           </View>

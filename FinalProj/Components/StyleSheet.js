@@ -85,6 +85,8 @@ export default StyleSheet.create({
     borderColor: "white",
     borderBottomWidth: 0.5,
     width: "100%",
+    height: 100,
+    // height: "14%",
     flexDirection: "row",
     justifyContent: "space-between"
   },

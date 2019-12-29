@@ -72,7 +72,7 @@ export default class Home extends Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={{ flex: 1 }}>
+          <View>
             <View>
               <View
                 style={{

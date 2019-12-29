@@ -37,9 +37,9 @@ class Contribution extends Component {
       itemsFromFavorite: null,
       searchItem: "",
       itemTypes: [],
-      remindView:false,
-      nameToRemind:"",
-      reminders:null,
+      remindView: false,
+      nameToRemind: "",
+      reminders: null
     };
   }
 
@@ -69,11 +69,11 @@ class Contribution extends Component {
   };
   AddReminder() {
     const data = {
-      itemName:this.state.nameToRemind,
+      itemName: this.state.nameToRemind,
       userid: global.user.UserID,
-      token:global.user.Token,
+      token: global.user.Token
     };
-    console.log("DAta - ",data)
+    console.log("DAta - ", data);
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/AddReminder",
       {
@@ -83,20 +83,18 @@ class Contribution extends Component {
         }),
         body: JSON.stringify(data)
       }
-    )
-      .then(res => {
-        console.log("res=", res);
-        this.setState({remindView:false})
+    ).then(res => {
+      console.log("res=", res);
+      this.setState({ remindView: false });
 
-        return res.json();
-      })
-       , error => {
-          console.log("err post=", error);
-        }
-      
-  };
-  GetReminders(){
-   fetch(
+      return res.json();
+    }),
+      error => {
+        console.log("err post=", error);
+      };
+  }
+  GetReminders() {
+    fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
       {
         method: "post",
@@ -120,33 +118,30 @@ class Contribution extends Component {
             this.setState({
               reminders: reminders
             });
-          
-            if(this.state.items[0].Reminder==""){
-              data =reminders.filter(re => {
-                return (
-                  re.ItemName.includes(this.state.items[0].ItemName) )})
-           for(i=0;i<data.length;i++)
-           {
-            this.SendPushFromClient(data[i]);
-  
-           }
-            }
-       
+
+            if (this.state.items[0].Reminder == "") {
+              data = reminders.filter(re => {
+                return re.ItemName.includes(this.state.items[0].ItemName);
+              });
+              for (i = 0; i < data.length; i++) {
+                this.SendPushFromClient(data[i]);
               }
+            }
+          }
         },
         error => {
           console.log("err post=", error);
         }
       );
-  };
-  SendPushFromClient = (R) => {
+  }
+  SendPushFromClient = R => {
     let per = {
-      name:"תן יד",
+      name: "תן יד",
       to: R.Token,
-      title: "היי מישהו העלה - " +R.ItemName+"\n",
+      title: "היי מישהו העלה - " + R.ItemName + "\n",
       body: "כנס עכשיו לראות :)!",
       badge: 3,
-      backgroundColor: "black",
+      backgroundColor: "black"
 
       // data: { name: "nir", grade: 100 }
     };
@@ -243,7 +238,7 @@ class Contribution extends Component {
         }
       );
   };
- 
+
   GetItemTypes = async () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItemTypes",
@@ -436,7 +431,6 @@ class Contribution extends Component {
                 })
               }
             >
-              {/* <View style={styles.line}></View> */}
               <View
                 style={{
                   position: "absolute",
@@ -480,8 +474,9 @@ class Contribution extends Component {
                 <Image
                   source={{
                     uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +0+ item.ItemImg
-               
+                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+                      0 +
+                      item.ItemImg
                   }}
                   style={{
                     width: "100%",
@@ -615,8 +610,7 @@ class Contribution extends Component {
                 />
               </TouchableOpacity>
             </View>
-          
-    
+
             <View
               style={{
                 width: "100%",
@@ -683,7 +677,7 @@ class Contribution extends Component {
                   itemColor="black"
                   baseColor="black"
                   fontSize={12}
-                  dropdownMargins={{ min: 0, max: 1 }}
+                  dropdownMargins={{ min: 0, max: 10 }}
                   dropdownOffset={{ top: 0, left: 0 }}
                   containerStyle={{ width: 100 }}
                   data={data}
@@ -692,87 +686,107 @@ class Contribution extends Component {
                   }}
                 />
               </View>
-         
-             
-           
             </View>
 
-            
             <ScrollView style={styles.scrollview}>{Items}</ScrollView>
           </View>
-          {this.state.remindView?
-          <View style={{position: "absolute",width:'100%',height:'100%', justifyContent:'center',alignItems: "center",flexDirection: "row-reverse",backgroundColor: "rgba(255,255,255,.8)", }}>
-            
-           <View style={{backgroundColor:'#add8e6',width:'90%',height:'30%',alignItems:'center',padding:20,borderRadius:20}}> 
-           <TouchableOpacity
-          onPress={()=>this.setState({remindView:false})}
-            style={{
-              position: "absolute",
-              // totp: 5,
-              right: 0,
-              alignItems: "center",
-              flexDirection: "row-reverse",
-              borderRadius: 200
-            }}
-          >
-            <Image
-              source={require("../assets/x.png")}
-              style={{ width: 40, height: 40, borderRadius: 200 }}
-            />
-          </TouchableOpacity>
-                <Text style={{color: "rgba(255,255,255,.9)",
+          {this.state.remindView ? (
+            <View
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "row-reverse",
+                backgroundColor: "rgba(255,255,255,.8)"
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "#add8e6",
+                  width: "90%",
+                  height: "30%",
+                  alignItems: "center",
+                  padding: 20,
+                  borderRadius: 20
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => this.setState({ remindView: false })}
+                  style={{
+                    position: "absolute",
+                    // totp: 5,
+                    right: 0,
+                    alignItems: "center",
+                    flexDirection: "row-reverse",
+                    borderRadius: 200
+                  }}
+                >
+                  <Image
+                    source={require("../assets/x.png")}
+                    style={{ width: 40, height: 40, borderRadius: 200 }}
+                  />
+                </TouchableOpacity>
+                <Text
+                  style={{
+                    color: "rgba(255,255,255,.9)",
                     fontWeight: "bold",
                     fontSize: 25,
                     fontFamily: "serif",
                     textShadowColor: "black",
                     textShadowOffset: { width: 1, height: 4 },
                     textShadowRadius: 5
-                    }}>
-                    להתריע לך ?
-                    </Text>
-                    <Text style={{padding:5}}>אנא רשום את שם הפריט שתרצה לקבל עבורו התרעה במידה ומישהו יפרסם..</Text>
-
-                    
-              <View style={styles.publushInput}>
-                <Icona
-                  name="edit"
-                  type="font-awesome"
-                  color="rgb(150,150,150)"
-                  size={24}
-                />
-                <TextInput
-                  placeholderTextColor="rgb(150,150,150)"
-                  style={{
-                    marginLeft: "8%",
-                    fontSize: 14
                   }}
-                  placeholder="שם הפריט"
-                  onChangeText={e => {
-                    this.setState({ nameToRemind: e });
-                  }}
-                />
-              </View>
-              <View>
-                <TouchableOpacity
-                  onPress={() => this.AddReminder()}
-                  style={styles.publishButton}
                 >
-                  <Text style={{ color: "white" }}>תתריע לי {"  "}</Text>
+                  להתריע לך ?
+                </Text>
+                <Text style={{ padding: 5 }}>
+                  אנא רשום את שם הפריט שתרצה לקבל עבורו התרעה במידה ומישהו
+                  יפרסם..
+                </Text>
+
+                <View style={styles.publushInput}>
                   <Icona
-                    name="upload"
+                    name="edit"
                     type="font-awesome"
-                    color="white"
-                    size={18}
+                    color="rgb(150,150,150)"
+                    size={24}
                   />
-                </TouchableOpacity>
+                  <TextInput
+                    placeholderTextColor="rgb(150,150,150)"
+                    style={{
+                      marginLeft: "8%",
+                      fontSize: 14
+                    }}
+                    placeholder="שם הפריט"
+                    onChangeText={e => {
+                      this.setState({ nameToRemind: e });
+                    }}
+                  />
+                </View>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.AddReminder()}
+                    style={styles.publishButton}
+                  >
+                    <Text style={{ color: "white" }}>תתריע לי {"  "}</Text>
+                    <Icona
+                      name="upload"
+                      type="font-awesome"
+                      color="white"
+                      size={18}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
-              </View>
-           </View>
-        :console.log(" ")}
-        
-        
+            </View>
+          ) : (
+            console.log(" ")
+          )}
+
           <TouchableOpacity
-          onPress={()=>this.setState({remindView:true})}
+            onPress={() => this.setState({ remindView: true })}
             style={{
               position: "absolute",
               bottom: 10,
@@ -821,7 +835,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
     Publish: {
       screen: Publish,
       navigationOptions: {
-          gesturesEnabled: false,
+        gesturesEnabled: false,
         tabBarLabel: "תן חפץ",
         tabBarIcon: ({ tintColor }) => (
           <View>

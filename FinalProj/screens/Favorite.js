@@ -164,6 +164,8 @@ export default class Favorite extends React.Component {
     // this.GetItemsFromFavorite();
   }
   render() {
+    const { navigate } = this.props.navigation;
+
     //Doing alerts whern i come back to Favorite screen .!
     {
       /* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */
@@ -177,19 +179,23 @@ export default class Favorite extends React.Component {
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
         return (
-          <View
+          <TouchableOpacity
             key={index}
             style={{
               backgroundColor: "white",
               width: "95%",
-              height: 260,
+              height: 210,
               margin: 10,
               borderWidth: 1,
               borderColor: "#e6e6fa",
               elevation: 10
             }}
+            onPress={() =>
+              navigate("PostPage", {
+                item: item
+              })
+            }
           >
-            {/* <View style={styles.line}></View> */}
             <View
               style={{
                 position: "absolute",
@@ -216,70 +222,90 @@ export default class Favorite extends React.Component {
                 />
               </TouchableOpacity> */}
             </View>
-            <Image
-              source={{
-                uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                  0+item.ItemImg
-              }}
-              style={{
-                width: "100%",
-                height: "60%"
-              }}
-            />
+            <View style={{ height: "70%" }}>
+              <Image
+                source={{
+                  uri:
+                    "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+                    0 +
+                    item.ItemImg
+                }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderTopLeftRadius: 100,
+                  borderBottomRightRadius: 100
+                }}
+              />
+            </View>
+
             <View
               style={{
                 justifyContent: "space-around",
                 flexDirection: "row-reverse",
-                alignItems: "center",
-                height: "10%"
+                alignContant: "center",
+                height: "30%",
+                marginTop: 15
               }}
               onPress={() => {
                 this.infoWindow(index);
               }}
             >
-              <Text
+              <View
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
+                  flexDirection: "column",
+                  alignItems: "center"
                 }}
               >
-                {item.ItemDate}
-              </Text>
-              <Text
+                <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
+                <Text
+                  style={{
+                    color: "#6495ed",
+                    // fontWeight: "bold",
+                    fontSize: 16
+                    // fontFamily: "serif"
+                  }}
+                >
+                  {item.ItemDate}
+                </Text>
+              </View>
+              <View
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontFamily: "serif",
-                  fontSize: 18
+                  flexDirection: "column",
+                  alignItems: "center"
                 }}
               >
-                {item.City}
-              </Text>
-              <Text
+                <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
+
+                <Text
+                  style={{
+                    color: "#6495ed",
+                    // fontWeight: "bold",
+                    // fontFamily: "serif",
+                    fontSize: 16
+                  }}
+                >
+                  {item.City}
+                </Text>
+              </View>
+              <View
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
+                  flexDirection: "column",
+                  alignItems: "center"
                 }}
               >
-                {item.ItemName}
-              </Text>
+                <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
+                <Text
+                  style={{
+                    color: "#6495ed",
+                    fontSize: 16
+                  }}
+                >
+                  {item.ItemName}
+                </Text>
+              </View>
             </View>
-            <View style={{ margin: 10, height: "20%" }}>
-              <Text>{item.ItemAbout}</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                height: "10%"
-              }}
-            ></View>
-          </View>
+          </TouchableOpacity>
         );
       });
     }

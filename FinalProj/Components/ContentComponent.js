@@ -8,7 +8,8 @@ import {
   Image,
   ScrollView,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {
@@ -238,13 +239,13 @@ export default withNavigation(ContentComponent);
 const styles = StyleSheet.create({
   drawerTransparent: {
     height: "100%",
-    marginTop: "26.5%",
-    // backgroundColor: "transparent"
+    justifyContent: "flex-end"
   },
   drawer: {
-    flex: 1,
     width: "70%",
-    backgroundColor: "white"
+    height: "86%",
+    backgroundColor: "white",
+    elevation: 10
   },
   header: {
     width: "100%",
