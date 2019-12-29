@@ -336,7 +336,6 @@ class Publish extends React.Component {
   };
 
   render() {
-    console.log("STATE + ", this.state);
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {

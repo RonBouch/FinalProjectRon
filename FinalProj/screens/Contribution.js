@@ -334,7 +334,6 @@ class Contribution extends Component {
     if (index != 0) {
       let data = null;
       let typeId = null;
-      console.log(index);
       if (this.state.filterItemsByRegion != null) {
         typeId = this.state.itemTypes[index].ItemTypeID;
 
@@ -347,7 +346,6 @@ class Contribution extends Component {
         });
       } else {
         typeId = this.state.itemTypes[index].ItemTypeID;
-        console.log(typeId);
 
         data = this.state.dataItems.filter(item => {
           console.log(item);
