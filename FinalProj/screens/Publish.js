@@ -372,374 +372,366 @@ class Publish extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <ScrollView keyboardShouldPersistTaps="always">
-              <View style={{ marginTop: 10, padding: 5 }}>
-                <Text>פרטים:</Text>
-              </View>
-              <View style={{ alignItems: "center", width: "100%" }}>
-                {/* איש קשר  */}
-
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="user"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                  <TextInput
-                    value={this.state.userName}
-                    placeholder="איש קשר"
-                    placeholderTextColor="rgb(150,150,150)"
-                    onChangeText={e => {
-                      this.setState({ userName: e });
-                    }}
-                    style={{ marginLeft: "8%", fontSize: 14 }}
-                  />
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+              <ScrollView keyboardShouldPersistTaps="always">
+                <View style={{ marginTop: 10, padding: 5 }}>
+                  <Text>פרטים:</Text>
                 </View>
-
-                {/* מס' טלפון */}
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="phone"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  {/* <Text style={{ color: "red" }}> *</Text> */}
-
-                  <TextInput
-                    value={this.state.userPhone}
-                    keyboardType="number-pad"
-                    placeholderTextColor="rgb(150,150,150)"
-                    placeholder="מס' טלפון"
-                    onChangeText={e => {
-                      this.setState({ userPhone: e });
-                    }}
-                    style={{ marginLeft: "8%", fontSize: 14 }}
-                  />
-                </View>
-
-                {/* עיר ישוב */}
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="map-marker"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-
-                  <Fragment>
-                    {/* Single */}
-                    <SearchableDropdown
-                      // onPress={(item) => {
-                      //   // const items = this.state.selectedItems;
-                      //   // items.push(item)
-                      //   this.setState({ selectedItems: item });
-                      // }}
-                      placeholderTextColor="rgb(150,150,150)"
-                      onItemSelect={item => {
-                        console.log(item, "item");
-                        // const items = this.state.selectedItems;
-                        // items.push(item)
-                        this.setState({ selectedItems: item });
-                      }}
-                      containerStyle={{ width: "100%" }}
-                      // onRemoveItem={(item, index) => {
-                      //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-                      //   this.setState({ selectedItems: items });
-                      // }}
-                      itemStyle={{
-                        padding: 10,
-                        height: 30,
-                        backgroundColor: "white"
-                      }}
-                      itemsContainerStyle={{ maxHeight: 240 }}
-                      items={data}
-                      // defaultIndex={2}
-                      resetValue={false}
-                      textInputProps={{
-                        placeholder: "עיר/ישוב",
-                        underlineColorAndroid: "transparent",
-                        style: {
-                          //  margin: 10,
-                          //  borderWidth: 1,
-                          marginLeft: "8%",
-                          fontSize: 14
-                        },
-                        onTextChange: text => console.log(text)
-                      }}
-                      listProps={{
-                        nestedScrollEnabled: true
-                      }}
+                <View style={{ alignItems: "center", width: "100%" }}>
+                  {/* איש קשר  */}
+                  <View style={styles.publushInput}>
+                    <Icon
+                      name="user"
+                      type="font-awesome"
+                      color="black"
+                      size={24}
                     />
-                  </Fragment>
-                </View>
+                    {/* <Text style={{ color: "red" }}> *</Text> */}
 
-                {/* שם הפריט  */}
-
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="edit"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  <TextInput
-                    value={this.state.itemName}
-                    placeholderTextColor="rgb(150,150,150)"
-                    style={{
-                      marginLeft: "8%",
-                      fontSize: 14
-                    }}
-                    placeholder="שם הפריט"
-                    onChangeText={e => {
-                      this.setState({ itemName: e });
-                    }}
-                  />
-                </View>
-
-                {/* קטגוריית הפריט */}
-
-                <View style={styles.publushInput}>
-                  <Icon
-                    name="mouse-pointer"
-                    type="font-awesome"
-                    color="black"
-                    size={24}
-                  />
-                  {/* <Text style={{ color: "red" }}>*</Text> */}
-
-                  <Dropdown
-                    // label="קטגוריית הפריט"
-                    placeholderTextColor="rgb(150,150,150)"
-                    itemColor="black"
-                    baseColor="black"
-                    placeholder="קטגוריית הפריט"
-                    value={this.state.itemType}
-                    style={{ marginLeft: "8%", fontSize: 14 }}
-                    dropdownMargins={{ min: 0, max: 10 }}
-                    dropdownOffset={{ top: 0, left: 0 }}
-                    data={ItemTypes}
-                    onChangeText={(e, i) => this.ItemType(e, i)}
-                    inputContainerStyle={{ borderBottomWidth: 0 }}
-                    containerStyle={{ width: "90%" }}
-                  />
-                </View>
-
-                {/* על הפריט */}
-                <View style={{ marginTop: 40 }}>
-                  <Text>תיאור:</Text>
-                  <View
-                    style={{
-                      margin: 5,
-                      width: 300,
-                      borderRadius: 10,
-                      backgroundColor: "white",
-                      justifyContent: "center",
-                      elevation: 5,
-                      borderColor: "black"
-                    }}
-                  >
                     <TextInput
-                      value={this.state.itemAbout}
-                      numberOfLines={4}
-                      multiline={true}
-                      maxLength={60}
-                      onChangeText={e => {
-                        this.setState({ itemAbout: e });
-                      }}
+                      value={this.state.userName}
+                      placeholder="איש קשר"
                       placeholderTextColor="rgb(150,150,150)"
-                      placeholder="תאר את הפריט עד 60 תווים"
+                      onChangeText={e => {
+                        this.setState({ userName: e });
+                      }}
+                      style={{ marginLeft: "8%", fontSize: 14 }}
+                    />
+                  </View>
+                  {/* מס' טלפון */}
+                  <View style={styles.publushInput}>
+                    <Icon
+                      name="phone"
+                      type="font-awesome"
+                      color="black"
+                      size={24}
+                    />
+                    {/* <Text style={{ color: "red" }}> *</Text> */}
+
+                    <TextInput
+                      value={this.state.userPhone}
+                      keyboardType="number-pad"
+                      placeholderTextColor="rgb(150,150,150)"
+                      placeholder="מס' טלפון"
+                      onChangeText={e => {
+                        this.setState({ userPhone: e });
+                      }}
+                      style={{ marginLeft: "8%", fontSize: 14 }}
+                    />
+                  </View>
+                  {/* עיר ישוב */}
+                  <View style={styles.publushInput}>
+                    <Icon
+                      name="map-marker"
+                      type="font-awesome"
+                      color="black"
+                      size={24}
+                    />
+
+                    <Fragment>
+                      {/* Single */}
+                      <SearchableDropdown
+                        // onPress={(item) => {
+                        //   // const items = this.state.selectedItems;
+                        //   // items.push(item)
+                        //   this.setState({ selectedItems: item });
+                        // }}
+                        placeholderTextColor="rgb(150,150,150)"
+                        onItemSelect={item => {
+                          console.log(item, "item");
+                          // const items = this.state.selectedItems;
+                          // items.push(item)
+                          this.setState({ selectedItems: item });
+                        }}
+                        containerStyle={{ width: "100%" }}
+                        // onRemoveItem={(item, index) => {
+                        //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+                        //   this.setState({ selectedItems: items });
+                        // }}
+                        itemStyle={{
+                          padding: 10,
+                          height: 30,
+                          backgroundColor: "white"
+                        }}
+                        itemsContainerStyle={{ maxHeight: 240 }}
+                        items={data}
+                        // defaultIndex={2}
+                        resetValue={false}
+                        textInputProps={{
+                          placeholder: "עיר/ישוב",
+                          underlineColorAndroid: "transparent",
+                          style: {
+                            //  margin: 10,
+                            //  borderWidth: 1,
+                            marginLeft: "8%",
+                            fontSize: 14
+                          },
+                          onTextChange: text => console.log(text)
+                        }}
+                        listProps={{
+                          nestedScrollEnabled: true
+                        }}
+                      />
+                    </Fragment>
+                  </View>
+                  {/* שם הפריט  */}
+                  <View style={styles.publushInput}>
+                    <Icon
+                      name="edit"
+                      type="font-awesome"
+                      color="black"
+                      size={24}
+                    />
+                    <TextInput
+                      value={this.state.itemName}
+                      placeholderTextColor="rgb(150,150,150)"
                       style={{
-                        textAlign: "center",
+                        marginLeft: "8%",
                         fontSize: 14
                       }}
+                      placeholder="שם הפריט"
+                      onChangeText={e => {
+                        this.setState({ itemName: e });
+                      }}
                     />
                   </View>
-                </View>
-
-                {/* מצלמה/גלריה */}
-                <View style={{ marginTop: 30, padding: 5, borderRadius: 40 }}>
-                  <Text>תמונה:</Text>
-                  <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity
-                      style={{
-                        margin: 5,
-                        elevation: 5,
-                        borderRadius: 10,
-                        backgroundColor: "white"
-                      }}
-                      onPress={() =>
-                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
-                          {
-                            text: "מצלמה",
-                            onPress: () => {
-                              this.openCamera(0);
-                            }
-                          },
-                          {
-                            text: "גלריה",
-                            onPress: () => {
-                              this.openGallery(0);
-                            }
-                          }
-                        ])
-                      }
-                    >
-                      {this.state.img[0] != null ? (
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10
-                          }}
-                          source={{ uri: this.state.img[0] }}
-                        ></Image>
-                      ) : (
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10
-                          }}
-                          source={require("../assets/plusBackground.png")}
-                        ></Image>
-                      )}
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={{
-                        margin: 5,
-                        elevation: 5,
-                        borderRadius: 10,
-                        backgroundColor: "white"
-                      }}
-                      onPress={() =>
-                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
-                          {
-                            text: "מצלמה",
-                            onPress: () => {
-                              this.openCamera(1);
-                            }
-                          },
-                          {
-                            text: "גלריה",
-                            onPress: () => {
-                              this.openGallery(1);
-                            }
-                          }
-                        ])
-                      }
-                    >
-                      {this.state.img[1] != null ? (
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10
-                          }}
-                          source={{ uri: this.state.img[1] }}
-                        ></Image>
-                      ) : (
-                        // <View
-                        //   style={{
-                        //     height: 120,
-                        //     width: 100,
-                        //     alignItems: "center",
-                        //     justifyContent: "center"
-                        //   }}
-                        // >
-                        //   <Text style={{ fontSize: 50 }}>+</Text>
-                        // </View>
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10
-                          }}
-                          source={require("../assets/plusBackground.png")}
-                        ></Image>
-                      )}
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={{
-                        margin: 5,
-                        elevation: 5,
-                        borderRadius: 10,
-                        backgroundColor: "white"
-                      }}
-                      onPress={() =>
-                        Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
-                          {
-                            text: "מצלמה",
-                            onPress: () => {
-                              this.openCamera(2);
-                            }
-                          },
-                          {
-                            text: "גלריה",
-                            onPress: () => {
-                              this.openGallery(2);
-                            }
-                          }
-                        ])
-                      }
-                    >
-                      {this.state.img[2] != null ? (
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10,
-                            borderWidth: 0.5
-                          }}
-                          source={{ uri: this.state.img[2] }}
-                        ></Image>
-                      ) : (
-                        <Image
-                          style={{
-                            height: 120,
-                            width: 100,
-                            borderRadius: 10
-                          }}
-                          source={require("../assets/plusBackground.png")}
-                        ></Image>
-                      )}
-                    </TouchableOpacity>
-                  </View>
-                </View>
-
-                {/* פרסם פריט */}
-                <View>
-                  <TouchableOpacity
-                    onPress={() => this.handleSubmit()}
-                    style={styles.publishButton}
-                  >
-                    <Text style={{ color: "white", fontSize: 20 }}>
-                      הוסף {"  "}
-                    </Text>
+                  {/* קטגוריית הפריט */}
+                  <View style={styles.publushInput}>
                     <Icon
-                      name="cart-plus"
+                      name="mouse-pointer"
                       type="font-awesome"
-                      color="white"
-                      size={20}
+                      color="black"
+                      size={24}
                     />
-                  </TouchableOpacity>
+                    {/* <Text style={{ color: "red" }}>*</Text> */}
+
+                    <Dropdown
+                      // label="קטגוריית הפריט"
+                      placeholderTextColor="rgb(150,150,150)"
+                      itemColor="black"
+                      baseColor="black"
+                      placeholder="קטגוריית הפריט"
+                      value={this.state.itemType}
+                      style={{ marginLeft: "8%", fontSize: 14 }}
+                      dropdownMargins={{ min: 0, max: 10 }}
+                      dropdownOffset={{ top: 0, left: 0 }}
+                      data={ItemTypes}
+                      onChangeText={(e, i) => this.ItemType(e, i)}
+                      inputContainerStyle={{ borderBottomWidth: 0 }}
+                      containerStyle={{ width: "90%" }}
+                    />
+                  </View>
+                  {/* על הפריט */}
+                  <View style={{ marginTop: 40 }}>
+                    <Text>תיאור:</Text>
+                    <View
+                      style={{
+                        margin: 5,
+                        width: 300,
+                        borderRadius: 10,
+                        backgroundColor: "white",
+                        justifyContent: "center",
+                        elevation: 5,
+                        borderColor: "black"
+                      }}
+                    >
+                      <TextInput
+                        value={this.state.itemAbout}
+                        numberOfLines={4}
+                        multiline={true}
+                        maxLength={60}
+                        onChangeText={e => {
+                          this.setState({ itemAbout: e });
+                        }}
+                        placeholderTextColor="rgb(150,150,150)"
+                        placeholder="תאר את הפריט עד 60 תווים"
+                        style={{
+                          textAlign: "center",
+                          fontSize: 14
+                        }}
+                      />
+                    </View>
+                  </View>
+                  {/* מצלמה/גלריה */}
+                  <View style={{ marginTop: 30, padding: 5, borderRadius: 40 }}>
+                    <Text>תמונה:</Text>
+                    <View style={{ flexDirection: "row" }}>
+                      <TouchableOpacity
+                        style={{
+                          margin: 5,
+                          elevation: 5,
+                          borderRadius: 10,
+                          backgroundColor: "white"
+                        }}
+                        onPress={() =>
+                          Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                            {
+                              text: "מצלמה",
+                              onPress: () => {
+                                this.openCamera(0);
+                              }
+                            },
+                            {
+                              text: "גלריה",
+                              onPress: () => {
+                                this.openGallery(0);
+                              }
+                            }
+                          ])
+                        }
+                      >
+                        {this.state.img[0] != null ? (
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10
+                            }}
+                            source={{ uri: this.state.img[0] }}
+                          ></Image>
+                        ) : (
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10
+                            }}
+                            source={require("../assets/plusBackground.png")}
+                          ></Image>
+                        )}
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={{
+                          margin: 5,
+                          elevation: 5,
+                          borderRadius: 10,
+                          backgroundColor: "white"
+                        }}
+                        onPress={() =>
+                          Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                            {
+                              text: "מצלמה",
+                              onPress: () => {
+                                this.openCamera(1);
+                              }
+                            },
+                            {
+                              text: "גלריה",
+                              onPress: () => {
+                                this.openGallery(1);
+                              }
+                            }
+                          ])
+                        }
+                      >
+                        {this.state.img[1] != null ? (
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10
+                            }}
+                            source={{ uri: this.state.img[1] }}
+                          ></Image>
+                        ) : (
+                          // <View
+                          //   style={{
+                          //     height: 120,
+                          //     width: 100,
+                          //     alignItems: "center",
+                          //     justifyContent: "center"
+                          //   }}
+                          // >
+                          //   <Text style={{ fontSize: 50 }}>+</Text>
+                          // </View>
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10
+                            }}
+                            source={require("../assets/plusBackground.png")}
+                          ></Image>
+                        )}
+                      </TouchableOpacity>
+
+                      <TouchableOpacity
+                        style={{
+                          margin: 5,
+                          elevation: 5,
+                          borderRadius: 10,
+                          backgroundColor: "white"
+                        }}
+                        onPress={() =>
+                          Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                            {
+                              text: "מצלמה",
+                              onPress: () => {
+                                this.openCamera(2);
+                              }
+                            },
+                            {
+                              text: "גלריה",
+                              onPress: () => {
+                                this.openGallery(2);
+                              }
+                            }
+                          ])
+                        }
+                      >
+                        {this.state.img[2] != null ? (
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10,
+                              borderWidth: 0.5
+                            }}
+                            source={{ uri: this.state.img[2] }}
+                          ></Image>
+                        ) : (
+                          <Image
+                            style={{
+                              height: 120,
+                              width: 100,
+                              borderRadius: 10
+                            }}
+                            source={require("../assets/plusBackground.png")}
+                          ></Image>
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  {/* פרסם פריט */}
+                  <View>
+                    <TouchableOpacity
+                      onPress={() => this.handleSubmit()}
+                      style={styles.publishButton}
+                    >
+                      <Text style={{ color: "white", fontSize: 20 }}>
+                        הוסף {"  "}
+                      </Text>
+                      <Icon
+                        name="cart-plus"
+                        type="font-awesome"
+                        color="white"
+                        size={20}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{ height: 50, justifyContent: "center" }}>
+                    <Text style={styles.textMessage}>
+                      {this.state.errors.userName ||
+                        this.state.errors.userPhone ||
+                        this.state.errors.city ||
+                        this.state.errors.itemName ||
+                        this.state.errors.itemType}
+                    </Text>
+                  </View>
                 </View>
-                <View style={{ height: 50, justifyContent: "center" }}>
-                  <Text style={styles.textMessage}>
-                    {this.state.errors.userName ||
-                      this.state.errors.userPhone ||
-                      this.state.errors.city ||
-                      this.state.errors.itemName ||
-                      this.state.errors.itemType}
-                  </Text>
-                </View>
-              </View>
-            </ScrollView>
+              </ScrollView>
+            </KeyboardAvoidingView>
           </View>
         </View>
       </ImageBackground>
