@@ -35,13 +35,7 @@ export default class Home extends Component {
               }
               style={styles.touchableHighlight}
             >
-              <Icon
-                iconStyle={{ marginEnd: "10%" }}
-                name="bars"
-                type="font-awesome"
-                color="white"
-                size={28}
-              />
+              <Icon name="bars" type="font-awesome" color="white" size={28} />
             </TouchableOpacity>
             <View
               style={{

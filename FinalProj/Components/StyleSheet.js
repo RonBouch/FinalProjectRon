@@ -59,8 +59,7 @@ export default StyleSheet.create({
     width: "70%",
     // height: 30,
     borderBottomWidth: 0.5,
-    borderColor: "black",
-    padding: 5
+    borderColor: "black"
   },
   //Basic Design
 
@@ -72,8 +71,7 @@ export default StyleSheet.create({
     marginTop: 35,
     width: 60,
     height: 60,
-    justifyContent: "center",
-    left: 5
+    justifyContent: "center"
   },
   open: {
     color: "white",
@@ -85,8 +83,8 @@ export default StyleSheet.create({
     borderColor: "white",
     borderBottomWidth: 0.5,
     width: "100%",
-    height: 100,
-    // height: "14%",
+    // height: 100,
+    height: "14%",
     flexDirection: "row",
     justifyContent: "space-between"
   },

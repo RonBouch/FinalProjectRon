@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Dimensions } from "react-native";
+import { createStackNavigator } from "react-navigation-stack";
+
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import ContentComponent from "./ContentComponent";
@@ -17,7 +19,7 @@ import FirstPage from "../screens/FirstPage";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
 
-const DNav = createDrawerNavigator(
+const MainNavigator = createStackNavigator(
   {
     Home: { screen: Home },
 
@@ -48,7 +50,16 @@ const DNav = createDrawerNavigator(
     AssociationPage: { screen: AssociationPage }
   },
   {
-    initialRouteName: "Home",
+    headerMode: "none"
+  }
+);
+
+const DNav = createDrawerNavigator(
+  {
+    MainNavigator: { screen: MainNavigator }
+  },
+  {
+    initialRouteName: "MainNavigator",
     contentComponent: ContentComponent,
     drawerWidth: Dimensions.get("window").width,
     drawerPosition: "right",
