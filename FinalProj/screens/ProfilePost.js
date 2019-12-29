@@ -33,25 +33,10 @@ export default class ProfilePost extends React.Component {
     };
   }
 
-  // define a separate function to get triggered on focus
-  onFocusFunction = () => {
+  async componentDidMount() {
     console.log("Call fetch Get Items .");
     this.GetItemsByID();
-    // do some stuff on every screen focus
-  };
-
-  // add a focus listener onDidMount
-  async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.onFocusFunction();
-    });
   }
-
-  // and don't forget to remove the listener
-  componentWillUnmount() {
-    this.focusListener.remove();
-  }
-
   GetItemsByID = async () => {
     const data = {
       userid: global.user.UserID

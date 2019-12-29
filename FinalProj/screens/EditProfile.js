@@ -22,11 +22,7 @@ import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
 import { Ionicons } from "@expo/vector-icons";
 
-// const DissmisKeyboard = ({ children }) => (
-//   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-//     {children}
-//   </TouchableWithoutFeedback>
-// );
+
 
 var radio_props = [
   {
