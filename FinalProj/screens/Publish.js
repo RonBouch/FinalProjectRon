@@ -40,35 +40,9 @@ class Publish extends React.Component {
     };
   }
 
-  onFocusFunction = async () => {
-    console.log("Focus s");
-    this.setState({
-      userName: "",
-      userPhone: "",
-      itemType: "",
-      itemName: "",
-      city: "",
-      itemAbout: "",
-      img: [],
-      formData: "",
-      selectedItems: []
-    });
-    this.GetItemTypes();
 
-    // do some stuff on every screen focus
-  };
-
-  // add a focus listener onDidMount
   async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.onFocusFunction();
-    });
-  }
-
-  // and don't forget to remove the listener
-  componentWillUnmount() {
-    console.log("WILL MOUNT");
-    this.focusListener.remove();
+    this.GetItemTypes();
   }
 
   ItemType = (e, i) => {
@@ -336,7 +310,6 @@ class Publish extends React.Component {
   };
 
   render() {
-    // console.log("STATE + ", this.state);
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {

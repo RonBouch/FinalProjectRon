@@ -36,51 +36,12 @@ class Login extends React.Component {
     this.state = {
       token: "",
       txtToken: "",
-      notification: {},
       LoginRegister: true,
-      token:"",
-      notification:"",
     };
   }
 
- async componentDidMount() {
-   await registerForPushNotificationsAsync().then(tok => {
-      this.setState({ token: tok });
-    });
-    this._notificationSubscription = Notifications.addListener(this._handleNotification); 
-  }
-  _handleNotification = notification => {
-    this.setState({ notification: notification });
-  };
 
-  // btnSendPushFromClient = () => {
-  //   let per = {
-  //     to: this.state.token,
-  //     title: "תודה שנכנסת שוב :)",
-  //     body: "מצא את הדירה שלך עכשיו!",
-  //     badge: 3,
-  //     data: { name: "nir", grade: 100 }
-  //   };
-
-  //   // POST adds a random id to the object sent
-  //   fetch("https://exp.host/--/api/v2/push/send", {
-  //     method: "POST",
-  //     body: JSON.stringify(per),
-  //     headers: {
-  //       "Content-type": "application/json; charset=UTF-8"
-  //     }
-  //   })
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       if (json != null) {
-  //         console.log(`
-  //               returned from server\n
-  //               json.data= ${JSON.stringify(json.data)}`);
-  //       } else {
-  //         alert("err json");
-  //       }
-  //     });
-  // };
+  
   changePass = e => {
     this.password = e;
   };
@@ -154,7 +115,10 @@ class Login extends React.Component {
   };
 
   FacebookLogin = async () => {
-    
+    await registerForPushNotificationsAsync().then(tok => {
+      this.setState({ token: tok });
+    });
+    this._notificationSubscription = Notifications.addListener(this._handleNotification); 
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
