@@ -42,24 +42,13 @@ export default class Contribution extends Component {
       reminders: null
     };
   }
-
-  // define a separate function to get triggered on focus
-  onFocusFunction = () => {
-    // console.log("Change Picture .");
-    this.GetItems();
-    // do some stuff on every screen focus
+  static navigationOptions = {
+    drawerLabel: "Contribution"
   };
 
-  // add a focus listener onDidMount
   async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.onFocusFunction();
-    });
-  }
-
-  // and don't forget to remove the listener
-  componentWillUnmount() {
-    this.focusListener.remove();
+    // console.log("Change Picture .");
+   await this.GetItems();
   }
 
   _pressCall = phone => {
@@ -272,10 +261,7 @@ export default class Contribution extends Component {
         }
       );
   };
-  static navigationOptions = {
-    drawerLabel: "Contribution"
-  };
-
+  
   infoWindow = (index, item) => {
     if (this.state.extraDetails == -1 || this.state.extraDetails != index) {
       this.setState({
