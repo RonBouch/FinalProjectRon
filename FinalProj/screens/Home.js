@@ -35,13 +35,7 @@ export default class Home extends Component {
               }
               style={styles.touchableHighlight}
             >
-              <Icon
-                iconStyle={{ marginEnd: "10%" }}
-                name="bars"
-                type="font-awesome"
-                color="white"
-                size={28}
-              />
+              <Icon name="bars" type="font-awesome" color="white" size={28} />
             </TouchableOpacity>
             <View
               style={{
@@ -88,9 +82,26 @@ export default class Home extends Component {
             </View>
             <View
               style={{
-                height: "50%",
-                flexDirection: "row",
                 marginTop: 30,
+                width: "100%",
+                padding: 20
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontStyle: "italic",
+                  textAlign: "center"
+                }}
+              >
+                "להקל על כאב לבו של אחר, זה לשכוח את כאבך שלך."
+              </Text>
+              <Text style={{ marginTop: 20 }}>אברהם לינקולן</Text>
+            </View>
+            <View
+              style={{
+                height: "30%",
+                flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-around"
               }}

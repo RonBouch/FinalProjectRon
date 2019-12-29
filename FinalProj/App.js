@@ -28,8 +28,6 @@ const MainNavigator = createStackNavigator(
 
     DrawerNavigator: { screen: DrawerNavigator },
 
-    // FirstPage: { screen: FirstPage },
-
     Login: { screen: Login },
     LoginWithFacebook: { screen: LoginWithFacebook },
 

@@ -126,6 +126,22 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
+              onPress={() => this.props.navigation.navigate("AssociationsList")}
+            >
+              <View style={styles.row}>
+                <Icon
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="place-of-worship"
+                  type="font-awesome"
+                  color="gray"
+                  size={20}
+                />
+                <Text style={styles.text}>עמותות</Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              underlayColor={"rgba(0,0,0,0.2)"}
               onPress={() => this.props.navigation.navigate("Contribution")}
             >
               <View style={styles.row}>
@@ -142,6 +158,22 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
+              onPress={() => this.props.navigation.navigate("Publish")}
+            >
+              <View style={styles.row}>
+                <Icon
+                  style={{ width: "25%", textAlign: "center" }}
+                  name="cart-plus"
+                  type="font-awesome"
+                  color="gray"
+                  size={20}
+                />
+                <Text style={styles.text}>פרסום תרומה</Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              underlayColor={"rgba(0,0,0,0.2)"}
               onPress={() => this.props.navigation.navigate("Favorite")}
             >
               <View style={styles.row}>
@@ -152,23 +184,7 @@ class ContentComponent extends Component {
                   color="gray"
                   size={20}
                 />
-                <Text style={styles.text}>מועדפים</Text>
-              </View>
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("AssociationsList")}
-            >
-              <View style={styles.row}>
-                <Icon
-                  style={{ width: "25%", textAlign: "center" }}
-                  name="place-of-worship"
-                  type="font-awesome"
-                  color="gray"
-                  size={20}
-                />
-                <Text style={styles.text}>עמותות</Text>
+                <Text style={styles.text}> מועדפים שלי</Text>
               </View>
             </TouchableHighlight>
 
@@ -191,7 +207,7 @@ class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("S3")}
+              onPress={() => this.props.navigation.navigate("About")}
             >
               <View style={styles.row}>
                 <Icon
@@ -271,7 +287,7 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   text: {
-    width: "30%",
+    width: "40%",
     fontSize: 14,
     fontWeight: "bold",
     color: "#111"

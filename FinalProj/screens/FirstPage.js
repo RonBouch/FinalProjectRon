@@ -6,7 +6,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,AsyncStorage,
+  ImageBackground,
+  AsyncStorage,
   Image
 } from "react-native";
 import { getLightEstimationEnabled } from "expo/build/AR";
@@ -19,29 +20,27 @@ export default class FirstPage extends React.Component {
     this.state = {
       LoginRegister: true
     };
-
   }
   static navigationOptions = {
     drawerLabel: "FirstPage"
   };
-   
+
   componentDidMount() {
-    this.retriveData('user');
+    this.retriveData("user");
   }
 
   retriveData = async () => {
-    let u = await AsyncStorage.getItem('user');
+    let u = await AsyncStorage.getItem("user");
     // console.log('u->>',u);
-    if(u != null){
+    if (u != null) {
       global.user = JSON.parse(u);
       this.props.navigation.navigate("DrawerNavigator");
     }
-  }
-  
+  };
 
-  componentWillMount(){
-  // AsyncStorage.clear();
-}
+  componentWillMount() {
+    // AsyncStorage.clear();
+  }
   changeToRegister = () => {
     this.setState({ LoginRegister: false });
   };

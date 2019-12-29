@@ -95,7 +95,7 @@ class Publish extends React.Component {
         imageName: index + this.state.itemName + global.user.UserID + ".jpg",
         userid: 0
       };
-      console.log(formData.imageName);
+      // console.log(formData.imageName);
 
       if (this.state.img.length > 2 || this.state.img[index] != null) {
         const list = this.state.formData.map((item, j) => {
@@ -232,7 +232,7 @@ class Publish extends React.Component {
             );
         }
 
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
           {
@@ -415,6 +415,7 @@ class Publish extends React.Component {
                   {/* <Text style={{ color: "red" }}> *</Text> */}
 
                   <TextInput
+                    value={this.state.userName}
                     placeholder="איש קשר"
                     placeholderTextColor="rgb(150,150,150)"
                     onChangeText={e => {
@@ -435,9 +436,10 @@ class Publish extends React.Component {
                   {/* <Text style={{ color: "red" }}> *</Text> */}
 
                   <TextInput
+                    value={this.state.userPhone}
                     keyboardType="number-pad"
                     placeholderTextColor="rgb(150,150,150)"
-                    placeholder={"מס' טלפון"}
+                    placeholder="מס' טלפון"
                     onChangeText={e => {
                       this.setState({ userPhone: e });
                     }}
@@ -511,6 +513,7 @@ class Publish extends React.Component {
                     size={24}
                   />
                   <TextInput
+                    value={this.state.itemName}
                     placeholderTextColor="rgb(150,150,150)"
                     style={{
                       marginLeft: "8%",
@@ -540,6 +543,7 @@ class Publish extends React.Component {
                     itemColor="black"
                     baseColor="black"
                     placeholder="קטגוריית הפריט"
+                    value={this.state.itemType}
                     style={{ marginLeft: "8%", fontSize: 14 }}
                     dropdownMargins={{ min: 0, max: 10 }}
                     dropdownOffset={{ top: 0, left: 0 }}
@@ -565,6 +569,7 @@ class Publish extends React.Component {
                     }}
                   >
                     <TextInput
+                      value={this.state.itemAbout}
                       numberOfLines={4}
                       multiline={true}
                       maxLength={60}
@@ -575,7 +580,7 @@ class Publish extends React.Component {
                       placeholder="תאר את הפריט עד 60 תווים"
                       style={{
                         textAlign: "center",
-                        fontSize: 16
+                        fontSize: 14
                       }}
                     />
                   </View>
@@ -739,12 +744,14 @@ class Publish extends React.Component {
                     onPress={() => this.handleSubmit()}
                     style={styles.publishButton}
                   >
-                    <Text style={{ color: "white" }}>פרסם {"  "}</Text>
+                    <Text style={{ color: "white", fontSize: 20 }}>
+                      הוסף {"  "}
+                    </Text>
                     <Icon
-                      name="upload"
+                      name="cart-plus"
                       type="font-awesome"
                       color="white"
-                      size={18}
+                      size={20}
                     />
                   </TouchableOpacity>
                 </View>

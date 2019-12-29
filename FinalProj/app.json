@@ -12,7 +12,7 @@
     "facebookAppId": "2363780303934516",
     "facebookDisplayName": "תן יד",
     "splash": {
-      "image": "./assets/logo.jpg",
+      "image": "./assets/TenYadLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

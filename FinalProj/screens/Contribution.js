@@ -22,7 +22,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import Publish from "../screens/Publish";
 import Favorite from "../screens/Favorite";
 
-class Contribution extends Component {
+export default class Contribution extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -808,75 +808,75 @@ class Contribution extends Component {
   }
 }
 
-const TabNavigator = createMaterialBottomTabNavigator(
-  {
-    Contribution: {
-      screen: Contribution,
-      navigationOptions: {
-        tabBarLabel: "תרומות",
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icona
-              color={tintColor}
-              type="font-awesome"
-              style={[{ color: tintColor }]}
-              size={25}
-              name="handshake-o"
-            />
-          </View>
-        ),
-        activeColor: "white",
-        inactiveColor: "#46f6d7",
-        barStyle: { backgroundColor: "#6495ed" }
-      }
-    },
-    Publish: {
-      screen: Publish,
-      navigationOptions: {
-        gesturesEnabled: false,
-        tabBarLabel: "תן חפץ",
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon
-              style={[{ color: tintColor }]}
-              size={25}
-              name={"ios-add-circle-outline"}
-            />
-          </View>
-        ),
-        activeColor: "white",
-        inactiveColor: "#46f6d7",
-        barStyle: { backgroundColor: "#67baf6" }
-      }
-    },
-    Favorite: {
-      screen: Favorite,
-      navigationOptions: {
-        tabBarLabel: "מועדפים",
-        tabBarIcon: ({ tintColor }) => (
-          <View>
-            <Icon
-              style={[{ color: tintColor }]}
-              size={25}
-              name={"ios-star-half"}
-            />
-          </View>
-          // <TouchableOpacity>
-          //   <Image style={{width:30,height:30}} source={require("../assets/Favorite1.png")}/>
-          // </TouchableOpacity>
-        ),
-        activeColor: "white",
-        inactiveColor: "#46f6d7",
-        barStyle: { backgroundColor: "#6495ed" }
-      }
-    }
-  },
-  {
-    initialRouteName: "Contribution",
-    activeColor: "#f0edf6",
-    inactiveColor: "#226557",
-    barStyle: { backgroundColor: "#3BAD87" }
-  }
-);
+// const TabNavigator = createMaterialBottomTabNavigator(
+//   {
+//     Contribution: {
+//       screen: Contribution,
+//       navigationOptions: {
+//         tabBarLabel: "תרומות",
+//         tabBarIcon: ({ tintColor }) => (
+//           <View>
+//             <Icona
+//               color={tintColor}
+//               type="font-awesome"
+//               style={[{ color: tintColor }]}
+//               size={25}
+//               name="handshake-o"
+//             />
+//           </View>
+//         ),
+//         activeColor: "white",
+//         inactiveColor: "#46f6d7",
+//         barStyle: { backgroundColor: "#6495ed" }
+//       }
+//     },
+//     Publish: {
+//       screen: Publish,
+//       navigationOptions: {
+//         gesturesEnabled: false,
+//         tabBarLabel: "תן חפץ",
+//         tabBarIcon: ({ tintColor }) => (
+//           <View>
+//             <Icon
+//               style={[{ color: tintColor }]}
+//               size={25}
+//               name={"ios-add-circle-outline"}
+//             />
+//           </View>
+//         ),
+//         activeColor: "white",
+//         inactiveColor: "#46f6d7",
+//         barStyle: { backgroundColor: "#67baf6" }
+//       }
+//     },
+//     Favorite: {
+//       screen: Favorite,
+//       navigationOptions: {
+//         tabBarLabel: "מועדפים",
+//         tabBarIcon: ({ tintColor }) => (
+//           <View>
+//             <Icon
+//               style={[{ color: tintColor }]}
+//               size={25}
+//               name={"ios-star-half"}
+//             />
+//           </View>
+//           // <TouchableOpacity>
+//           //   <Image style={{width:30,height:30}} source={require("../assets/Favorite1.png")}/>
+//           // </TouchableOpacity>
+//         ),
+//         activeColor: "white",
+//         inactiveColor: "#46f6d7",
+//         barStyle: { backgroundColor: "#6495ed" }
+//       }
+//     }
+//   },
+//   {
+//     initialRouteName: "Contribution",
+//     activeColor: "#f0edf6",
+//     inactiveColor: "#226557",
+//     barStyle: { backgroundColor: "#3BAD87" }
+//   }
+// );
 
-export default createAppContainer(TabNavigator);
+// export default createAppContainer(TabNavigator);
