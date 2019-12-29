@@ -416,7 +416,7 @@ class Publish extends React.Component {
                   {/* <Text style={{ color: "red" }}> *</Text> */}
 
                   <TextInput
-                   value={this.state.userName}
+                    value={this.state.userName}
                     placeholder="איש קשר"
                     placeholderTextColor="rgb(150,150,150)"
                     onChangeText={e => {
@@ -437,11 +437,11 @@ class Publish extends React.Component {
                   {/* <Text style={{ color: "red" }}> *</Text> */}
 
                   <TextInput
-                  value={this.state.userPhone}
+                    value={this.state.userPhone}
                     keyboardType="number-pad"
                     placeholderTextColor="rgb(150,150,150)"
                     placeholder="מס' טלפון"
-                    onChangeText={(e) => {
+                    onChangeText={e => {
                       this.setState({ userPhone: e });
                     }}
                     style={{ marginLeft: "8%", fontSize: 14 }}
@@ -545,7 +545,6 @@ class Publish extends React.Component {
                     baseColor="black"
                     placeholder="קטגוריית הפריט"
                     value={this.state.itemType}
-
                     style={{ marginLeft: "8%", fontSize: 14 }}
                     dropdownMargins={{ min: 0, max: 10 }}
                     dropdownOffset={{ top: 0, left: 0 }}
@@ -746,12 +745,14 @@ class Publish extends React.Component {
                     onPress={() => this.handleSubmit()}
                     style={styles.publishButton}
                   >
-                    <Text style={{ color: "white" }}>פרסם {"  "}</Text>
+                    <Text style={{ color: "white", fontSize: 20 }}>
+                      הוסף {"  "}
+                    </Text>
                     <Icon
-                      name="upload"
+                      name="cart-plus"
                       type="font-awesome"
                       color="white"
-                      size={18}
+                      size={20}
                     />
                   </TouchableOpacity>
                 </View>

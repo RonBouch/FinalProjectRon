@@ -246,11 +246,11 @@ export default StyleSheet.create({
 
   //Publish Page Style
   publishButton: {
-    backgroundColor: "rgba(0,0,255,.7)",
+    backgroundColor: "#6495ed",
     flexDirection: "row",
-    height: 35,
-    marginTop: 10,
-    width: 150,
+    height: 45,
+    marginTop: 30,
+    width: 180,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
