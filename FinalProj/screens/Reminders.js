@@ -17,7 +17,6 @@ export default class Reminders extends Component {
     super(props);
     this.state = {
       reminders: null,
-      reminderExist: false
     };
   }
 
@@ -78,13 +77,18 @@ export default class Reminders extends Component {
   };
 
   GetReminders = async () => {
+    const data = {
+      userid: global.user.UserID,
+    };
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
       {
         method: "post",
         headers: new Headers({
           "Content-Type": "application/Json;"
-        })
+        }),
+        body: JSON.stringify(data)
+
       }
     )
       .then(res => {
@@ -115,8 +119,7 @@ export default class Reminders extends Component {
 
     if (this.state.reminders != null) {
       Items = this.state.reminders.map((item, index) => {
-        if (global.user.UserID == item.UserID) {
-          this.state.reminderExist = true;
+        
           return (
             <View
               key={index}
@@ -150,7 +153,7 @@ export default class Reminders extends Component {
             </View>
           );
         }
-      });
+      );
     }
 
     return (
@@ -205,7 +208,7 @@ export default class Reminders extends Component {
                 />
               </TouchableOpacity>
             </View>
-            {this.state.reminderExist ? (
+            {Items.length!=0 ? (
               <View style={{ flex: 1, alignItems: "center", marginTop: 30 }}>
                 {Items}
               </View>

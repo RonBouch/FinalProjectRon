@@ -68,9 +68,9 @@ public class WebService : System.Web.Services.WebService
 
     }
     [WebMethod]
-    public string GetReminders()
+    public string GetReminders(int userid)
     {
-        return BALServices.GetReminders();
+        return BALServices.GetReminders(userid);
     }
 
     [WebMethod]
