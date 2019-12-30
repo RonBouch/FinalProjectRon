@@ -816,28 +816,54 @@ namespace DALproj
             }
             return check;
         }
-        public static List<Reminder> GetReminders()
+        public static List<Reminder> GetReminders(int userid)
         {
             List<Reminder> items = new List<Reminder>();
-            comm.CommandText = $"SELECT  * from Reminders ORDER BY ItemName DESC";
-            comm.Connection.Open();
-            SqlDataReader reader = comm.ExecuteReader();
-            while (reader.Read())
+            if (userid == 0)
             {
-                Reminder p = new Reminder()
+                comm.CommandText = $"SELECT  * from Reminders ORDER BY ItemName DESC";
+                comm.Connection.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
                 {
-                    ReminderID = int.Parse(reader["ReminderID"].ToString()),
-                     ItemName=reader["ItemName"].ToString(),
-                     UserID=reader["UserID"].ToString(),
-                     Token=reader["Token"].ToString(),
-                };
-                items.Add(p);
+                    Reminder p = new Reminder()
+                    {
+                        ReminderID = int.Parse(reader["ReminderID"].ToString()),
+                        ItemName = reader["ItemName"].ToString(),
+                        UserID = reader["UserID"].ToString(),
+                        Token = reader["Token"].ToString(),
+                    };
+                    items.Add(p);
+                }
+
+                comm.Connection.Close();
+
+                return items;
             }
+            else
+            {
+                comm.CommandText = $"SELECT  * from Reminders Where UserID='{userid}'";
+                comm.Connection.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Reminder p = new Reminder()
+                    {
+                        ReminderID = int.Parse(reader["ReminderID"].ToString()),
+                        ItemName = reader["ItemName"].ToString(),
+                        UserID = reader["UserID"].ToString(),
+                        Token = reader["Token"].ToString(),
+                    };
+                    items.Add(p);
+                }
 
-            comm.Connection.Close();
+                comm.Connection.Close();
 
-            return items;
+                return items;
+            }
         }
+        
+          
 
         public static string UploadImage(string base64, string imageName,int userid)
         {

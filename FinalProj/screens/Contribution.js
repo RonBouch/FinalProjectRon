@@ -93,13 +93,18 @@ export default class Contribution extends Component {
       };
   }
   GetReminders() {
+    const data = {
+      userid:0
+    };
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
       {
         method: "post",
         headers: new Headers({
           "Content-Type": "application/Json;"
-        })
+        }),
+        body: JSON.stringify(data)
+
       }
     )
       .then(res => {

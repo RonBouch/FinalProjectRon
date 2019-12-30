@@ -122,9 +122,9 @@ namespace BALproj
         }
 
 
-        public static string GetReminders()
+        public static string GetReminders(int userid)
         {
-            List<Reminder> p = DBServices.GetReminders();
+            List<Reminder> p = DBServices.GetReminders(userid);
 
             if (p != null)
             {
