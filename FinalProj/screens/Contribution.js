@@ -120,7 +120,7 @@ export default class Contribution extends Component {
               reminders: reminders
             });
 
-            if (this.state.items[0].Reminder == ""&&this.state.items[0]!=null) {
+            if (this.state.items[0]!=null&&this.state.items[0].Reminder == "") {
               data = reminders.filter(re => {
                 return re.ItemName.includes(this.state.items[0].ItemName);
               });
