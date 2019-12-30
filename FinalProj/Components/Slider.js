@@ -59,22 +59,6 @@ const Slider2 = props => (
           props.item
       }}
     />
-
-    <View
-      style={{
-        width: "100%",
-        height: "13%",
-        position: "absolute",
-        alignItems: "center",
-        justifyContent: "center",
-        top: "87%",
-        backgroundColor: "rgba(0,0,0,.8)"
-      }}
-    >
-      <Text style={{ color: "white", fontSize: 14 }}>
-        {props.item.ItemName}
-      </Text>
-    </View>
   </View>
 );
 const styles = {
