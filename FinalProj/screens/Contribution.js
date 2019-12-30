@@ -43,6 +43,8 @@ export default class Contribution extends Component {
       reminders: null,
       LoadingFirstTime:false,
     };
+    _isMounted = false;
+
   }
   static navigationOptions = {
     drawerLabel: "Contribution"
@@ -50,9 +52,8 @@ export default class Contribution extends Component {
 
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
-    this.setState({
-      LoadingFirstTime:false
-    })
+    _isMounted = true;
+
     await this.GetItems();
   };
 
@@ -64,6 +65,8 @@ export default class Contribution extends Component {
   }
 
   componentWillUnmount() {
+    console.log("Bye Bye")
+    _isMounted = false;
     this.focusListener.remove();
   }
   _pressCall = phone => {
@@ -97,7 +100,7 @@ export default class Contribution extends Component {
         console.log("err post=", error);
       };
   }
-  GetReminders() {
+  GetReminders =async()=> {
     const idToSend = {
       userid:0
     };
@@ -117,6 +120,8 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
+          if(_isMounted)
+          {
           let reminders = JSON.parse(result.d);
           if (reminders == null) {
             this.setState({
@@ -140,6 +145,7 @@ export default class Contribution extends Component {
               }
             }
           }
+        }
         },
         error => {
           console.log("err post=", error);
@@ -196,6 +202,8 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
+          if(_isMounted)
+          {
           let itemsFromFavorite = JSON.parse(result.d);
           if (itemsFromFavorite == null) {
             console.log("no Favorite");
@@ -206,14 +214,18 @@ export default class Contribution extends Component {
             });
           }
           this.GetItemTypes();
-        },
+        }
+      },
         error => {
           console.log("err post=", error);
         }
       );
   };
 
-  GetItems = () => {
+  GetItems = async() => {
+    this.setState({
+      LoadingFirstTime:false
+    })
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
       {
@@ -229,7 +241,9 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
-          // console.log("fetch POST= ", result);
+          if(_isMounted)
+          {
+            // console.log("fetch POST= ", result);
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
@@ -238,7 +252,6 @@ export default class Contribution extends Component {
             });
             return;
           } else {
-           
             // console.log("U = " + items);
             this.setState({
               dataItems: items,
@@ -246,6 +259,7 @@ export default class Contribution extends Component {
             });
             this.GetItemsFromFavorite();
           }
+        }
         },
         error => {
           console.log("err post=", error);
@@ -268,6 +282,8 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
+          if(_isMounted)
+          {
           let itemTypes = JSON.parse(result.d);
           if (itemTypes == null) {
             this.setState({
@@ -280,7 +296,8 @@ export default class Contribution extends Component {
             });
             this.GetReminders();
           }
-        },
+        }
+      },
         error => {
           console.log("err post=", error);
         }

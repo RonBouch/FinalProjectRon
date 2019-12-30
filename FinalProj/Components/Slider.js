@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Swiper from "react-native-swiper";
 
-const { width } = Dimensions.get("window");
 const Slider = props => (
   <View style={styles.container}>
     <Image
@@ -49,18 +48,7 @@ const Slider = props => (
     </View>
   </View>
 );
-const Slider2 = props => (
-  <View style={styles.container}>
-    <Image
-      style={styles.image}
-      source={{
-        uri:
-          "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-          props.item
-      }}
-    />
-  </View>
-);
+
 const styles = {
   container: {
     // padding: 8
@@ -77,25 +65,16 @@ export default class extends Component {
     super(props);
     this.state = {
       imagesSlider: [],
-      itemImageArray: [],
       imageName: [],
       items: null,
-      checkURL: null,
       checkArrayComplete: false,
-      lastRefresh: Date(Date.now()).toString()
     };
-    this.refreshScreen = this.refreshScreen.bind(this);
+
   }
-  refreshScreen() {
-    this.setState({ lastRefresh: Date(Date.now()).toString() });
-  }
+
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
-    this.setState({
-      checkArrayComplete: false,
-      imagesSlider: [],
-      itemImageArray: []
-    });
+   
     this.RealoadScreen();
     // do some stuff on every screen focus
   };
@@ -112,42 +91,9 @@ export default class extends Component {
     this.focusListener.remove();
   }
   async RealoadScreen() {
-    if (this.props.img != null && this.props.img != undefined) {
-      let imgArr = [];
-      for (i = 0; i < 3; i++) {
-        console.log(
-          await this.checkImageURL(
-            "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-              i +
-              this.props.img
-          )
-        );
-        if (this.state.checkURL) {
-          imgArr.push(i + this.props.img);
-        }
-      }
-      this.setState({
-        itemImageArray: imgArr,
-        checkArrayComplete: true
-      });
-    } else {
       await this.GetItems();
-    }
   }
-  async checkImageURL(url) {
-    await fetch(url)
-      .then(res => {
-        if (res.status == 404) {
-          this.setState({ checkURL: false });
 
-          return false;
-        } else {
-          this.setState({ checkURL: true });
-          return true;
-        }
-      })
-      .catch(err => console.log(err));
-  }
 
   // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
   ImageArray = async items => {
@@ -165,6 +111,10 @@ export default class extends Component {
   };
 
   GetItems = async () => {
+    await this.setState({
+      checkArrayComplete: false,
+      imagesSlider: [],
+    });
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
       {
@@ -198,27 +148,13 @@ export default class extends Component {
   render() {
     return (
       <View
-        style={{
-          width: "100%",
-          height: 200,
-          elevation: 10
-        }}
-      >
+      style={{
+        width: "100%",
+        height: 200,
+        elevation: 10
+      }}>
         {this.state.checkArrayComplete ? (
-          this.state.itemImageArray != null &&
-          this.state.itemImageArray != "" ? (
-            <Swiper autoplay={false}>
-              {this.state.itemImageArray.map((item, i) => (
-                <TouchableOpacity key={i}>
-                  {i <= this.state.itemImageArray.length ? (
-                    <Slider2 item={item} key={i} />
-                  ) : (
-                    console.log("yeeeee")
-                  )}
-                </TouchableOpacity>
-              ))}
-            </Swiper>
-          ) : (
+
             <Swiper autoplay={true} autoplayTimeout={5}>
               {this.state.imagesSlider.map((item, i) => (
                 <TouchableOpacity
@@ -234,7 +170,7 @@ export default class extends Component {
               ))}
             </Swiper>
           )
-        ) : (
+        : (
           console.log("Reload array")
         )}
       </View>

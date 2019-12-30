@@ -7,12 +7,10 @@ import {
   Image,
   ImageBackground,
   Dimensions,
-  Button
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
-// import StyleSheet from "../Components/StyleSheet";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Slider from "../Components/Slider";
 const { width } = Dimensions.get("window");

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
-import Slider from "../Components/Slider";
+import Slider from "../Components/PostPageSlider";
 import {
   View,
   TouchableHighlight,

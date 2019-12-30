@@ -40,9 +40,7 @@ export default class FirstPage extends React.Component {
     }
   };
 
-  componentWillMount() {
-    // AsyncStorage.clear();
-  }
+
   changeToRegister = () => {
     this.setState({ LoginRegister: false });
   };
