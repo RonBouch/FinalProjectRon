@@ -79,7 +79,8 @@ export default class Favorite extends React.Component {
             return;
           } else {
             this.setState({
-              items: items
+              items: items,
+              LoadingFirstTime:true
             });
           }
         },
@@ -167,13 +168,12 @@ export default class Favorite extends React.Component {
     const { navigate } = this.props.navigation;
     let Items = [];
 
-    if(Items.length!=0){
-      this.setState({LoadingFirstTime:true}) 
-     }
+    
 
     if (this.state.items != null) {
+      
       Items = this.state.items.map((item, index) => {
-        console.log("test:", Items[0]);
+        // console.log("test:", Items[0]);
 
         return (
           <TouchableOpacity
