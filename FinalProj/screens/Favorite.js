@@ -25,13 +25,17 @@ export default class Favorite extends React.Component {
       screenHeight: 0,
       userPhone: "",
       pageToShow: null,
-      reloadPage: false
+      reloadPage: false,
+      LoadingFirstTime:false,
+    
     };
   }
 
   // define a separate function to get triggered on focus
   onFocusFunction = () => {
-    console.log("Call fetch Get Items .");
+     this.setState({
+     LoadingFirstTime:false
+     })
     this.GetItemsFromFavorite();
     // do some stuff on every screen focus
   };
@@ -161,15 +165,11 @@ export default class Favorite extends React.Component {
   }
   render() {
     const { navigate } = this.props.navigation;
-
-    //Doing alerts whern i come back to Favorite screen .!
-    {
-      /* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */
-    }
-
-    // const scrollEnabled = this.state.screenHeight > height ;
-
     let Items = [];
+
+    if(Items.length!=0){
+      this.setState({LoadingFirstTime:true}) 
+     }
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
@@ -306,7 +306,7 @@ export default class Favorite extends React.Component {
         );
       });
     }
-
+   
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -372,8 +372,12 @@ export default class Favorite extends React.Component {
                   justifyContent: "center"
                 }}
               >
+              {this.state.LoadingFirstTime ?
                 <Text>אין פריטים להצגה</Text>
-              </View>
+                :
+                <Image source={require("../assets/loading.gif")}/>
+                }           
+                   </View>
             )}
           </View>
         </View>
