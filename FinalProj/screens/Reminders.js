@@ -109,7 +109,9 @@ export default class Reminders extends Component {
             return;
           } else {
             this.setState({
-              reminders: reminders
+              reminders: reminders,
+              LoadingFirstTime:true
+
             });
           }
         },
@@ -120,9 +122,7 @@ export default class Reminders extends Component {
   };
   render() {
     let Items = [];
-    if(Items.length!=0){
-      this.setState({LoadingFirstTime:true}) 
-     }
+
     if (this.state.reminders != null) {
       Items = this.state.reminders.map((item, index) => {
         

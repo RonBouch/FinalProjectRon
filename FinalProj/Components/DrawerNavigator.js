@@ -23,6 +23,8 @@ import S3 from "../screens/S3.js";
 
 const MainNavigator = createStackNavigator(
   {
+    Favorite: { screen: Favorite },
+
     Home: { screen: Home },
 
     Contribution: { screen: Contribution },
@@ -36,7 +38,6 @@ const MainNavigator = createStackNavigator(
     Publish: { screen: Publish },
     About: { screen: About },
     Publish: { screen: Publish },
-    Favorite: { screen: Favorite },
     S3: { screen: S3 },
 
     EditProfile: { screen: EditProfile },

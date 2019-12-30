@@ -80,7 +80,9 @@ export default class ProfilePost extends React.Component {
           } else {
             console.log("ITEMS ", items);
             this.setState({
-              items: items
+              items: items,
+              LoadingFirstTime:true
+
             });
           }
         },
@@ -161,9 +163,7 @@ export default class ProfilePost extends React.Component {
     // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
-    if(Items.length!=0){
-      this.setState({LoadingFirstTime:true}) 
-     }
+    
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
         return (
