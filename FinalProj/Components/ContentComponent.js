@@ -300,6 +300,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: 1,
     backgroundColor: "gray",
+    elevation: 3,
     margin: 15
   }
 });

@@ -116,9 +116,6 @@ class PostPage extends Component {
               {this.state.item.ItemName}
             </Text>
 
-            <View style={{ alignItems: "flex-start", width: "90%" }}>
-              <Text>פרטי התקשרות:</Text>
-            </View>
             <View
               style={{
                 width: "90%",
@@ -165,8 +162,14 @@ class PostPage extends Component {
             </View>
 
             <View
-              style={{ borderBottomWidth: 1, width: "90%", margin: 20 }}
+              style={{
+                borderBottomWidth: 1,
+                width: "90%",
+                margin: 20,
+                elevation: 5
+              }}
             ></View>
+
             {this.state.item.ItemAbout != "" ? (
               <Text style={{ fontSize: 14, marginTop: 30 }}>
                 {this.state.item.ItemAbout}
