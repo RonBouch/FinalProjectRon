@@ -32,18 +32,34 @@ class AssociationsList extends Component {
       associations: null,
       associationTypes: null,
       dataAssociations: null,
-      searchAssociation: ""
+      searchAssociation: "",
+      LoadingFirstTime:false,
     };
   }
-  componentDidMount() {
+  onFocusFunction = () => {
+    this.setState({
+    LoadingFirstTime:false
+    })
     try {
       this.loadPage();
     } catch (e) {
       console.log("Errr Fetch ", e);
     }
-    // this.GetAssociationsType();
-    // this.GetAssociations();
-  }
+       // do some stuff on every screen focus
+ };
+
+ // add a focus listener onDidMount
+ async componentDidMount() {
+   this.focusListener = this.props.navigation.addListener("didFocus", () => {
+     this.onFocusFunction();
+   });
+ }
+
+ // and don't forget to remove the listener
+ componentWillUnmount() {
+   this.focusListener.remove();
+ }
+
   GetAssociations = async () => {
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetAssociations",
@@ -68,7 +84,8 @@ class AssociationsList extends Component {
           } else {
             this.setState({
               dataAssociations: associations,
-              associations: associations
+              associations: associations,
+              LoadingFirstTime:true
             });
           }
         },
@@ -330,16 +347,21 @@ class AssociationsList extends Component {
                {Associations}
               </View>
                :
-                 <View
-                 style={{
-                   flex: 1,
-                   alignItems: "center",
-                   justifyContent: "center",
-                   marginTop:30
-                 }}
-               >
-                 <Text>אין פריטים להצגה</Text>
-              </View>}
+               <View
+               style={{
+                 flex: 1,
+                 alignItems: "center",
+                 justifyContent: "center",
+                 marginTop:30
+               }}
+             >
+               {this.state.LoadingFirstTime ?
+               <Text>אין פריטים להצגה</Text>
+               :
+               <Image source={require("../assets/loading.gif")}/>
+               }
+                             </View>
+                 }
 
             </ScrollView>
           </View>
