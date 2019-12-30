@@ -122,7 +122,7 @@ class PostPage extends Component {
                 {this.state.item.UserPhone}
               </Text>
             </Text>
-            ) : ( console.log("No Phone") )}
+             :  console.log("No Phone") }
             {this.state.item.ItemAbout != "" ? (
               <Text style={{ fontSize: 14, padding: 10 }}>
                 {this.state.item.ItemAbout}
