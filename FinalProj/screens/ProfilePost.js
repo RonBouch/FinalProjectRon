@@ -29,11 +29,15 @@ export default class ProfilePost extends React.Component {
       screenHeight: 0,
       userPhone: "",
       pageToShow: null,
-      reloadPage: false
+      reloadPage: false,
+      LoadingFirstTime:false,
     };
   }
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
+    this.setState({
+      LoadingFirstTime:false
+    })
     this.GetItemsByID();
   };
 
@@ -157,7 +161,9 @@ export default class ProfilePost extends React.Component {
     // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
-
+    if(Items.length!=0){
+      this.setState({LoadingFirstTime:true}) 
+     }
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
         return (
@@ -357,8 +363,12 @@ export default class ProfilePost extends React.Component {
                   justifyContent: "center"
                 }}
               >
-                <Text>אין פרסומים להצגה</Text>
-              </View>
+              {this.state.LoadingFirstTime ?
+                <Text>אין פריטים להצגה</Text>
+                :
+                <Image source={require("../assets/loading.gif")}/>
+                }
+                              </View>
             )}
           </View>
         </View>

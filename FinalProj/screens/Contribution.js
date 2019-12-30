@@ -21,6 +21,7 @@ import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import Publish from "../screens/Publish";
 import Favorite from "../screens/Favorite";
+import { Item } from "native-base";
 
 export default class Contribution extends Component {
   constructor(props) {
@@ -39,7 +40,8 @@ export default class Contribution extends Component {
       itemTypes: [],
       remindView: false,
       nameToRemind: "",
-      reminders: null
+      reminders: null,
+      LoadingFirstTime:false,
     };
   }
   static navigationOptions = {
@@ -48,6 +50,9 @@ export default class Contribution extends Component {
 
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
+    this.setState({
+      LoadingFirstTime:false
+    })
     await this.GetItems();
   };
 
@@ -93,7 +98,7 @@ export default class Contribution extends Component {
       };
   }
   GetReminders() {
-    const data = {
+    const idToSend = {
       userid:0
     };
     fetch(
@@ -103,7 +108,7 @@ export default class Contribution extends Component {
         headers: new Headers({
           "Content-Type": "application/Json;"
         }),
-        body: JSON.stringify(data)
+        body: JSON.stringify(idToSend)
 
       }
     )
@@ -235,7 +240,7 @@ export default class Contribution extends Component {
             // console.log("U = " + items);
             this.setState({
               dataItems: items,
-              items: items
+              items: items,
             });
             this.GetItemsFromFavorite();
           }
@@ -411,7 +416,9 @@ export default class Contribution extends Component {
         ItemTypes.push({ value: type.ItemType });
       });
     }
-
+     if(Items.length!=0){
+      this.setState({LoadingFirstTime:true}) 
+     }
     if (this.state.items != null && this.state.itemsFromFavorite != null) {
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
@@ -556,7 +563,7 @@ export default class Contribution extends Component {
               </View>
             </TouchableOpacity>
           );
-        }
+}
       });
     }
 
@@ -702,8 +709,12 @@ export default class Contribution extends Component {
                   justifyContent: "center"
                 }}
               >
+                {this.state.LoadingFirstTime ?
                 <Text>אין פריטים להצגה</Text>
-              </View>
+                :
+                <Image source={require("../assets/loading.gif")}/>
+                }
+                </View>
             )}
           </View>
           {this.state.remindView ? (

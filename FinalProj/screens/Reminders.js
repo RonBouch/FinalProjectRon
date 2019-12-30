@@ -17,10 +17,14 @@ export default class Reminders extends Component {
     super(props);
     this.state = {
       reminders: null,
+      LoadingFirstTime:false,
     };
   }
 
   onFocusFunction = () => {
+    this.setState({
+      LoadingFirstTime:false,
+    })
     this.GetReminders();
   };
 
@@ -116,7 +120,9 @@ export default class Reminders extends Component {
   };
   render() {
     let Items = [];
-
+    if(Items.length!=0){
+      this.setState({LoadingFirstTime:true}) 
+     }
     if (this.state.reminders != null) {
       Items = this.state.reminders.map((item, index) => {
         
@@ -220,8 +226,12 @@ export default class Reminders extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text>אין פרסומים להצגה</Text>
-              </View>
+                {this.state.LoadingFirstTime ?
+                <Text>אין פריטים להצגה</Text>
+                :
+                <Image source={require("../assets/loading.gif")}/>
+                }
+                              </View>
             )}
           </View>
         </View>
