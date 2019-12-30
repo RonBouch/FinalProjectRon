@@ -46,11 +46,23 @@ export default class Contribution extends Component {
     drawerLabel: "Contribution"
   };
 
+
+ // define a separate function to get triggered on focus
+  onFocusFunction = async () => {
+    await this.GetItems();
+   
+  };
+
+  // add a focus listener onDidMount
   async componentDidMount() {
-    // console.log("Change Picture .");
-   await this.GetItems();
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
   }
 
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
   _pressCall = phone => {
     const url = "tel:" + phone;
     // console.log("url  asasds",url)
@@ -108,7 +120,7 @@ export default class Contribution extends Component {
               reminders: reminders
             });
 
-            if (this.state.items[0].Reminder == "") {
+            if (this.state.items[0].Reminder == ""&&this.state.items[0]!=null) {
               data = reminders.filter(re => {
                 return re.ItemName.includes(this.state.items[0].ItemName);
               });
@@ -672,7 +684,11 @@ export default class Contribution extends Component {
               </View>
             </View>
 
-            <ScrollView style={styles.scrollview}>{Items}</ScrollView>
+            <ScrollView style={styles.scrollview}>{Items.length!=0?Items:
+            <View style={{alignItems:'center',marginTop:40}}>
+              <Text style={{alignItems:'center',fontSize:16}}>אין פריטים להצגה</Text>
+            </View>
+            }</ScrollView>
           </View>
           {this.state.remindView ? (
             <View
