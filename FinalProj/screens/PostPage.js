@@ -95,7 +95,6 @@ class PostPage extends Component {
                 />
               </TouchableOpacity>
             </View>
-
             {/* <Image
               source={{
                 uri:
@@ -111,22 +110,19 @@ class PostPage extends Component {
               img={this.props.navigation.state.params.item.ItemImg}
               navigation={this.props.navigation}
             />
-
             <Text style={{ fontWeight: "bold", fontSize: 20 }}>
               {this.state.item.ItemName}
             </Text>
-            <Text></Text>
-            {this.state.item.UserPhone != "" ? (
-              <Text onPress={this.callPhone}>
-                טלפון :{" "}
-                <Text style={{ color: "green" }}>
-                  {this.state.item.UserPhone}
-                </Text>
+            <Text onPress={this.callPhone}>
+              טלפון : <Text> {this.state.item.City}</Text>
+            </Text>
+            <Text>
+              עיר :{" "}
+              <Text style={{ color: "green" }}>
+                {this.state.item.UserPhone}
               </Text>
-            ) : (
-              console.log("No Phone")
-            )}
-
+            </Text>
+            ) : ( console.log("No Phone") )}
             {this.state.item.ItemAbout != "" ? (
               <Text style={{ fontSize: 14, padding: 10 }}>
                 {this.state.item.ItemAbout}
