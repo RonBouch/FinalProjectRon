@@ -174,7 +174,6 @@ export default class Favorite extends React.Component {
     // const scrollEnabled = this.state.screenHeight > height ;
 
     let Items = [];
-    console.log("test:", this.state.items);
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
@@ -379,9 +378,6 @@ export default class Favorite extends React.Component {
               </View>
             )}
 
-            {/* <View style={{ flex: 1, alignItems: "center" }}>
-                  <Text>dfhrd</Text>
-                </View> */}
           </View>
         </View>
       </ImageBackground>

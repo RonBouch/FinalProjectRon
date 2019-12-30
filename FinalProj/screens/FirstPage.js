@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   ImageBackground,
   AsyncStorage,
-  Image
+  Image,
+  KeyboardAvoidingView,
+  ScrollView
 } from "react-native";
 import { getLightEstimationEnabled } from "expo/build/AR";
 

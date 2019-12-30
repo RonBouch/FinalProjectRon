@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  ScrollView,
   Image
 } from "react-native";
 import { Icon } from "react-native-elements";
@@ -201,21 +202,19 @@ class Register extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={{ alignItems: "center" }} behavior="padding">
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <TextInput
           style={styles.input}
           placeholder="שם פרטי"
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeFirstName}
         />
-
         <TextInput
           style={styles.input}
           placeholder="שם משפחה"
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeLastName}
         />
-
         <TextInput
           style={styles.input}
           keyboardType="email-address"
@@ -223,7 +222,6 @@ class Register extends React.Component {
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeEmail}
         />
-
         <TextInput
           style={styles.input}
           secureTextEntry={true}
@@ -232,7 +230,6 @@ class Register extends React.Component {
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changePassword}
         />
-
         <TextInput
           style={styles.input}
           secureTextEntry={true}
@@ -278,7 +275,6 @@ class Register extends React.Component {
             this.setState({ date: date });
           }}
         />
-
         <RadioForm
           radio_props={radio_props}
           initial={null}
@@ -290,7 +286,6 @@ class Register extends React.Component {
           style={styles.radioGender}
           onPress={this.changeGender}
         />
-
         <TouchableOpacity style={styles.registerButton} onPress={this.register}>
           <Text style={{ fontWeight: "bold", color: "white", fontSize: 18 }}>
             הרשמה
@@ -298,7 +293,6 @@ class Register extends React.Component {
           </Text>
           <Icon name="user-plus" type="font-awesome" color="white" size={18} />
         </TouchableOpacity>
-
         <Text style={styles.textMessage}>
           {this.state.errors.firstName ||
             this.state.errors.lastName ||

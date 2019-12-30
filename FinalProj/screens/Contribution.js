@@ -48,7 +48,7 @@ export default class Contribution extends Component {
 
   async componentDidMount() {
     // console.log("Change Picture .");
-   await this.GetItems();
+    await this.GetItems();
   }
 
   _pressCall = phone => {
@@ -261,7 +261,7 @@ export default class Contribution extends Component {
         }
       );
   };
-  
+
   infoWindow = (index, item) => {
     if (this.state.extraDetails == -1 || this.state.extraDetails != index) {
       this.setState({
@@ -739,6 +739,7 @@ export default class Contribution extends Component {
                   />
                   <TextInput
                     placeholderTextColor="rgb(150,150,150)"
+                    maxLength={20}
                     style={{
                       marginLeft: "8%",
                       fontSize: 14

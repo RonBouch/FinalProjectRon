@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   ImageBackground,
@@ -19,20 +19,18 @@ export default class Profile extends React.Component {
     super(props);
     this.state = {
       selectedItems: [],
-      reminders:"",
+      reminders: "",
       img: ""
     };
     this.profileImage = require("../assets/profileIcon.png");
   }
 
-
-  componentDidMount=async()=> {
+  componentDidMount = async () => {
     console.log("global profile ", global.user.Image);
     this.setState({ img: global.user.Image }, function() {
       console.log("img state", this.state.img);
-
     });
-  }
+  };
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
@@ -143,10 +141,8 @@ export default class Profile extends React.Component {
       // let type = match ? `image/${match[1]}` : `image`;
     }
   };
- 
 
   render() {
-  
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -226,7 +222,8 @@ export default class Profile extends React.Component {
                     // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן
                     source={{
                       uri:
-                        this.state.img ==global.user.UserID + global.user.Email + ".jpg"
+                        this.state.img ==
+                        global.user.UserID + global.user.Email + ".jpg"
                           ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                             this.state.img +
                             "?time" +
@@ -261,7 +258,7 @@ export default class Profile extends React.Component {
                 onPress={() => this.props.navigation.navigate("EditProfile")}
               >
                 <Text style={styles.register}>
-                  עידכון פרטים
+                  עדכון פרטים
                   {"  "}
                 </Text>
                 <Icon name="edit" type="font-awesome" color="black" size={18} />
@@ -282,10 +279,10 @@ export default class Profile extends React.Component {
                 onPress={() => this.props.navigation.navigate("Reminders")}
               >
                 <Text style={styles.register}>
-                  ההתרעות שלי
+                  ההתראות שלי
                   {"  "}
                 </Text>
-                <Icon name="edit" type="font-awesome" color="black" size={18} />
+                <Icon name="bell" type="font-awesome" color="black" size={18} />
               </TouchableOpacity>
             </View>
           </View>

@@ -96,7 +96,7 @@ export default class Home extends Component {
               >
                 "להקל על כאב לבו של אחר, זה לשכוח את כאבך שלך."
               </Text>
-              <Text style={{ marginTop: 20 }}>אברהם לינקולן</Text>
+              <Text style={{ marginTop: 20 }}>( אברהם לינקולן )</Text>
             </View>
             <View
               style={{
