@@ -316,6 +316,7 @@ class AssociationsList extends Component {
             </View>
 
             <ScrollView style={styles.scrollview}>
+            {Associations.length!=0?
               <View
                 style={{
                   alignItems: "center",
@@ -326,8 +327,20 @@ class AssociationsList extends Component {
                   width: "100%"
                 }}
               >
-                {Associations}
+               {Associations}
               </View>
+               :
+                 <View
+                 style={{
+                   flex: 1,
+                   alignItems: "center",
+                   justifyContent: "center",
+                   marginTop:30
+                 }}
+               >
+                 <Text>אין פריטים להצגה</Text>
+              </View>}
+
             </ScrollView>
           </View>
         </View>

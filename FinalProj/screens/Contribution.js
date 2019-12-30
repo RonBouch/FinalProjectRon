@@ -233,10 +233,12 @@ export default class Contribution extends Component {
           let items = JSON.parse(result.d);
           if (items == null) {
             this.setState({
-              message: "הרשמה נכשלה"
+              message: "הרשמה נכשלה",
+              LoadingFirstTime:true
             });
             return;
           } else {
+           
             // console.log("U = " + items);
             this.setState({
               dataItems: items,
@@ -316,7 +318,7 @@ export default class Contribution extends Component {
       }
     )
       .then(res => {
-        console.log("res=", res);
+        // console.log("res=", res);
         return res.json();
       })
       .then(
@@ -347,7 +349,7 @@ export default class Contribution extends Component {
         typeId = this.state.itemTypes[index].ItemTypeID;
 
         data = this.state.dataItems.filter(item => {
-          console.log(item);
+          // console.log(item);
           return (
             item.ItemType == typeId &&
             item.Region == this.state.filterItemsByRegion
@@ -357,12 +359,16 @@ export default class Contribution extends Component {
         typeId = this.state.itemTypes[index].ItemTypeID;
 
         data = this.state.dataItems.filter(item => {
-          console.log(item);
+          // console.log(item);
 
           return item.ItemType == typeId;
         });
       }
-      this.setState({ items: data, filterItemsByType: typeId });
+      if(data.length==0){
+
+        this.setState({LoadingFirstTime:true})
+      }
+      this.setState({ items: data, filterItemsByType: typeId, });
     } else {
       if (this.state.filterItemsByRegion != null) {
         let data = this.state.dataItems.filter(item => {
@@ -389,17 +395,22 @@ export default class Contribution extends Component {
           return item.Region == value;
         });
       }
+      if(data.length==0){
+
+        this.setState({LoadingFirstTime:true})
+      }
       this.setState({ items: data, filterItemsByRegion: value });
     } else {
       if (this.state.filterItemsByType != null) {
         let data = this.state.dataItems.filter(item => {
           return item.ItemType == this.state.filterItemsByType;
         });
-        this.setState({ items: data, filterItemsByRegion: null });
+        this.setState({ items: data, filterItemsByRegion: null});
       } else {
         this.setState({
           items: this.state.dataItems,
-          filterItemsByRegion: null
+          filterItemsByRegion: null,
+          
         });
       }
     }
@@ -416,9 +427,7 @@ export default class Contribution extends Component {
         ItemTypes.push({ value: type.ItemType });
       });
     }
-     if(Items.length!=0){
-      this.setState({LoadingFirstTime:true}) 
-     }
+    
     if (this.state.items != null && this.state.itemsFromFavorite != null) {
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
