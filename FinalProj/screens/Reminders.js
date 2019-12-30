@@ -16,12 +16,15 @@ export default class Reminders extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reminders: null
+      reminders: null,
+      reminderExist: false
     };
   }
-  onFocusFunction = async () => {
-    await this.GetReminders();
+
+  onFocusFunction = () => {
+    this.GetReminders();
   };
+
   async componentDidMount() {
     this.focusListener = this.props.navigation.addListener("didFocus", () => {
       this.onFocusFunction();
@@ -74,7 +77,7 @@ export default class Reminders extends Component {
     }
   };
 
-  async GetReminders() {
+  GetReminders = async () => {
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
       {
@@ -106,13 +109,14 @@ export default class Reminders extends Component {
           console.log("err post=", error);
         }
       );
-  }
+  };
   render() {
     let Items = [];
 
     if (this.state.reminders != null) {
       Items = this.state.reminders.map((item, index) => {
         if (global.user.UserID == item.UserID) {
+          this.state.reminderExist = true;
           return (
             <View
               key={index}
@@ -158,16 +162,18 @@ export default class Reminders extends Component {
           <View style={styles.main}>
             <View style={styles.topBar}>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Profile")}
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
                 style={styles.touchableHighlight}
                 underlayColor={"rgba(0,0,0,0.8)"}
               >
                 <Icona
                   iconStyle={{ marginEnd: "10%" }}
-                  name="arrow-circle-right"
+                  name="bars"
                   type="font-awesome"
                   color="white"
-                  size={32}
+                  size={28}
                 />
               </TouchableOpacity>
               <View
@@ -199,7 +205,7 @@ export default class Reminders extends Component {
                 />
               </TouchableOpacity>
             </View>
-            {Items[0] != null ? (
+            {this.state.reminderExist ? (
               <View style={{ flex: 1, alignItems: "center", marginTop: 30 }}>
                 {Items}
               </View>
@@ -211,7 +217,7 @@ export default class Reminders extends Component {
                   justifyContent: "center"
                 }}
               >
-                <Text>אין פריטים להצגה</Text>
+                <Text>אין פרסומים להצגה</Text>
               </View>
             )}
           </View>

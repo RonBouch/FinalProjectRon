@@ -5,7 +5,8 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from "react-native";
 import { Icon as Icona } from "react-native-elements";
 import styles from "../Components/StyleSheet";
@@ -31,6 +32,7 @@ export default class Profile extends React.Component {
       console.log("img state", this.state.img);
     });
   };
+
   openCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false, // higher res on iOS
@@ -209,7 +211,22 @@ export default class Profile extends React.Component {
                   height: 150,
                   width: 150
                 }}
-                onPress={this.openGallery}
+                onPress={() =>
+                  Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
+                    {
+                      text: "מצלמה",
+                      onPress: () => {
+                        this.openCamera();
+                      }
+                    },
+                    {
+                      text: "גלריה",
+                      onPress: () => {
+                        this.openGallery();
+                      }
+                    }
+                  ])
+                }
               >
                 {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונת ברירת מחדל.  */}
                 {this.state.img != "" ? (
@@ -272,7 +289,12 @@ export default class Profile extends React.Component {
                   הפירסומים שלי
                   {"  "}
                 </Text>
-                <Icon name="edit" type="font-awesome" color="black" size={18} />
+                <Icon
+                  name="cart-plus"
+                  type="font-awesome"
+                  color="black"
+                  size={18}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.updateButton}

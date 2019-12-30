@@ -65,49 +65,52 @@ class ContentComponent extends Component {
           style={styles.drawer}
           disabled={false}
         >
-          <ScrollView>
-            <View style={styles.header}>
-              <View style={{ alignItems: "center" }}>
-                {this.state.img != "" && global.user != null ? (
-                  <Image
-                    style={{
-                      height: 150,
-                      width: 150,
-                      borderRadius: 100
-                    }}
-                    source={{
-                      uri:
-                        global.user.Image != null &&
-                        this.state.img == global.user.Image
-                          ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
-                            this.state.img +
-                            "?time" +
-                            new Date()
-                          : global.user.Image
-                    }}
-                  />
-                ) : (
-                  <Image
-                    source={require("../assets/profileIcon.png")}
-                    style={[styles.headerImage, { width: 150, height: 150 }]}
-                  />
-                )}
-              </View>
-              <View
-                style={{
-                  marginTop: 10,
-                  alignItems: "center",
-                  textAlign: "center"
-                }}
+          <View style={styles.header}>
+            <TouchableOpacity
+              style={{ alignItems: "center" }}
+              onPress={() => this.props.navigation.navigate("Profile")}
+            >
+              {this.state.img != "" && global.user != null ? (
+                <Image
+                  style={{
+                    height: 150,
+                    width: 150,
+                    borderRadius: 100
+                  }}
+                  source={{
+                    uri:
+                      global.user.Image != null &&
+                      this.state.img == global.user.Image
+                        ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
+                          this.state.img +
+                          "?time" +
+                          new Date()
+                        : global.user.Image
+                  }}
+                />
+              ) : (
+                <Image
+                  source={require("../assets/profileIcon.png")}
+                  style={[styles.headerImage, { width: 150, height: 150 }]}
+                />
+              )}
+            </TouchableOpacity>
+            <View
+              style={{
+                marginTop: 10,
+                alignItems: "center",
+                textAlign: "center"
+              }}
+            >
+              <Text
+                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
               >
-                <Text
-                  style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
-                >
-                  {global.user ? global.user.FirstName : ""}{" "}
-                  {global.user ? global.user.LastName : ""}
-                </Text>
-              </View>
+                {global.user ? global.user.FirstName : ""}{" "}
+                {global.user ? global.user.LastName : ""}
+              </Text>
             </View>
+          </View>
+          <ScrollView>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
               onPress={() => this.props.navigation.navigate("Home")}
@@ -184,7 +187,7 @@ class ContentComponent extends Component {
                   color="gray"
                   size={20}
                 />
-                <Text style={styles.text}> מועדפים שלי</Text>
+                <Text style={styles.text}>המועדפים שלי</Text>
               </View>
             </TouchableHighlight>
 
@@ -287,7 +290,7 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   text: {
-    width: "40%",
+    width: "45%",
     fontSize: 14,
     fontWeight: "bold",
     color: "#111"

@@ -23,14 +23,15 @@ import S3 from "../screens/S3.js";
 
 const MainNavigator = createStackNavigator(
   {
+    Contribution: { screen: Contribution },
+
+    ProfilePost: { screen: ProfilePost },
+
     Reminders: { screen: Reminders },
 
     Home: { screen: Home },
 
     Profile: { screen: Profile },
-
-    Contribution: { screen: Contribution },
-    Contribution: { screen: Contribution },
 
     Publish: { screen: Publish },
     About: { screen: About },
@@ -42,7 +43,6 @@ const MainNavigator = createStackNavigator(
 
     // FirstPage: { screen: FirstPage },
     S3: { screen: S3 },
-
 
     PostPage: { screen: PostPage },
 

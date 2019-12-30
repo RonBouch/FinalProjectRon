@@ -173,6 +173,8 @@ export default class Favorite extends React.Component {
 
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
+        console.log("test:", Items[0]);
+
         return (
           <TouchableOpacity
             key={index}
@@ -345,7 +347,7 @@ export default class Favorite extends React.Component {
                     textShadowRadius: 5
                   }}
                 >
-                  מועדפים
+                  המועדפים שלי
                 </Text>
               </View>
               <TouchableOpacity
@@ -373,7 +375,6 @@ export default class Favorite extends React.Component {
                 <Text>אין פריטים להצגה</Text>
               </View>
             )}
-
           </View>
         </View>
       </ImageBackground>

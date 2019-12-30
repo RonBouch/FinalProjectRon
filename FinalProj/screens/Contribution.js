@@ -46,11 +46,9 @@ export default class Contribution extends Component {
     drawerLabel: "Contribution"
   };
 
-
- // define a separate function to get triggered on focus
+  // define a separate function to get triggered on focus
   onFocusFunction = async () => {
     await this.GetItems();
-   
   };
 
   // add a focus listener onDidMount
@@ -120,7 +118,10 @@ export default class Contribution extends Component {
               reminders: reminders
             });
 
-            if (this.state.items[0]!=null&&this.state.items[0].Reminder == "") {
+            if (
+              this.state.items[0] != null &&
+              this.state.items[0].Reminder == ""
+            ) {
               data = reminders.filter(re => {
                 return re.ItemName.includes(this.state.items[0].ItemName);
               });
@@ -140,7 +141,7 @@ export default class Contribution extends Component {
       name: "תן יד",
       to: R.Token,
       title: "היי מישהו העלה - " + R.ItemName + "\n",
-      body: "כנס עכשיו לראות :)!",
+      body: "כנס עכשיו לראות !",
       badge: 3,
       backgroundColor: "black"
 
@@ -684,11 +685,21 @@ export default class Contribution extends Component {
               </View>
             </View>
 
-            <ScrollView style={styles.scrollview}>{Items.length!=0?Items:
-            <View style={{alignItems:'center',marginTop:40}}>
-              <Text style={{alignItems:'center',fontSize:16}}>אין פריטים להצגה</Text>
-            </View>
-            }</ScrollView>
+            {Items.length != 0 ? (
+              <ScrollView style={styles.scrollview}>
+                <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+              </ScrollView>
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Text>אין פריטים להצגה</Text>
+              </View>
+            )}
           </View>
           {this.state.remindView ? (
             <View
@@ -698,13 +709,12 @@ export default class Contribution extends Component {
                 height: "100%",
                 justifyContent: "center",
                 alignItems: "center",
-                flexDirection: "row-reverse",
                 backgroundColor: "rgba(255,255,255,.8)"
               }}
             >
               <View
                 style={{
-                  backgroundColor: "#add8e6",
+                  backgroundColor: "#6495ed",
                   width: "90%",
                   height: "30%",
                   alignItems: "center",
@@ -716,16 +726,12 @@ export default class Contribution extends Component {
                   onPress={() => this.setState({ remindView: false })}
                   style={{
                     position: "absolute",
-                    // totp: 5,
-                    right: 0,
-                    alignItems: "center",
-                    flexDirection: "row-reverse",
-                    borderRadius: 200
+                    right: 0
                   }}
                 >
                   <Image
                     source={require("../assets/x.png")}
-                    style={{ width: 40, height: 40, borderRadius: 200 }}
+                    style={{ width: 40, height: 40 }}
                   />
                 </TouchableOpacity>
                 <Text
@@ -739,22 +745,29 @@ export default class Contribution extends Component {
                     textShadowRadius: 5
                   }}
                 >
-                  להתריע לך ?
+                  לעדכן אותך ?
                 </Text>
-                <Text style={{ padding: 5 }}>
-                  אנא רשום את שם הפריט שתרצה לקבל עבורו התרעה במידה ומישהו
-                  יפרסם..
+                <Text style={{ textAlign: "center", padding: 5 }}>
+                  אנא הזן את שם הפריט ואנו נעדכן ברגע שיעלה פרסום רלוונטי
                 </Text>
 
-                <View style={styles.publushInput}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 20,
+                    width: "70%",
+                    borderBottomWidth: 0.5,
+                    borderColor: "white"
+                  }}
+                >
                   <Icona
                     name="edit"
                     type="font-awesome"
-                    color="rgb(150,150,150)"
+                    color="white"
                     size={24}
                   />
                   <TextInput
-                    placeholderTextColor="rgb(150,150,150)"
+                    placeholderTextColor="rgba(255,255,255,.5)"
                     maxLength={20}
                     style={{
                       marginLeft: "8%",
@@ -769,15 +782,20 @@ export default class Contribution extends Component {
                 <View>
                   <TouchableOpacity
                     onPress={() => this.AddReminder()}
-                    style={styles.publishButton}
+                    style={{
+                      backgroundColor: "rgb(117, 9, 1)",
+                      flexDirection: "row",
+                      elevation: 10,
+                      height: 45,
+                      marginTop: 30,
+                      width: 180,
+                      borderRadius: 20,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderColor: "white"
+                    }}
                   >
-                    <Text style={{ color: "white" }}>תתריע לי {"  "}</Text>
-                    <Icona
-                      name="upload"
-                      type="font-awesome"
-                      color="white"
-                      size={18}
-                    />
+                    <Text style={{ color: "white" }}>תעדכן אותי !</Text>
                   </TouchableOpacity>
                 </View>
               </View>

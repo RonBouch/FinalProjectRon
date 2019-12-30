@@ -32,22 +32,21 @@ export default class ProfilePost extends React.Component {
       reloadPage: false
     };
   }
- // define a separate function to get triggered on focus
- onFocusFunction = async () => {
-  this.GetItemsByID();
- 
-};
+  // define a separate function to get triggered on focus
+  onFocusFunction = async () => {
+    this.GetItemsByID();
+  };
 
-// add a focus listener onDidMount
-async componentDidMount() {
-  this.focusListener = this.props.navigation.addListener("didFocus", () => {
-    this.onFocusFunction();
-  });
-}
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
 
-componentWillUnmount() {
-  this.focusListener.remove();
-}
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
 
   GetItemsByID = async () => {
     const data = {
@@ -163,42 +162,40 @@ componentWillUnmount() {
       Items = this.state.items.map((item, index) => {
         return (
           <View
-              key={index}
+            key={index}
+            style={{
+              backgroundColor: "white",
+              width: "95%",
+              height: 210,
+              margin: 10,
+              borderWidth: 1,
+              borderColor: "#e6e6fa",
+              elevation: 10
+            }}
+            onPress={() =>
+              navigate("PostPage", {
+                item: item
+              })
+            }
+          >
+            <View
               style={{
-                backgroundColor: "white",
-                width: "95%",
-                height: 210,
-                margin: 10,
-                borderWidth: 1,
-                borderColor: "#e6e6fa",
-                elevation: 10
+                position: "absolute",
+                zIndex: 1,
+                margin: 5,
+                left: 2
               }}
-              onPress={() =>
-                navigate("PostPage", {
-                  item: item
-                })
-              }
             >
-              <View
-                style={{
-                  position: "absolute",
-                  zIndex: 1,
-                  margin: 5,
-                  left: 2
-                }}
-              >
-                <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
-                 
-                    <Icona
-                      name="trash"
-                      type="font-awesome"
-                      size={18}
-                      color="red"
-                      raised
-                    />
-                 
-                </TouchableOpacity>
-                {/* <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
+                <Icona
+                  name="trash"
+                  type="font-awesome"
+                  size={18}
+                  color="red"
+                  raised
+                />
+              </TouchableOpacity>
+              {/* <TouchableOpacity>
                   <Icon
                     name="md-call"
                     size={30}
@@ -207,90 +204,90 @@ componentWillUnmount() {
                     
                   />
                 </TouchableOpacity> */}
-              </View>
-              <View style={{ height: "70%" }}>
-                <Image
-                  source={{
-                    uri:
-                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                      0 +
-                      item.ItemImg
-                  }}
+            </View>
+            <View style={{ height: "70%" }}>
+              <Image
+                source={{
+                  uri:
+                    "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+                    0 +
+                    item.ItemImg
+                }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderTopLeftRadius: 100,
+                  borderBottomRightRadius: 100
+                }}
+              />
+            </View>
+            <View
+              style={{
+                justifyContent: "space-around",
+                flexDirection: "row-reverse",
+                alignContant: "center",
+                height: "30%",
+                marginTop: 15
+              }}
+              onPress={() => {
+                this.infoWindow(index);
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
+                <Text
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    borderTopLeftRadius: 100,
-                    borderBottomRightRadius: 100
+                    color: "#6495ed",
+                    // fontWeight: "bold",
+                    fontSize: 16
+                    // fontFamily: "serif"
                   }}
-                />
+                >
+                  {item.ItemDate}
+                </Text>
               </View>
               <View
                 style={{
-                  justifyContent: "space-around",
-                  flexDirection: "row-reverse",
-                  alignContant: "center",
-                  height: "30%",
-                  marginTop: 15
-                }}
-                onPress={() => {
-                  this.infoWindow(index);
+                  flexDirection: "column",
+                  alignItems: "center"
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      // fontWeight: "bold",
-                      fontSize: 16
-                      // fontFamily: "serif"
-                    }}
-                  >
-                    {item.ItemDate}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
+                <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
 
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      // fontWeight: "bold",
-                      // fontFamily: "serif",
-                      fontSize: 16
-                    }}
-                  >
-                    {item.City}
-                  </Text>
-                </View>
-                <View
+                <Text
                   style={{
-                    flexDirection: "column",
-                    alignItems: "center"
+                    color: "#6495ed",
+                    // fontWeight: "bold",
+                    // fontFamily: "serif",
+                    fontSize: 16
                   }}
                 >
-                  <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      fontSize: 16
-                    }}
-                  >
-                    {item.ItemName}
-                  </Text>
-                </View>
+                  {item.City}
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
+                <Text
+                  style={{
+                    color: "#6495ed",
+                    fontSize: 16
+                  }}
+                >
+                  {item.ItemName}
+                </Text>
               </View>
             </View>
+          </View>
         );
       });
     }
@@ -303,7 +300,7 @@ componentWillUnmount() {
         <View style={styles.container}>
           <View style={styles.main}>
             <View style={styles.topBar}>
-            <TouchableOpacity
+              <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.dispatch(DrawerActions.openDrawer())
                 }
@@ -348,9 +345,21 @@ componentWillUnmount() {
               </TouchableOpacity>
             </View>
 
-            <ScrollView style={styles.scrollview}>
-              <View style={{ flex: 1, alignItems: "center" }}>{Items.length!=0?Items:<Text style={{alignItems:'center',fontSize:16}}>אין פריטים להצגה</Text>}</View>
-            </ScrollView>
+            {Items.length != 0 ? (
+              <ScrollView style={styles.scrollview}>
+                <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+              </ScrollView>
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Text>אין פרסומים להצגה</Text>
+              </View>
+            )}
           </View>
         </View>
       </ImageBackground>
