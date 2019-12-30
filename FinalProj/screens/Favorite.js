@@ -15,17 +15,13 @@ import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
 import { DrawerActions } from "react-navigation-drawer";
-import { NavigationEvents } from "react-navigation";
 
-import RadioForm from "react-native-simple-radio-button";
-const { height } = Dimensions.get("window");
 export default class Favorite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: null,
       item: null,
-      //   checkedB: true,
       screenHeight: 0,
       userPhone: "",
       pageToShow: null,

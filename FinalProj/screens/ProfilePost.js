@@ -32,25 +32,22 @@ export default class ProfilePost extends React.Component {
       reloadPage: false
     };
   }
+ // define a separate function to get triggered on focus
+ onFocusFunction = async () => {
+  this.GetItemsByID();
+ 
+};
 
-  // define a separate function to get triggered on focus
-  onFocusFunction = () => {
-    console.log("Call fetch Get Items .");
-    this.GetItemsByID();
-    // do some stuff on every screen focus
-  };
+// add a focus listener onDidMount
+async componentDidMount() {
+  this.focusListener = this.props.navigation.addListener("didFocus", () => {
+    this.onFocusFunction();
+  });
+}
 
-  // add a focus listener onDidMount
-  async componentDidMount() {
-    this.focusListener = this.props.navigation.addListener("didFocus", () => {
-      this.onFocusFunction();
-    });
-  }
-
-  // and don't forget to remove the listener
-  componentWillUnmount() {
-    this.focusListener.remove();
-  }
+componentWillUnmount() {
+  this.focusListener.remove();
+}
 
   GetItemsByID = async () => {
     const data = {
@@ -166,108 +163,134 @@ export default class ProfilePost extends React.Component {
       Items = this.state.items.map((item, index) => {
         return (
           <View
-            key={index}
-            style={{
-              backgroundColor: "white",
-              width: "95%",
-              height: 260,
-              margin: 10,
-              borderWidth: 1,
-              borderColor: "#e6e6fa",
-              elevation: 10
-            }}
-          >
-            {/* <View style={styles.line}></View> */}
-            <View
+              key={index}
               style={{
-                position: "absolute",
-                zIndex: 1,
-                margin: 5,
-                left: 2
+                backgroundColor: "white",
+                width: "95%",
+                height: 210,
+                margin: 10,
+                borderWidth: 1,
+                borderColor: "#e6e6fa",
+                elevation: 10
               }}
+              onPress={() =>
+                navigate("PostPage", {
+                  item: item
+                })
+              }
             >
-              <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
-                <Icona
-                  name="trash"
-                  type="font-awesome"
-                  size={18}
-                  color="red"
-                  raised
+              <View
+                style={{
+                  position: "absolute",
+                  zIndex: 1,
+                  margin: 5,
+                  left: 2
+                }}
+              >
+                <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
+                 
+                    <Icona
+                      name="trash"
+                      type="font-awesome"
+                      size={18}
+                      color="red"
+                      raised
+                    />
+                 
+                </TouchableOpacity>
+                {/* <TouchableOpacity>
+                  <Icon
+                    name="md-call"
+                    size={30}
+                    color="green"
+                    onPress={() => this._pressCall(item.UserPhone)}
+                    
+                  />
+                </TouchableOpacity> */}
+              </View>
+              <View style={{ height: "70%" }}>
+                <Image
+                  source={{
+                    uri:
+                      "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+                      0 +
+                      item.ItemImg
+                  }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderTopLeftRadius: 100,
+                    borderBottomRightRadius: 100
+                  }}
                 />
-              </TouchableOpacity>
-              {/* <TouchableOpacity>
-              <Icon
-                name="md-call"
-                size={30}
-                color="green"
-                onPress={() => this._pressCall(item.UserPhone)}
-              />
-            </TouchableOpacity> */}
-            </View>
-            <Image
-              source={{
-                uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                  0+item.ItemImg
-              }}
-              style={{
-                width: "100%",
-                height: "60%"
-              }}
-            />
-            <View
-              style={{
-                justifyContent: "space-around",
-                flexDirection: "row-reverse",
-                alignItems: "center",
-                height: "10%"
-              }}
-              onPress={() => {
-                this.infoWindow(index);
-              }}
-            >
-              <Text
+              </View>
+              <View
                 style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
+                  justifyContent: "space-around",
+                  flexDirection: "row-reverse",
+                  alignContant: "center",
+                  height: "30%",
+                  marginTop: 15
+                }}
+                onPress={() => {
+                  this.infoWindow(index);
                 }}
               >
-                {item.ItemDate}
-              </Text>
-              <Text
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontFamily: "serif",
-                  fontSize: 18
-                }}
-              >
-                {item.City}
-              </Text>
-              <Text
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  fontFamily: "serif"
-                }}
-              >
-                {item.ItemName}
-              </Text>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "center"
+                  }}
+                >
+                  <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
+                  <Text
+                    style={{
+                      color: "#6495ed",
+                      // fontWeight: "bold",
+                      fontSize: 16
+                      // fontFamily: "serif"
+                    }}
+                  >
+                    {item.ItemDate}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "center"
+                  }}
+                >
+                  <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
+
+                  <Text
+                    style={{
+                      color: "#6495ed",
+                      // fontWeight: "bold",
+                      // fontFamily: "serif",
+                      fontSize: 16
+                    }}
+                  >
+                    {item.City}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    alignItems: "center"
+                  }}
+                >
+                  <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
+                  <Text
+                    style={{
+                      color: "#6495ed",
+                      fontSize: 16
+                    }}
+                  >
+                    {item.ItemName}
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={{ margin: 10, height: "20%" }}>
-              <Text>{item.ItemAbout}</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                height: "10%"
-              }}
-            ></View>
-          </View>
         );
       });
     }
@@ -281,20 +304,20 @@ export default class ProfilePost extends React.Component {
           <View style={styles.main}>
             <View style={styles.topBar}>
             <TouchableOpacity
-                    onPress={() =>
-                      this.props.navigation.navigate("Profile")
-                    }
-                    style={styles.touchableHighlight}
-                    underlayColor={"rgba(0,0,0,0.8)"}
-                  >
-                    <Icona
-                      iconStyle={{ marginEnd: "10%" }}
-                      name="arrow-circle-right"
-                      type="font-awesome"
-                      color="white"
-                      size={32}
-                    />
-                  </TouchableOpacity>
+                onPress={() =>
+                  this.props.navigation.dispatch(DrawerActions.openDrawer())
+                }
+                style={styles.touchableHighlight}
+                underlayColor={"rgba(0,0,0,0.8)"}
+              >
+                <Icona
+                  iconStyle={{ marginEnd: "10%" }}
+                  name="bars"
+                  type="font-awesome"
+                  color="white"
+                  size={28}
+                />
+              </TouchableOpacity>
               <View
                 style={{
                   marginTop: 35,
@@ -312,7 +335,7 @@ export default class ProfilePost extends React.Component {
                     textShadowRadius: 5
                   }}
                 >
-                  מועדפים
+                  הפרסומים שלי
                 </Text>
               </View>
               <TouchableOpacity
@@ -326,7 +349,7 @@ export default class ProfilePost extends React.Component {
             </View>
 
             <ScrollView style={styles.scrollview}>
-              <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+              <View style={{ flex: 1, alignItems: "center" }}>{Items.length!=0?Items:<Text style={{alignItems:'center',fontSize:16}}>אין פריטים להצגה</Text>}</View>
             </ScrollView>
           </View>
         </View>

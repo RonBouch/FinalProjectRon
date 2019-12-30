@@ -43,7 +43,6 @@ const MainNavigator = createStackNavigator(
     // FirstPage: { screen: FirstPage },
     S3: { screen: S3 },
 
-    ProfilePost: { screen: ProfilePost },
 
     PostPage: { screen: PostPage },
 
