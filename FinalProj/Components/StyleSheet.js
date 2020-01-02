@@ -1,6 +1,74 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  //All Screen
+  imageBackground: {
+    width: "100%",
+    height: "100%"
+  },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    alignItems: "center"
+  },
+  main: {
+    flex: 1,
+    alignItems: "center",
+    width: "100%",
+    height: "100%"
+  },
+  topBar: {
+    backgroundColor: "#6495ed",
+    borderColor: "white",
+    borderBottomWidth: 0.5,
+    width: "100%",
+    // height: 100,
+    height: "14%",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+    //Basic Design
+
+    backgroundImage: {
+      flex: 1,
+      resizeMode: "cover"
+    },
+    touchableHighlight: {
+      marginTop: 35,
+      width: 60,
+      height: 60,
+      justifyContent: "center"
+    },
+    open: {
+      color: "white",
+      fontSize: 16,
+      fontWeight: "bold",
+      
+    },
+  
+    logo: {
+      width: 60,
+      height: 60,
+      marginTop: 35
+    },
+    firstPageContainer: {
+      flex: 1,
+      flexDirection: "column",
+      width: "100%",
+      height: "100%",
+      alignItems: "center"
+    },
+    bigText:{
+      color: "rgba(255,255,255,.9)",
+      fontWeight: "bold",
+      fontSize: 25,
+      fontFamily: "serif",
+      textShadowColor: "black",
+      textShadowOffset: { width: 1, height: 4 },
+      textShadowRadius: 5
+    },
   //Publish Screen
   autocompletesContainer: {
     paddingTop: 0,
@@ -28,6 +96,11 @@ export default StyleSheet.create({
     position: "absolute",
     left: 15,
     top: 10
+  },
+
+  titleView:{
+    marginTop: 10, 
+    padding: 5
   },
   //contribution screen
   view: {
@@ -61,59 +134,8 @@ export default StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: "black"
   },
-  //Basic Design
 
-  backgroundImage: {
-    flex: 1,
-    resizeMode: "cover"
-  },
-  touchableHighlight: {
-    marginTop: 35,
-    width: 60,
-    height: 60,
-    justifyContent: "center"
-  },
-  open: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-    
-  },
-  topBar: {
-    backgroundColor: "#6495ed",
-    borderColor: "white",
-    borderBottomWidth: 0.5,
-    width: "100%",
-    // height: 100,
-    height: "14%",
-    flexDirection: "row",
-    justifyContent: "space-between"
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    marginTop: 35
-  },
-  firstPageContainer: {
-    flex: 1,
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-    alignItems: "center"
-  },
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-    alignItems: "center"
-  },
-  main: {
-    flex: 1,
-    alignItems: "center",
-    width: "100%",
-    height: "100%"
-  },
+
 
   //Login Page Style
 
@@ -144,10 +166,7 @@ export default StyleSheet.create({
     height: "85%",
     margin: 75
   },
-  imageBackground: {
-    width: "100%",
-    height: "100%"
-  },
+ 
   input: {
     flexDirection: "row",
     width: 200,

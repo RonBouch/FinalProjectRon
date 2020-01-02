@@ -37,9 +37,9 @@ public class WebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string EditProfile(string firstName, string lastName, string gender, string birthday, int id)
+    public string EditProfile(int userid , string firstName, string lastName, string gender, string birthday )
     {
-        return BALServices.EditProfile( firstName,  lastName,  gender,  birthday,  id);
+        return BALServices.EditProfile( userid,firstName,  lastName,  gender,  birthday);
     }
 
 

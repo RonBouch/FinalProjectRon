@@ -215,19 +215,19 @@ namespace DALproj
             return u;
         }
 
-        public static User EditProfile(string firstName, string lastName, string gender, string birthday,int id)
+        public static User EditProfile(int userid,string firstName, string lastName, string gender, string date)
         {
             User u = null;
             SqlDataReader reader2 = null;
             try
             {
 
-                comm.CommandText = $"UPDATE  Users   SET FirstName = '{firstName}',LastName =  '{lastName}', Gender = '{gender}', Birthday ='{birthday.ToString()}'  where UserID ='{id}'";
+                comm.CommandText = $"UPDATE  Users   SET FirstName = '{firstName}',LastName =  '{lastName}', Gender = '{gender}', Birthday ='{date}'  where UserID ='{userid}'";
                 comm.Connection.Open();
                 int res = comm.ExecuteNonQuery();
                 if (res == 1)
                 {
-                    comm.CommandText = $"SELECT * FROM Users where UserID ='{id}'";
+                    comm.CommandText = $"SELECT * FROM Users where UserID ='{userid}'";
                     reader2 = comm.ExecuteReader();
                     if (reader2.Read())
                     {
@@ -237,9 +237,11 @@ namespace DALproj
                             FirstName = firstName,
                             LastName = lastName,
                             Gender = gender,
-                            Birthday = birthday,
+                            Birthday = date,
                             Email = reader2["Email"].ToString(),
-                            Password = reader2["Password"].ToString()
+                            Password = reader2["Password"].ToString(),
+                            Token=reader2["Token"].ToString(),
+                            Image=reader2["Image"].ToString(),
                         };
                     }
                     return u;
