@@ -349,17 +349,7 @@ class Publish extends React.Component {
                   justifyContent: "center"
                 }}
               >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+                <Text style={styles.bigText}>
                   עמותות
                 </Text>
               </View>
@@ -374,7 +364,7 @@ class Publish extends React.Component {
             </View>
             <KeyboardAvoidingView style={styles.container} behavior="padding">
               <ScrollView keyboardShouldPersistTaps="always">
-                <View style={{ marginTop: 10, padding: 5 }}>
+                <View style={styles.titleView}>
                   <Text>פרטים:</Text>
                 </View>
                 <View style={{ alignItems: "center", width: "100%" }}>
@@ -522,7 +512,7 @@ class Publish extends React.Component {
                     />
                   </View>
                   {/* על הפריט */}
-                  <View style={{ marginTop: 40 }}>
+                  <View style={styles.titleView}>
                     <Text>תיאור:</Text>
                     <View
                       style={{
