@@ -19,10 +19,11 @@ import {
   SafeAreaView,
   KeyboardAvoidingView
 } from "react-native";
-
 class EditPost extends React.Component {
   constructor(props) {
     super(props);
+    const item = this.props.navigation.state.params.item;
+
     this.state = {
       selectedItems: [],
       errors: {},
@@ -30,12 +31,12 @@ class EditPost extends React.Component {
       showErrLabel: false,
       formData: "",
       item: null,
-      userName: "",
-      userPhone: "",
-      itemType: "",
-      itemName: "",
-      city: "",
-      itemAbout: "",
+      userName: item.UserName,
+      userPhone: item.UserPhone,
+      itemType: item.ItemType,
+      itemName: item.ItemName,
+      city: item.City,
+      itemAbout: item.ItemAbout,
       img: []
     };
   }
@@ -68,8 +69,7 @@ class EditPost extends React.Component {
       }
       this.setState({
         img: imgArr,
-        formData: [...this.state.formData, "formData"],
-
+        formData: [...this.state.formData, "formData"]
       });
     }
   };
@@ -207,82 +207,90 @@ class EditPost extends React.Component {
   };
 
   handleSubmit = async () => {
-    if (this.isValid()) {
-      const data = {
-        userId: global.user.UserID,
-        userName: this.state.userName,
-        userPhone: this.state.userPhone,
-        itemType: this.state.itemType,
-        itemName: this.state.itemName,
-        city: this.state.selectedItems.name,
-        region: this.state.selectedItems.shem_napa,
-        itemAbout: this.state.itemAbout,
-        itemImg: this.state.itemName + global.user.UserID + ".jpg"
-      };
-      if (this.state.formData != "" && this.state.formData != null) {
-        for (i = 0; this.state.formData[i] != null; i++) {
-          const imageToUpload = this.state.formData[i];
-          console.log(
-            "send pic to upload",
-            JSON.stringify(imageToUpload.imageName)
-          );
-          await fetch(
-            "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-            {
-              method: "post",
-              headers: new Headers({
-                "Content-Type": "application/Json;"
-              }),
-              body: JSON.stringify(imageToUpload)
-            }
-          )
-            .then(res => {
-              return res.json();
-            })
-            .then(
-              result => {
-                console.log("result = ", result);
-              },
-              error => {
-                console.log("err post=", error);
-              }
-            );
-        }
+    // if (this.isValid()) {
+    const data = {
+      itemid: this.state.item.ItemID,
+      userId: global.user.UserID,
+      userName: this.state.userName,
+      userPhone: this.state.userPhone,
+      itemType: this.state.itemType,
+      itemName: this.state.itemName,
+      city:
+        this.state.selectedItems.name != null
+          ? this.state.selectedItems.name
+          : this.state.item.City,
+      region:
+        this.state.selectedItems.shem_napa != null
+          ? this.state.selectedItems.shem_napa
+          : this.state.item.Region,
+      itemAbout: this.state.itemAbout,
+      itemImg: this.state.itemName + global.user.UserID + ".jpg"
+    };
+    console.log("Data", data);
+    //   if (this.state.formData != "" && this.state.formData != null) {
+    //     for (i = 0; this.state.formData[i] != null; i++) {
+    //       const imageToUpload = this.state.formData[i];
+    //       console.log(
+    //         "send pic to upload",
+    //         JSON.stringify(imageToUpload.imageName)
+    //       );
+    //       await fetch(
+    //         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+    //         {
+    //           method: "post",
+    //           headers: new Headers({
+    //             "Content-Type": "application/Json;"
+    //           }),
+    //           body: JSON.stringify(imageToUpload)
+    //         }
+    //       )
+    //         .then(res => {
+    //           return res.json();
+    //         })
+    //         .then(
+    //           result => {
+    //             console.log("result = ", result);
+    //           },
+    //           error => {
+    //             console.log("err post=", error);
+    //           }
+    //         );
+    //     }
 
-        // console.log(JSON.stringify(data));
-        fetch(
-          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
-          {
-            method: "post",
-            headers: new Headers({
-              "Content-Type": "application/Json;"
-            }),
-            body: JSON.stringify(data)
-          }
-        )
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              console.log("fetch POST= ", result);
-              let u = JSON.parse(result.d);
-              console.log("u = " + u);
-              if (u == null) {
-                this.setState({
-                  message: "לא ניתן לעלות חפץ זה ."
-                });
-                return;
-              } else {
-                this.props.navigation.navigate("Contribution");
-              }
-            },
-            error => {
-              console.log("err post=", error);
-            }
-          );
-      }
-    }
+    //     // console.log(JSON.stringify(data));
+    //     fetch(
+    //       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
+    //       {
+    //         method: "post",
+    //         headers: new Headers({
+    //           "Content-Type": "application/Json;"
+    //         }),
+    //         body: JSON.stringify(data)
+    //       }
+    //     )
+    //       .then(res => {
+    //         return res.json();
+    //       })
+    //       .then(
+    //         result => {
+    //           console.log("fetch POST= ", result);
+    //           let u = JSON.parse(result.d);
+    //           console.log("u = " + u);
+    //           if (u == null) {
+    //             this.setState({
+    //               message: "לא ניתן לעלות חפץ זה ."
+    //             });
+    //             return;
+    //           } else {
+    //             this.props.navigation.navigate("Contribution");
+    //           }
+    //         },
+    //         error => {
+    //           console.log("err post=", error);
+    //         }
+    //       );
+    //   }
+    // }
   };
 
   isValid() {
@@ -404,7 +412,7 @@ class EditPost extends React.Component {
                     textShadowRadius: 5
                   }}
                 >
-                  עמותות
+                  עדכן פרסום
                 </Text>
               </View>
               <TouchableOpacity
@@ -433,7 +441,7 @@ class EditPost extends React.Component {
                     {/* <Text style={{ color: "red" }}> *</Text> */}
 
                     <TextInput
-                      value={this.state.item.UserName}
+                      value={this.state.userName}
                       placeholder="איש קשר"
                       placeholderTextColor="rgb(150,150,150)"
                       onChangeText={e => {
@@ -453,7 +461,7 @@ class EditPost extends React.Component {
                     {/* <Text style={{ color: "red" }}> *</Text> */}
 
                     <TextInput
-                      value={this.state.item.UserPhone}
+                      value={this.state.userPhone}
                       keyboardType="number-pad"
                       placeholderTextColor="rgb(150,150,150)"
                       placeholder="מס' טלפון"
@@ -501,8 +509,8 @@ class EditPost extends React.Component {
                         // defaultIndex={2}
                         resetValue={false}
                         textInputProps={{
-                          placeholder: "עיר/ישוב",
-                          value: this.state.item.City,
+                          placeholder: this.state.city,
+                          //   value: this.state.city,
                           underlineColorAndroid: "transparent",
                           style: {
                             //  margin: 10,
@@ -527,7 +535,7 @@ class EditPost extends React.Component {
                       size={24}
                     />
                     <TextInput
-                      value={this.state.item.ItemName}
+                      value={this.state.itemName}
                       placeholderTextColor="rgb(150,150,150)"
                       style={{
                         marginLeft: "8%",
