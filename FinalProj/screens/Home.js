@@ -64,21 +64,52 @@ export default class Home extends Component {
               />
             </TouchableOpacity>
           </View>
-          <View>
-            <View>
+            <View style={{display:'flex' ,    flexDirection: "column",width:'100%',height:'86%',justifyContent:'space-around'}}>
               <View
                 style={{
                   // marginTop: 20,
                   alignItems: "center",
                   width: width,
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
-                {/* <Image style={{width:100,height:70}} source={require('../assets/new1.gif')}/> */}
-                <Slider props={this.props} navigation={this.props.navigation} />
+                 <Slider props={this.props} navigation={this.props.navigation} />
               </View>
+            {/* <TouchableOpacity >
+             <Image   style={{width:'100%',height:200}} source={require("../assets/1.jpg")}/>
+            </TouchableOpacity>
+   */}
+          
+          <View
+              style={{
+                width: "100%",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontStyle: "italic",
+                  textAlign: "center"
+                }}
+              >
+                "להקל על כאב לבו של אחר, זה לשכוח את כאבך שלך."
+              </Text>
+              <Text style={{ marginTop: 10 }}>( אברהם לינקולן )</Text>
+            </View> 
+            <TouchableOpacity style={{alignItems: "center",}}  onPress={() => this.props.navigation.navigate("Contribution")}>
+             <Image   style={{width:'95%',height:150,borderRadius:20}} source={require("../assets/2.jpg")}/>
+            </TouchableOpacity>
+
+         
+              <TouchableOpacity style={{alignItems: "center",marginBottom:10}} onPress={() =>
+                  this.props.navigation.navigate("AssociationsList")
+                } >
+            <Image style={{width:'95%',height:150,borderRadius:20}} source={require("../assets/3.jpg")}/>
+            </TouchableOpacity>
+           
             </View>
-            <View
+
+            {/* <View
               style={{
                 marginTop: 30,
                 width: "100%",
@@ -176,8 +207,7 @@ export default class Home extends Component {
                   size={34}
                 />
               </TouchableOpacity>
-            </View>
-          </View>
+            </View> */}
         </View>
       </ImageBackground>
     );

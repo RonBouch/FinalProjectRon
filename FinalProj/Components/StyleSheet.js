@@ -76,7 +76,8 @@ export default StyleSheet.create({
   open: {
     color: "white",
     fontSize: 16,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    
   },
   topBar: {
     backgroundColor: "#6495ed",
