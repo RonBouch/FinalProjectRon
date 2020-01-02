@@ -30,14 +30,14 @@ export default class ProfilePost extends React.Component {
       userPhone: "",
       pageToShow: null,
       reloadPage: false,
-      LoadingFirstTime:false,
+      LoadingFirstTime: false
     };
   }
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
     this.setState({
-      LoadingFirstTime:false
-    })
+      LoadingFirstTime: false
+    });
     this.GetItemsByID();
   };
 
@@ -81,8 +81,7 @@ export default class ProfilePost extends React.Component {
             console.log("ITEMS ", items);
             this.setState({
               items: items,
-              LoadingFirstTime:true
-
+              LoadingFirstTime: true
             });
           }
         },
@@ -161,13 +160,14 @@ export default class ProfilePost extends React.Component {
     }
 
     // const scrollEnabled = this.state.screenHeight > height ;
+    const { navigate } = this.props.navigation;
 
     let Items = [];
-    
+
     if (this.state.items != null) {
       Items = this.state.items.map((item, index) => {
         return (
-          <View
+          <TouchableOpacity
             key={index}
             style={{
               backgroundColor: "white",
@@ -197,6 +197,22 @@ export default class ProfilePost extends React.Component {
                   name="trash"
                   type="font-awesome"
                   size={18}
+                  color="red"
+                  raised
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() =>
+                  navigate("EditPost", {
+                    item: item
+                  })
+                }
+              >
+                <Icona
+                  name="edit"
+                  type="font-awesome"
+                  size={20}
                   color="red"
                   raised
                 />
@@ -293,7 +309,7 @@ export default class ProfilePost extends React.Component {
                 </Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         );
       });
     }
@@ -363,12 +379,12 @@ export default class ProfilePost extends React.Component {
                   justifyContent: "center"
                 }}
               >
-              {this.state.LoadingFirstTime ?
-                <Text>אין פריטים להצגה</Text>
-                :
-                <Image source={require("../assets/loading.gif")}/>
-                }
-                              </View>
+                {this.state.LoadingFirstTime ? (
+                  <Text>אין פריטים להצגה</Text>
+                ) : (
+                  <Image source={require("../assets/loading.gif")} />
+                )}
+              </View>
             )}
           </View>
         </View>

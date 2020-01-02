@@ -20,6 +20,7 @@ import About from "../screens/About";
 import FirstPage from "../screens/FirstPage";
 import Contribution from "../screens/Contribution";
 import S3 from "../screens/S3.js";
+import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
@@ -29,7 +30,7 @@ const MainNavigator = createStackNavigator(
 
     Favorite: { screen: Favorite },
 
-
+    EditPost: { screen: EditPost },
 
     ProfilePost: { screen: ProfilePost },
 
