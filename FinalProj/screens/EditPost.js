@@ -43,6 +43,50 @@ class EditPost extends React.Component {
   async componentDidMount() {
     this.GetItemTypes();
   }
+  MakeImageArray = async () => {
+    console.log("Item img - ", this.state.item.ItemImg);
+    if (
+      this.state.item.ItemImg != null &&
+      this.state.item.ItemImg != undefined
+    ) {
+      let imgArr = [];
+      for (i = 0; i < 3; i++) {
+        console.log(
+          await this.checkImageURL(
+            "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+              i +
+              this.state.item.ItemImg
+          )
+        );
+        if (this.state.checkURL) {
+          imgArr.push(
+            "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
+              i +
+              this.state.item.ItemImg
+          );
+        }
+      }
+      this.setState({
+        img: imgArr,
+        formData: [...this.state.formData, "formData"],
+
+      });
+    }
+  };
+  async checkImageURL(url) {
+    await fetch(url)
+      .then(res => {
+        if (res.status == 404) {
+          this.setState({ checkURL: false });
+
+          return false;
+        } else {
+          this.setState({ checkURL: true });
+          return true;
+        }
+      })
+      .catch(err => console.log(err));
+  }
 
   ItemType = (e, i) => {
     this.setState({
@@ -207,7 +251,7 @@ class EditPost extends React.Component {
 
         // console.log(JSON.stringify(data));
         fetch(
-          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
+          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
           {
             method: "post",
             headers: new Headers({
@@ -300,6 +344,7 @@ class EditPost extends React.Component {
             this.setState({
               itemTypes: itemTypes
             });
+            this.MakeImageArray();
           }
         },
         error => {
@@ -310,24 +355,15 @@ class EditPost extends React.Component {
 
   render() {
     this.state.item = this.props.navigation.state.params.item;
-
     let ItemTypes = [];
     if (this.state.itemTypes != null) {
       this.state.itemTypes.map((type, index) => {
         if (index != 0) {
           ItemTypes.push({ value: type.ItemType });
-          console.log("index = ", index + "ITem ", type.ItemType);
         }
       });
     }
-    console.log("item= ", this.state.item);
-
     const data = cities;
-
-    this.setState({
-      img: [...this.state.item.ItemImg]
-    });
-    
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -446,7 +482,6 @@ class EditPost extends React.Component {
                         // }}
                         placeholderTextColor="rgb(150,150,150)"
                         onItemSelect={item => {
-                          console.log(item, "item");
                           // const items = this.state.selectedItems;
                           // items.push(item)
                           this.setState({ selectedItems: item });
