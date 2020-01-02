@@ -64,7 +64,7 @@ export default class Home extends Component {
               />
             </TouchableOpacity>
           </View>
-            <View style={{display:'flex' ,    flexDirection: "column",width:'100%',height:'86%',justifyContent:'space-around'}}>
+            <View style={{display:'flex' ,    flexDirection: "column",width:'100%',height:'86%',justifyContent:'space-between'}}>
               <View
                 style={{
                   // marginTop: 20,

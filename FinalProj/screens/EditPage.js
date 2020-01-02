@@ -195,15 +195,15 @@ export default class EditPage extends React.Component {
           <KeyboardAvoidingView style={styles.container} behavior="padding">
             <TextInput
               style={styles.input}
-              placeholder="שם פרטי"
-              defaultValue={global.user.FirstName}
+              value={global.user.FirstName}
+              // defaultValue={global.user.FirstName}
               onChangeText={this.changeFirstName}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="שם משפחה"
-              defaultValue={global.user.LastName}
+              value={global.user.LastName}
+              // defaultValue={global.user.LastName}
               onChangeText={this.changeLastName}
             />
 
@@ -211,7 +211,8 @@ export default class EditPage extends React.Component {
               style={styles.input}
               keyboardType="email-address"
               placeholder="אמייל"
-              defaultValue={global.user.Email}
+              value={global.user.Email}
+              // defaultValue={global.user.Email}
               onChangeText={this.changeEmail}
             />
 

@@ -10,6 +10,7 @@ import {
   TouchableHighlight,
   Keyboard,
   TouchableWithoutFeedback,
+  AsyncStorage,
   KeyboardAvoidingView,
   Image
 } from "react-native";
@@ -25,43 +26,39 @@ import { Ionicons } from "@expo/vector-icons";
 var radio_props = [
   {
     label: "  זכר  ",
-    value: "זכר"
+    value:"male"
   },
   {
     label: "  נקבה  ",
-    value: "נקבה"
+    value: "female"
   }
 ];
 
 export default class EditProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.firstName = "";
-    this.lastName = "";
-    this.birthday = "";
-    this.gender = "";
-    this.state = {
-      date: ""
-    };
-  }
-  changeFirstName = e => {
-    this.firstName = e;
-  };
+    this.state={
+      firstName:"",
+      lastName:"",
+      birthday:global.user.Birthday,
+      gender:global.user.Gender,
+      date:"",
+    }
 
-  changeLastName = e => {
-    this.lastName = e;
-  };
-  changeGender = e => {
-    this.gender = e;
+  }
+  
+  storeData = async (key, value) => {
+    console.log("value ->", JSON.stringify(value));
+    await AsyncStorage.setItem(key, JSON.stringify(value));
   };
 
   EditProfile = () => {
     const data = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      gender: this.gender,
-      birthday: global.user.Birthday,
-      id: global.user.UserID
+      userid: global.user.UserID,
+      firstName: this.state.firstName!=""?this.state.firstName:global.user.FirstName,
+      lastName: this.state.lastName!=""?this.state.lastName:global.user.LastName,
+      gender: this.state.gender,
+      birthday: this.state.date!=""?this.state.date:global.user.Birthday,
     };
     console.log(data);
     fetch(
@@ -90,8 +87,8 @@ export default class EditProfile extends React.Component {
             return;
           } else {
             global.user = u;
+            this.storeData("user", u);
 
-            alert("היי ," + this.firstName + " " + this.lastName);
             this.props.navigation.navigate("Home");
           }
           console.log(result.d);
@@ -163,15 +160,13 @@ export default class EditProfile extends React.Component {
               <TextInput
                 style={styles.inputUpdate}
                 placeholder={global.user.FirstName}
-                placeholderTextColor="rgba(155,155,155,.7)"
-                onChangeText={this.changeFirstName}
+                onChangeText={(e)=>this.setState({firstName:e})}
               />
 
               <TextInput
                 style={styles.inputUpdate}
                 placeholder={global.user.LastName}
-                placeholderTextColor="rgba(155,155,155,.7)"
-                onChangeText={this.changeLastName}
+                onChangeText={(e)=>this.setState({lastName:e})}
               />
 
               <DatePicker
@@ -182,6 +177,7 @@ export default class EditProfile extends React.Component {
                 date={this.state.date}
                 mode="date"
                 placeholder={global.user.Birthday}
+
                 format="DD/MM/YYYY"
                 minDate={
                   new Date().getDate() +
@@ -214,14 +210,14 @@ export default class EditProfile extends React.Component {
 
               <RadioForm
                 radio_props={radio_props}
-                initial={null}
+                initial={global.user.Gender=="male"?0:1}
                 selectedButtonColor={"black"}
                 selectedLabelColor={"black"}
                 buttonColor={"black"}
                 labelColor={"black"}
                 animation={true}
                 style={styles.radioGender}
-                onPress={this.changeGender}
+                onPress={(e)=>this.setState({gender:e})}
               />
 
               <TouchableOpacity

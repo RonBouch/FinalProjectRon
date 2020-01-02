@@ -44,9 +44,9 @@ namespace BALproj
         }
 
 
-        public static string EditProfile(string firstName, string lastName, string gender, string birthday, int id)
+        public static string EditProfile(int userid,string firstName, string lastName, string gender, string birthday)
         {
-            User u = DBServices.EditProfile(firstName, lastName, gender, birthday, id);
+            User u = DBServices.EditProfile(userid,firstName, lastName, gender, birthday);
             if (u != null)
             {
 

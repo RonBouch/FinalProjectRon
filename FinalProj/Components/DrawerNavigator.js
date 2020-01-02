@@ -25,6 +25,9 @@ const MainNavigator = createStackNavigator(
   {
     Home: { screen: Home },
 
+    EditProfile: { screen: EditProfile },
+
+
     Contribution: { screen: Contribution },
 
     Favorite: { screen: Favorite },
@@ -42,7 +45,6 @@ const MainNavigator = createStackNavigator(
     Publish: { screen: Publish },
     S3: { screen: S3 },
 
-    EditProfile: { screen: EditProfile },
 
     // FirstPage: { screen: FirstPage },
     S3: { screen: S3 },
