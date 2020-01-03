@@ -24,11 +24,12 @@ import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
+    Home: { screen: Home },
+
     ProfilePost: { screen: ProfilePost },
 
     Publish: { screen: Publish },
 
-    Home: { screen: Home },
 
     EditProfile: { screen: EditProfile },
 

@@ -36,21 +36,10 @@ export default class Home extends Component {
               <Icon name="bars" type="font-awesome" color="white" size={28} />
             </TouchableOpacity>
             <View
-              style={{
-                marginTop: 35,
-                justifyContent: "center"
-              }}
+              style={styles.textTopBar}
             >
               <Text
-                style={{
-                  color: "rgba(255,255,255,.9)",
-                  fontWeight: "bold",
-                  fontSize: 25,
-                  fontFamily: "serif",
-                  textShadowColor: "black",
-                  textShadowOffset: { width: 1, height: 4 },
-                  textShadowRadius: 5
-                }}
+                style={styles.bigText}
               >
                 דף הבית
               </Text>

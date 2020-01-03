@@ -29,6 +29,9 @@ const Slider = props => (
           "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
           0 +
           props.item.ItemImg
+          +
+          "?time" +
+          new Date()
       }}
     />
     <View

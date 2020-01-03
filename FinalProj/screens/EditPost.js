@@ -56,7 +56,9 @@ class EditPost extends React.Component {
           await this.checkImageURL(
             "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
               i +
-              this.state.item.ItemImg
+              this.state.item.ItemImg+
+              "?time" +
+              new Date()
           )
         );
         if (this.state.checkURL) {
@@ -492,7 +494,7 @@ class EditPost extends React.Component {
                         //   // items.push(item)
                         //   this.setState({ selectedItems: item });
                         // }}
-                        placeholderTextColor="rgb(150,150,150)"
+                        placeholderTextColor="black"
                         onItemSelect={item => {
                           // const items = this.state.selectedItems;
                           // items.push(item)

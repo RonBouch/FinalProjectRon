@@ -233,7 +233,9 @@ export default class ProfilePost extends React.Component {
                   uri:
                     "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                     0 +
-                    item.ItemImg
+                    item.ItemImg+
+                    "?time" +
+                    new Date()
                 }}
                 style={{
                   width: "100%",

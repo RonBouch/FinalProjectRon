@@ -69,7 +69,9 @@ export default class extends Component {
           )
         );
         if (this.state.checkURL) {
-          imgArr.push(i + this.props.img);
+          imgArr.push(i + this.props.img+
+            "?time" +
+            new Date());
         }
       }
       this.setState({

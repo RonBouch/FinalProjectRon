@@ -29,6 +29,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
+  textTopBar:{
+    marginTop: 35,
+    justifyContent: "center"
+  },
     //Basic Design
 
     backgroundImage: {
@@ -101,6 +105,36 @@ export default StyleSheet.create({
   titleView:{
     marginTop: 10, 
     padding: 5
+  },
+  textInputStyle:{
+    marginLeft: "8%", 
+    fontSize: 14
+  },
+  aboutView:{
+    color: "rgba(255,255,255,.9)",
+    fontWeight: "bold",
+    fontSize: 25,
+    fontFamily: "serif",
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 4 },
+    textShadowRadius: 5,
+    borderWidth:2
+  },
+  uploadImageView:{
+    marginTop: 30,
+     padding: 5, 
+     borderRadius: 40 
+  },
+  uploadImage:{
+    height: 120,
+    width: 100,
+    borderRadius: 10
+  },
+  uploadImageTouch:{
+    margin: 5,
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: "white"
   },
   //contribution screen
   view: {

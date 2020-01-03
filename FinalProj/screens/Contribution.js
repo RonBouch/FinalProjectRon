@@ -512,6 +512,9 @@ export default class Contribution extends Component {
                       "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                       0 +
                       item.ItemImg
+                      +
+                      "?time" +
+                      new Date()
                   }}
                   style={{
                     width: "100%",
