@@ -207,7 +207,20 @@ namespace BALproj
 
             return check;
         }
+        public static int UpdateItem(string itemid, string userId, string userName, string userPhone, string itemType, string itemName, string city, string region, string itemAbout, string itemImg)
+        {
+            int check = DBServices.UpdateItem(itemid, userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg);
+            if (check == 1)
+            {
 
+            }
+            else
+            {
+
+            }
+
+            return check;
+        }
         public static string GetItemsFromFavorite(int userid)
         {
             List<Item> p = DBServices.GetItemsFromFavorite(userid);

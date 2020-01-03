@@ -42,7 +42,11 @@ public class WebService : System.Web.Services.WebService
         return BALServices.EditProfile( userid,firstName,  lastName,  gender,  birthday);
     }
 
-
+    [WebMethod]
+    public  int UpdateItem(string itemid, string userId, string userName, string userPhone, string itemType, string itemName, string city, string region, string itemAbout, string itemImg)
+    {
+        return BALServices.UpdateItem(itemid, userId, userName, userPhone, itemType, itemName, city, region, itemAbout, itemImg);
+    }
     [WebMethod]
     public string RegisterWithGoogle(string firstName, string lastName, string email, string password, string image,string token)
     {

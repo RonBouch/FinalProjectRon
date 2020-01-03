@@ -231,68 +231,68 @@ class EditPost extends React.Component {
         for (i = 0; this.state.formData[i] != null; i++) {
           if(this.state.formData[i]!="formData"){
             // console.log("Defrent img",this.state.formData[i].imageName)
-            // const imageToUpload = this.state.formData[i];
-            // console.log(
-            //   "send pic to upload",
-            //   JSON.stringify(imageToUpload.imageName)
-            // );
-            // await fetch(
-            //   "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-            //   {
-            //     method: "post",
-            //     headers: new Headers({
-            //       "Content-Type": "application/Json;"
-            //     }),
-            //     body: JSON.stringify(imageToUpload)
-            //   }
-            // )
-            //   .then(res => {
-            //     return res.json();
-            //   })
-            //   .then(
-            //     result => {
-            //       console.log("result = ", result);
-            //     },
-            //     error => {
-            //       console.log("err post=", error);
-            //     }
-            //   );
+            const imageToUpload = this.state.formData[i];
+            console.log(
+              "send pic to upload",
+              JSON.stringify(imageToUpload.imageName)
+            );
+            await fetch(
+              "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+              {
+                method: "post",
+                headers: new Headers({
+                  "Content-Type": "application/Json;"
+                }),
+                body: JSON.stringify(imageToUpload)
+              }
+            )
+              .then(res => {
+                return res.json();
+              })
+              .then(
+                result => {
+                  console.log("result = ", result);
+                },
+                error => {
+                  console.log("err post=", error);
+                }
+              );
           }
        
         }
 
         // console.log(JSON.stringify(data));
-      //   fetch(
-      //     "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
-      //     {
-      //       method: "post",
-      //       headers: new Headers({
-      //         "Content-Type": "application/Json;"
-      //       }),
-      //       body: JSON.stringify(data)
-      //     }
-      //   )
-      //     .then(res => {
-      //       return res.json();
-      //     })
-      //     .then(
-      //       result => {
-      //         console.log("fetch POST= ", result);
-      //         let u = JSON.parse(result.d);
-      //         console.log("u = " + u);
-      //         if (u == null) {
-      //           this.setState({
-      //             message: "לא ניתן לעלות חפץ זה ."
-      //           });
-      //           return;
-      //         } else {
-      //           this.props.navigation.navigate("Contribution");
-      //         }
-      //       },
-      //       error => {
-      //         console.log("err post=", error);
-      //       }
-      //     );
+        fetch(
+          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
+          {
+            method: "post",
+            headers: new Headers({
+              "Content-Type": "application/Json;"
+            }),
+            body: JSON.stringify(data)
+          }
+        )
+          .then(res => {
+            return res.json();
+          })
+          .then(
+            result => {
+              console.log("fetch POST= ", result);
+              let u = JSON.parse(result.d);
+              console.log("u = " + u);
+              if (u == null) {
+                this.setState({
+                  message: "לא ניתן לעלות חפץ זה ."
+                });
+                return;
+              } else {
+                this.props.navigation.navigate("Contribution");
+              }
+            },
+            error => {
+              console.log("err post=", error);
+            }
+          );
       }
     
   };

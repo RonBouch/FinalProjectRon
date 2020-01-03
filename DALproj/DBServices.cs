@@ -266,7 +266,45 @@ namespace DALproj
 
             return u;
         }
-        
+        public static int UpdateItem(string itemid , string userId, string userName, string userPhone, string itemType, string itemName, string city, string region, string itemAbout, string itemImg)
+        {
+
+            try
+            {
+
+
+                comm.CommandText = $"UPDATE  Items   SET UserName= '{userName}',UserPhone =  '{userPhone}',ItemType =  '{itemType}',ItemName =  '{itemName}',City =  '{city}',Region =  '{region}',ItemAbout =  '{itemAbout}',ItemImg =  '{itemImg}' WHERE ItemID ='{int.Parse(itemid)}'";
+                comm.Connection.Open();
+                int res = comm.ExecuteNonQuery();
+                if (res == 1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+
+                }
+            
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (comm.Connection.State != ConnectionState.Closed)
+                {
+                    comm.Connection.Close();
+                }
+
+            }
+
+            return 0;
+
+
+        }
         public static Item InsertItem(string userId, string userName, string userPhone, string itemType, string itemName, string city, string region , string itemAbout, string itemImg)
         {
             string itemDate = DateTime.Now.ToString("dd/MM/yyyy");
