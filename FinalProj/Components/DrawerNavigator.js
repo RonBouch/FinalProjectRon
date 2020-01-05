@@ -24,6 +24,12 @@ import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
+    Home: { screen: Home },
+
+    Favorite: { screen: Favorite },
+
+    Profile: { screen: Profile },
+
     ProfilePost: { screen: ProfilePost },
 
     EditPost: { screen: EditPost },
@@ -32,7 +38,6 @@ const MainNavigator = createStackNavigator(
 
     Publish: { screen: Publish },
 
-    Home: { screen: Home },
 
 
 
@@ -41,12 +46,10 @@ const MainNavigator = createStackNavigator(
 
     Contribution: { screen: Contribution },
 
-    Favorite: { screen: Favorite },
 
 
     Reminders: { screen: Reminders },
 
-    Profile: { screen: Profile },
 
     About: { screen: About },
     Publish: { screen: Publish },

@@ -10,7 +10,7 @@ import {
   AsyncStorage,
   Image,
   KeyboardAvoidingView,
-  ScrollView
+  StyleSheet
 } from "react-native";
 import { getLightEstimationEnabled } from "expo/build/AR";
 
@@ -59,7 +59,7 @@ export default class FirstPage extends React.Component {
           <View style={styles.form}>
             <Image
               source={require("../assets/TenYadLogo.png")}
-              style={{ height: 120, width: 120 }}
+              style={s.logoStyle}
             />
             <View style={{ flexDirection: "row" }}>
               <TouchableOpacity onPress={this.changeToLogin}>
@@ -92,3 +92,8 @@ export default class FirstPage extends React.Component {
     );
   }
 }
+const s =StyleSheet.create({
+  logoStyle:{
+    height: 120, width: 120
+  },
+});

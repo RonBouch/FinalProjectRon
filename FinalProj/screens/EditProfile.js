@@ -8,8 +8,6 @@ import {
   TouchableOpacity,
   ImageBackground,
   TouchableHighlight,
-  Keyboard,
-  TouchableWithoutFeedback,
   AsyncStorage,
   KeyboardAvoidingView,
   Image
@@ -17,11 +15,8 @@ import {
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
 import { Icon } from "react-native-elements";
-import { withNavigation } from "react-navigation";
-
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
-import { Ionicons } from "@expo/vector-icons";
 
 var radio_props = [
   {
@@ -124,23 +119,8 @@ export default class EditProfile extends React.Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  marginTop: 35,
-                  justifyContent: "center"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+              <View style={styles.textTopBar} >
+                <Text style={styles.bigText} >
                   עדכון פרטים
                 </Text>
               </View>
@@ -153,31 +133,24 @@ export default class EditProfile extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <KeyboardAvoidingView
-              style={{ alignItems: "center" }}
-              behavior="padding"
-            >
+            <KeyboardAvoidingView style={s.pageView} behavior="padding" >
               <TextInput
-                style={styles.inputUpdate}
+                style={s.inputUpdate}
                 placeholder={global.user.FirstName}
                 onChangeText={(e)=>this.setState({firstName:e})}
               />
 
               <TextInput
-                style={styles.inputUpdate}
+                style={s.inputUpdate}
                 placeholder={global.user.LastName}
                 onChangeText={(e)=>this.setState({lastName:e})}
               />
 
               <DatePicker
-                style={{
-                  width: 150,
-                  margin: 5
-                }}
+                style={s.dataPicker}
                 date={this.state.date}
                 mode="date"
                 placeholder={global.user.Birthday}
-
                 format="DD/MM/YYYY"
                 minDate={
                   new Date().getDate() +
@@ -189,19 +162,8 @@ export default class EditProfile extends React.Component {
                 maxDate={new Date()}
                 customStyles={{
                   placeholderText: { color: "rgba(155,155,155,.7)" },
-                  dateIcon: {
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 36,
-                    borderColor: "black",
-                    borderWidth: 0,
-                    borderBottomWidth: 1
-                  }
-                  // ... You can check the source to find the other keys.
+                  dateIcon: s.dateIcon ,
+                  dateInput: s.dateInput,
                 }}
                 onDateChange={date => {
                   this.setState({ date: date });
@@ -224,9 +186,7 @@ export default class EditProfile extends React.Component {
                 style={styles.registerButton}
                 onPress={this.EditProfile}
               >
-                <Text
-                  style={{ fontWeight: "bold", color: "white", fontSize: 18 }}
-                >
+                <Text style={s.txtBtn}>
                   עדכון
                   {"  "}
                 </Text>
@@ -244,3 +204,38 @@ export default class EditProfile extends React.Component {
     );
   }
 }
+const s = StyleSheet.create({
+  inputUpdate: {
+    flexDirection: "row",
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 1,
+    marginTop: 5
+  },
+  pageView:{
+    alignItems: "center"
+  },
+  dataPicker:{
+    width: 150,
+    margin: 5
+  },
+    dateIcon: {
+      position: "absolute",
+      left: 0,
+      top: 4,
+      marginLeft: 0
+    },
+    dateInput: {
+      marginLeft: 36,
+      borderColor: "black",
+      borderWidth: 0,
+      borderBottomWidth: 1
+    },
+    txtBtn:{
+      fontWeight: "bold", 
+      color: "white", 
+      fontSize: 18
+    },
+});

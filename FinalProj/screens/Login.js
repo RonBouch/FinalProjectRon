@@ -131,23 +131,12 @@ class Login extends React.Component {
           ]
         }
       );
-
-      //console.log("token=", token);
-      console.log("type=", type);
       if (type === "success") {
-        // Get the user's name using Facebook's Graph API
 
         const response = await fetch(
           `https://graph.facebook.com/me?fields=gender,birthday,email,first_name,last_name,picture.type(large)&access_token=${token}`
         );
-        // Alert.alert("Logged in!", `Hi ${await response.json()}!`);
-        // console.log(await response.json());
-        // this.props.navigation.navigate("DrawerNavigator");
-        // return await response.json()
-
         const user = await response.json();
-        console.log("user =", user.gender);
-
         var lParams = `access_token=${token}`;
         fetch(`https://graph.facebook.com/${user.id}/permissions`, {
           method: "DELETE",
@@ -185,7 +174,6 @@ class Login extends React.Component {
 
                 return;
               } else {
-                // console.log("U = " ,u);
                 global.user = u;
                 this.storeData("user", u);
                 this.props.navigation.navigate("DrawerNavigator");
@@ -199,7 +187,6 @@ class Login extends React.Component {
           );
         return;
       } else {
-        // type === 'cancel'
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
@@ -214,14 +201,6 @@ class Login extends React.Component {
   RegisterBtn = () => {
     this.props.navigation.navigate("Register");
   };
-
-  // FaceBookBtn = () => {
-  //   this.props.navigation.navigate("FaceBookPage");
-  // };
-
-  // GoogleBtn = () => {
-  //   this.props.navigation.navigate("LoginWithGoogle");
-  // };
 
   logInFB = async () => {
     try {
@@ -251,7 +230,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <View style={{ alignItems: "center" }}>
+      <View style={s.loginView}>
         <View style={styles.input}>
           <Icon
             iconStyle={{
@@ -267,7 +246,7 @@ class Login extends React.Component {
             placeholder="אימייל"
             placeholderTextColor="rgba(255,255,255,.7)"
             onChangeText={this.changeEmail}
-            style={{ width: 150 }}
+            style={s.txtInput}
           />
         </View>
 
@@ -285,12 +264,12 @@ class Login extends React.Component {
             maxLength={12}
             placeholderTextColor="rgba(255,255,255,.7)"
             onChangeText={this.changePass}
-            style={{ width: 150 }}
+            style={s.txtInput}
           />
         </View>
 
         <TouchableOpacity style={styles.loginButton} onPress={this.validation}>
-          <Text style={{ fontWeight: "bold", color: "white", fontSize: 18 }}>
+          <Text style={s.btnTxt}>
             התחבר{"  "}
           </Text>
           <Icon name="login" type="antdesign" color="white" size={20} />
@@ -298,7 +277,7 @@ class Login extends React.Component {
 
         <Text style={styles.textMessage}>{this.state.message}</Text>
 
-        <View style={{ marginTop: 20 }}>
+        <View style={s.spaceGoogleFace}>
           <Text style={{ color: "white" }}>
             {"_________   "}או התחבר באמצעות{"    _________"}
           </Text>
@@ -306,24 +285,22 @@ class Login extends React.Component {
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("LoginWithGoogle")}
-            style={{ margin: 20 }}
+            style={s.spaceGoogleFace}
           >
             <Image
               source={require("../assets/googleIcon.png")}
-              style={{ height: 55, width: 55, marginTop: 8 }}
+              style={s.googleImg}
             />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={async () => {
               await this.FacebookLogin();
             }}
-            // onPress={() => LoginWithFacebook.FacebookLogin()}
-            // onPress={() => this.props.navigation.navigate("LoginWithFacebook")}
-            style={{ margin: 20 }}
+            style={s.spaceGoogleFace}
           >
             <Image
               source={require("../assets/facebookIcon2.png")}
-              style={{ height: 70, width: 70 }}
+              style={s.facebookImg}
             />
           </TouchableOpacity>
         </View>
@@ -332,3 +309,28 @@ class Login extends React.Component {
   }
 }
 export default withNavigation(Login);
+const s=StyleSheet.create({
+loginView:{
+  alignItems: "center"
+},
+txtInput:{
+width:150,
+},
+btnTxt:{
+  fontWeight: "bold",
+   color: "white",
+    fontSize: 18
+},
+googleImg:{
+  height: 55,
+   width: 55,
+   marginTop: 8
+},
+facebookImg:{
+  height: 70, 
+  width: 70
+},
+spaceGoogleFace:{
+  margin: 20
+},
+});

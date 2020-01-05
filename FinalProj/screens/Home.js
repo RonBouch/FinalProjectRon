@@ -53,152 +53,62 @@ export default class Home extends Component {
               />
             </TouchableOpacity>
           </View>
-            <View style={{display:'flex' ,    flexDirection: "column",width:'100%',height:'86%',justifyContent:'space-between'}}>
-              <View
-                style={{
-                  // marginTop: 20,
-                  alignItems: "center",
-                  width: width,
-                  justifyContent: "center",
-                }}
-              >
+            <View style={s.viewHome}>
+              <View style={s.sliderView}>
                  <Slider props={this.props} navigation={this.props.navigation} />
               </View>
-            {/* <TouchableOpacity >
-             <Image   style={{width:'100%',height:200}} source={require("../assets/1.jpg")}/>
-            </TouchableOpacity>
-   */}
+   
           
-          <View
-              style={{
-                width: "100%",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontStyle: "italic",
-                  textAlign: "center"
-                }}
-              >
+          <View style={s.sentenceView}>
+              <Text style={s.sentenceViewTxt}>
                 "להקל על כאב לבו של אחר, זה לשכוח את כאבך שלך."
               </Text>
               <Text style={{ marginTop: 10 }}>( אברהם לינקולן )</Text>
             </View> 
-            <TouchableOpacity style={{alignItems: "center",}}  onPress={() => this.props.navigation.navigate("Contribution")}>
-             <Image   style={{width:'95%',height:150,borderRadius:20}} source={require("../assets/2.jpg")}/>
+            <TouchableOpacity style={s.touchStyle}  onPress={() => this.props.navigation.navigate("Contribution")}>
+             <Image   style={s.touchImage} source={require("../assets/2.jpg")}/>
             </TouchableOpacity>
 
          
               <TouchableOpacity style={{alignItems: "center",marginBottom:10}} onPress={() =>
                   this.props.navigation.navigate("AssociationsList")
                 } >
-            <Image style={{width:'95%',height:150,borderRadius:20}} source={require("../assets/3.jpg")}/>
+            <Image style={s.touchImage} source={require("../assets/3.jpg")}/>
             </TouchableOpacity>
            
             </View>
-
-            {/* <View
-              style={{
-                marginTop: 30,
-                width: "100%",
-                padding: 20
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontStyle: "italic",
-                  textAlign: "center"
-                }}
-              >
-                "להקל על כאב לבו של אחר, זה לשכוח את כאבך שלך."
-              </Text>
-              <Text style={{ marginTop: 20 }}>( אברהם לינקולן )</Text>
-            </View>
-            <View
-              style={{
-                height: "30%",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-around"
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 150,
-                  width: 150,
-                  borderWidth: 1,
-                  borderColor: "white",
-                  borderRadius: 100,
-                  elevation: 5,
-                  shadowColor: "rgba(0,0,0, .4)",
-                  shadowOffset: { height: 1, width: 1 },
-                  shadowOpacity: 1,
-                  shadowRadius: 1,
-                  backgroundColor: "#6495ed"
-                }}
-                onPress={() => this.props.navigation.navigate("Contribution")}
-              >
-                <Text
-                  style={{
-                    fontSize: 25,
-                    color: "white"
-                  }}
-                >
-                  תרומות
-                </Text>
-                <Text></Text>
-                <Icon
-                  style={{ width: "25%", textAlign: "center" }}
-                  name="hand-holding-heart"
-                  type="font-awesome"
-                  color="white"
-                  size={34}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: 150,
-                  width: 150,
-                  borderWidth: 1,
-                  borderColor: "white",
-                  borderRadius: 100,
-                  elevation: 5,
-                  shadowColor: "rgba(0,0,0, .4)",
-                  shadowOffset: { height: 1, width: 1 },
-                  shadowOpacity: 1,
-                  shadowRadius: 1,
-                  backgroundColor: "#6495ed"
-                }}
-                onPress={() =>
-                  this.props.navigation.navigate("AssociationsList")
-                }
-              >
-                <Text
-                  style={{
-                    fontSize: 25,
-                    color: "white"
-                  }}
-                >
-                  עמותות
-                </Text>
-                <Text></Text>
-                <Icon
-                  style={{ width: "25%", textAlign: "center" }}
-                  name="place-of-worship"
-                  type="font-awesome"
-                  color="white"
-                  size={34}
-                />
-              </TouchableOpacity>
-            </View> */}
         </View>
       </ImageBackground>
     );
   }
 }
+const s = StyleSheet.create({
+viewHome:{
+  display:'flex' ,  
+    flexDirection: "column",
+    width:'100%',
+    height:'86%',
+    justifyContent:'space-between'
+},
+sliderView:{
+  alignItems: "center",
+  width: width,
+  justifyContent: "center",
+},
+sentenceView:{
+width:'100%',
+},
+sentenceViewTxt:{
+  fontSize: 18,
+  fontStyle: "italic",
+  textAlign: "center"
+},
+touchImage:{
+  width:'95%',
+  height:150,
+  borderRadius:20
+},
+touchStyle:{
+  alignItems: "center"
+},
+});

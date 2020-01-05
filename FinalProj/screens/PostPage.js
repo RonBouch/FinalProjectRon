@@ -96,17 +96,6 @@ class PostPage extends Component {
               </TouchableOpacity>
             </View>
 
-            {/* <Image
-              source={{
-                uri:
-                  "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
-                  this.state.item.ItemImg
-              }}
-              style={{
-                width: 400,
-                height: 200
-              }}
-            /> */}
             <Slider
               img={this.props.navigation.state.params.item.ItemImg}
               navigation={this.props.navigation}
