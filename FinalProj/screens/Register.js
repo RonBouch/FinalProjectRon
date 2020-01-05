@@ -204,26 +204,26 @@ class Register extends React.Component {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <TextInput
-          style={styles.input}
+          style={s.input}
           placeholder="שם פרטי"
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeFirstName}
         />
         <TextInput
-          style={styles.input}
+          style={s.input}
           placeholder="שם משפחה"
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeLastName}
         />
         <TextInput
-          style={styles.input}
+          style={s.input}
           keyboardType="email-address"
           placeholder="אמייל"
           placeholderTextColor="rgba(255,255,255,.7)"
           onChangeText={this.changeEmail}
         />
         <TextInput
-          style={styles.input}
+          style={s.input}
           secureTextEntry={true}
           placeholder="סיסמא"
           maxLength={12}
@@ -231,7 +231,7 @@ class Register extends React.Component {
           onChangeText={this.changePassword}
         />
         <TextInput
-          style={styles.input}
+          style={s.input}
           secureTextEntry={true}
           placeholder="אימות סיסמא"
           maxLength={12}
@@ -239,10 +239,7 @@ class Register extends React.Component {
           onChangeText={this.changeVerifyPassword}
         />
         <DatePicker
-          style={{
-            width: 150,
-            margin: 5
-          }}
+          style={s.dataPicker}
           date={this.state.date}
           mode="date"
           placeholder="יום הולדת"
@@ -257,18 +254,8 @@ class Register extends React.Component {
           maxDate={new Date()}
           customStyles={{
             placeholderText: { color: "rgba(255,255,255,.7)" },
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36,
-              borderColor: "white",
-              borderWidth: 0,
-              borderBottomWidth: 1
-            }
+            dateIcon: s.dataIcon,
+            dateInput: s.dataInput
             // ... You can check the source to find the other keys.
           }}
           onDateChange={date => {
@@ -287,7 +274,7 @@ class Register extends React.Component {
           onPress={this.changeGender}
         />
         <TouchableOpacity style={styles.registerButton} onPress={this.register}>
-          <Text style={{ fontWeight: "bold", color: "white", fontSize: 18 }}>
+          <Text style={s.txtRegister}>
             הרשמה
             {"  "}
           </Text>
@@ -307,3 +294,33 @@ class Register extends React.Component {
   }
 }
 export default withNavigation(Register);
+const s = StyleSheet.create({
+  input: {
+    flexDirection: "row",
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    borderColor: "white",
+    borderBottomWidth: 1,
+    marginTop: 5
+  },
+  dataPicker:{
+  },
+  dataIcon:{
+    position: "absolute",
+    left: 0,
+    top: 4,
+    marginLeft: 0
+  },
+  dataInput:{
+    marginLeft: 36,
+    borderColor: "white",
+    borderWidth: 0,
+    borderBottomWidth: 1
+  },
+  txtRegister:{
+     fontWeight: "bold",
+      color: "white",
+       fontSize: 18 
+    },
+})
