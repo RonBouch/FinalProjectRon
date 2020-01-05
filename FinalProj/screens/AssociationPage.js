@@ -6,6 +6,7 @@ import {
   View,
   TouchableHighlight,
   Image,
+  StyleSheet,
   ImageBackground,
   TouchableOpacity,
   Text,
@@ -85,27 +86,16 @@ class AssociationPage extends Component {
             </View>
 
             <ScrollView style={styles.scrollview}>
-              <View
-                style={{
-                  width: "100%",
-
-                  flexDirection: "row",
-                  padding: "5%"
-                }}
-              >
-                <View
-                  style={{
-                    width: "60%"
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+              <View style={s.viewHeader}>
+                <View style={{width: "60%"}}>
+                  <Text style={s.txtTitle}>
                     עמותת {this.state.association.AssociationName}
                   </Text>
                   <Text></Text>
                   {this.state.association.AssociationPhone != "" ? (
                     <Text onPress={this.callPhone}>
                       טלפון :{" "}
-                      <Text style={{ color: "green" }}>
+                      <Text style={s.txtPhone}>
                         {this.state.association.AssociationPhone}
                       </Text>
                     </Text>
@@ -115,7 +105,7 @@ class AssociationPage extends Component {
                   {this.state.association.AssociationAdditionalPhone != "" ? (
                     <Text onPress={this.callAdditionalPhone}>
                       טלפון נוסף :
-                      <Text style={{ color: "green" }}>
+                      <Text style={s.txtPhone}>
                         {this.state.association.AssociationAdditionalPhone}
                       </Text>
                     </Text>
@@ -129,21 +119,15 @@ class AssociationPage extends Component {
                   )}
                 </View>
                 <Image
-                  style={{
-                    width: 100,
-                    height: 100,
-                    width: "40%"
-                  }}
-                  source={{
-                    uri: this.state.association.AssociationImage
-                  }}
+                  style={s.imgS}
+                  source={{uri: this.state.association.AssociationImage}}
                 ></Image>
               </View>
 
               {this.state.association.AssociationAdress != "" ? (
                 <Button
                   onPress={this.openAdress}
-                  style={{ color: "blue", fontWeight: "bold" }}
+                  style={s.btnLinks}
                 >
                   ניווט
                 </Button>
@@ -154,7 +138,7 @@ class AssociationPage extends Component {
               {this.state.association.AssociationEmail != "" ? (
                 <Button
                   onPress={this.sendMail}
-                  style={{ color: "blue", fontWeight: "bold" }}
+                  style={s.btnLinks}
                 >
                   פנייה באמצעות מייל
                 </Button>
@@ -165,7 +149,7 @@ class AssociationPage extends Component {
               {this.state.association.AssociationWebsite != "" ? (
                 <Button
                   onPress={this.openWebSite}
-                  style={{ color: "blue", fontWeight: "bold" }}
+                  style={s.btnLinks}
                 >
                   לאתר האינטרנט
                 </Button>
@@ -174,7 +158,7 @@ class AssociationPage extends Component {
               )}
 
               {this.state.association.AssociationDetails != "" ? (
-                <Text style={{ fontSize: 14, padding: 10 }}>
+                <Text style={s.txtDetails}>
                   {this.state.association.AssociationDetails}
                   {"\n"}
                   {"\n"}
@@ -193,3 +177,30 @@ class AssociationPage extends Component {
 }
 
 export default AssociationPage;
+const s = StyleSheet.create({
+ viewHeader:{ 
+   width: "100%",
+ flexDirection: "row",
+ padding: "5%"
+},
+txtTitle:{
+  fontWeight: "bold", 
+  fontSize: 20
+},
+txtPhone:{
+color:'green'
+},
+imgS:{
+  width: 100,
+  height: 100,
+  width: "40%"
+},
+btnLinks:{
+  color: "blue",
+   fontWeight: "bold"
+},
+txtDetails:{
+  fontSize: 14, 
+  padding: 10
+},
+});

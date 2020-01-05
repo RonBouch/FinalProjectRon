@@ -24,6 +24,8 @@ import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
+    AssociationsList: { screen: AssociationsList },
+
     Publish: { screen: Publish },
 
     Home: { screen: Home },
@@ -55,7 +57,6 @@ const MainNavigator = createStackNavigator(
 
     EditPage: { screen: EditPage },
 
-    AssociationsList: { screen: AssociationsList },
 
     AssociationPage: { screen: AssociationPage }
   },
