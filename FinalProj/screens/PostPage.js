@@ -10,10 +10,9 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
-  ScrollView
+  StyleSheet
 } from "react-native";
 import { Linking } from "expo";
-import { Button } from "react-native-paper";
 
 class PostPage extends Component {
   constructor(props) {
@@ -101,22 +100,14 @@ class PostPage extends Component {
               navigation={this.props.navigation}
             />
 
-            <Text style={{ fontWeight: "bold", fontSize: 24 }}>
+            <Text style={s.titleTxt}>
               {this.state.item.ItemName}
             </Text>
 
-            <View
-              style={{
-                width: "90%",
-                height: 80,
-                alignItems: "flex-start",
-                justifyContent: "space-between",
-                marginTop: 20
-              }}
-            >
-              <View style={{ flexDirection: "row" }}>
+            <View style={s.detailsView}>
+              <View style={s.detailsLine}>
                 <Icona
-                  iconStyle={{ marginEnd: "10%" }}
+                  iconStyle={s.iconStyle}
                   name="user"
                   type="font-awesome"
                   color="black"
@@ -125,9 +116,9 @@ class PostPage extends Component {
                 <Text>{this.state.item.UserName}</Text>
               </View>
 
-              <View style={{ flexDirection: "row" }}>
+              <View style={s.detailsLine}>
                 <Icona
-                  iconStyle={{ marginEnd: "10%" }}
+                  iconStyle={s.iconStyle}
                   name="map-marker"
                   type="font-awesome"
                   color="black"
@@ -136,9 +127,9 @@ class PostPage extends Component {
                 <Text>{this.state.item.City}</Text>
               </View>
 
-              <View style={{ flexDirection: "row" }}>
+              <View style={s.detailsLine}>
                 <Icona
-                  iconStyle={{ marginEnd: "10%" }}
+                  iconStyle={s.iconStyle}
                   name="mobile"
                   type="font-awesome"
                   color="black"
@@ -150,17 +141,10 @@ class PostPage extends Component {
               </View>
             </View>
 
-            <View
-              style={{
-                borderBottomWidth: 1,
-                width: "90%",
-                margin: 20,
-                elevation: 5
-              }}
-            ></View>
+            <View style={s.itemAboutView}></View>
 
             {this.state.item.ItemAbout != "" ? (
-              <Text style={{ fontSize: 14, marginTop: 30 }}>
+              <Text style={s.txtItemAbout}>
                 {this.state.item.ItemAbout}
               </Text>
             ) : (
@@ -174,3 +158,32 @@ class PostPage extends Component {
 }
 
 export default PostPage;
+const s=StyleSheet.create({
+titleTxt:{
+  fontWeight: "bold",
+   fontSize: 24 
+},
+detailsView:{
+  width: "90%",
+   height: 80,
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  marginTop: 20
+},
+detailsLine:{
+  flexDirection: "row" 
+},
+iconStyle:{
+  marginEnd: "10%"
+},
+txtItemAbout:{
+  fontSize: 14, 
+  marginTop: 30 
+},
+itemAboutView:{
+  borderBottomWidth: 1,
+  width: "90%",
+  margin: 20,
+  elevation: 5
+},
+})

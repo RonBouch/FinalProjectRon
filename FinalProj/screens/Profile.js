@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Text,
   TouchableHighlight,
-  Alert
+  Alert,
+  StyleSheet
 } from "react-native";
 import { Icon as Icona } from "react-native-elements";
 import styles from "../Components/StyleSheet";
@@ -27,9 +28,7 @@ export default class Profile extends React.Component {
   }
 
   componentDidMount = async () => {
-    console.log("global profile ", global.user.Image);
     this.setState({ img: global.user.Image }, function() {
-      console.log("img state", this.state.img);
     });
   };
 
@@ -168,23 +167,8 @@ export default class Profile extends React.Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  marginTop: 35,
-                  justifyContent: "center"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+              <View style={styles.textTopBar}>
+                <Text style={styles.bigText}>
                   פרופיל
                 </Text>
               </View>
@@ -198,20 +182,8 @@ export default class Profile extends React.Component {
               </TouchableOpacity>
             </View>
 
-            <View style={{ alignItems: "center" }}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "white",
-                  marginTop: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderWidth: 1,
-                  borderRadius: 100,
-                  borderColor: "black",
-                  height: 150,
-                  width: 150
-                }}
-                onPress={() =>
+            <View style={s.profileView}>
+              <TouchableOpacity style={s.touchProfileImg} onPress={() =>
                   Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                     {
                       text: "מצלמה",
@@ -230,12 +202,7 @@ export default class Profile extends React.Component {
               >
                 {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונת ברירת מחדל.  */}
                 {this.state.img != "" ? (
-                  <Image
-                    style={{
-                      height: 150,
-                      width: 150,
-                      borderRadius: 100
-                    }}
+                  <Image style={s.profileImage}
                     // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן
                     source={{
                       uri:
@@ -250,26 +217,14 @@ export default class Profile extends React.Component {
                   />
                 ) : (
                   <Image
-                    style={{
-                      height: 100,
-                      width: 100,
-                      borderRadius: 100
-                    }}
+                    style={s.profileImage}
                     source={this.profileImage}
                   />
                 )}
               </TouchableOpacity>
-              <Text
-                style={{
-                  marginTop: 20,
-                  marginBottom: 30,
-                  fontWeight: "bold",
-                  fontSize: 24
-                }}
-              >
+              <Text style={s.txtName} >
                 {global.user.FirstName} {global.user.LastName}
               </Text>
-
               <TouchableOpacity
                 style={styles.updateButton}
                 onPress={() => this.props.navigation.navigate("EditProfile")}
@@ -280,7 +235,6 @@ export default class Profile extends React.Component {
                 </Text>
                 <Icon name="edit" type="font-awesome" color="black" size={18} />
               </TouchableOpacity>
-
               <TouchableOpacity
                 style={styles.updateButton}
                 onPress={() => this.props.navigation.navigate("ProfilePost")}
@@ -313,3 +267,30 @@ export default class Profile extends React.Component {
     );
   }
 }
+const s= StyleSheet.create({
+profileView:{
+  alignItems: "center"
+},
+  touchProfileImg:{
+  backgroundColor: "white",
+  marginTop: 20,
+  justifyContent: "center",
+  alignItems: "center",
+  borderWidth: 1,
+  borderRadius: 100,
+  borderColor: "black",
+  height: 150,
+  width: 150
+},
+profileImage:{
+  height: 150,
+  width: 150,
+  borderRadius: 100
+},
+txtName:{
+  marginTop: 20,
+ marginBottom: 30,
+  fontWeight: "bold",
+  fontSize: 24
+},
+});

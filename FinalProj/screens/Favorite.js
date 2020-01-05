@@ -200,7 +200,9 @@ export default class Favorite extends React.Component {
                   uri:
                     "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                     0 +
-                    item.ItemImg
+                    item.ItemImg+
+                    "?time" +
+                    new Date()
                 }}
                 style={styles.imageStyle} />
             </View>
@@ -276,13 +278,13 @@ export default class Favorite extends React.Component {
 
             {Items[0] != null ? (
               <ScrollView style={styles.scrollview}>
-                <View style={s.viewItems}>
+                <View style={styles.viewItems}>
                 {Items}
                 </View>
               </ScrollView>
             ) : (
               <View
-                style={s.viewNoItems}
+                style={styles.viewNoItems}
               >
               {this.state.LoadingFirstTime ?
                 <Text>אין פריטים להצגה</Text>
@@ -298,13 +300,6 @@ export default class Favorite extends React.Component {
   }
 }
 const s = StyleSheet.create({
-viewItems:{
-  flex: 1, 
-  alignItems: "center"
-},
-viewNoItems:{
-  flex: 1,
-   alignItems: "center",
-  justifyContent: "center"
-},
+
+
 });

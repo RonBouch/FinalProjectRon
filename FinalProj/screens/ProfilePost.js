@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   Image,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   TouchableHighlight,
@@ -13,11 +14,7 @@ import {
 } from "react-native";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
-import Icon from "react-native-vector-icons/Ionicons";
 import { DrawerActions } from "react-navigation-drawer";
-import { NavigationEvents } from "react-navigation";
-
-import RadioForm from "react-native-simple-radio-button";
 const { height } = Dimensions.get("window");
 export default class ProfilePost extends React.Component {
   constructor(props) {
@@ -25,7 +22,6 @@ export default class ProfilePost extends React.Component {
     this.state = {
       items: null,
       item: null,
-      //   checkedB: true,
       screenHeight: 0,
       userPhone: "",
       pageToShow: null,
@@ -102,12 +98,6 @@ export default class ProfilePost extends React.Component {
     Linking.openURL(url);
   };
 
-  // async DeleteItem(item) {
-  //   await this.setState({
-  //     item: item
-  //   });
-  //   this.DeleteItemByID();
-  // }
   DeleteItemByID = item => {
     console.log("item = ", item);
 
@@ -154,12 +144,6 @@ export default class ProfilePost extends React.Component {
   };
 
   render() {
-    //Doing alerts whern i come back to Favorite screen .!
-    {
-      /* <NavigationEvents onDidFocus={()=>alert("Hello, I'm focused!")} /> */
-    }
-
-    // const scrollEnabled = this.state.screenHeight > height ;
     const { navigate } = this.props.navigation;
 
     let Items = [];
@@ -169,29 +153,14 @@ export default class ProfilePost extends React.Component {
         return (
           <TouchableOpacity
             key={index}
-            style={{
-              backgroundColor: "white",
-              width: "95%",
-              height: 210,
-              margin: 10,
-              borderWidth: 1,
-              borderColor: "#e6e6fa",
-              elevation: 10
-            }}
+            style={styles.contributionView}
             onPress={() =>
               navigate("PostPage", {
                 item: item
               })
             }
           >
-            <View
-              style={{
-                position: "absolute",
-                zIndex: 1,
-                margin: 5,
-                left: 2
-              }}
-            >
+            <View   style={styles.heartIconStyle}  >
               <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
                 <Icona
                   name="trash"
@@ -217,17 +186,8 @@ export default class ProfilePost extends React.Component {
                   raised
                 />
               </TouchableOpacity>
-              {/* <TouchableOpacity>
-                  <Icon
-                    name="md-call"
-                    size={30}
-                    color="green"
-                    onPress={() => this._pressCall(item.UserPhone)}
-                    
-                  />
-                </TouchableOpacity> */}
             </View>
-            <View style={{ height: "70%" }}>
+            <View style={styles.viewImageStyle}>
               <Image
                 source={{
                   uri:
@@ -237,76 +197,30 @@ export default class ProfilePost extends React.Component {
                     "?time" +
                     new Date()
                 }}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderTopLeftRadius: 100,
-                  borderBottomRightRadius: 100
-                }}
+                style={styles.imageStyle}
               />
             </View>
             <View
-              style={{
-                justifyContent: "space-around",
-                flexDirection: "row-reverse",
-                alignContant: "center",
-                height: "30%",
-                marginTop: 15
-              }}
+             style={styles.viewDetails}
               onPress={() => {
                 this.infoWindow(index);
               }}
             >
-              <View
-                style={{
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
-                <Text
-                  style={{
-                    color: "#6495ed",
-                    // fontWeight: "bold",
-                    fontSize: 16
-                    // fontFamily: "serif"
-                  }}
-                >
+              <View style={styles.viewTitle} >
+              <Text style={styles.txtTitle}>תאריך</Text>
+              <Text  style={styles.txtDetails} >
                   {item.ItemDate}
                 </Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
-
-                <Text
-                  style={{
-                    color: "#6495ed",
-                    // fontWeight: "bold",
-                    // fontFamily: "serif",
-                    fontSize: 16
-                  }}
-                >
+              <View style={styles.viewTitle} >
+              <Text style={styles.txtTitle}>עיר</Text>
+              <Text style={styles.txtDetails} >
                   {item.City}
                 </Text>
               </View>
-              <View
-                style={{
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
-                <Text
-                  style={{
-                    color: "#6495ed",
-                    fontSize: 16
-                  }}
-                >
+              <View style={styles.viewTitle} >
+              <Text style={styles.txtTitle}>למסירה</Text>
+              <Text style={styles.txtDetails} >
                   {item.ItemName}
                 </Text>
               </View>
@@ -339,23 +253,8 @@ export default class ProfilePost extends React.Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  marginTop: 35,
-                  justifyContent: "center"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+              <View  style={styles.textTopBar} >
+                <Text    style={styles.bigText} >
                   הפרסומים שלי
                 </Text>
               </View>
@@ -371,16 +270,10 @@ export default class ProfilePost extends React.Component {
 
             {Items.length != 0 ? (
               <ScrollView style={styles.scrollview}>
-                <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+                <View style={styles.viewItems}>{Items}</View>
               </ScrollView>
             ) : (
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
+              <View style={styles.viewNoItems}>
                 {this.state.LoadingFirstTime ? (
                   <Text>אין פריטים להצגה</Text>
                 ) : (

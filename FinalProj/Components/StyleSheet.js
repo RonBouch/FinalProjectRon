@@ -73,7 +73,7 @@ export default StyleSheet.create({
       textShadowOffset: { width: 1, height: 4 },
       textShadowRadius: 5
     },
-    //Cotnribution and Favorite
+    //Cotnribution and Favorite and profilePost
      contributionView:{
       backgroundColor: "white",
       width: "95%",
@@ -116,6 +116,17 @@ export default StyleSheet.create({
       color: "#6495ed",
       fontSize: 16
      },
+     viewItems:{
+      flex: 1, 
+      alignItems: "center"
+     },
+     viewNoItems:{
+      flex: 1,
+       alignItems: "center",
+      justifyContent: "center"
+    },
+
+
   //Publish Screen
   autocompletesContainer: {
     paddingTop: 0,
