@@ -361,12 +361,12 @@ class Publish extends React.Component {
             </View>
             <KeyboardAvoidingView style={styles.container} behavior="padding">
               <ScrollView keyboardShouldPersistTaps="always">
-                <View style={styles.titleView}>
+                <View style={s.titleView}>
                   <Text>פרטים:</Text>
                 </View>
                 <View style={{ alignItems: "center", width: "100%" }}>
                   {/* איש קשר  */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="user"
                       type="font-awesome"
@@ -381,11 +381,11 @@ class Publish extends React.Component {
                       onChangeText={e => {
                         this.setState({ userName: e });
                       }}
-                      style={styles.textInputStyle}
+                      style={s.textInputStyle}
                     />
                   </View>
                   {/* מס' טלפון */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="phone"
                       type="font-awesome"
@@ -401,11 +401,11 @@ class Publish extends React.Component {
                       onChangeText={e => {
                         this.setState({ userPhone: e });
                       }}
-                      style={styles.textInputStyle}
+                      style={s.textInputStyle}
                     />
                   </View>
                   {/* עיר ישוב */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="map-marker"
                       type="font-awesome"
@@ -430,7 +430,7 @@ class Publish extends React.Component {
                         items={data}
                         // defaultIndex={2}
                         resetValue={false}
-                        textInputStyle={styles.textInputStyle}
+                        textInputStyle={s.textInputStyle}
                         textInputProps={{
                           placeholder: "עיר/ישוב",
                           underlineColorAndroid: "transparent",
@@ -444,7 +444,7 @@ class Publish extends React.Component {
                     </Fragment>
                   </View>
                   {/* שם הפריט  */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="edit"
                       type="font-awesome"
@@ -454,7 +454,7 @@ class Publish extends React.Component {
                     <TextInput
                       value={this.state.itemName}
                       placeholderTextColor="rgb(150,150,150)"
-                      style={styles.textInputStyle}
+                      style={s.textInputStyle}
                       placeholder="שם הפריט"
                       onChangeText={e => {
                         this.setState({ itemName: e });
@@ -462,7 +462,7 @@ class Publish extends React.Component {
                     />
                   </View>
                   {/* קטגוריית הפריט */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="mouse-pointer"
                       type="font-awesome"
@@ -476,7 +476,7 @@ class Publish extends React.Component {
                       baseColor="black"
                       placeholder="קטגוריית הפריט"
                       value={this.state.itemType}
-                      style={styles.textInputStyle}
+                      style={s.textInputStyle}
                       dropdownMargins={{ min: 0, max: 10 }}
                       dropdownOffset={{ top: 0, left: 0 }}
                       data={ItemTypes}
@@ -486,7 +486,7 @@ class Publish extends React.Component {
                     />
                   </View>
                   {/* על הפריט */}
-                  <View style={styles.titleView}>
+                  <View style={s.titleView}>
                     <Text>תיאור:</Text>
                     <View
                      style={{
@@ -509,16 +509,16 @@ class Publish extends React.Component {
                         }}
                         placeholderTextColor="rgb(150,150,150)"
                         placeholder="תאר את הפריט עד 60 תווים"
-                        style={styles.textInputStyle}
+                        style={s.textInputStyle}
                       />
                     </View>
                   </View>
                   {/* מצלמה/גלריה */}
-                  <View style={styles.uploadImageView}>
+                  <View style={s.uploadImageView}>
                     <Text>תמונה:</Text>
                     <View style={{ flexDirection: "row" }}>
                       <TouchableOpacity
-                        style={styles.uploadImageTouch}
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -538,19 +538,19 @@ class Publish extends React.Component {
                       >
                         {this.state.img[0] != null ? (
                           <Image
-                            style={styles.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[0] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={styles.uploadImage}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                        style={styles.uploadImageTouch}
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -570,19 +570,19 @@ class Publish extends React.Component {
                       >
                         {this.state.img[1] != null ? (
                           <Image
-                            style={styles.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[1] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={styles.uploadImage}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                       style={styles.uploadImageTouch}
+                       style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -602,12 +602,12 @@ class Publish extends React.Component {
                       >
                         {this.state.img[2] != null ? (
                           <Image
-                          style={styles.uploadImage}
+                          style={s.uploadImage}
                             source={{ uri: this.state.img[2] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={styles.uploadImage}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -618,7 +618,7 @@ class Publish extends React.Component {
                   <View>
                     <TouchableOpacity
                       onPress={() => this.handleSubmit()}
-                      style={styles.publishButton}
+                      style={s.publishButton}
                     >
                       <Text style={{ color: "white", fontSize: 20 }}>
                         הוסף {"  "}
@@ -650,7 +650,7 @@ class Publish extends React.Component {
   }
 }
 export default Publish;
-const styless = StyleSheet.create({
+const s = StyleSheet.create({
     titleView:{
     marginTop: 10, 
     padding: 5
@@ -712,5 +712,11 @@ const styless = StyleSheet.create({
     marginBottom: 5,
     marginTop: 5
   },
-
+  publishInput: {
+    flexDirection: "row",
+    marginTop: 20,
+    width: "70%",
+    borderBottomWidth: 0.5,
+    borderColor: "black"
+  },
 });

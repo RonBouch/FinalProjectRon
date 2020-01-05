@@ -160,7 +160,7 @@ export default StyleSheet.create({
     borderWidth: 2,
     marginTop: 10
   },
-  publushInput: {
+  publishInput: {
     flexDirection: "row",
     marginTop: 20,
     width: "70%",
