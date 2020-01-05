@@ -12,7 +12,7 @@ import Reminders from "../screens/Reminders";
 import Publish from "../screens/Publish";
 import Profile from "../screens/Profile";
 import Favorite from "../screens/Favorite";
-import EditPage from "../screens/EditPage";
+// import EditPage from "../screens/EditPage";
 import ProfilePost from "../screens/ProfilePost";
 import PostPage from "../screens/PostPage";
 import EditProfile from "../screens/EditProfile";
@@ -24,13 +24,16 @@ import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
+    ProfilePost: { screen: ProfilePost },
+
+    EditPost: { screen: EditPost },
+    
     AssociationsList: { screen: AssociationsList },
 
     Publish: { screen: Publish },
 
     Home: { screen: Home },
 
-    ProfilePost: { screen: ProfilePost },
 
 
 
@@ -40,7 +43,6 @@ const MainNavigator = createStackNavigator(
 
     Favorite: { screen: Favorite },
 
-    EditPost: { screen: EditPost },
 
     Reminders: { screen: Reminders },
 
@@ -50,12 +52,8 @@ const MainNavigator = createStackNavigator(
     Publish: { screen: Publish },
     S3: { screen: S3 },
 
-    // FirstPage: { screen: FirstPage },
-    S3: { screen: S3 },
-
     PostPage: { screen: PostPage },
 
-    EditPage: { screen: EditPage },
 
 
     AssociationPage: { screen: AssociationPage }

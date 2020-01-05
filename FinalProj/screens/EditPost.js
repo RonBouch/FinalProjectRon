@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView
 } from "react-native";
@@ -432,20 +433,18 @@ class EditPost extends React.Component {
             </View>
             <KeyboardAvoidingView style={styles.container} behavior="padding">
               <ScrollView keyboardShouldPersistTaps="always">
-                <View style={{ marginTop: 10, padding: 5 }}>
+              <View style={s.titleView}>
                   <Text>פרטים:</Text>
                 </View>
                 <View style={{ alignItems: "center", width: "100%" }}>
                   {/* איש קשר  */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="user"
                       type="font-awesome"
                       color="black"
                       size={24}
                     />
-                    {/* <Text style={{ color: "red" }}> *</Text> */}
-
                     <TextInput
                       value={this.state.userName}
                       placeholder="איש קשר"
@@ -453,11 +452,11 @@ class EditPost extends React.Component {
                       onChangeText={e => {
                         this.setState({ userName: e });
                       }}
-                      style={{ marginLeft: "8%", fontSize: 14 }}
+                      style={s.textInputStyle}
                     />
                   </View>
                   {/* מס' טלפון */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="phone"
                       type="font-awesome"
@@ -474,11 +473,11 @@ class EditPost extends React.Component {
                       onChangeText={e => {
                         this.setState({ userPhone: e });
                       }}
-                      style={{ marginLeft: "8%", fontSize: 14 }}
+                      style={s.textInputStyle}
                     />
                   </View>
                   {/* עיר ישוב */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="map-marker"
                       type="font-awesome"
@@ -487,43 +486,26 @@ class EditPost extends React.Component {
                     />
 
                     <Fragment>
-                      {/* Single */}
                       <SearchableDropdown
-                        // onPress={(item) => {
-                        //   // const items = this.state.selectedItems;
-                        //   // items.push(item)
-                        //   this.setState({ selectedItems: item });
-                        // }}
                         placeholderTextColor="black"
                         onItemSelect={item => {
-                          // const items = this.state.selectedItems;
-                          // items.push(item)
                           this.setState({ selectedItems: item });
                         }}
                         containerStyle={{ width: "100%" }}
-                        // onRemoveItem={(item, index) => {
-                        //   const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-                        //   this.setState({ selectedItems: items });
-                        // }}
                         itemStyle={{
                           padding: 10,
                           height: 30,
                           backgroundColor: "white"
                         }}
+                        textInputStyle={s.textInputStyle}
+
                         itemsContainerStyle={{ maxHeight: 240 }}
                         items={data}
                         // defaultIndex={2}
                         resetValue={false}
                         textInputProps={{
                           placeholder: this.state.city,
-                          //   value: this.state.city,
                           underlineColorAndroid: "transparent",
-                          style: {
-                            //  margin: 10,
-                            //  borderWidth: 1,
-                            marginLeft: "8%",
-                            fontSize: 14
-                          },
                           onTextChange: text => console.log(text)
                         }}
                         listProps={{
@@ -533,7 +515,7 @@ class EditPost extends React.Component {
                     </Fragment>
                   </View>
                   {/* שם הפריט  */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="edit"
                       type="font-awesome"
@@ -543,10 +525,7 @@ class EditPost extends React.Component {
                     <TextInput
                       value={this.state.itemName}
                       placeholderTextColor="rgb(150,150,150)"
-                      style={{
-                        marginLeft: "8%",
-                        fontSize: 14
-                      }}
+                      style={s.textInputStyle}
                       placeholder="שם הפריט"
                       onChangeText={e => {
                         this.setState({ itemName: e });
@@ -554,7 +533,7 @@ class EditPost extends React.Component {
                     />
                   </View>
                   {/* קטגוריית הפריט */}
-                  <View style={styles.publushInput}>
+                  <View style={s.publishInput}>
                     <Icon
                       name="mouse-pointer"
                       type="font-awesome"
@@ -574,7 +553,7 @@ class EditPost extends React.Component {
                           ? ItemTypes[this.state.item.ItemType - 2].value
                           : ""
                       }
-                      style={{ marginLeft: "8%", fontSize: 14 }}
+                      style={s.textInputStyle}
                       dropdownMargins={{ min: 0, max: 10 }}
                       dropdownOffset={{ top: 0, left: 0 }}
                       data={ItemTypes}
@@ -584,7 +563,7 @@ class EditPost extends React.Component {
                     />
                   </View>
                   {/* על הפריט */}
-                  <View style={{ marginTop: 40 }}>
+                  <View style={s.titleView}>
                     <Text>תיאור:</Text>
                     <View
                       style={{
@@ -608,24 +587,15 @@ class EditPost extends React.Component {
                         }}
                         placeholderTextColor="rgb(150,150,150)"
                         placeholder="תאר את הפריט עד 60 תווים"
-                        style={{
-                          textAlign: "center",
-                          fontSize: 14
-                        }}
+                        style={s.textInputStyle}
                       />
                     </View>
                   </View>
                   {/* מצלמה/גלריה */}
-                  <View style={{ marginTop: 30, padding: 5, borderRadius: 40 }}>
+                  <View style={s.uploadImageView}>
                     <Text>תמונה:</Text>
                     <View style={{ flexDirection: "row" }}>
-                      <TouchableOpacity
-                        style={{
-                          margin: 5,
-                          elevation: 5,
-                          borderRadius: 10,
-                          backgroundColor: "white"
-                        }}
+                      <TouchableOpacity style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -645,32 +615,19 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[0] != null ? (
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10
-                            }}
+                          style={s.uploadImage}
                             source={{ uri: this.state.img[0] }}
                           ></Image>
                         ) : (
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10
-                            }}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                        style={{
-                          margin: 5,
-                          elevation: 5,
-                          borderRadius: 10,
-                          backgroundColor: "white"
-                        }}
+                      style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -690,42 +647,20 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[1] != null ? (
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10
-                            }}
+                          style={s.uploadImage}
                             source={{ uri: this.state.img[1] }}
                           ></Image>
                         ) : (
-                          // <View
-                          //   style={{
-                          //     height: 120,
-                          //     width: 100,
-                          //     alignItems: "center",
-                          //     justifyContent: "center"
-                          //   }}
-                          // >
-                          //   <Text style={{ fontSize: 50 }}>+</Text>
-                          // </View>
+                        
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10
-                            }}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                        style={{
-                          margin: 5,
-                          elevation: 5,
-                          borderRadius: 10,
-                          backgroundColor: "white"
-                        }}
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -745,21 +680,12 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[2] != null ? (
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10,
-                              borderWidth: 0.5
-                            }}
+                          style={s.uploadImage}
                             source={{ uri: this.state.img[2] }}
                           ></Image>
                         ) : (
                           <Image
-                            style={{
-                              height: 120,
-                              width: 100,
-                              borderRadius: 10
-                            }}
+                          style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -770,7 +696,7 @@ class EditPost extends React.Component {
                   <View>
                     <TouchableOpacity
                       onPress={() => this.handleSubmit()}
-                      style={styles.publishButton}
+                      style={s.publishButton}
                     >
                       <Text style={{ color: "white", fontSize: 20 }}>
                         הוסף {"  "}
@@ -802,3 +728,73 @@ class EditPost extends React.Component {
   }
 }
 export default EditPost;
+const s = StyleSheet.create({
+  titleView:{
+  marginTop: 10, 
+  padding: 5
+},
+textInputStyle:{
+  marginLeft: "8%", 
+  fontSize: 14
+},
+aboutView:{
+  color: "rgba(255,255,255,.9)",
+  fontWeight: "bold",
+  fontSize: 25,
+  fontFamily: "serif",
+  textShadowColor: "black",
+  textShadowOffset: { width: 1, height: 4 },
+  textShadowRadius: 5
+},
+uploadImageView:{
+  marginTop: 30,
+   padding: 5, 
+   borderRadius: 40 
+},
+uploadImage:{
+  height: 120,
+  width: 100,
+  borderRadius: 10
+},
+uploadImageTouch:{
+  margin: 5,
+  elevation: 5,
+  borderRadius: 10,
+  backgroundColor: "white"
+},
+publishButton: {
+  backgroundColor: "#6495ed",
+  flexDirection: "row",
+  height: 45,
+  marginTop: 30,
+  width: 180,
+  borderRadius: 20,
+  alignItems: "center",
+  justifyContent: "center",
+  borderColor: "white",
+  borderWidth: 1
+},
+radioPublish: {
+  flexDirection: "row",
+  margin: 10,
+  justifyContent: "center"
+},
+addImage: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center"
+},
+uploadIcon: {
+  marginLeft: 20,
+  marginRight: 20,
+  marginBottom: 5,
+  marginTop: 5
+},
+publishInput: {
+  flexDirection: "row",
+  marginTop: 20,
+  width: "70%",
+  borderBottomWidth: 0.5,
+  borderColor: "black"
+},
+});
