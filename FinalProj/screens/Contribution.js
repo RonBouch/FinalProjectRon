@@ -9,19 +9,15 @@ import {
   ScrollView,
   Linking,
   Dimensions,
-  TextInput
+  TextInput,
+  StyleSheet
 } from "react-native";
 import region from "../region";
 import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
-import Icon from "react-native-vector-icons/Ionicons";
-import { createAppContainer } from "react-navigation";
-import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-import Publish from "../screens/Publish";
-import Favorite from "../screens/Favorite";
-import { Item } from "native-base";
+
 
 export default class Contribution extends Component {
   constructor(props) {
@@ -451,29 +447,14 @@ export default class Contribution extends Component {
           return (
             <TouchableOpacity
               key={index}
-              style={{
-                backgroundColor: "white",
-                width: "95%",
-                height: 210,
-                margin: 10,
-                borderWidth: 1,
-                borderColor: "#e6e6fa",
-                elevation: 10
-              }}
+              style={styles.contributionView}
               onPress={() =>
                 navigate("PostPage", {
                   item: item
                 })
               }
             >
-              <View
-                style={{
-                  position: "absolute",
-                  zIndex: 1,
-                  margin: 5,
-                  left: 2
-                }}
-              >
+              <View  style={styles.heartIconStyle}>
                 <TouchableOpacity onPress={() => this.Favorite(item)}>
                   {this.state.itemsFromFavorite.filter(
                     data => data.ItemID == item.ItemID
@@ -495,17 +476,8 @@ export default class Contribution extends Component {
                     />
                   )}
                 </TouchableOpacity>
-                {/* <TouchableOpacity>
-                  <Icon
-                    name="md-call"
-                    size={30}
-                    color="green"
-                    onPress={() => this._pressCall(item.UserPhone)}
-                    
-                  />
-                </TouchableOpacity> */}
               </View>
-              <View style={{ height: "70%" }}>
+              <View style={styles.viewImageStyle}>
                 <Image
                   source={{
                     uri:
@@ -516,78 +488,32 @@ export default class Contribution extends Component {
                       "?time" +
                       new Date()
                   }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderTopLeftRadius: 100,
-                    borderBottomRightRadius: 100
-                  }}
+                  style={styles.imageStyle}
                 />
               </View>
               <View
-                style={{
-                  justifyContent: "space-around",
-                  flexDirection: "row-reverse",
-                  alignContant: "center",
-                  height: "30%",
-                  marginTop: 15
-                }}
+               style={styles.viewDetails}
                 onPress={() => {
                   this.infoWindow(index);
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text style={{ fontSize: 10, color: "gray" }}>תאריך</Text>
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      // fontWeight: "bold",
-                      fontSize: 16
-                      // fontFamily: "serif"
-                    }}
-                  >
-                    {item.ItemDate}
-                  </Text>
+              <View style={styles.viewTitle} >
+              <Text style={styles.txtTitle}>תאריך</Text>
+              <Text  style={styles.txtDetails} >
+                  {item.ItemDate}
+                </Text>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text style={{ fontSize: 10, color: "gray" }}>עיר</Text>
-
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      // fontWeight: "bold",
-                      // fontFamily: "serif",
-                      fontSize: 16
-                    }}
-                  >
-                    {item.City}
-                  </Text>
+                <View style={styles.viewTitle} >
+                <Text style={styles.txtTitle}>עיר</Text>
+                <Text style={styles.txtDetails} >
+                  {item.City}
+                </Text>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Text style={{ fontSize: 10, color: "gray" }}>למסירה</Text>
-                  <Text
-                    style={{
-                      color: "#6495ed",
-                      fontSize: 16
-                    }}
-                  >
-                    {item.ItemName}
-                  </Text>
+                <View style={styles.viewTitle} >
+                <Text style={styles.txtTitle}>למסירה</Text>
+                <Text style={styles.txtDetails} >
+                  {item.ItemName}
+                </Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -619,23 +545,8 @@ export default class Contribution extends Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  marginTop: 35,
-                  justifyContent: "center"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+              <View style={styles.textTopBar}>
+                <Text  style={styles.bigText} >
                   תרומות
                 </Text>
               </View>
@@ -649,26 +560,8 @@ export default class Contribution extends Component {
               </TouchableOpacity>
             </View>
 
-            <View
-              style={{
-                width: "100%",
-                height: "15%",
-                alignItems: "center",
-                backgroundColor: "white",
-                elevation: 15
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 200,
-                  marginTop: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderColor: "black",
-                  borderBottomWidth: 0.4
-                }}
-              >
+            <View style={s.optionView}>
+              <View  style={s.searchView}>
                 <Icona
                   iconStyle={{
                     marginEnd: "10%"
@@ -682,20 +575,10 @@ export default class Contribution extends Component {
                   placeholder="חפש פריט"
                   placeholderTextColor="black"
                   onChangeText={this.SearchItem}
-                  style={{
-                    fontSize: 12,
-                    width: 200
-                  }}
+                  style={s.searchTxtInput}
                 />
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 20,
-                  width: "100%",
-                  justifyContent: "space-around"
-                }}
-              >
+              <View   style={s.filteringView}>
                 <Text>סינון לפי:</Text>
                 <Dropdown
                   label="קטגוריה"
@@ -728,16 +611,10 @@ export default class Contribution extends Component {
 
             {Items.length != 0 ? (
               <ScrollView style={styles.scrollview}>
-                <View style={{ flex: 1, alignItems: "center" }}>{Items}</View>
+                <View style={styles.viewItems}>{Items}</View>
               </ScrollView>
             ) : (
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
+              <View   style={styles.viewNoItems}>
                 {this.state.LoadingFirstTime ?
                 <Text>אין פריטים להצגה</Text>
                 :
@@ -851,21 +728,10 @@ export default class Contribution extends Component {
 
           <TouchableOpacity
             onPress={() => this.setState({ remindView: true })}
-            style={{
-              position: "absolute",
-              bottom: 10,
-              // width: Dimensions.get("window").width - 85,
-              padding: 5,
-              right: "5%",
-              alignItems: "center",
-              flexDirection: "row-reverse",
-              backgroundColor: "white",
-              borderRadius: 200
-            }}
-          >
+            style={s.reminderTouch} >
             <Image
               source={require("../assets/add-reminder.png")}
-              style={{ width: 50, height: 50, borderRadius: 200 }}
+              style={s.reminderImg}
             />
           </TouchableOpacity>
         </View>
@@ -874,75 +740,46 @@ export default class Contribution extends Component {
   }
 }
 
-// const TabNavigator = createMaterialBottomTabNavigator(
-//   {
-//     Contribution: {
-//       screen: Contribution,
-//       navigationOptions: {
-//         tabBarLabel: "תרומות",
-//         tabBarIcon: ({ tintColor }) => (
-//           <View>
-//             <Icona
-//               color={tintColor}
-//               type="font-awesome"
-//               style={[{ color: tintColor }]}
-//               size={25}
-//               name="handshake-o"
-//             />
-//           </View>
-//         ),
-//         activeColor: "white",
-//         inactiveColor: "#46f6d7",
-//         barStyle: { backgroundColor: "#6495ed" }
-//       }
-//     },
-//     Publish: {
-//       screen: Publish,
-//       navigationOptions: {
-//         gesturesEnabled: false,
-//         tabBarLabel: "תן חפץ",
-//         tabBarIcon: ({ tintColor }) => (
-//           <View>
-//             <Icon
-//               style={[{ color: tintColor }]}
-//               size={25}
-//               name={"ios-add-circle-outline"}
-//             />
-//           </View>
-//         ),
-//         activeColor: "white",
-//         inactiveColor: "#46f6d7",
-//         barStyle: { backgroundColor: "#67baf6" }
-//       }
-//     },
-//     Favorite: {
-//       screen: Favorite,
-//       navigationOptions: {
-//         tabBarLabel: "מועדפים",
-//         tabBarIcon: ({ tintColor }) => (
-//           <View>
-//             <Icon
-//               style={[{ color: tintColor }]}
-//               size={25}
-//               name={"ios-star-half"}
-//             />
-//           </View>
-//           // <TouchableOpacity>
-//           //   <Image style={{width:30,height:30}} source={require("../assets/Favorite1.png")}/>
-//           // </TouchableOpacity>
-//         ),
-//         activeColor: "white",
-//         inactiveColor: "#46f6d7",
-//         barStyle: { backgroundColor: "#6495ed" }
-//       }
-//     }
-//   },
-//   {
-//     initialRouteName: "Contribution",
-//     activeColor: "#f0edf6",
-//     inactiveColor: "#226557",
-//     barStyle: { backgroundColor: "#3BAD87" }
-//   }
-// );
-
-// export default createAppContainer(TabNavigator);
+const s= StyleSheet.create({
+optionView:{
+  width: "100%",
+  height: "15%",
+  alignItems: "center",
+  backgroundColor: "white",
+  elevation: 15
+},
+searchView:{
+  flexDirection: "row",
+  width: 200,
+  marginTop: 10,
+  justifyContent: "center",
+  alignItems: "center",
+  borderColor: "black",
+  borderBottomWidth: 0.4
+},
+searchTxtInput:{
+  fontSize: 12,
+  width: 200
+},
+filteringView:{
+  flexDirection: "row",
+  marginTop: 20,
+  width: "100%",
+  justifyContent: "space-around"
+},
+reminderTouch:{
+  position: "absolute",
+  bottom: 10,
+  padding: 5,
+  right: "5%",
+  alignItems: "center",
+  flexDirection: "row-reverse",
+  backgroundColor: "white",
+  borderRadius: 200
+},
+reminderImg:{
+  width: 50, 
+  height: 50,
+ borderRadius: 200
+},
+});

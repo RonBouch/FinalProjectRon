@@ -24,6 +24,8 @@ import EditPost from "../screens/EditPost";
 
 const MainNavigator = createStackNavigator(
   {
+    Contribution: { screen: Contribution },
+
     ProfilePost: { screen: ProfilePost },
 
     Profile: { screen: Profile },
@@ -46,7 +48,6 @@ const MainNavigator = createStackNavigator(
 
     EditProfile: { screen: EditProfile },
 
-    Contribution: { screen: Contribution },
 
 
 
