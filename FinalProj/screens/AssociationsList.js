@@ -161,48 +161,21 @@ class AssociationsList extends Component {
           return (
             <View
               key={index}
-              style={{
-                margin: 10
-              }}
-            >
+              style={s.spaceBetween}>
               <TouchableOpacity
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: 140,
-                  width: 140,
-                  borderWidth: 1,
-                  borderColor: "black",
-                  borderRadius: 50,
-                  elevation: 10,
-                  backgroundColor: "#fff",
-                  shadowColor: "rgba(0,0,0, .4)",
-                  shadowOffset: { height: 1, width: 1 },
-                  shadowOpacity: 1,
-                  shadowRadius: 1
-                }}
+                style={s.touchAssociation}
                 onPress={() =>
                   navigate("AssociationPage", { association: association })
                 }
               >
                 <Image
-                  style={{ width: 80, height: 80, alignItems: "flex-start" }}
+                  style={s.imgS}
                   source={{
                     uri: association.AssociationImage
                   }}
                 ></Image>
-                <View
-                  style={{
-                    marginLeft: "5%"
-                  }}
-                >
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      fontSize: 12
-                    }}
-                  >
+                <View style={{ marginLeft: "5%" }}>
+                  <Text style={s.txtAssociationName}>
                     עמותת {association.AssociationName}
                   </Text>
                 </View>
@@ -265,25 +238,8 @@ class AssociationsList extends Component {
               </TouchableOpacity>
             </View>
             <View
-              style={{
-                width: "100%",
-                height: "15%",
-                alignItems: "center",
-                backgroundColor: "white",
-                elevation: 15
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 200,
-                  marginTop: 10,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderColor: "black",
-                  borderBottomWidth: 0.4
-                }}
-              >
+              style={s.viewDetails}>
+              <View style={s.searchAssociation}>
                 <Icona
                   iconStyle={{
                     marginEnd: "10%"
@@ -299,20 +255,10 @@ class AssociationsList extends Component {
                   onChangeText={e => {
                     this.setState({ searchAssociation: e });
                   }}
-                  style={{
-                    fontSize: 12,
-                    width: 200
-                  }}
+                  style={s.searchtxtInput}
                 />
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 30,
-                  width: "100%",
-                  justifyContent: "space-around"
-                }}
-              >
+              <View style={s.filteringView} >
                 <Text>סינון לפי:</Text>
                 <Dropdown
                   label="סוג עמותה"
@@ -334,27 +280,11 @@ class AssociationsList extends Component {
 
             <ScrollView style={styles.scrollview}>
             {Associations.length!=0?
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "space-around",
-                  marginTop: 10,
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  width: "100%"
-                }}
-              >
+              <View style={s.associationView}>
                {Associations}
               </View>
                :
-               <View
-               style={{
-                 flex: 1,
-                 alignItems: "center",
-                 justifyContent: "center",
-                 marginTop:30
-               }}
-             >
+               <View style={s.noAssociations}>
                {this.state.LoadingFirstTime ?
                <Text>אין פריטים להצגה</Text>
                :
@@ -372,3 +302,73 @@ class AssociationsList extends Component {
 }
 
 export default AssociationsList;
+const s = StyleSheet.create({
+  spaceBetween: {
+    margin: 10
+  },
+  touchAssociation:{
+    alignItems: "center",
+    justifyContent: "center",
+    height: 140,
+    width: 140,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 50,
+    elevation: 10,
+    backgroundColor: "#fff",
+    shadowColor: "rgba(0,0,0, .4)",
+    shadowOffset: { height: 1, width: 1 },
+   shadowOpacity: 1,
+    shadowRadius: 1
+  },
+  imgS:{
+    width: 80,
+     height: 80,
+      alignItems: "flex-start"
+  },
+  txtAssociationName:{
+    textAlign: "center",
+   fontWeight: "bold",
+    fontSize: 12
+  },
+  viewDetails:{
+    width: "100%",
+    height: "15%",
+    alignItems: "center",
+    backgroundColor: "white",
+    elevation: 15
+  },
+  searchAssociation:{
+    flexDirection: "row",
+    width: 200,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 0.4
+  },
+  searchtxtInput:{
+    fontSize: 12,
+    width: 200
+  },
+  filteringView:{
+    flexDirection: "row",
+    marginTop: 30,
+    width: "100%",
+    justifyContent: "space-around"
+  },
+  associationView:{
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginTop: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "100%"
+  },
+  noAssociations:{
+     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop:30
+  },
+});
