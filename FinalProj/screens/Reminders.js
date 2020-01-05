@@ -5,7 +5,8 @@ import {
   View,
   ImageBackground,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  StyleSheet
 } from "react-native";
 import { DrawerActions } from "react-navigation-drawer";
 import styles from "../Components/StyleSheet";
@@ -129,21 +130,8 @@ export default class Reminders extends Component {
           return (
             <View
               key={index}
-              style={{
-                marginTop: 10,
-                flexDirection: "row",
-                backgroundColor: "#6495ed",
-                borderColor: "white",
-                borderWidth: 1,
-                borderRadius: 20,
-                padding: 10,
-                height: 40,
-                elevation: 5,
-                justifyContent: "space-around",
-                alignItems: "center"
-              }}
-            >
-              <Text style={{ color: "white" }}>{item.ItemName}</Text>
+              style={s.viewReminder}>
+              <Text style={s.txtReminderName}>{item.ItemName}</Text>
 
               <TouchableOpacity
                 onPress={() => this.DeleteReminder(item)}
@@ -185,23 +173,8 @@ export default class Reminders extends Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  marginTop: 35,
-                  justifyContent: "center"
-                }}
-              >
-                <Text
-                  style={{
-                    color: "rgba(255,255,255,.9)",
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    fontFamily: "serif",
-                    textShadowColor: "black",
-                    textShadowOffset: { width: 1, height: 4 },
-                    textShadowRadius: 5
-                  }}
-                >
+              <View style={styles.textTopBar}>
+                <Text style={styles.bigText}>
                   ההתראות שלי
                 </Text>
               </View>
@@ -215,17 +188,11 @@ export default class Reminders extends Component {
               </TouchableOpacity>
             </View>
             {Items.length!=0 ? (
-              <View style={{ flex: 1, alignItems: "center", marginTop: 30 }}>
+              <View style={styles.viewItems}>
                 {Items}
               </View>
             ) : (
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
+              <View style={styles.viewNoItems}>
                 {this.state.LoadingFirstTime ?
                 <Text>אין פריטים להצגה</Text>
                 :
@@ -239,3 +206,21 @@ export default class Reminders extends Component {
     );
   }
 }
+const s =StyleSheet.create({
+viewReminder:{
+  marginTop: 10,
+  flexDirection: "row",
+  backgroundColor: "#6495ed",
+  borderColor: "white",
+  borderWidth: 1,
+  borderRadius: 20,
+  padding: 10,
+  height: 40,
+  elevation: 5,
+  justifyContent: "space-around",
+  alignItems: "center"
+},
+txtReminderName:{
+  color: "white"
+}
+});

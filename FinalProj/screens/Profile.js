@@ -226,7 +226,7 @@ export default class Profile extends React.Component {
                 {global.user.FirstName} {global.user.LastName}
               </Text>
               <TouchableOpacity
-                style={styles.updateButton}
+                style={s.updateButton}
                 onPress={() => this.props.navigation.navigate("EditProfile")}
               >
                 <Text style={styles.register}>
@@ -236,7 +236,7 @@ export default class Profile extends React.Component {
                 <Icon name="edit" type="font-awesome" color="black" size={18} />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.updateButton}
+                style={s.updateButton}
                 onPress={() => this.props.navigation.navigate("ProfilePost")}
               >
                 <Text style={styles.register}>
@@ -251,7 +251,7 @@ export default class Profile extends React.Component {
                 />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.updateButton}
+                style={s.updateButton}
                 onPress={() => this.props.navigation.navigate("Reminders")}
               >
                 <Text style={styles.register}>
@@ -293,4 +293,17 @@ txtName:{
   fontWeight: "bold",
   fontSize: 24
 },
+ updateButton: {
+    flexDirection: "row",
+    elevation: 10,
+    backgroundColor: "rgba(208, 222, 9,.9)",
+    borderRadius: 20,
+    height: 40,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "white",
+    borderWidth: 1,
+    marginTop: 10
+  },
 });
