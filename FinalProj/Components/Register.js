@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../Components/StyleSheet";
+import styles from "./StyleSheet";
 import {
   Text,
   View,
@@ -304,23 +304,22 @@ const s = StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: 5
   },
-  dataPicker:{
-  },
-  dataIcon:{
+  dataPicker: {},
+  dataIcon: {
     position: "absolute",
     left: 0,
     top: 4,
     marginLeft: 0
   },
-  dataInput:{
+  dataInput: {
     marginLeft: 36,
     borderColor: "white",
     borderWidth: 0,
     borderBottomWidth: 1
   },
-  txtRegister:{
-     fontWeight: "bold",
-      color: "white",
-       fontSize: 18 
-    },
-})
+  txtRegister: {
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 18
+  }
+});

@@ -2,18 +2,13 @@ import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
-import Slider from "../Components/Slider";
 import {
   View,
-  TouchableHighlight,
   Image,
   ImageBackground,
   TouchableOpacity,
-  Text,
-  ScrollView
+  Text
 } from "react-native";
-import { Linking } from "expo";
-import { Button } from "react-native-paper";
 
 class About extends Component {
   constructor(props) {
@@ -65,7 +60,7 @@ class About extends Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}

@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  TouchableHighlight,
   Alert,
   StyleSheet
 } from "react-native";
@@ -173,7 +172,7 @@ export default class Profile extends React.Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -227,7 +226,7 @@ export default class Profile extends React.Component {
               </Text>
               <TouchableOpacity
                 style={s.updateButton}
-                onPress={() => this.props.navigation.navigate("EditProfile")}
+                onPress={() => this.props.navigation.navigate("EditProfilePage")}
               >
                 <Text style={styles.register}>
                   עדכון פרטים
@@ -237,7 +236,7 @@ export default class Profile extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={s.updateButton}
-                onPress={() => this.props.navigation.navigate("ProfilePost")}
+                onPress={() => this.props.navigation.navigate("MyPostsPage")}
               >
                 <Text style={styles.register}>
                   הפירסומים שלי
@@ -252,7 +251,7 @@ export default class Profile extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={s.updateButton}
-                onPress={() => this.props.navigation.navigate("Reminders")}
+                onPress={() => this.props.navigation.navigate("MyAlertsPage")}
               >
                 <Text style={styles.register}>
                   ההתראות שלי

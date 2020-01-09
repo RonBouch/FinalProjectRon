@@ -13,13 +13,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  Dimensions,
-  ScrollView,
-  StatusBar,
-  TouchableHighlight,
-  Alert
+  ScrollView
 } from "react-native";
-import { Left } from "native-base";
 
 class AssociationsList extends Component {
   loadPage() {
@@ -33,32 +28,32 @@ class AssociationsList extends Component {
       associationTypes: null,
       dataAssociations: null,
       searchAssociation: "",
-      LoadingFirstTime:false,
+      LoadingFirstTime: false
     };
   }
   onFocusFunction = () => {
     this.setState({
-    LoadingFirstTime:false
-    })
+      LoadingFirstTime: false
+    });
     try {
       this.loadPage();
     } catch (e) {
       console.log("Errr Fetch ", e);
     }
-       // do some stuff on every screen focus
- };
+    // do some stuff on every screen focus
+  };
 
- // add a focus listener onDidMount
- async componentDidMount() {
-   this.focusListener = this.props.navigation.addListener("didFocus", () => {
-     this.onFocusFunction();
-   });
- }
+  // add a focus listener onDidMount
+  async componentDidMount() {
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.onFocusFunction();
+    });
+  }
 
- // and don't forget to remove the listener
- componentWillUnmount() {
-   this.focusListener.remove();
- }
+  // and don't forget to remove the listener
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
 
   GetAssociations = async () => {
     await fetch(
@@ -85,7 +80,7 @@ class AssociationsList extends Component {
             this.setState({
               dataAssociations: associations,
               associations: associations,
-              LoadingFirstTime:true
+              LoadingFirstTime: true
             });
           }
         },
@@ -159,13 +154,13 @@ class AssociationsList extends Component {
           association.AssociationName.includes(this.state.searchAssociation)
         ) {
           return (
-            <View
-              key={index}
-              style={s.spaceBetween}>
+            <View key={index} style={s.spaceBetween}>
               <TouchableOpacity
                 style={s.touchAssociation}
                 onPress={() =>
-                  navigate("AssociationPage", { association: association })
+                  navigate("AssociationSelectedPage", {
+                    association: association
+                  })
                 }
               >
                 <Image
@@ -229,7 +224,7 @@ class AssociationsList extends Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -237,8 +232,7 @@ class AssociationsList extends Component {
                 />
               </TouchableOpacity>
             </View>
-            <View
-              style={s.viewDetails}>
+            <View style={s.viewDetails}>
               <View style={s.searchAssociation}>
                 <Icona
                   iconStyle={{
@@ -258,7 +252,7 @@ class AssociationsList extends Component {
                   style={s.searchtxtInput}
                 />
               </View>
-              <View style={s.filteringView} >
+              <View style={s.filteringView}>
                 <Text>סינון לפי:</Text>
                 <Dropdown
                   label="סוג עמותה"
@@ -279,20 +273,17 @@ class AssociationsList extends Component {
             </View>
 
             <ScrollView style={styles.scrollview}>
-            {Associations.length!=0?
-              <View style={s.associationView}>
-               {Associations}
-              </View>
-               :
-               <View style={s.noAssociations}>
-               {this.state.LoadingFirstTime ?
-               <Text>אין פריטים להצגה</Text>
-               :
-               <Image source={require("../assets/loading.gif")}/>
-               }
-                             </View>
-                 }
-
+              {Associations.length != 0 ? (
+                <View style={s.associationView}>{Associations}</View>
+              ) : (
+                <View style={s.noAssociations}>
+                  {this.state.LoadingFirstTime ? (
+                    <Text>אין פריטים להצגה</Text>
+                  ) : (
+                    <Image source={require("../assets/loading.gif")} />
+                  )}
+                </View>
+              )}
             </ScrollView>
           </View>
         </View>
@@ -306,7 +297,7 @@ const s = StyleSheet.create({
   spaceBetween: {
     margin: 10
   },
-  touchAssociation:{
+  touchAssociation: {
     alignItems: "center",
     justifyContent: "center",
     height: 140,
@@ -318,27 +309,27 @@ const s = StyleSheet.create({
     backgroundColor: "#fff",
     shadowColor: "rgba(0,0,0, .4)",
     shadowOffset: { height: 1, width: 1 },
-   shadowOpacity: 1,
+    shadowOpacity: 1,
     shadowRadius: 1
   },
-  imgS:{
+  imgS: {
     width: 80,
-     height: 80,
-      alignItems: "flex-start"
+    height: 80,
+    alignItems: "flex-start"
   },
-  txtAssociationName:{
+  txtAssociationName: {
     textAlign: "center",
-   fontWeight: "bold",
+    fontWeight: "bold",
     fontSize: 12
   },
-  viewDetails:{
+  viewDetails: {
     width: "100%",
     height: "15%",
     alignItems: "center",
     backgroundColor: "white",
     elevation: 15
   },
-  searchAssociation:{
+  searchAssociation: {
     flexDirection: "row",
     width: 200,
     marginTop: 10,
@@ -347,17 +338,17 @@ const s = StyleSheet.create({
     borderColor: "black",
     borderBottomWidth: 0.4
   },
-  searchtxtInput:{
+  searchtxtInput: {
     fontSize: 12,
     width: 200
   },
-  filteringView:{
+  filteringView: {
     flexDirection: "row",
     marginTop: 30,
     width: "100%",
     justifyContent: "space-around"
   },
-  associationView:{
+  associationView: {
     alignItems: "center",
     justifyContent: "space-around",
     marginTop: 10,
@@ -365,10 +356,10 @@ const s = StyleSheet.create({
     flexWrap: "wrap",
     width: "100%"
   },
-  noAssociations:{
-     flex: 1,
+  noAssociations: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop:30
-  },
+    marginTop: 30
+  }
 });

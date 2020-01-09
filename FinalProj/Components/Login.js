@@ -1,9 +1,10 @@
 import React from "react";
 import * as Facebook from "expo-facebook";
 
-import styles from "../Components/StyleSheet";
+import styles from "./StyleSheet";
 import { Ionicons } from "@expo/vector-icons";
 import { LoginButton, AccessToken } from "react-native-fbsdk";
+import * as Google from "expo-google-app-auth";
 
 import {
   Text,
@@ -16,9 +17,9 @@ import {
   Dimensions,
   AsyncStorage
 } from "react-native";
-import registerForPushNotificationsAsync from "../Components/registerForPushNotificationsAsync";
+import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 import { Notifications } from "expo";
-import {Permissions} from 'expo-permissions'
+import { Permissions } from "expo-permissions";
 import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
@@ -36,12 +37,10 @@ class Login extends React.Component {
     this.state = {
       token: "",
       txtToken: "",
-      LoginRegister: true,
+      LoginRegister: true
     };
   }
 
-
-  
   changePass = e => {
     this.password = e;
   };
@@ -59,8 +58,6 @@ class Login extends React.Component {
   };
 
   validation = () => {
-    // this.props.navigation.navigate("HomeScreen");
-
     if (this.email == "") {
       this.setState({ message: "* אנא הכנס כתובת אימייל" });
     } else if (this.password == "") {
@@ -113,12 +110,77 @@ class Login extends React.Component {
         );
     }
   };
+  GoogleLogin = async () => {
+    let result = null;
+    await registerForPushNotificationsAsync().then(tok => {
+      this.setState({ token: tok });
+    });
+    this._notificationSubscription = Notifications.addListener(
+      this._handleNotification
+    );
+    try {
+      result = await Google.logInAsync({
+        androidClientId:
+          "135412253455-6ep88ehld8lcfch6g6ik6llgk326m3fj.apps.googleusercontent.com",
+        //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
+        scopes: ["profile", "email"]
+      });
+      console.log("Google Details - ", result);
+    } catch (e) {
+      console.log("error", e);
+    }
+    if (result != null) {
+      const data = {
+        firstName: result.user.givenName,
+        lastName: result.user.familyName,
+        email: result.user.email,
+        password: "Google",
+        gender: "Google",
+        birthday: "1900-01-01",
+        image: result.user.photoUrl,
+        token: this.state.token
+      };
+      fetch(
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithGoogle",
+        {
+          method: "post",
+          headers: new Headers({
+            "Content-Type": "application/Json;"
+          }),
+          body: JSON.stringify(data)
+        }
+      )
+        .then(res => {
+          return res.json();
+        })
+        .then(
+          result => {
+            let u = JSON.parse(result.d);
+            if (u == null) {
+              this.props.navigation.navigate("FirstPage");
 
+              return;
+            } else {
+              global.user = u;
+              this.storeData("user", u);
+              this.props.navigation.navigate("DrawerNavigator");
+            }
+            console.log(result.d);
+            console.log(result);
+          },
+          error => {
+            console.log("err post=", error);
+          }
+        );
+    }
+  };
   FacebookLogin = async () => {
     await registerForPushNotificationsAsync().then(tok => {
       this.setState({ token: tok });
     });
-    this._notificationSubscription = Notifications.addListener(this._handleNotification); 
+    this._notificationSubscription = Notifications.addListener(
+      this._handleNotification
+    );
     try {
       const { type, token } = await Facebook.logInWithReadPermissionsAsync(
         "2363780303934516",
@@ -132,7 +194,6 @@ class Login extends React.Component {
         }
       );
       if (type === "success") {
-
         const response = await fetch(
           `https://graph.facebook.com/me?fields=gender,birthday,email,first_name,last_name,picture.type(large)&access_token=${token}`
         );
@@ -151,7 +212,7 @@ class Login extends React.Component {
           gender: user.gender,
           birthday: user.birthday,
           image: user.picture.data.url,
-          token:this.state.token
+          token: this.state.token
         };
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/RegisterWithFacebook",
@@ -269,9 +330,7 @@ class Login extends React.Component {
         </View>
 
         <TouchableOpacity style={styles.loginButton} onPress={this.validation}>
-          <Text style={s.btnTxt}>
-            התחבר{"  "}
-          </Text>
+          <Text style={s.btnTxt}>התחבר{"  "}</Text>
           <Icon name="login" type="antdesign" color="white" size={20} />
         </TouchableOpacity>
 
@@ -284,7 +343,9 @@ class Login extends React.Component {
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("LoginWithGoogle")}
+            onPress={async () => {
+              await this.GoogleLogin();
+            }}
             style={s.spaceGoogleFace}
           >
             <Image
@@ -308,29 +369,30 @@ class Login extends React.Component {
     );
   }
 }
+
 export default withNavigation(Login);
-const s=StyleSheet.create({
-loginView:{
-  alignItems: "center"
-},
-txtInput:{
-width:150,
-},
-btnTxt:{
-  fontWeight: "bold",
-   color: "white",
+const s = StyleSheet.create({
+  loginView: {
+    alignItems: "center"
+  },
+  txtInput: {
+    width: 150
+  },
+  btnTxt: {
+    fontWeight: "bold",
+    color: "white",
     fontSize: 18
-},
-googleImg:{
-  height: 55,
-   width: 55,
-   marginTop: 8
-},
-facebookImg:{
-  height: 70, 
-  width: 70
-},
-spaceGoogleFace:{
-  margin: 20
-},
+  },
+  googleImg: {
+    height: 55,
+    width: 55,
+    marginTop: 8
+  },
+  facebookImg: {
+    height: 70,
+    width: 70
+  },
+  spaceGoogleFace: {
+    margin: 20
+  }
 });

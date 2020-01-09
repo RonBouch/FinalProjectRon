@@ -5,7 +5,6 @@ import { Icon as Icona } from "react-native-elements";
 import Slider from "../Components/PostPageSlider";
 import {
   View,
-  TouchableHighlight,
   Image,
   ImageBackground,
   TouchableOpacity,
@@ -86,7 +85,7 @@ class PostPage extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -100,9 +99,7 @@ class PostPage extends Component {
               navigation={this.props.navigation}
             />
 
-            <Text style={s.titleTxt}>
-              {this.state.item.ItemName}
-            </Text>
+            <Text style={s.titleTxt}>{this.state.item.ItemName}</Text>
 
             <View style={s.detailsView}>
               <View style={s.detailsLine}>
@@ -144,9 +141,7 @@ class PostPage extends Component {
             <View style={s.itemAboutView}></View>
 
             {this.state.item.ItemAbout != "" ? (
-              <Text style={s.txtItemAbout}>
-                {this.state.item.ItemAbout}
-              </Text>
+              <Text style={s.txtItemAbout}>{this.state.item.ItemAbout}</Text>
             ) : (
               console.log("No Details")
             )}
@@ -158,32 +153,32 @@ class PostPage extends Component {
 }
 
 export default PostPage;
-const s=StyleSheet.create({
-titleTxt:{
-  fontWeight: "bold",
-   fontSize: 24 
-},
-detailsView:{
-  width: "90%",
-   height: 80,
+const s = StyleSheet.create({
+  titleTxt: {
+    fontWeight: "bold",
+    fontSize: 24
+  },
+  detailsView: {
+    width: "90%",
+    height: 80,
     alignItems: "flex-start",
     justifyContent: "space-between",
-  marginTop: 20
-},
-detailsLine:{
-  flexDirection: "row" 
-},
-iconStyle:{
-  marginEnd: "10%"
-},
-txtItemAbout:{
-  fontSize: 14, 
-  marginTop: 30 
-},
-itemAboutView:{
-  borderBottomWidth: 1,
-  width: "90%",
-  margin: 20,
-  elevation: 5
-},
-})
+    marginTop: 20
+  },
+  detailsLine: {
+    flexDirection: "row"
+  },
+  iconStyle: {
+    marginEnd: "10%"
+  },
+  txtItemAbout: {
+    fontSize: 14,
+    marginTop: 30
+  },
+  itemAboutView: {
+    borderBottomWidth: 1,
+    width: "90%",
+    margin: 20,
+    elevation: 5
+  }
+});

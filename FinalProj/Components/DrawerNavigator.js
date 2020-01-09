@@ -1,69 +1,49 @@
-import React, { Component } from "react";
 import { Dimensions } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
-
-import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
+
 import ContentComponent from "./ContentComponent";
-import AssociationsList from "../screens/AssociationsList";
-import AssociationPage from "../screens/AssociationPage";
-import Home from "../screens/Home";
-import Reminders from "../screens/Reminders";
-import Publish from "../screens/Publish";
-import Profile from "../screens/Profile";
-import Favorite from "../screens/Favorite";
-// import EditPage from "../screens/EditPage";
-import ProfilePost from "../screens/ProfilePost";
-import PostPage from "../screens/PostPage";
-import EditProfile from "../screens/EditProfile";
-import About from "../screens/About";
-import FirstPage from "../screens/FirstPage";
-import Contribution from "../screens/Contribution";
-import S3 from "../screens/S3.js";
-import EditPost from "../screens/EditPost";
+import AssociationsListPage from "../Screens/AssociationsListPage";
+import AssociationSelectedPage from "../Screens/AssociationSelectedPage";
+import HomePage from "../Screens/HomePage";
+import MyAlertsPage from "../Screens/MyAlertsPage";
+import PublishPostPage from "../Screens/PublishPostPage";
+import MyProfilePage from "../Screens/MyProfilePage";
+import MyFavoritesPage from "../Screens/MyFavoritesPage";
+import MyPostsPage from "../Screens/MyPostsPage";
+import PostSelectedPage from "../Screens/PostSelectedPage";
+import EditProfilePage from "../Screens/EditProfilePage";
+import AboutPage from "../Screens/AboutPage";
+import PostsListPage from "../Screens/PostsListPage";
+import EditPostPage from "../Screens/EditPostPage";
 
 const MainNavigator = createStackNavigator(
   {
-    Home: { screen: Home },
+    HomePage: { screen: HomePage },
 
-    Contribution: { screen: Contribution },
+    PostsListPage: { screen: PostsListPage },
 
-    ProfilePost: { screen: ProfilePost },
+    MyPostsPage: { screen: MyPostsPage },
 
-    Profile: { screen: Profile },
+    MyProfilePage: { screen: MyProfilePage },
 
+    MyFavoritesPage: { screen: MyFavoritesPage },
 
-    Favorite: { screen: Favorite },
+    EditPostPage: { screen: EditPostPage },
 
+    AssociationsListPage: { screen: AssociationsListPage },
 
+    PublishPostPage: { screen: PublishPostPage },
 
-    EditPost: { screen: EditPost },
-    
-    AssociationsList: { screen: AssociationsList },
+    EditProfilePage: { screen: EditProfilePage },
 
-    Publish: { screen: Publish },
+    MyAlertsPage: { screen: MyAlertsPage },
 
+    AboutPage: { screen: AboutPage },
 
+    PostSelectedPage: { screen: PostSelectedPage },
 
-
-
-    EditProfile: { screen: EditProfile },
-
-
-
-
-    Reminders: { screen: Reminders },
-
-
-    About: { screen: About },
-    Publish: { screen: Publish },
-    S3: { screen: S3 },
-
-    PostPage: { screen: PostPage },
-
-
-
-    AssociationPage: { screen: AssociationPage }
+    AssociationSelectedPage: { screen: AssociationSelectedPage }
   },
   {
     headerMode: "none"
@@ -84,9 +64,3 @@ const DNav = createDrawerNavigator(
   }
 );
 export default DNav;
-// const AppContainer = createAppContainer(DNav);
-// export default class DrawerNavigator extends Component {
-//   render() {
-//     return <AppContainer />;
-//   }
-// }

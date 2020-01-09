@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import {
   View,
-  TouchableHighlight,
   Image,
   ImageBackground,
   TouchableOpacity,
   Text,
   ScrollView,
   Linking,
-  Dimensions,
   TextInput,
   StyleSheet
 } from "react-native";
@@ -17,7 +15,6 @@ import { Dropdown } from "react-native-material-dropdown";
 import { DrawerActions } from "react-navigation-drawer";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
-
 
 export default class Contribution extends Component {
   constructor(props) {
@@ -37,10 +34,9 @@ export default class Contribution extends Component {
       remindView: false,
       nameToRemind: "",
       reminders: null,
-      LoadingFirstTime:false,
+      LoadingFirstTime: false
     };
     _isMounted = false;
-
   }
   static navigationOptions = {
     drawerLabel: "Contribution"
@@ -61,7 +57,7 @@ export default class Contribution extends Component {
   }
 
   componentWillUnmount() {
-    console.log("Bye Bye")
+    console.log("Bye Bye");
     _isMounted = false;
     this.focusListener.remove();
   }
@@ -96,9 +92,9 @@ export default class Contribution extends Component {
         console.log("err post=", error);
       };
   }
-  GetReminders =async()=> {
+  GetReminders = async () => {
     const idToSend = {
-      userid:0
+      userid: 0
     };
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetReminders",
@@ -108,7 +104,6 @@ export default class Contribution extends Component {
           "Content-Type": "application/Json;"
         }),
         body: JSON.stringify(idToSend)
-
       }
     )
       .then(res => {
@@ -116,38 +111,37 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
-          if(_isMounted)
-          {
-          let reminders = JSON.parse(result.d);
-          if (reminders == null) {
-            this.setState({
-              message: "לא קיימים סוגי פריטים"
-            });
-            return;
-          } else {
-            this.setState({
-              reminders: reminders
-            });
-
-            if (
-              this.state.items[0] != null &&
-              this.state.items[0].Reminder == ""
-            ) {
-              data = reminders.filter(re => {
-                return re.ItemName.includes(this.state.items[0].ItemName);
+          if (_isMounted) {
+            let reminders = JSON.parse(result.d);
+            if (reminders == null) {
+              this.setState({
+                message: "לא קיימים סוגי פריטים"
               });
-              for (i = 0; i < data.length; i++) {
-                this.SendPushFromClient(data[i]);
+              return;
+            } else {
+              this.setState({
+                reminders: reminders
+              });
+
+              if (
+                this.state.items[0] != null &&
+                this.state.items[0].Reminder == ""
+              ) {
+                data = reminders.filter(re => {
+                  return re.ItemName.includes(this.state.items[0].ItemName);
+                });
+                for (i = 0; i < data.length; i++) {
+                  this.SendPushFromClient(data[i]);
+                }
               }
             }
           }
-        }
         },
         error => {
           console.log("err post=", error);
         }
       );
-  }
+  };
   SendPushFromClient = R => {
     let per = {
       name: "תן יד",
@@ -198,30 +192,29 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
-          if(_isMounted)
-          {
-          let itemsFromFavorite = JSON.parse(result.d);
-          if (itemsFromFavorite == null) {
-            console.log("no Favorite");
-            return;
-          } else {
-            this.setState({
-              itemsFromFavorite: itemsFromFavorite
-            });
+          if (_isMounted) {
+            let itemsFromFavorite = JSON.parse(result.d);
+            if (itemsFromFavorite == null) {
+              console.log("no Favorite");
+              return;
+            } else {
+              this.setState({
+                itemsFromFavorite: itemsFromFavorite
+              });
+            }
+            this.GetItemTypes();
           }
-          this.GetItemTypes();
-        }
-      },
+        },
         error => {
           console.log("err post=", error);
         }
       );
   };
 
-  GetItems = async() => {
+  GetItems = async () => {
     this.setState({
-      LoadingFirstTime:false
-    })
+      LoadingFirstTime: false
+    });
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
       {
@@ -237,25 +230,24 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
-          if(_isMounted)
-          {
+          if (_isMounted) {
             // console.log("fetch POST= ", result);
-          let items = JSON.parse(result.d);
-          if (items == null) {
-            this.setState({
-              message: "הרשמה נכשלה",
-              LoadingFirstTime:true
-            });
-            return;
-          } else {
-            // console.log("U = " + items);
-            this.setState({
-              dataItems: items,
-              items: items,
-            });
-            this.GetItemsFromFavorite();
+            let items = JSON.parse(result.d);
+            if (items == null) {
+              this.setState({
+                message: "הרשמה נכשלה",
+                LoadingFirstTime: true
+              });
+              return;
+            } else {
+              // console.log("U = " + items);
+              this.setState({
+                dataItems: items,
+                items: items
+              });
+              this.GetItemsFromFavorite();
+            }
           }
-        }
         },
         error => {
           console.log("err post=", error);
@@ -278,22 +270,21 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
-          if(_isMounted)
-          {
-          let itemTypes = JSON.parse(result.d);
-          if (itemTypes == null) {
-            this.setState({
-              message: "לא קיימים סוגי פריטים"
-            });
-            return;
-          } else {
-            this.setState({
-              itemTypes: itemTypes
-            });
-            this.GetReminders();
+          if (_isMounted) {
+            let itemTypes = JSON.parse(result.d);
+            if (itemTypes == null) {
+              this.setState({
+                message: "לא קיימים סוגי פריטים"
+              });
+              return;
+            } else {
+              this.setState({
+                itemTypes: itemTypes
+              });
+              this.GetReminders();
+            }
           }
-        }
-      },
+        },
         error => {
           console.log("err post=", error);
         }
@@ -377,11 +368,10 @@ export default class Contribution extends Component {
           return item.ItemType == typeId;
         });
       }
-      if(data.length==0){
-
-        this.setState({LoadingFirstTime:true})
+      if (data.length == 0) {
+        this.setState({ LoadingFirstTime: true });
       }
-      this.setState({ items: data, filterItemsByType: typeId, });
+      this.setState({ items: data, filterItemsByType: typeId });
     } else {
       if (this.state.filterItemsByRegion != null) {
         let data = this.state.dataItems.filter(item => {
@@ -408,9 +398,8 @@ export default class Contribution extends Component {
           return item.Region == value;
         });
       }
-      if(data.length==0){
-
-        this.setState({LoadingFirstTime:true})
+      if (data.length == 0) {
+        this.setState({ LoadingFirstTime: true });
       }
       this.setState({ items: data, filterItemsByRegion: value });
     } else {
@@ -418,12 +407,11 @@ export default class Contribution extends Component {
         let data = this.state.dataItems.filter(item => {
           return item.ItemType == this.state.filterItemsByType;
         });
-        this.setState({ items: data, filterItemsByRegion: null});
+        this.setState({ items: data, filterItemsByRegion: null });
       } else {
         this.setState({
           items: this.state.dataItems,
-          filterItemsByRegion: null,
-          
+          filterItemsByRegion: null
         });
       }
     }
@@ -440,7 +428,7 @@ export default class Contribution extends Component {
         ItemTypes.push({ value: type.ItemType });
       });
     }
-    
+
     if (this.state.items != null && this.state.itemsFromFavorite != null) {
       Items = this.state.items.map((item, index) => {
         if (item.ItemName.includes(this.state.searchItem)) {
@@ -449,12 +437,12 @@ export default class Contribution extends Component {
               key={index}
               style={styles.contributionView}
               onPress={() =>
-                navigate("PostPage", {
+                navigate("PostSelectedPage", {
                   item: item
                 })
               }
             >
-              <View  style={styles.heartIconStyle}>
+              <View style={styles.heartIconStyle}>
                 <TouchableOpacity onPress={() => this.Favorite(item)}>
                   {this.state.itemsFromFavorite.filter(
                     data => data.ItemID == item.ItemID
@@ -483,8 +471,7 @@ export default class Contribution extends Component {
                     uri:
                       "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                       0 +
-                      item.ItemImg
-                      +
+                      item.ItemImg +
                       "?time" +
                       new Date()
                   }}
@@ -492,33 +479,27 @@ export default class Contribution extends Component {
                 />
               </View>
               <View
-               style={styles.viewDetails}
+                style={styles.viewDetails}
                 onPress={() => {
                   this.infoWindow(index);
                 }}
               >
-              <View style={styles.viewTitle} >
-              <Text style={styles.txtTitle}>תאריך</Text>
-              <Text  style={styles.txtDetails} >
-                  {item.ItemDate}
-                </Text>
+                <View style={styles.viewTitle}>
+                  <Text style={styles.txtTitle}>תאריך</Text>
+                  <Text style={styles.txtDetails}>{item.ItemDate}</Text>
                 </View>
-                <View style={styles.viewTitle} >
-                <Text style={styles.txtTitle}>עיר</Text>
-                <Text style={styles.txtDetails} >
-                  {item.City}
-                </Text>
+                <View style={styles.viewTitle}>
+                  <Text style={styles.txtTitle}>עיר</Text>
+                  <Text style={styles.txtDetails}>{item.City}</Text>
                 </View>
-                <View style={styles.viewTitle} >
-                <Text style={styles.txtTitle}>למסירה</Text>
-                <Text style={styles.txtDetails} >
-                  {item.ItemName}
-                </Text>
+                <View style={styles.viewTitle}>
+                  <Text style={styles.txtTitle}>למסירה</Text>
+                  <Text style={styles.txtDetails}>{item.ItemName}</Text>
                 </View>
               </View>
             </TouchableOpacity>
           );
-}
+        }
       });
     }
 
@@ -546,12 +527,10 @@ export default class Contribution extends Component {
                 />
               </TouchableOpacity>
               <View style={styles.textTopBar}>
-                <Text  style={styles.bigText} >
-                  תרומות
-                </Text>
+                <Text style={styles.bigText}>תרומות</Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -561,7 +540,7 @@ export default class Contribution extends Component {
             </View>
 
             <View style={s.optionView}>
-              <View  style={s.searchView}>
+              <View style={s.searchView}>
                 <Icona
                   iconStyle={{
                     marginEnd: "10%"
@@ -578,7 +557,7 @@ export default class Contribution extends Component {
                   style={s.searchTxtInput}
                 />
               </View>
-              <View   style={s.filteringView}>
+              <View style={s.filteringView}>
                 <Text>סינון לפי:</Text>
                 <Dropdown
                   label="קטגוריה"
@@ -614,13 +593,13 @@ export default class Contribution extends Component {
                 <View style={styles.viewItems}>{Items}</View>
               </ScrollView>
             ) : (
-              <View   style={styles.viewNoItems}>
-                {this.state.LoadingFirstTime ?
-                <Text>אין פריטים להצגה</Text>
-                :
-                <Image source={require("../assets/loading.gif")}/>
-                }
-                </View>
+              <View style={styles.viewNoItems}>
+                {this.state.LoadingFirstTime ? (
+                  <Text>אין פריטים להצגה</Text>
+                ) : (
+                  <Image source={require("../assets/loading.gif")} />
+                )}
+              </View>
             )}
           </View>
           {this.state.remindView ? (
@@ -728,7 +707,8 @@ export default class Contribution extends Component {
 
           <TouchableOpacity
             onPress={() => this.setState({ remindView: true })}
-            style={s.reminderTouch} >
+            style={s.reminderTouch}
+          >
             <Image
               source={require("../assets/add-reminder.png")}
               style={s.reminderImg}
@@ -740,46 +720,46 @@ export default class Contribution extends Component {
   }
 }
 
-const s= StyleSheet.create({
-optionView:{
-  width: "100%",
-  height: "15%",
-  alignItems: "center",
-  backgroundColor: "white",
-  elevation: 15
-},
-searchView:{
-  flexDirection: "row",
-  width: 200,
-  marginTop: 10,
-  justifyContent: "center",
-  alignItems: "center",
-  borderColor: "black",
-  borderBottomWidth: 0.4
-},
-searchTxtInput:{
-  fontSize: 12,
-  width: 200
-},
-filteringView:{
-  flexDirection: "row",
-  marginTop: 20,
-  width: "100%",
-  justifyContent: "space-around"
-},
-reminderTouch:{
-  position: "absolute",
-  bottom: 10,
-  padding: 5,
-  right: "5%",
-  alignItems: "center",
-  flexDirection: "row-reverse",
-  backgroundColor: "white",
-  borderRadius: 200
-},
-reminderImg:{
-  width: 50, 
-  height: 50,
- borderRadius: 200
-},
+const s = StyleSheet.create({
+  optionView: {
+    width: "100%",
+    height: "15%",
+    alignItems: "center",
+    backgroundColor: "white",
+    elevation: 15
+  },
+  searchView: {
+    flexDirection: "row",
+    width: 200,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "black",
+    borderBottomWidth: 0.4
+  },
+  searchTxtInput: {
+    fontSize: 12,
+    width: 200
+  },
+  filteringView: {
+    flexDirection: "row",
+    marginTop: 20,
+    width: "100%",
+    justifyContent: "space-around"
+  },
+  reminderTouch: {
+    position: "absolute",
+    bottom: 10,
+    padding: 5,
+    right: "5%",
+    alignItems: "center",
+    flexDirection: "row-reverse",
+    backgroundColor: "white",
+    borderRadius: 200
+  },
+  reminderImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 200
+  }
 });

@@ -1,9 +1,7 @@
-import React from "react";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import Register from "./screens/Register";
-import S1 from "./screens/S1";
-import FirstPage from "./screens/FirstPage";
+import React, { Component } from "react";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import FirstPage from "./Screens/FirstPage";
 import DrawerNavigator from "./Components/DrawerNavigator";
 import LoginWithFacebook from "./Components/LoginWithFacebook";
 import LoginWithGoogle from "./Components/LoginWithGoogle";
@@ -29,13 +27,12 @@ const MainNavigator = createStackNavigator(
     DrawerNavigator: { screen: DrawerNavigator },
 
     Login: { screen: Login },
+
+    Register: { screen: Register },
+
     LoginWithFacebook: { screen: LoginWithFacebook },
 
-    LoginWithGoogle: { screen: LoginWithGoogle },
-    Home: { screen: Home },
-
-    S1: { screen: S1 },
-    Register: { screen: Register }
+    LoginWithGoogle: { screen: LoginWithGoogle }
   },
   {
     headerMode: "none",

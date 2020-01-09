@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../Components/StyleSheet";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "../Components/Login";
+import Register from "../Components/Register";
 import {
   Text,
   View,
@@ -9,10 +9,8 @@ import {
   ImageBackground,
   AsyncStorage,
   Image,
-  KeyboardAvoidingView,
   StyleSheet
 } from "react-native";
-import { getLightEstimationEnabled } from "expo/build/AR";
 
 export default class FirstPage extends React.Component {
   constructor(props) {
@@ -39,7 +37,6 @@ export default class FirstPage extends React.Component {
       this.props.navigation.navigate("DrawerNavigator");
     }
   };
-
 
   changeToRegister = () => {
     this.setState({ LoginRegister: false });
@@ -92,8 +89,9 @@ export default class FirstPage extends React.Component {
     );
   }
 }
-const s =StyleSheet.create({
-  logoStyle:{
-    height: 120, width: 120
-  },
+const s = StyleSheet.create({
+  logoStyle: {
+    height: 120,
+    width: 120
+  }
 });

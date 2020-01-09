@@ -4,16 +4,16 @@ import { Alert } from "react-native";
 import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 
 export default class LoginWithFacebook extends React.Component {
-constructor(props) {
-  super(props);
-  this.state={
-    notification:"",
+  constructor(props) {
+    super(props);
+    this.state = {
+      notification: ""
+    };
   }
-}
 
   componentDidMount() {
-   console.log("FAce BOOOKK LOGIN")
-     registerForPushNotificationsAsync().then(tok => {
+    console.log("FAce BOOOKK LOGIN");
+    registerForPushNotificationsAsync().then(tok => {
       this.setState({ token: tok });
     });
     console.log("Token   = " + this.state.tok);
@@ -21,7 +21,6 @@ constructor(props) {
       this._handleNotification
     );
     this.FacebookLogin();
-
   }
   _handleNotification = notification => {
     this.setState({ notification: notification });
@@ -72,16 +71,9 @@ constructor(props) {
         const response = await fetch(
           `https://graph.facebook.com/me?fields=email,name,picture.type(large)&access_token=${token}`
         );
-      
 
         const user = await response.json();
-        // console.log("user =", user);
 
-        // this.setState({
-        //   firstName: user.name,
-        //   image: user.picture.data.url,
-        //   email: user.email
-        // });
         const data = {
           firstName: user.name,
           lastName: "",

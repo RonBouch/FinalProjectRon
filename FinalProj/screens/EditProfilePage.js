@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  TouchableHighlight,
   AsyncStorage,
   KeyboardAvoidingView,
   Image
@@ -84,7 +83,7 @@ export default class EditProfile extends React.Component {
             global.user = u;
             this.storeData("user", u);
 
-            this.props.navigation.navigate("Home");
+            this.props.navigation.navigate("HomePage");
           }
           console.log(result.d);
           console.log(result);
@@ -125,7 +124,7 @@ export default class EditProfile extends React.Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}

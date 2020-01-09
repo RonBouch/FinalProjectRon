@@ -5,7 +5,6 @@ import {
   View,
   ImageBackground,
   Image,
-  TouchableHighlight,
   StyleSheet
 } from "react-native";
 import { DrawerActions } from "react-navigation-drawer";
@@ -179,7 +178,7 @@ export default class Reminders extends Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}

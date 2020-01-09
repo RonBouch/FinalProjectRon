@@ -4,7 +4,6 @@ import { DrawerActions } from "react-navigation-drawer";
 import { Icon } from "react-native-elements";
 import {
   View,
-  TouchableHighlight,
   Image,
   StyleSheet,
   ImageBackground,
@@ -19,45 +18,42 @@ class AssociationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      association: null,
-      url: null,
-      email: null,
-      adress: null,
-      phone: null,
-      additionalPhone: null
+      association: null //משתנה שמכיל את פרטי העמותה
     };
   }
 
+  //פונקציה לפתיחת אתר האינטרנט
   openWebSite = () => {
-    Linking.openURL(this.state.url);
+    Linking.openURL(this.state.association.AssociationWebsite);
   };
 
+  //פונקציה לפתיחת המייל
   sendMail = () => {
-    Linking.openURL("mailto:" + this.state.email);
+    Linking.openURL("mailto:" + this.state.association.AssociationEmail);
   };
 
+  //פונקציה לפתיחת ניווט
   openAdress = () => {
     Linking.openURL(
-      "https://www.google.com/maps/search/?api=1&query=" + this.state.adress
+      "https://www.google.com/maps/search/?api=1&query=" +
+        this.state.association.AssociationAdress
     );
   };
 
+  //פונקציה לחיוג למספר
   callPhone = () => {
-    Linking.openURL("tel:" + this.state.phone);
+    Linking.openURL("tel:" + this.state.association.AssociationPhone);
   };
 
+  //פונקציה לחיוג למספר
   callAdditionalPhone = () => {
-    Linking.openURL("tel:" + this.state.additionalPhone);
+    Linking.openURL("tel:" + this.state.association.AssociationAdditionalPhone);
   };
 
   render() {
+    //הכנסת העמותה הנבחרת לתוך המשתנה
     this.state.association = this.props.navigation.state.params.association;
-    this.state.url = this.state.association.AssociationWebsite;
-    this.state.email = this.state.association.AssociationEmail;
-    this.state.adress = this.state.association.AssociationAdress;
-    this.state.phone = this.state.association.AssociationPhone;
-    this.state.additionalPhone = this.state.association.AssociationAdditionalPhone;
-    console.log("image: ", this.state.association.AssociationImage);
+
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -76,7 +72,7 @@ class AssociationPage extends Component {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -87,7 +83,7 @@ class AssociationPage extends Component {
 
             <ScrollView style={styles.scrollview}>
               <View style={s.viewHeader}>
-                <View style={{width: "60%"}}>
+                <View style={{ width: "60%" }}>
                   <Text style={s.txtTitle}>
                     עמותת {this.state.association.AssociationName}
                   </Text>
@@ -120,15 +116,12 @@ class AssociationPage extends Component {
                 </View>
                 <Image
                   style={s.imgS}
-                  source={{uri: this.state.association.AssociationImage}}
+                  source={{ uri: this.state.association.AssociationImage }}
                 ></Image>
               </View>
 
               {this.state.association.AssociationAdress != "" ? (
-                <Button
-                  onPress={this.openAdress}
-                  style={s.btnLinks}
-                >
+                <Button onPress={this.openAdress} style={s.btnLinks}>
                   ניווט
                 </Button>
               ) : (
@@ -136,10 +129,7 @@ class AssociationPage extends Component {
               )}
 
               {this.state.association.AssociationEmail != "" ? (
-                <Button
-                  onPress={this.sendMail}
-                  style={s.btnLinks}
-                >
+                <Button onPress={this.sendMail} style={s.btnLinks}>
                   פנייה באמצעות מייל
                 </Button>
               ) : (
@@ -147,10 +137,7 @@ class AssociationPage extends Component {
               )}
 
               {this.state.association.AssociationWebsite != "" ? (
-                <Button
-                  onPress={this.openWebSite}
-                  style={s.btnLinks}
-                >
+                <Button onPress={this.openWebSite} style={s.btnLinks}>
                   לאתר האינטרנט
                 </Button>
               ) : (
@@ -178,29 +165,29 @@ class AssociationPage extends Component {
 
 export default AssociationPage;
 const s = StyleSheet.create({
- viewHeader:{ 
-   width: "100%",
- flexDirection: "row",
- padding: "5%"
-},
-txtTitle:{
-  fontWeight: "bold", 
-  fontSize: 20
-},
-txtPhone:{
-color:'green'
-},
-imgS:{
-  width: 100,
-  height: 100,
-  width: "40%"
-},
-btnLinks:{
-  color: "blue",
-   fontWeight: "bold"
-},
-txtDetails:{
-  fontSize: 14, 
-  padding: 10
-},
+  viewHeader: {
+    width: "100%",
+    flexDirection: "row",
+    padding: "5%"
+  },
+  txtTitle: {
+    fontWeight: "bold",
+    fontSize: 20
+  },
+  txtPhone: {
+    color: "green"
+  },
+  imgS: {
+    width: 100,
+    height: 100,
+    width: "40%"
+  },
+  btnLinks: {
+    color: "blue",
+    fontWeight: "bold"
+  },
+  txtDetails: {
+    fontSize: 14,
+    padding: 10
+  }
 });
