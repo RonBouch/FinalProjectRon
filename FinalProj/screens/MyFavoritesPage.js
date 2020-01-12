@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  TouchableHighlight,
   Linking,
   ImageBackground,
   ScrollView
@@ -178,7 +177,7 @@ export default class Favorite extends React.Component {
             key={index}
             style={styles.contributionView}
             onPress={() =>
-              navigate("PostPage", {
+              navigate("PostSelectedPage", {
                 item: item
               })
             }
@@ -267,7 +266,7 @@ export default class Favorite extends React.Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}

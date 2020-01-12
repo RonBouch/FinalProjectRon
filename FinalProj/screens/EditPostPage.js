@@ -17,7 +17,6 @@ import {
   ScrollView,
   ImageBackground,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView
 } from "react-native";
 class EditPost extends React.Component {
@@ -57,7 +56,7 @@ class EditPost extends React.Component {
           await this.checkImageURL(
             "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
               i +
-              this.state.item.ItemImg+
+              this.state.item.ItemImg +
               "?time" +
               new Date()
           )
@@ -230,74 +229,72 @@ class EditPost extends React.Component {
       itemImg: this.state.itemName + global.user.UserID + ".jpg"
     };
     console.log("Data", data);
-      if (this.state.formData != "" && this.state.formData != null) {
-        for (i = 0; this.state.formData[i] != null; i++) {
-          if(this.state.formData[i]!="formData"){
-            // console.log("Defrent img",this.state.formData[i].imageName)
-            const imageToUpload = this.state.formData[i];
-            console.log(
-              "send pic to upload",
-              JSON.stringify(imageToUpload.imageName)
-            );
-            await fetch(
-              "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
-              {
-                method: "post",
-                headers: new Headers({
-                  "Content-Type": "application/Json;"
-                }),
-                body: JSON.stringify(imageToUpload)
-              }
-            )
-              .then(res => {
-                return res.json();
-              })
-              .then(
-                result => {
-                  console.log("result = ", result);
-                },
-                error => {
-                  console.log("err post=", error);
-                }
-              );
-          }
-       
-        }
-
-        // console.log(JSON.stringify(data));
-        fetch(
-          "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
-          {
-            method: "post",
-            headers: new Headers({
-              "Content-Type": "application/Json;"
-            }),
-            body: JSON.stringify(data)
-          }
-        )
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              console.log("fetch POST= ", result);
-              let u = JSON.parse(result.d);
-              console.log("u = " + u);
-              if (u == null) {
-                this.setState({
-                  message: "לא ניתן לעלות חפץ זה ."
-                });
-                return;
-              } else {
-                this.props.navigation.navigate("Contribution");
-              }
-            },
-            error => {
-              console.log("err post=", error);
-            }
+    if (this.state.formData != "" && this.state.formData != null) {
+      for (i = 0; this.state.formData[i] != null; i++) {
+        if (this.state.formData[i] != "formData") {
+          // console.log("Defrent img",this.state.formData[i].imageName)
+          const imageToUpload = this.state.formData[i];
+          console.log(
+            "send pic to upload",
+            JSON.stringify(imageToUpload.imageName)
           );
+          await fetch(
+            "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
+            {
+              method: "post",
+              headers: new Headers({
+                "Content-Type": "application/Json;"
+              }),
+              body: JSON.stringify(imageToUpload)
+            }
+          )
+            .then(res => {
+              return res.json();
+            })
+            .then(
+              result => {
+                console.log("result = ", result);
+              },
+              error => {
+                console.log("err post=", error);
+              }
+            );
+        }
       }
-    
+
+      // console.log(JSON.stringify(data));
+      fetch(
+        "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
+        {
+          method: "post",
+          headers: new Headers({
+            "Content-Type": "application/Json;"
+          }),
+          body: JSON.stringify(data)
+        }
+      )
+        .then(res => {
+          return res.json();
+        })
+        .then(
+          result => {
+            console.log("fetch POST= ", result);
+            let u = JSON.parse(result.d);
+            console.log("u = " + u);
+            if (u == null) {
+              this.setState({
+                message: "לא ניתן לעלות חפץ זה ."
+              });
+              return;
+            } else {
+              this.props.navigation.navigate("PostsListPage");
+            }
+          },
+          error => {
+            console.log("err post=", error);
+          }
+        );
+    }
   };
 
   isValid() {
@@ -423,7 +420,7 @@ class EditPost extends React.Component {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -433,7 +430,7 @@ class EditPost extends React.Component {
             </View>
             <KeyboardAvoidingView style={styles.container} behavior="padding">
               <ScrollView keyboardShouldPersistTaps="always">
-              <View style={s.titleView}>
+                <View style={s.titleView}>
                   <Text>פרטים:</Text>
                 </View>
                 <View style={{ alignItems: "center", width: "100%" }}>
@@ -498,7 +495,6 @@ class EditPost extends React.Component {
                           backgroundColor: "white"
                         }}
                         textInputStyle={s.textInputStyle}
-
                         itemsContainerStyle={{ maxHeight: 240 }}
                         items={data}
                         // defaultIndex={2}
@@ -595,7 +591,8 @@ class EditPost extends React.Component {
                   <View style={s.uploadImageView}>
                     <Text>תמונה:</Text>
                     <View style={{ flexDirection: "row" }}>
-                      <TouchableOpacity style={s.uploadImageTouch}
+                      <TouchableOpacity
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -615,19 +612,19 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[0] != null ? (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[0] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                      style={s.uploadImageTouch}
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -647,13 +644,12 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[1] != null ? (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[1] }}
                           ></Image>
                         ) : (
-                        
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -680,12 +676,12 @@ class EditPost extends React.Component {
                       >
                         {this.state.img[2] != null ? (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[2] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -729,72 +725,72 @@ class EditPost extends React.Component {
 }
 export default EditPost;
 const s = StyleSheet.create({
-  titleView:{
-  marginTop: 10, 
-  padding: 5
-},
-textInputStyle:{
-  marginLeft: "8%", 
-  fontSize: 14
-},
-aboutView:{
-  color: "rgba(255,255,255,.9)",
-  fontWeight: "bold",
-  fontSize: 25,
-  fontFamily: "serif",
-  textShadowColor: "black",
-  textShadowOffset: { width: 1, height: 4 },
-  textShadowRadius: 5
-},
-uploadImageView:{
-  marginTop: 30,
-   padding: 5, 
-   borderRadius: 40 
-},
-uploadImage:{
-  height: 120,
-  width: 100,
-  borderRadius: 10
-},
-uploadImageTouch:{
-  margin: 5,
-  elevation: 5,
-  borderRadius: 10,
-  backgroundColor: "white"
-},
-publishButton: {
-  backgroundColor: "#6495ed",
-  flexDirection: "row",
-  height: 45,
-  marginTop: 30,
-  width: 180,
-  borderRadius: 20,
-  alignItems: "center",
-  justifyContent: "center",
-  borderColor: "white",
-  borderWidth: 1
-},
-radioPublish: {
-  flexDirection: "row",
-  margin: 10,
-  justifyContent: "center"
-},
-addImage: {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center"
-},
-uploadIcon: {
-  marginLeft: 20,
-  marginRight: 20,
-  marginBottom: 5,
-  marginTop: 5
-},
-publishInput: {
-  flexDirection: "row",
-  marginTop: 20,
-  width: "70%",
-  borderBottomWidth: 0.5,
-  borderColor: "black"
-},
+  titleView: {
+    marginTop: 10,
+    padding: 5
+  },
+  textInputStyle: {
+    marginLeft: "8%",
+    fontSize: 14
+  },
+  aboutView: {
+    color: "rgba(255,255,255,.9)",
+    fontWeight: "bold",
+    fontSize: 25,
+    fontFamily: "serif",
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 4 },
+    textShadowRadius: 5
+  },
+  uploadImageView: {
+    marginTop: 30,
+    padding: 5,
+    borderRadius: 40
+  },
+  uploadImage: {
+    height: 120,
+    width: 100,
+    borderRadius: 10
+  },
+  uploadImageTouch: {
+    margin: 5,
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: "white"
+  },
+  publishButton: {
+    backgroundColor: "#6495ed",
+    flexDirection: "row",
+    height: 45,
+    marginTop: 30,
+    width: 180,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "white",
+    borderWidth: 1
+  },
+  radioPublish: {
+    flexDirection: "row",
+    margin: 10,
+    justifyContent: "center"
+  },
+  addImage: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  uploadIcon: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 5,
+    marginTop: 5
+  },
+  publishInput: {
+    flexDirection: "row",
+    marginTop: 20,
+    width: "70%",
+    borderBottomWidth: 0.5,
+    borderColor: "black"
+  }
 });

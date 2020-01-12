@@ -40,7 +40,6 @@ class Publish extends React.Component {
     };
   }
 
-
   async componentDidMount() {
     this.GetItemTypes();
   }
@@ -231,7 +230,7 @@ class Publish extends React.Component {
                 });
                 return;
               } else {
-                this.props.navigation.navigate("Contribution");
+                this.props.navigation.navigate("PostsListPage");
               }
             },
             error => {
@@ -343,15 +342,11 @@ class Publish extends React.Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View
-                style={styles.textTopBar}
-              >
-                <Text style={styles.bigText}>
-                  פרסם תרומה
-                </Text>
+              <View style={styles.textTopBar}>
+                <Text style={styles.bigText}>פרסם תרומה</Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}
@@ -420,7 +415,7 @@ class Publish extends React.Component {
                           console.log(item, "item");
                           this.setState({ selectedItems: item });
                         }}
-                        containerStyle={{ width: "100%" }} 
+                        containerStyle={{ width: "100%" }}
                         itemStyle={{
                           padding: 10,
                           height: 30,
@@ -434,7 +429,7 @@ class Publish extends React.Component {
                         textInputProps={{
                           placeholder: "עיר/ישוב",
                           underlineColorAndroid: "transparent",
-                         
+
                           onTextChange: text => console.log(text)
                         }}
                         listProps={{
@@ -489,15 +484,15 @@ class Publish extends React.Component {
                   <View style={s.titleView}>
                     <Text>תיאור:</Text>
                     <View
-                     style={{
-                      margin: 5,
-                      width: 300,
-                      borderRadius: 10,
-                      backgroundColor: "white",
-                      justifyContent: "center",
-                      elevation: 5,
-                      borderColor: "black"
-                    }}
+                      style={{
+                        margin: 5,
+                        width: 300,
+                        borderRadius: 10,
+                        backgroundColor: "white",
+                        justifyContent: "center",
+                        elevation: 5,
+                        borderColor: "black"
+                      }}
                     >
                       <TextInput
                         value={this.state.itemAbout}
@@ -543,7 +538,7 @@ class Publish extends React.Component {
                           ></Image>
                         ) : (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -575,14 +570,14 @@ class Publish extends React.Component {
                           ></Image>
                         ) : (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
                       </TouchableOpacity>
 
                       <TouchableOpacity
-                       style={s.uploadImageTouch}
+                        style={s.uploadImageTouch}
                         onPress={() =>
                           Alert.alert("בחר תמונה", "האם תרצה גלריה/מצלמה?", [
                             {
@@ -602,12 +597,12 @@ class Publish extends React.Component {
                       >
                         {this.state.img[2] != null ? (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={{ uri: this.state.img[2] }}
                           ></Image>
                         ) : (
                           <Image
-                          style={s.uploadImage}
+                            style={s.uploadImage}
                             source={require("../assets/plusBackground.png")}
                           ></Image>
                         )}
@@ -651,15 +646,15 @@ class Publish extends React.Component {
 }
 export default Publish;
 const s = StyleSheet.create({
-    titleView:{
-    marginTop: 10, 
+  titleView: {
+    marginTop: 10,
     padding: 5
   },
-  textInputStyle:{
-    marginLeft: "8%", 
+  textInputStyle: {
+    marginLeft: "8%",
     fontSize: 14
   },
-  aboutView:{
+  aboutView: {
     color: "rgba(255,255,255,.9)",
     fontWeight: "bold",
     fontSize: 25,
@@ -668,17 +663,17 @@ const s = StyleSheet.create({
     textShadowOffset: { width: 1, height: 4 },
     textShadowRadius: 5
   },
-  uploadImageView:{
+  uploadImageView: {
     marginTop: 30,
-     padding: 5, 
-     borderRadius: 40 
+    padding: 5,
+    borderRadius: 40
   },
-  uploadImage:{
+  uploadImage: {
     height: 120,
     width: 100,
     borderRadius: 10
   },
-  uploadImageTouch:{
+  uploadImageTouch: {
     margin: 5,
     elevation: 5,
     borderRadius: 10,
@@ -718,5 +713,5 @@ const s = StyleSheet.create({
     width: "70%",
     borderBottomWidth: 0.5,
     borderColor: "black"
-  },
+  }
 });

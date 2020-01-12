@@ -7,15 +7,10 @@ import {
   Button,
   AsyncStorage
 } from "react-native";
-// import * as Expo from "expo"
 import * as Google from "expo-google-app-auth";
-import { setProvidesAudioData } from "expo/build/AR";
-//import Expo from "expo"
 import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 import { Notifications } from "expo";
 
-const WSURL =
-  "http://ruppinmobile.tempdomain.co.il/site11//WebServise.asmx/Register";
 
 export default class LoginWithGoogle extends React.Component {
   constructor(props) {

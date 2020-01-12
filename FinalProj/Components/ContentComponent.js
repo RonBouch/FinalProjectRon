@@ -17,7 +17,7 @@ import {
   NavigationActions,
   StackActions
 } from "react-navigation";
-import FirstPage from "../screens/FirstPage";
+
 class ContentComponent extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +68,7 @@ class ContentComponent extends Component {
           <View style={styles.header}>
             <TouchableOpacity
               style={{ alignItems: "center" }}
-              onPress={() => this.props.navigation.navigate("Profile")}
+              onPress={() => this.props.navigation.navigate("MyProfilePage")}
             >
               {this.state.img != "" && global.user != null ? (
                 <Image
@@ -113,7 +113,7 @@ class ContentComponent extends Component {
           <ScrollView>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Home")}
+              onPress={() => this.props.navigation.navigate("HomePage")}
             >
               <View style={styles.row}>
                 <Icon
@@ -129,7 +129,9 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("AssociationsList")}
+              onPress={() =>
+                this.props.navigation.navigate("AssociationsListPage")
+              }
             >
               <View style={styles.row}>
                 <Icon
@@ -145,7 +147,7 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Contribution")}
+              onPress={() => this.props.navigation.navigate("PostsListPage")}
             >
               <View style={styles.row}>
                 <Icon
@@ -161,7 +163,7 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Publish")}
+              onPress={() => this.props.navigation.navigate("PublishPostPage")}
             >
               <View style={styles.row}>
                 <Icon
@@ -177,7 +179,7 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Favorite")}
+              onPress={() => this.props.navigation.navigate("MyFavoritesPage")}
             >
               <View style={styles.row}>
                 <Icon
@@ -195,7 +197,7 @@ class ContentComponent extends Component {
 
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("Profile")}
+              onPress={() => this.props.navigation.navigate("MyProfilePage")}
             >
               <View style={styles.row}>
                 <Icon
@@ -210,7 +212,7 @@ class ContentComponent extends Component {
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor={"rgba(0,0,0,0.2)"}
-              onPress={() => this.props.navigation.navigate("About")}
+              onPress={() => this.props.navigation.navigate("AboutPage")}
             >
               <View style={styles.row}>
                 <Icon

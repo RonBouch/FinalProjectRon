@@ -4,10 +4,7 @@ import {
   View,
   Dimensions,
   Image,
-  StyleSheet,
-  TextInput,
   TouchableOpacity,
-  TouchableHighlight,
   Linking,
   ScrollView,
   ImageBackground
@@ -155,12 +152,12 @@ export default class ProfilePost extends React.Component {
             key={index}
             style={styles.contributionView}
             onPress={() =>
-              navigate("PostPage", {
+              navigate("PostSelectedPage", {
                 item: item
               })
             }
           >
-            <View   style={styles.heartIconStyle}  >
+            <View style={styles.heartIconStyle}>
               <TouchableOpacity onPress={() => this.DeleteItemByID(item)}>
                 <Icona
                   name="trash"
@@ -173,7 +170,7 @@ export default class ProfilePost extends React.Component {
 
               <TouchableOpacity
                 onPress={() =>
-                  navigate("EditPost", {
+                  navigate("EditPostPage", {
                     item: item
                   })
                 }
@@ -193,7 +190,7 @@ export default class ProfilePost extends React.Component {
                   uri:
                     "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
                     0 +
-                    item.ItemImg+
+                    item.ItemImg +
                     "?time" +
                     new Date()
                 }}
@@ -201,28 +198,22 @@ export default class ProfilePost extends React.Component {
               />
             </View>
             <View
-             style={styles.viewDetails}
+              style={styles.viewDetails}
               onPress={() => {
                 this.infoWindow(index);
               }}
             >
-              <View style={styles.viewTitle} >
-              <Text style={styles.txtTitle}>תאריך</Text>
-              <Text  style={styles.txtDetails} >
-                  {item.ItemDate}
-                </Text>
+              <View style={styles.viewTitle}>
+                <Text style={styles.txtTitle}>תאריך</Text>
+                <Text style={styles.txtDetails}>{item.ItemDate}</Text>
               </View>
-              <View style={styles.viewTitle} >
-              <Text style={styles.txtTitle}>עיר</Text>
-              <Text style={styles.txtDetails} >
-                  {item.City}
-                </Text>
+              <View style={styles.viewTitle}>
+                <Text style={styles.txtTitle}>עיר</Text>
+                <Text style={styles.txtDetails}>{item.City}</Text>
               </View>
-              <View style={styles.viewTitle} >
-              <Text style={styles.txtTitle}>למסירה</Text>
-              <Text style={styles.txtDetails} >
-                  {item.ItemName}
-                </Text>
+              <View style={styles.viewTitle}>
+                <Text style={styles.txtTitle}>למסירה</Text>
+                <Text style={styles.txtDetails}>{item.ItemName}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -253,13 +244,11 @@ export default class ProfilePost extends React.Component {
                   size={28}
                 />
               </TouchableOpacity>
-              <View  style={styles.textTopBar} >
-                <Text    style={styles.bigText} >
-                  הפרסומים שלי
-                </Text>
+              <View style={styles.textTopBar}>
+                <Text style={styles.bigText}>הפרסומים שלי</Text>
               </View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("HomePage")}
               >
                 <Image
                   source={require("../assets/TenYadLogo.png")}

@@ -28,8 +28,7 @@ const Slider = props => (
         uri:
           "http://ruppinmobile.tempdomain.co.il/site11/imageStorage/" +
           0 +
-          props.item.ItemImg
-          +
+          props.item.ItemImg +
           "?time" +
           new Date()
       }}
@@ -70,14 +69,12 @@ export default class extends Component {
       imagesSlider: [],
       imageName: [],
       items: null,
-      checkArrayComplete: false,
+      checkArrayComplete: false
     };
-
   }
 
   // define a separate function to get triggered on focus
   onFocusFunction = async () => {
-   
     this.RealoadScreen();
     // do some stuff on every screen focus
   };
@@ -94,9 +91,8 @@ export default class extends Component {
     this.focusListener.remove();
   }
   async RealoadScreen() {
-      await this.GetItems();
+    await this.GetItems();
   }
-
 
   // פונקציה שלוקחת את ה5 פריטים האחרונים ממערך ושמה אותם במערך חדש
   ImageArray = async items => {
@@ -116,7 +112,7 @@ export default class extends Component {
   GetItems = async () => {
     await this.setState({
       checkArrayComplete: false,
-      imagesSlider: [],
+      imagesSlider: []
     });
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/GetItems",
@@ -151,29 +147,28 @@ export default class extends Component {
   render() {
     return (
       <View
-      style={{
-        width: "100%",
-        height: 200,
-        elevation: 10
-      }}>
+        style={{
+          width: "100%",
+          height: 200,
+          elevation: 10
+        }}
+      >
         {this.state.checkArrayComplete ? (
-
-            <Swiper autoplay={true} autoplayTimeout={5}>
-              {this.state.imagesSlider.map((item, i) => (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() =>
-                    this.props.props.navigation.navigate("PostPage", {
-                      item: item
-                    })
-                  }
-                >
-                  <Slider item={item} key={i} />
-                </TouchableOpacity>
-              ))}
-            </Swiper>
-          )
-        : (
+          <Swiper autoplay={true} autoplayTimeout={5}>
+            {this.state.imagesSlider.map((item, i) => (
+              <TouchableOpacity
+                key={i}
+                onPress={() =>
+                  this.props.props.navigation.navigate("PostSelectedPage", {
+                    item: item
+                  })
+                }
+              >
+                <Slider item={item} key={i} />
+              </TouchableOpacity>
+            ))}
+          </Swiper>
+        ) : (
           console.log("Reload array")
         )}
       </View>
