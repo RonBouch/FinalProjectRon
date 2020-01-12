@@ -19,8 +19,6 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItems: [],
-      reminders: "",
       img: ""
     };
     this.profileImage = require("../assets/profileIcon.png");
@@ -199,10 +197,8 @@ export default class Profile extends React.Component {
                   ])
                 }
               >
-                {/* בדיקה עם יש תמונה למשתמש. ואם אין למשתמש תמונה אז יהיה תמונת ברירת מחדל.  */}
                 {this.state.img != "" ? (
                   <Image style={s.profileImage}
-                    // אם יש תמונה למשתמש זה נותן את הכתובת לתמונה בשרת.. קורא לתמונה עם התאריך הכי חדש שכל פעם שיחליפו תמונה התמונה תתעדכן
                     source={{
                       uri:
                         this.state.img ==

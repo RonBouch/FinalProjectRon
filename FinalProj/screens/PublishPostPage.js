@@ -26,10 +26,7 @@ class Publish extends React.Component {
     this.state = {
       selectedItems: [],
       errors: {},
-      resLabel: "",
-      showErrLabel: false,
       formData: "",
-
       userName: "",
       userPhone: "",
       itemType: "",
@@ -68,7 +65,6 @@ class Publish extends React.Component {
         imageName: index + this.state.itemName + global.user.UserID + ".jpg",
         userid: 0
       };
-      // console.log(formData.imageName);
 
       if (this.state.img.length > 2 || this.state.img[index] != null) {
         const list = this.state.formData.map((item, j) => {
@@ -94,14 +90,6 @@ class Publish extends React.Component {
         });
       }
     }
-
-    // let filename = localUri.split("/").pop();
-    // let imageBase64 = result.base64;
-
-    // let match = /\.(\w+)$/.exec(filename);
-    // let type = match ? `image/${match[1]}` : `image`;
-
-    // const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
   };
 
   openGallery = async index => {
@@ -132,8 +120,6 @@ class Publish extends React.Component {
           imageName: index + this.state.itemName + global.user.UserID + ".jpg",
           userid: 0
         };
-
-        console.log(formData.imageName);
 
         if (this.state.img.length > 2 || this.state.img[index] != null) {
           const list = this.state.formData.map((item, j) => {
@@ -178,10 +164,6 @@ class Publish extends React.Component {
       if (this.state.formData != "" && this.state.formData != null) {
         for (i = 0; this.state.formData[i] != null; i++) {
           const imageToUpload = this.state.formData[i];
-          console.log(
-            "send pic to upload",
-            JSON.stringify(imageToUpload.imageName)
-          );
           await fetch(
             "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
             {
@@ -205,7 +187,6 @@ class Publish extends React.Component {
             );
         }
 
-        // console.log(JSON.stringify(data));
         fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/InsertItem",
           {

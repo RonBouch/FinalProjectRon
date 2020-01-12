@@ -17,49 +17,14 @@ class PostPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: null,
-      ItemName: null,
-      ItemAbout: null,
-      ItemDate: null,
-      UserPhone: null,
-      ItemImg: null
+      item: this.props.navigation.state.params.item,
     };
   }
-
-  openWebSite = () => {
-    Linking.openURL(this.state.url);
-  };
-
-  sendMail = () => {
-    Linking.openURL("mailto:" + this.state.email);
-  };
-
-  openAdress = () => {
-    Linking.openURL(
-      "https://www.google.com/maps/search/?api=1&query=" + this.state.adress
-    );
-  };
-
   callPhone = () => {
     Linking.openURL("tel:" + this.state.item.UserPhone);
   };
-
-  callAdditionalPhone = () => {
-    Linking.openURL("tel:" + this.state.additionalPhone);
-  };
-
   render() {
     const { navigate } = this.props.navigation;
-
-    this.state.item = this.props.navigation.state.params.item;
-    this.state.ItemName = this.state.item.ItemName;
-    this.state.ItemAbout = this.state.item.ItemAbout;
-    this.state.ItemDate = this.state.item.ItemDate;
-    this.state.UserPhone = this.state.item.UserPhone;
-    console.log(
-      "props from contribution",
-      this.props.navigation.state.params.item.ItemImg
-    );
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}

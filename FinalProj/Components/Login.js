@@ -1,25 +1,18 @@
 import React from "react";
 import * as Facebook from "expo-facebook";
-
 import styles from "./StyleSheet";
-import { Ionicons } from "@expo/vector-icons";
-import { LoginButton, AccessToken } from "react-native-fbsdk";
 import * as Google from "expo-google-app-auth";
-
 import {
   Text,
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
   Image,
-  Dimensions,
   AsyncStorage
 } from "react-native";
 import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 import { Notifications } from "expo";
-import { Permissions } from "expo-permissions";
 import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
