@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import {
   View,
-  TouchableHighlight,
   Image,
   ImageBackground,
   TouchableOpacity,
   Text,
   ScrollView,
   Linking,
-  Dimensions,
   TextInput,
   StyleSheet
 } from "react-native";

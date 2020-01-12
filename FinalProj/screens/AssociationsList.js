@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { Icon } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
-
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
 import {
@@ -13,13 +12,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  Dimensions,
   ScrollView,
-  StatusBar,
-  TouchableHighlight,
-  Alert
 } from "react-native";
-import { Left } from "native-base";
 
 class AssociationsList extends Component {
   loadPage() {
