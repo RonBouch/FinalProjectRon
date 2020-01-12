@@ -5,6 +5,8 @@ import FirstPage from "./Screens/FirstPage";
 import DrawerNavigator from "./Components/DrawerNavigator";
 import LoginWithFacebook from "./Components/LoginWithFacebook";
 import LoginWithGoogle from "./Components/LoginWithGoogle";
+
+
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -16,13 +18,7 @@ class App extends React.Component {
 
 const MainNavigator = createStackNavigator(
   {
-    FirstPage: {
-      screen: FirstPage,
-      navigationOptions: {
-        title: "FirstPage",
-        headerLeft: null
-      }
-    },
+    FirstPage: {screen:FirstPage},
 
     DrawerNavigator: { screen: DrawerNavigator },
 
