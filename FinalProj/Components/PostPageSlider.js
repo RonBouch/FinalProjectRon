@@ -118,14 +118,14 @@ export default class extends Component {
                   {i <= this.state.itemImageArray.length ? (
                     <Slider item={item} key={i} />
                   ) : (
-                    console.log("yeeeee")
+                    null
                   )}
                 </TouchableOpacity>
               ))}
             </Swiper>
          </View> ) :
            (
-          console.log("Reload array")
+          null
         )}
       </View>
     );

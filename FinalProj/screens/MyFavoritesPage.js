@@ -121,7 +121,6 @@ export default class Favorite extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(

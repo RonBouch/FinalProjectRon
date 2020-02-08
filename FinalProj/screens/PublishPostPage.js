@@ -202,9 +202,7 @@ class Publish extends React.Component {
           })
           .then(
             result => {
-              console.log("fetch POST= ", result);
               let u = JSON.parse(result.d);
-              console.log("u = " + u);
               if (u == null) {
                 this.setState({
                   message: "לא ניתן לעלות חפץ זה ."
@@ -393,7 +391,6 @@ class Publish extends React.Component {
                       <SearchableDropdown
                         placeholderTextColor="rgb(150,150,150)"
                         onItemSelect={item => {
-                          console.log(item, "item");
                           this.setState({ selectedItems: item });
                         }}
                         containerStyle={{ width: "100%" }}

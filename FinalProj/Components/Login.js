@@ -90,12 +90,11 @@ class Login extends React.Component {
               });
               return;
             } else {
-              // this.btnSendPushFromClient();
               global.user = u;
+              this.storeData("user", u);
+
               this.props.navigation.navigate("DrawerNavigator");
             }
-            console.log(result.d);
-            console.log(result);
           },
           error => {
             console.log("err post=", error);
@@ -118,7 +117,6 @@ class Login extends React.Component {
         //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
         scopes: ["profile", "email"]
       });
-      console.log("Google Details - ", result);
     } catch (e) {
       console.log("error", e);
     }
@@ -158,8 +156,6 @@ class Login extends React.Component {
               this.storeData("user", u);
               this.props.navigation.navigate("DrawerNavigator");
             }
-            console.log(result.d);
-            console.log(result);
           },
           error => {
             console.log("err post=", error);
@@ -232,8 +228,7 @@ class Login extends React.Component {
                 this.storeData("user", u);
                 this.props.navigation.navigate("DrawerNavigator");
               }
-              console.log(result.d);
-              console.log(result);
+
             },
             error => {
               console.log("err post=", error);
@@ -248,7 +243,6 @@ class Login extends React.Component {
   };
 
   storeData = async (key, value) => {
-    console.log("value ->", JSON.stringify(value));
     await AsyncStorage.setItem(key, JSON.stringify(value));
   };
 

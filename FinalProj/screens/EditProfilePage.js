@@ -42,7 +42,6 @@ export default class EditProfile extends React.Component {
   }
   
   storeData = async (key, value) => {
-    console.log("value ->", JSON.stringify(value));
     await AsyncStorage.setItem(key, JSON.stringify(value));
   };
 
@@ -54,7 +53,6 @@ export default class EditProfile extends React.Component {
       gender: this.state.gender,
       birthday: this.state.date!=""?this.state.date:global.user.Birthday,
     };
-    console.log(data);
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/EditProfile",
       {
@@ -66,14 +64,11 @@ export default class EditProfile extends React.Component {
       }
     )
       .then(res => {
-        console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-          console.log("fetch POST= ", result);
           let u = JSON.parse(result.d);
-          console.log("u = " + u);
           if (u == null) {
             this.setState({
               message: "הרשמה נכשלה"
@@ -85,8 +80,6 @@ export default class EditProfile extends React.Component {
 
             this.props.navigation.navigate("HomePage");
           }
-          console.log(result.d);
-          console.log(result);
         },
         error => {
           console.log("err post=", error);

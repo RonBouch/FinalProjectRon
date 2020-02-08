@@ -64,7 +64,6 @@ export default class PostListPage extends Component {
       userid: global.user.UserID,
       token: global.user.Token
     };
-    console.log("DAta - ", data);
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/AddReminder",
       {
@@ -75,7 +74,6 @@ export default class PostListPage extends Component {
         body: JSON.stringify(data)
       }
     ).then(res => {
-      console.log("res=", res);
       this.setState({ remindView: false });
 
       return res.json();
@@ -103,6 +101,7 @@ export default class PostListPage extends Component {
       })
       .then(
         result => {
+
           if (_isMounted) {
             let reminders = JSON.parse(result.d);
             if (reminders == null) {
@@ -110,7 +109,9 @@ export default class PostListPage extends Component {
                 message: "לא קיימים סוגי פריטים"
               });
               return;
-            } else {
+            }
+             else {
+
               this.setState({
                 reminders: reminders
               });
@@ -123,6 +124,7 @@ export default class PostListPage extends Component {
                   return re.ItemName.includes(this.state.items[0].ItemName);
                 });
                 for (i = 0; i < data.length; i++) {
+
                   this.SendPushFromClient(data[i]);
                 }
               }
@@ -145,7 +147,6 @@ export default class PostListPage extends Component {
 
     };
 
-    // POST adds a random id to the object sent
     fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
       body: JSON.stringify(per),
@@ -157,7 +158,7 @@ export default class PostListPage extends Component {
       .then(json => {
         if (json != null) {
           console.log(`
-                returned from server\n
+                returned Push from server\n
                 json.data= ${JSON.stringify(json.data)}`);
         } else {
           alert("err json");
@@ -295,16 +296,11 @@ export default class PostListPage extends Component {
       }
     )
       .then(res => {
-        // console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-          console.log("fetch POST= ", result);
-          // let favorite = JSON.parse(result.d);
           this.GetItems();
-          console.log(result.d);
-          console.log(result);
         },
         error => {
           console.log("err post=", error);

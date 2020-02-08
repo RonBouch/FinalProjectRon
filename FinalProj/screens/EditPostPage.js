@@ -674,7 +674,7 @@ class EditPost extends React.Component {
                       style={s.publishButton}
                     >
                       <Text style={{ color: "white", fontSize: 20 }}>
-                        הוסף {"  "}
+                        עדכן {"  "}
                       </Text>
                       <Icon
                         name="cart-plus"

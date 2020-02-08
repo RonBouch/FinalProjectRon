@@ -80,14 +80,11 @@ export default class ProfilePost extends React.Component {
 
 
   DeleteItemByID = item => {
-    console.log("item = ", item);
-
     if (item.ItemID != null) {
       const data = {
         userid: global.user.UserID,
         itemid: item.ItemID
       };
-      console.log("DATA = ", data);
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/DeleteItem",
         {
@@ -99,16 +96,12 @@ export default class ProfilePost extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
-            // console.log("fetch POST= ", result);
-
             let favorite = JSON.parse(result.d);
             this.GetItemsByID();
-            console.log("YESYESTWS");
             if (favorite == -1) {
               console.log("Allready Exist this favorite");
               return;

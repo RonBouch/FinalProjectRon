@@ -49,7 +49,6 @@ export default class Profile extends React.Component {
     let type = match ? `image/${match[1]}` : `image`;
 
     const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
-    console.log("formdata = ", formData);
     await fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
       {
@@ -101,11 +100,6 @@ export default class Profile extends React.Component {
           imageName: global.user.UserID + global.user.Email + ".jpg",
           userid: global.user.UserID
         };
-        //לעלות את התמונה לשרת fetch עושה
-        console.log(
-          global.user.UserID + global.user.Email + ".jpg",
-          global.user.UserID
-        );
         await fetch(
           "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
           {
@@ -132,11 +126,6 @@ export default class Profile extends React.Component {
             }
           );
       }
-
-      // let localUri = result.uri;
-      // let filename = localUri.split("/").pop();
-      // let match = /\.(\w+)$/.exec(filename);
-      // let type = match ? `image/${match[1]}` : `image`;
     }
   };
 
