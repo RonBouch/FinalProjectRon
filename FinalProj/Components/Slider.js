@@ -169,7 +169,7 @@ export default class extends Component {
             ))}
           </Swiper>
         ) : (
-          console.log("Reload array")
+          null
         )}
       </View>
     );

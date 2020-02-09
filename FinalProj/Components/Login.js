@@ -1,25 +1,18 @@
 import React from "react";
 import * as Facebook from "expo-facebook";
-
 import styles from "./StyleSheet";
-import { Ionicons } from "@expo/vector-icons";
-import { LoginButton, AccessToken } from "react-native-fbsdk";
 import * as Google from "expo-google-app-auth";
-
 import {
   Text,
   View,
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
   Image,
-  Dimensions,
   AsyncStorage
 } from "react-native";
 import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 import { Notifications } from "expo";
-import { Permissions } from "expo-permissions";
 import { withNavigation } from "react-navigation";
 
 import { Icon } from "react-native-elements";
@@ -97,12 +90,11 @@ class Login extends React.Component {
               });
               return;
             } else {
-              // this.btnSendPushFromClient();
               global.user = u;
+              this.storeData("user", u);
+
               this.props.navigation.navigate("DrawerNavigator");
             }
-            console.log(result.d);
-            console.log(result);
           },
           error => {
             console.log("err post=", error);
@@ -125,7 +117,6 @@ class Login extends React.Component {
         //iosClientId: YOUR_CLIENT_ID_HERE,  <-- if you use iOS
         scopes: ["profile", "email"]
       });
-      console.log("Google Details - ", result);
     } catch (e) {
       console.log("error", e);
     }
@@ -165,8 +156,6 @@ class Login extends React.Component {
               this.storeData("user", u);
               this.props.navigation.navigate("DrawerNavigator");
             }
-            console.log(result.d);
-            console.log(result);
           },
           error => {
             console.log("err post=", error);
@@ -239,8 +228,7 @@ class Login extends React.Component {
                 this.storeData("user", u);
                 this.props.navigation.navigate("DrawerNavigator");
               }
-              console.log(result.d);
-              console.log(result);
+
             },
             error => {
               console.log("err post=", error);
@@ -255,7 +243,6 @@ class Login extends React.Component {
   };
 
   storeData = async (key, value) => {
-    console.log("value ->", JSON.stringify(value));
     await AsyncStorage.setItem(key, JSON.stringify(value));
   };
 

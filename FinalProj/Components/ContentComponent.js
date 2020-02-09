@@ -70,7 +70,7 @@ class ContentComponent extends Component {
               style={{ alignItems: "center" }}
               onPress={() => this.props.navigation.navigate("MyProfilePage")}
             >
-              {this.state.img != "" && global.user != null ? (
+              {this.state.img  && global.user.Image ? (
                 <Image
                   style={{
                     height: 150,
@@ -79,7 +79,7 @@ class ContentComponent extends Component {
                   }}
                   source={{
                     uri:
-                      global.user.Image != null &&
+                      global.user.Image &&
                       this.state.img == global.user.Image
                         ? "http://ruppinmobile.tempdomain.co.il/site11/ImageStorage/" +
                           this.state.img +
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   },
   drawer: {
     width: "70%",
-    height: "86%",
+    height: "88%",
     backgroundColor: "white",
     elevation: 10
   },

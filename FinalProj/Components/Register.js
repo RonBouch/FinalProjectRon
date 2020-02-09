@@ -6,34 +6,25 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground,
-  Keyboard,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  ScrollView,
-  Image
+  AsyncStorage,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
-
+import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
 import { Ionicons } from "@expo/vector-icons";
 
-// const DissmisKeyboard = ({ children }) => (
-//   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-//     {children}
-//   </TouchableWithoutFeedback>
-// );
 
 var radio_props = [
   {
     label: "  זכר  ",
-    value: "זכר"
+    value: "male"
   },
   {
     label: "  נקבה  ",
-    value: "נקבה"
+    value: "female"
   }
 ];
 
@@ -56,7 +47,9 @@ class Register extends React.Component {
       errors: {}
     };
   }
-
+  storeData = async (key, value) => {
+    await AsyncStorage.setItem(key, JSON.stringify(value));
+  };
   changeFirstName = e => {
     this.firstName = e;
   };
@@ -154,7 +147,9 @@ class Register extends React.Component {
     return formIsValid;
   }
 
-  register = () => {
+  register =async () => {
+    let tok = await registerForPushNotificationsAsync()
+
     if (this.registerValidatation()) {
       const data = {
         firstName: this.firstName,
@@ -162,7 +157,8 @@ class Register extends React.Component {
         gender: this.gender,
         email: this.email,
         password: this.password,
-        birthday: this.state.date
+        birthday: this.state.date,
+        token:tok
       };
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/Register",
@@ -179,7 +175,7 @@ class Register extends React.Component {
         })
         .then(
           result => {
-            console.log("fetch POST= ", result);
+            console.log("data - > ",data)
             let u = JSON.parse(result.d);
 
             if (u == null) {
@@ -190,6 +186,7 @@ class Register extends React.Component {
               return;
             } else {
               global.user = u;
+              this.storeData("user", u);
               this.props.navigation.navigate("DrawerNavigator");
             }
           },

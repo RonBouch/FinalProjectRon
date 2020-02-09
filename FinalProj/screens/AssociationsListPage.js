@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "../Components/StyleSheet";
 import { Icon } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
-
 import { DrawerActions } from "react-navigation-drawer";
 import { Icon as Icona } from "react-native-elements";
 import {
@@ -13,10 +12,10 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  ScrollView
+  ScrollView,
 } from "react-native";
 
-class AssociationsList extends Component {
+class AssociationsListPage extends Component {
   loadPage() {
     this.GetAssociations();
   }
@@ -292,7 +291,7 @@ class AssociationsList extends Component {
   }
 }
 
-export default AssociationsList;
+export default AssociationsListPage;
 const s = StyleSheet.create({
   spaceBetween: {
     margin: 10

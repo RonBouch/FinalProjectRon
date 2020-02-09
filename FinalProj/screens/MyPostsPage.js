@@ -12,17 +12,12 @@ import {
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 import { DrawerActions } from "react-navigation-drawer";
-const { height } = Dimensions.get("window");
 export default class ProfilePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: null,
       item: null,
-      screenHeight: 0,
-      userPhone: "",
-      pageToShow: null,
-      reloadPage: false,
       LoadingFirstTime: false
     };
   }
@@ -71,7 +66,6 @@ export default class ProfilePost extends React.Component {
             });
             return;
           } else {
-            console.log("ITEMS ", items);
             this.setState({
               items: items,
               LoadingFirstTime: true
@@ -84,26 +78,13 @@ export default class ProfilePost extends React.Component {
       );
   };
 
-  onContentSizeChange = (contentWidth, contentHeight) => {
-    this.setState({ screenHeight: contentHeight });
-  };
-  _pressCall = p => {
-    this.setState({
-      userPhone: p
-    });
-    const url = "tel:" + p;
-    Linking.openURL(url);
-  };
 
   DeleteItemByID = item => {
-    console.log("item = ", item);
-
     if (item.ItemID != null) {
       const data = {
         userid: global.user.UserID,
         itemid: item.ItemID
       };
-      console.log("DATA = ", data);
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/DeleteItem",
         {
@@ -115,16 +96,12 @@ export default class ProfilePost extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
-            // console.log("fetch POST= ", result);
-
             let favorite = JSON.parse(result.d);
             this.GetItemsByID();
-            console.log("YESYESTWS");
             if (favorite == -1) {
               console.log("Allready Exist this favorite");
               return;

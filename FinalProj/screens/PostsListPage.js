@@ -16,7 +16,7 @@ import { DrawerActions } from "react-navigation-drawer";
 import styles from "../Components/StyleSheet";
 import { Icon as Icona } from "react-native-elements";
 
-export default class Contribution extends Component {
+export default class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,9 +25,6 @@ export default class Contribution extends Component {
       dataItems: null,
       filterItemsByRegion: null,
       filterItemsByType: null,
-      extraDetails: -1,
-      showImg: false,
-      checkedFavorite: false,
       itemsFromFavorite: null,
       searchItem: "",
       itemTypes: [],
@@ -39,7 +36,7 @@ export default class Contribution extends Component {
     _isMounted = false;
   }
   static navigationOptions = {
-    drawerLabel: "Contribution"
+    drawerLabel: "PostListPage"
   };
 
   // define a separate function to get triggered on focus
@@ -57,22 +54,16 @@ export default class Contribution extends Component {
   }
 
   componentWillUnmount() {
-    console.log("Bye Bye");
     _isMounted = false;
     this.focusListener.remove();
   }
-  _pressCall = phone => {
-    const url = "tel:" + phone;
-    // console.log("url  asasds",url)
-    Linking.openURL(url);
-  };
+
   AddReminder() {
     const data = {
       itemName: this.state.nameToRemind,
       userid: global.user.UserID,
       token: global.user.Token
     };
-    console.log("DAta - ", data);
     fetch(
       "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/AddReminder",
       {
@@ -83,7 +74,6 @@ export default class Contribution extends Component {
         body: JSON.stringify(data)
       }
     ).then(res => {
-      console.log("res=", res);
       this.setState({ remindView: false });
 
       return res.json();
@@ -111,6 +101,7 @@ export default class Contribution extends Component {
       })
       .then(
         result => {
+
           if (_isMounted) {
             let reminders = JSON.parse(result.d);
             if (reminders == null) {
@@ -118,7 +109,9 @@ export default class Contribution extends Component {
                 message: "לא קיימים סוגי פריטים"
               });
               return;
-            } else {
+            }
+             else {
+
               this.setState({
                 reminders: reminders
               });
@@ -131,6 +124,7 @@ export default class Contribution extends Component {
                   return re.ItemName.includes(this.state.items[0].ItemName);
                 });
                 for (i = 0; i < data.length; i++) {
+
                   this.SendPushFromClient(data[i]);
                 }
               }
@@ -151,10 +145,8 @@ export default class Contribution extends Component {
       badge: 3,
       backgroundColor: "black"
 
-      // data: { name: "nir", grade: 100 }
     };
 
-    // POST adds a random id to the object sent
     fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
       body: JSON.stringify(per),
@@ -166,7 +158,7 @@ export default class Contribution extends Component {
       .then(json => {
         if (json != null) {
           console.log(`
-                returned from server\n
+                returned Push from server\n
                 json.data= ${JSON.stringify(json.data)}`);
         } else {
           alert("err json");
@@ -225,13 +217,11 @@ export default class Contribution extends Component {
       }
     )
       .then(res => {
-        // console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
           if (_isMounted) {
-            // console.log("fetch POST= ", result);
             let items = JSON.parse(result.d);
             if (items == null) {
               this.setState({
@@ -240,7 +230,6 @@ export default class Contribution extends Component {
               });
               return;
             } else {
-              // console.log("U = " + items);
               this.setState({
                 dataItems: items,
                 items: items
@@ -291,21 +280,6 @@ export default class Contribution extends Component {
       );
   };
 
-  infoWindow = (index, item) => {
-    if (this.state.extraDetails == -1 || this.state.extraDetails != index) {
-      this.setState({
-        extraDetails: index,
-        item: item,
-        checkedFavorite: false
-      });
-    } else {
-      this.setState({
-        extraDetails: -1,
-        item: item
-      });
-    }
-  };
-
   Favorite = item => {
     const data = {
       userid: global.user.UserID,
@@ -322,16 +296,11 @@ export default class Contribution extends Component {
       }
     )
       .then(res => {
-        // console.log("res=", res);
         return res.json();
       })
       .then(
         result => {
-          console.log("fetch POST= ", result);
-          // let favorite = JSON.parse(result.d);
           this.GetItems();
-          console.log(result.d);
-          console.log(result);
         },
         error => {
           console.log("err post=", error);
@@ -344,7 +313,6 @@ export default class Contribution extends Component {
       ...prevState.imagesSlider
     }));
   };
-
   FilterItemTypes = (value, index) => {
     if (index != 0) {
       let data = null;
@@ -353,7 +321,6 @@ export default class Contribution extends Component {
         typeId = this.state.itemTypes[index].ItemTypeID;
 
         data = this.state.dataItems.filter(item => {
-          // console.log(item);
           return (
             item.ItemType == typeId &&
             item.Region == this.state.filterItemsByRegion
@@ -361,10 +328,7 @@ export default class Contribution extends Component {
         });
       } else {
         typeId = this.state.itemTypes[index].ItemTypeID;
-
         data = this.state.dataItems.filter(item => {
-          // console.log(item);
-
           return item.ItemType == typeId;
         });
       }
@@ -479,11 +443,7 @@ export default class Contribution extends Component {
                 />
               </View>
               <View
-                style={styles.viewDetails}
-                onPress={() => {
-                  this.infoWindow(index);
-                }}
-              >
+                style={styles.viewDetails} >
                 <View style={styles.viewTitle}>
                   <Text style={styles.txtTitle}>תאריך</Text>
                   <Text style={styles.txtDetails}>{item.ItemDate}</Text>

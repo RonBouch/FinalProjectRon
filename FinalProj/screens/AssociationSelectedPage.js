@@ -14,7 +14,7 @@ import {
 import { Linking } from "expo";
 import { Button } from "react-native-paper";
 
-class AssociationPage extends Component {
+class AssociationSelectedPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +53,6 @@ class AssociationPage extends Component {
   render() {
     //הכנסת העמותה הנבחרת לתוך המשתנה
     this.state.association = this.props.navigation.state.params.association;
-
     return (
       <ImageBackground
         source={require("../assets/background2.jpg")}
@@ -163,7 +162,7 @@ class AssociationPage extends Component {
   }
 }
 
-export default AssociationPage;
+export default AssociationSelectedPage;
 const s = StyleSheet.create({
   viewHeader: {
     width: "100%",

@@ -27,8 +27,6 @@ class EditPost extends React.Component {
     this.state = {
       selectedItems: [],
       errors: {},
-      resLabel: "",
-      showErrLabel: false,
       formData: "",
       item: null,
       userName: item.UserName,
@@ -45,7 +43,6 @@ class EditPost extends React.Component {
     this.GetItemTypes();
   }
   MakeImageArray = async () => {
-    console.log("Item img - ", this.state.item.ItemImg);
     if (
       this.state.item.ItemImg != null &&
       this.state.item.ItemImg != undefined
@@ -114,7 +111,6 @@ class EditPost extends React.Component {
         imageName: index + this.state.itemName + global.user.UserID + ".jpg",
         userid: 0
       };
-      // console.log(formData.imageName);
 
       if (this.state.img.length > 2 || this.state.img[index] != null) {
         const list = this.state.formData.map((item, j) => {
@@ -140,15 +136,7 @@ class EditPost extends React.Component {
         });
       }
     }
-
-    // let filename = localUri.split("/").pop();
-    // let imageBase64 = result.base64;
-
-    // let match = /\.(\w+)$/.exec(filename);
-    // let type = match ? `image/${match[1]}` : `image`;
-
-    // const formData = { base64: imageBase64, imageName: "imgRon1.jpg" };
-  };
+  }
 
   openGallery = async index => {
     // פתיחת גלריה לבחירת תמונה
@@ -179,7 +167,6 @@ class EditPost extends React.Component {
           userid: 0
         };
 
-        console.log(formData.imageName);
 
         if (this.state.img.length > 2 || this.state.img[index] != null) {
           const list = this.state.formData.map((item, j) => {
@@ -209,7 +196,7 @@ class EditPost extends React.Component {
   };
 
   handleSubmit = async () => {
-    // if (this.isValid()) {
+    if (this.isValid()) {
     const data = {
       itemid: this.state.item.ItemID,
       userId: global.user.UserID,
@@ -228,16 +215,11 @@ class EditPost extends React.Component {
       itemAbout: this.state.itemAbout,
       itemImg: this.state.itemName + global.user.UserID + ".jpg"
     };
-    console.log("Data", data);
     if (this.state.formData != "" && this.state.formData != null) {
       for (i = 0; this.state.formData[i] != null; i++) {
         if (this.state.formData[i] != "formData") {
-          // console.log("Defrent img",this.state.formData[i].imageName)
           const imageToUpload = this.state.formData[i];
-          console.log(
-            "send pic to upload",
-            JSON.stringify(imageToUpload.imageName)
-          );
+  
           await fetch(
             "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UploadImage",
             {
@@ -262,7 +244,6 @@ class EditPost extends React.Component {
         }
       }
 
-      // console.log(JSON.stringify(data));
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/UpdateItem",
         {
@@ -278,9 +259,7 @@ class EditPost extends React.Component {
         })
         .then(
           result => {
-            console.log("fetch POST= ", result);
             let u = JSON.parse(result.d);
-            console.log("u = " + u);
             if (u == null) {
               this.setState({
                 message: "לא ניתן לעלות חפץ זה ."
@@ -295,6 +274,7 @@ class EditPost extends React.Component {
           }
         );
     }
+  }
   };
 
   isValid() {
@@ -575,7 +555,6 @@ class EditPost extends React.Component {
                       <TextInput
                         value={this.state.itemAbout}
                         numberOfLines={4}
-                        value={this.state.item.ItemAbout}
                         multiline={true}
                         maxLength={60}
                         onChangeText={e => {
@@ -695,7 +674,7 @@ class EditPost extends React.Component {
                       style={s.publishButton}
                     >
                       <Text style={{ color: "white", fontSize: 20 }}>
-                        הוסף {"  "}
+                        עדכן {"  "}
                       </Text>
                       <Icon
                         name="cart-plus"

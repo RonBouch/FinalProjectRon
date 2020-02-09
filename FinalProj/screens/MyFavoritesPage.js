@@ -21,7 +21,6 @@ export default class Favorite extends React.Component {
       item: null,
       screenHeight: 0,
       userPhone: "",
-      pageToShow: null,
       reloadPage: false,
       LoadingFirstTime:false,
     
@@ -97,19 +96,6 @@ export default class Favorite extends React.Component {
     const url = "tel:" + p;
     Linking.openURL(url);
   };
-  infoWindow = (item, i) => {
-    if (this.state.pageToShow == null || this.state.pageToShow != i) {
-      this.setState({
-        pageToShow: i,
-        item: item
-      });
-    } else {
-      this.setState({
-        pageToShow: null,
-        item: null
-      });
-    }
-  };
 
   async FavoriteChack(item) {
     await this.setState({
@@ -135,7 +121,6 @@ export default class Favorite extends React.Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
@@ -159,19 +144,12 @@ export default class Favorite extends React.Component {
 
   async ReloadPage() {
     this.setState({ reloadPage: !this.state.reloadPage });
-    // this.GetItemsFromFavorite();
   }
   render() {
     const { navigate } = this.props.navigation;
     let Items = [];
-
-    
-
     if (this.state.items != null) {
-      
       Items = this.state.items.map((item, index) => {
-        // console.log("test:", Items[0]);
-
         return (
           <TouchableOpacity
             key={index}
@@ -208,9 +186,6 @@ export default class Favorite extends React.Component {
 
             <View
               style={styles.viewDetails}
-              onPress={() => {
-                this.infoWindow(index);
-              }}
             >
               <View style={styles.viewTitle} >
                 <Text style={styles.txtTitle}>תאריך</Text>

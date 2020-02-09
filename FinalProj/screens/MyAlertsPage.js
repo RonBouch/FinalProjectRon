@@ -37,14 +37,12 @@ export default class Reminders extends Component {
     this.focusListener.remove();
   }
   DeleteReminder = item => {
-    console.log("item = ", item);
 
     if (item.UserID != null) {
       const data = {
         userid: global.user.UserID,
         itemName: item.ItemName
       };
-      console.log("DATA = ", data);
       fetch(
         "http://ruppinmobile.tempdomain.co.il/site11/WebService.asmx/DeleteReminder",
         {
@@ -56,16 +54,12 @@ export default class Reminders extends Component {
         }
       )
         .then(res => {
-          console.log("res=", res);
           return res.json();
         })
         .then(
           result => {
-            // console.log("fetch POST= ", result);
-
             let Del = JSON.parse(result.d);
             if (Del == -1) {
-              console.log("Delete Reminder");
               this.GetReminders();
               return;
             } else {
@@ -101,7 +95,6 @@ export default class Reminders extends Component {
       .then(
         result => {
           let reminders = JSON.parse(result.d);
-          //  console.log("data ",reminders)
           if (reminders == null) {
             this.setState({
               message: "לא קיימים סוגי פריטים"
